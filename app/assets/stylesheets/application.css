@@ -68,3 +68,8 @@
   float: right;
   margin: 110px 60px;
 }
+
+.middle_content {
+  display: inline;
+  position: absolute;
+}
