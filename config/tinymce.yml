@@ -1,0 +1,7 @@
+default:
+  plugins:
+    - image
+    - link
+    - lists
+    - table
+  toolbar: styleselect | bold italic | undo redo | table | numlist bullist

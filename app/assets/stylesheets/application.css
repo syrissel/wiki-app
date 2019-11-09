@@ -72,4 +72,5 @@
 .middle_content {
   display: inline;
   position: absolute;
+  width: 80%;
 }
