@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DocsApp</title>
+    <title>c4smb Wiki</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag asset_path('favicon.png') %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Acme&display=swap" %>
@@ -13,11 +13,25 @@
   <body>
 
   <div class="container">
+  <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
     <div class="header_container">
       <div class="logo"></div>
       <h2 class="wiki_logo">wiki</h2>
+      <div class="user_login">
+      <p>
+        <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+      </p>
     </div>
-
+    </div>
+    <div id="side_panel">
+    <h3>Bootstrapping</h3>
+      <ul>
+        <li>Core 2 Systems</li>
+        <li>i-Series Systems</li>
+        <li>Laptop i-Series</li>
+      </ul>
+    </div>
     <%= yield %>
   </div>
 

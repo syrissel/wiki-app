@@ -14,6 +14,12 @@
  *= require_self
  */
 
+  * {
+    margin: 0px auto;
+    padding: 0px;
+    font-family: roboto_cond_regular_ycdt, Arial;
+  }
+
  .logo {
   display: block;
   width: 249px;
@@ -28,7 +34,6 @@
 
 .header_container {
   background: url(header_container_external_bg.png) repeat-x top center;
-  position: absolute;
   top: 0px;
   left: 0;
   width: 100%;
@@ -41,7 +46,25 @@
   font-family: 'Acme', sans-serif;
   font-size: 2em;
   font-style: italic;
-  color: #B4A061;
+  color: #d4af37;
   float: left;
   margin: 74px -10px;
+}
+
+#side_panel {
+  border: 2px solid;
+  padding: 10px 36px;
+  float: left;
+  position: absolute;
+  margin: 10px;
+}
+
+.user_login a {
+  text-decoration: none;
+  color: #d4af37;
+}
+
+.user_login {
+  float: right;
+  margin: 110px 60px;
 }
