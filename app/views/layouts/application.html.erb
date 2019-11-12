@@ -8,6 +8,28 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Acme&display=swap" %>
+    <script>
+      function load() {
+        var model_lists = document.getElementsByClassName("model_list");
+        var make_links = document.getElementsByClassName("makes");
+
+        make_links[0].addEventListener("click", function() { hide_models(model_lists[0]); }, false);
+
+        
+        // var i;
+        // for (i=0; i < make_links.length; i++) {
+        //   make_links[i].addEventListener("click", function() { hide_models(model_lists[i]); }, false);
+        // }
+      }
+
+
+      function hide_models(element) {
+        var setStyle = element.style.display === "block" ? "none" : "block";
+        element.style.display = setStyle;
+      }
+
+      document.addEventListener("DOMContentLoaded", load, false);
+    </script>
   </head>
 
   <body>
@@ -16,8 +38,10 @@
   <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
     <div class="header_container">
+      <%= link_to root_path do %>
       <div class="logo"></div>
       <h2 class="wiki_logo">wiki</h2>
+      <% end %>
       <div class="user_login">
       <p>
         <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary btn-lg' %>
@@ -27,9 +51,20 @@
     <div id="side_panel">
     <h3>Bootstrapping</h3>
       <ul>
-        <li>Core 2 Systems</li>
-        <li>i-Series Systems</li>
-        <li>Laptop i-Series</li>
+        <% @makes.each do |make| %>
+          <li class="makes">
+            <%= make.name %>
+            <div class="model_list">
+            <ul>
+              <% make.models.each do |model| %>
+              <li>
+                <%= model.name %>
+              </li>
+              <% end %>
+            </ul>
+            </div>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="middle_content">
@@ -37,6 +72,7 @@
     </div>
   </div>
 
+  <footer></footer>
     
   </body>
 </html>

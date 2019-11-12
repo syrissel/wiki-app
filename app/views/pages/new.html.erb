@@ -1,6 +1,6 @@
 <div class="middle_content">
   <h1>New Document</h1>
-  <%= form_for :page do |f| %>
+  <%= form_for :page, url: pages_path do |f| %>
     <p>
       <%= f.label :title %><br>
       <%= f.text_field :title %>
@@ -12,7 +12,7 @@
     </p>
 
     <p>
-      <%= f.submit %>
+      <%= f.submit "Post" %>
     </p>
   <% end %>
 </div>

@@ -1,7 +1,8 @@
 default:
+  toolbar: 
+    - styleselect | bold italic | undo redo | table | numlist bullist
   plugins:
     - image
     - link
     - lists
     - table
-  toolbar: styleselect | bold italic | undo redo | table | numlist bullist
