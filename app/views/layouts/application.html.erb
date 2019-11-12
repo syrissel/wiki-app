@@ -13,15 +13,14 @@
         var model_lists = document.getElementsByClassName("model_list");
         var make_links = document.getElementsByClassName("makes");
 
-        make_links[0].addEventListener("click", function() { hide_models(model_lists[0]); }, false);
-
+        for (let i=0; i < make_links.length; i++) {
+          model_lists[i].style.display = "none";
+        }
         
-        // var i;
-        // for (i=0; i < make_links.length; i++) {
-        //   make_links[i].addEventListener("click", function() { hide_models(model_lists[i]); }, false);
-        // }
+        for (let i=0; i < make_links.length; i++) {
+          make_links[i].addEventListener("click", function() { hide_models(model_lists[i]); }, false);
+        }
       }
-
 
       function hide_models(element) {
         var setStyle = element.style.display === "block" ? "none" : "block";
@@ -49,16 +48,17 @@
     </div>
     </div>
     <div id="side_panel">
-    <h3>Bootstrapping</h3>
-      <ul>
+    <div class="side_panel_container">
+    <h3><a href="#">Production</a></h3>
+      <ul class="make_list">
         <% @makes.each do |make| %>
-          <li class="makes">
-            <%= make.name %>
+          <li>
+            <a href="#" class="makes"><%= make.name%></a>
             <div class="model_list">
             <ul>
               <% make.models.each do |model| %>
-              <li>
-                <%= model.name %>
+              <li class="model_item">
+                <a href="#"><%= model.name %></a>
               </li>
               <% end %>
             </ul>
@@ -66,6 +66,7 @@
           </li>
         <% end %>
       </ul>
+      </div>
     </div>
     <div class="middle_content">
       <%= yield %>
