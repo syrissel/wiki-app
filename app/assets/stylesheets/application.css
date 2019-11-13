@@ -43,16 +43,19 @@
   font-style: italic;
   color: #d4af37;
   float: left;
-  margin: 74px -10px;
+  padding-top: 45px;
+  margin-left: -12px;
+  margin-right: 40px;
 }
 
 #side_panel {
-  border: 2px solid;
+  border-right: 2px solid;
   /* padding: 10px 36px; */
   float: left;
   position: absolute;
-  margin: 10px;
+  margin-top: -5px;
   background: rgb(179, 209, 219);
+  height: 100%;
 }
 
 .user_login a {
@@ -63,6 +66,9 @@
 .user_login {
   float: right;
   margin: 70px 60px;
+  position: absolute;
+  top: -72px;
+  right: -40px;
 }
 
 .middle_content {
@@ -71,9 +77,9 @@
   overflow: hidden;
   display: block;
   background:rgb(179, 209, 219);
-  border: 2px solid#d4af37;
+  border: 3px solid#d4af37;
   padding: 10px 25px;
-  margin: 10px 0px;
+  margin: 10px 300px 10px 185px;
 }
 
 .model_list {
@@ -93,7 +99,7 @@
 }
 
 .side_panel_container {
-  margin: 12px 30px 12px 10px;
+  margin: 12px 55px 12px 10px;
 }
 
 .make_list {
@@ -118,8 +124,8 @@ footer {
   font-family: 'Acme', sans-serif;
   color: #d4af37;
   font-size: 24px;
-  position: absolute;
-  margin: 88px 450px;
+  position: relative;
+  padding: 85px;
 }
 
 
@@ -127,6 +133,11 @@ footer {
   display: inline;
   margin: 0px 10px;
   font-family: 'Acme', sans-serif;
+}
+
+.header_nav ul li a {
+  text-decoration: none;
+  color: #d4af37;
 }
 
 .container {

@@ -1,9 +1,10 @@
 default:
   toolbar: 
-    - styleselect | bold italic | undo redo | table | numlist bullist
+    - styleselect | bold italic | undo redo | table | numlist bullist | toc
   plugins:
     - image
     - link
     - lists
     - table
     - hr
+    - toc
