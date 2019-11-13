@@ -1,7 +1,24 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit]
 
   def show
     @page = Page.find(params[:id])
+  end
+
+  def edit
+    @page = Page.find(params[:id])
+  end
+
+  def update
+    @page = Page.find(params[:id])
+    
+    if (@page.update(title: params[:page][:title], content: params[:page][:content]))
+      
+      redirect_to @page
+      flash[:notice] = 'Wiki was updated.'
+    else
+      render 'edit'
+    end   
   end
 
   # Instantiates new Page object with permitted values: title and content.
@@ -11,6 +28,7 @@ class PagesController < ApplicationController
 
     if (@page.save)
       redirect_to @page
+      flash[:notice] = 'Wiki created.'
     else
       render 'new'
     end

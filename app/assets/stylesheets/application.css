@@ -14,11 +14,6 @@
  *= require_self
  */
 
-  * {
-    margin: 0px auto;
-    padding: 0px;
-    font-family: roboto_cond_regular_ycdt, Arial;
-  }
 
  .logo {
   display: block;
@@ -39,7 +34,7 @@
   width: 100%;
   height: 150px;
   padding: 0px 0px 0px 0px;
-  margin: 0;
+  margin: 0px auto;
 }
 
 .wiki_logo {
@@ -67,13 +62,18 @@
 
 .user_login {
   float: right;
-  margin: 110px 60px;
+  margin: 70px 60px;
 }
 
 .middle_content {
   display: inline;
-  position: absolute;
-  width: 80%;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  background:rgb(179, 209, 219);
+  border: 2px solid#d4af37;
+  padding: 10px 25px;
+  margin: 10px 0px;
 }
 
 .model_list {
@@ -101,6 +101,109 @@
   margin: 2px 0;
 }
 
-body {
-  
+footer {
+  background: rgba(0,0,0,0.8) none repeat scroll 0% 0%;
+  width: 100%;
+  padding: 0px !important;
+  margin-top: 20px !important;
+  bottom: 0px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  color:#C2C8CF;
+  position: absolute;
+  height: 100px;
+}
+
+.header_nav {
+  font-family: 'Acme', sans-serif;
+  color: #d4af37;
+  font-size: 24px;
+  position: absolute;
+  margin: 88px 450px;
+}
+
+
+.header_nav ul li {
+  display: inline;
+  margin: 0px 10px;
+  font-family: 'Acme', sans-serif;
+}
+
+.container {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 100px; /* height of your footer */
+  font-family: roboto_cond_regular_ycdt, Arial;
+}
+
+html, body {
+  height: 100%;
+  position: relative;
+  margin: 0px auto;
+}
+
+.margin_fix {
+  margin: 0px auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }

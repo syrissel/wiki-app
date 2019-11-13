@@ -34,17 +34,50 @@
   <body>
 
   <div class="container">
-  <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+
+       <p class="alert margin_fix"><%= alert %></p>
     <div class="header_container">
+
+    <p id="snackbar" class="notice"><%= notice %></p>
+    <% if notice %>
+      
+    <script type="text/javascript">
+
+      $(window).load(function () {
+        var snackbarContainer = document.getElementById('snackbar');
+        snackbarContainer.className = "show";
+        setTimeout(function(){ snackbarContainer.className = snackbarContainer.className.replace("show", ""); }, 3000);
+      });
+
+
+    </script>
+    <% end %>
       <%= link_to root_path do %>
       <div class="logo"></div>
       <h2 class="wiki_logo">wiki</h2>
       <% end %>
+      <% if user_signed_in? %>
+      <div class="header_nav">
+        <ul>
+          <li>News</li>
+          <li>MSDS</li>
+          <li>Resource Centre</li>
+        </ul>
+      </div>
+      <% end %>
       <div class="user_login">
+      <% if !user_signed_in? %>
       <p>
-        <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+        <%= link_to 'Admin portal', new_user_session_path, class: 'btn btn-primary btn-lg' %>
       </p>
+      <% else %>
+      <p>
+        <%= link_to 'Logout', destroy_user_session_path %>
+      </p>
+      <p>
+        <%= link_to 'New Wiki', new_page_path %>
+      </p>
+      <% end %>
     </div>
     </div>
     <div id="side_panel">
@@ -71,9 +104,15 @@
     <div class="middle_content">
       <%= yield %>
     </div>
+    <footer>
+     <ul class="footer_info">
+      <li class="footer_info_lastmod">Last modified by smireault 18:30 Tuesday, November 12, 2019</li>
+      <li class="footer_info_copyright">Copywrong Computers for Schools Manitoba 2019</li>
+     </ul>
+    </footer>
   </div>
 
-  <footer></footer>
+  
     
   </body>
 </html>

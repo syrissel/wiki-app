@@ -1,5 +1,6 @@
-<h1>New Wiki</h1>
-<%= form_for :page, url: pages_path do |f| %>
+
+<h2>Editing <%= @page.title %></h2>
+<%= form_for @page do |f| %>
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -11,10 +12,9 @@
   </p>
 
   <p>
-    <%= f.submit "Post" %>
+    <%= f.submit "Save changes" %>
   </p>
 <% end %>
 
 <%= tinymce_assets %>
 <%= tinymce %>
-
