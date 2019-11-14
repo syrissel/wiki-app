@@ -11,5 +11,18 @@ Make.create(name: 'HP')
 Make.create(name: 'Lenovo')
 Make.create(name: 'Ciara')
 
-Model.create(name: '6570b', series: 'i-series', make_id: 1)
-Model.create(name: '8005', series: 'Dual-core', make_id: 1)
+PageType.create(name: 'Production')
+PageType.create(name: 'Cataloguing')
+PageType.create(name: 'Models')
+PageType.create(name: 'Misc')
+
+ModelType.create(name: 'Desktop')
+ModelType.create(name: 'Laptop')
+ModelType.create(name: 'Server')
+ModelType.create(name: 'Printer')
+ModelType.create(name: 'Other')
+
+Page.create(title: "Test", content: "valuable content", page_type_id: 2)
+
+Model.create(name: '6570b', series: 'i-series', make_id: 1, model_type_id: 2, page_id: 1)
+# Model.create(name: '8005', series: 'Dual-core', make_id: 1, model_type: 1)

@@ -1,7 +1,10 @@
 <h2>Welcome to the Computers for Schools Wiki Site!</h2>
 <h3>Latest updates:</h3>
-<% @pages.each do |page| %>
-  <ul>
-    <li><%= link_to page.title, page %></li>
-  </ul>
-<% end %>
+
+<div class="cardview_container">
+  <% @pages.each do |page| %>
+    <ul>
+      <li class="cardview"><%= link_to page.title, page %></li>
+    </ul>
+  <% end %>
+</div>

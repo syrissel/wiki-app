@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_060752) do
+ActiveRecord::Schema.define(version: 2019_11_14_161355) do
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "url"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2019_11_13_060752) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "model_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "series"
@@ -33,7 +39,17 @@ ActiveRecord::Schema.define(version: 2019_11_13_060752) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "make_id", null: false
+    t.bigint "model_type_id", null: false
+    t.bigint "page_id", null: false
     t.index ["make_id"], name: "index_models_on_make_id"
+    t.index ["model_type_id"], name: "index_models_on_model_type_id"
+    t.index ["page_id"], name: "index_models_on_page_id"
+  end
+
+  create_table "page_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -41,6 +57,8 @@ ActiveRecord::Schema.define(version: 2019_11_13_060752) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "page_type_id", null: false
+    t.index ["page_type_id"], name: "index_pages_on_page_type_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -56,4 +74,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_060752) do
   end
 
   add_foreign_key "models", "makes"
+  add_foreign_key "models", "model_types"
+  add_foreign_key "models", "pages"
+  add_foreign_key "pages", "page_types"
 end

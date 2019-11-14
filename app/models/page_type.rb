@@ -1,0 +1,2 @@
+class PageType < ApplicationRecord
+end

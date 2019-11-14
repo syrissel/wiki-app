@@ -108,7 +108,8 @@
 }
 
 footer {
-  background: rgba(0,0,0,0.8) none repeat scroll 0% 0%;
+  /*background: rgba(0,0,0,0.8) none repeat scroll 0% 0%;*/
+  background: black;
   width: 100%;
   padding: 0px !important;
   margin-top: 20px !important;
@@ -159,6 +160,60 @@ html, body {
 .margin_fix {
   margin: 0px auto;
 }
+
+
+.model_list ul {
+  padding: 0px;
+}
+
+
+.cardview_container {
+  padding: 35px;
+border: 1px solid black;
+height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+/* Dropdown menu */
+
+.dropdown li {
+  display: block;
+  transition-duration: 0.5s;
+ }
+ 
+ .dropdown li:hover {
+   cursor: pointer;
+ }
+ 
+ .dropdown ul li ul {
+   visibility: hidden;
+   opacity: 0;
+   position: absolute;
+   transition: all 0.5s ease;
+   margin-top: 1rem;
+   left: 0;
+   display: none;
+ }
+ 
+ .dropdown ul li:hover > ul,
+ .dropdown ul li ul:hover {
+   visibility: visible;
+   opacity: 1;
+   display: block;
+ }
+ 
+ .dropdown ul li ul li {
+   clear: both;
+   width: 100%;
+ }
 
 
 
