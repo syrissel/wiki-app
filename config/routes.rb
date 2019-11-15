@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :pages, only: [:index, :show, :new, :create, :edit, :update]
+  get 'user_admin', to: 'pages#user_admin'
 
 
   # get 'new', to: 'pages#new'

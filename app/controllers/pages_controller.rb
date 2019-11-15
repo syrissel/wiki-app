@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
 
+  def user_admin
+    @users = User.where(user_level_id: [1,2])
+  end
+
   def show
     @page = Page.find(params[:id])
   end
