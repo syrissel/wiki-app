@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
+  
 
   # User level id of 1 and 2 are Supervisor and Executive, respectively.
   def user_admin
@@ -40,7 +40,7 @@ class PagesController < ApplicationController
   end
 
   private 
-  
+
   def page_params
     params.require(:page).permit(:title, :content)
   end
