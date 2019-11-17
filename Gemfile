@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
 
 # User authentication
-gem 'devise'
+# gem 'devise'
 
 # Carrierwave image upload
 gem 'carrierwave'
