@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_032359) do
+ActiveRecord::Schema.define(version: 2019_11_18_221443) do
+
+  create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "url"
@@ -59,6 +65,8 @@ ActiveRecord::Schema.define(version: 2019_11_18_032359) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "page_type_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "approval_status_id", null: false
+    t.index ["approval_status_id"], name: "index_pages_on_approval_status_id"
     t.index ["page_type_id"], name: "index_pages_on_page_type_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
@@ -74,11 +82,15 @@ ActiveRecord::Schema.define(version: 2019_11_18_032359) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_level_id", null: false
+    t.index ["user_level_id"], name: "index_users_on_user_level_id"
   end
 
   add_foreign_key "models", "makes"
   add_foreign_key "models", "model_types"
   add_foreign_key "models", "pages"
+  add_foreign_key "pages", "approval_statuses"
   add_foreign_key "pages", "page_types"
   add_foreign_key "pages", "users"
+  add_foreign_key "users", "user_levels"
 end

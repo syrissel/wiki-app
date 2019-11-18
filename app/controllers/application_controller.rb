@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, alert: "Not authorized" if current_user.nil?
   end
 
+  def authenticate_supervisor
+    # if current_user.user_level = 2;
+    # end
+  end
+
 end
