@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_050612) do
+ActiveRecord::Schema.define(version: 2019_11_18_032359) do
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "url"
@@ -70,17 +70,10 @@ ActiveRecord::Schema.define(version: 2019_11_15_050612) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.string "username"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_level_id", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["user_level_id"], name: "index_users_on_user_level_id"
   end
 
   add_foreign_key "models", "makes"
@@ -88,5 +81,4 @@ ActiveRecord::Schema.define(version: 2019_11_15_050612) do
   add_foreign_key "models", "pages"
   add_foreign_key "pages", "page_types"
   add_foreign_key "pages", "users"
-  add_foreign_key "users", "user_levels"
 end

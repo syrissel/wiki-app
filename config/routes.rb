@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
+  #get 'sessions/new'
+  get 'register', to: 'users#new', as: 'register'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
   resources :users
+  resources :sessions
   resources :pages, only: [:index, :show, :new, :create, :edit, :update]
   get 'user_admin', to: 'pages#user_admin'
 

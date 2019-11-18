@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  
+  before_action :authorize, only: [:edit, update]
 
   # User level id of 1 and 2 are Supervisor and Executive, respectively.
   def user_admin

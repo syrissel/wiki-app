@@ -29,6 +29,7 @@ gem 'jquery-rails'
 
 # User authentication
 # gem 'devise'
+gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 
 # Carrierwave image upload
 gem 'carrierwave'
