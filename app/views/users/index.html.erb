@@ -6,5 +6,9 @@
   <div style="margin-left: 10px"><%= u.user_level.level %></div>
   <div style="margin-left: 10px"><%= u.created_at %></div>
   <div style="margin-left: 10px">Last login: <%= u.last_login %></div>
+  <%= link_to 'Edit', edit_user_path(u) %>
+  <%= link_to 'Delete', destroy_user_path(u), method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
+
+
 </ul>

@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   get 'register', to: 'users#new', as: 'register'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'user/:id/destroy', to: 'users#destroy', as: 'destroy_user'
 
   resources :users
   resources :sessions
   resources :pages, only: [:index, :show, :new, :create, :edit, :update]
-  get 'user_admin', to: 'pages#user_admin'
+  # get 'user_admin', to: 'pages#user_admin'
 
 
   # get 'new', to: 'pages#new'

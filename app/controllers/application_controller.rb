@@ -16,8 +16,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate_supervisor
-    if current_user.user_level_id == UserLevel.find_by_level('Intern').id
-      redirect_to login_path, alert: "Not authorized"
+    if current_user.nil?
+      redirect_to login_path, alert: "Not authorized. Please login."
+    elsif current_user.user_level_id == UserLevel.find_by_level('Intern').id 
+      redirect_to login_path, alert: "Not authorized. Please find a supervisor to perform this action."
     end
   end
 

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_supervisor, only: [:new]
+  before_action :authenticate_supervisor, only: [:new, :index]
 
   # What does this do?
   wrap_parameters :user, include: [:username, :password, :password_confirmation]
@@ -21,6 +21,12 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    redirect_to users_path, notice: "#{@user.username} has been deleted."
+    @user.destroy
   end
 
   private
