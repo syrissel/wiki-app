@@ -1,0 +1,9 @@
+<h1>Users</h1>
+
+<ul>
+<% @users.each do |u| %>
+  <li><%= link_to u.username, edit_user_path(u) %></li>
+  <div style="margin-left: 10px"><%= u.user_level.level %></div>
+  <div style="margin-left: 10px"><%= u.created_at %></div>
+<% end %>
+</ul>

@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_supervisor, only: [:new]
+
+  # What does this do?
   wrap_parameters :user, include: [:username, :password, :password_confirmation]
+
+  def index
+    @users = User.order(:username)
+  end
 
   def new
     @user = User.new

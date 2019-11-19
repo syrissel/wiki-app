@@ -1,10 +1,4 @@
 class PagesController < ApplicationController
-  before_action :authorize, only: [:edit, update]
-
-  # User level id of 1 and 2 are Supervisor and Executive, respectively.
-  def user_admin
-    @users = User.where(user_level_id: [1,2])
-  end
 
   def show
     @page = Page.find(params[:id])
