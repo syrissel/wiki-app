@@ -9,18 +9,16 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Not exactly sure how helper_method works; revisit later.
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
 
-  def authorize
-    redirect_to login_path, alert: "Not authorized" if current_user.nil?
-  end
-
   def authenticate_supervisor
-    # if current_user.user_level = 2;
-    # end
+    if current_user.user_level_id == UserLevel.find_by_level('Intern').id
+      redirect_to login_path, alert: "Not authorized"
+    end
   end
 
 end

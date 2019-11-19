@@ -68,6 +68,7 @@
       <% if current_user %>
       <p>
         Logged in as <%= current_user.username %>
+        User Level: <%= current_user.user_level.level %>
         <%= link_to 'Logout', logout_path %>
       </p>
       <% else %>

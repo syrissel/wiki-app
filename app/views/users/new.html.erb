@@ -1,7 +1,5 @@
 <h1>Register User</h1>
 
-<%= render plain: params[:user].inspect %>
-
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
   <div class="error_messages">
@@ -20,7 +18,11 @@
     <%= f.text_field :username %>
   </div>
   <div class="field">
-    <%= f.label :passwordm, params[:password] %><br />
+    <%= f.label :user_level_id %><br />
+    <%= collection_select :user, :user_level_id, UserLevel.order(:level), :id, :level, prompt: true %>
+  </div>
+  <div class="field">
+    <%= f.label :password, params[:password] %><br />
     <%= f.password_field :password %>
   </div>
   <div class="field">
