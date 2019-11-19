@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      user.update_attribute(:last_login, Time.now)
       redirect_to root_path, notice: "Logged in successfully."
     else
       flash.now.alert = "Username/password combination is invalid."

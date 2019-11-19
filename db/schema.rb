@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_012023) do
+ActiveRecord::Schema.define(version: 2019_11_19_031702) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_012023) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_level_id", null: false
+    t.datetime "last_login"
     t.index ["user_level_id"], name: "index_users_on_user_level_id"
   end
 
