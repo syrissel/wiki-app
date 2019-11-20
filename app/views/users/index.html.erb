@@ -5,9 +5,9 @@
   <li><%= link_to u.username, edit_user_path(u) %></li>
   <div style="margin-left: 10px"><%= u.user_level.level %></div>
   <div style="margin-left: 10px"><%= u.created_at %></div>
-  <div style="margin-left: 10px">Last login: <%= u.last_login %></div>
+  <div style="margin-left: 10px"><%= u.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %></div>
   <%= link_to 'Edit', edit_user_path(u) %>
-  <%= link_to 'Delete', destroy_user_path(u), method: :delete, data: { confirm: "Are you sure?" } %>
+  <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: "Delete user #{u.username}?"} %>
 <% end %>
 
 
