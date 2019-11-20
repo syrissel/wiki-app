@@ -22,5 +22,10 @@ class ApplicationController < ActionController::Base
       redirect_to login_path, alert: "Not authorized. Please find a supervisor to perform this action."
     end
   end
+  
+  def authorize_access
+    current_user.user_level_id == UserLevel.find_by_level('Supervisor').id unless current_user.nil?
+  end
+  helper_method :authorize_access
 
 end
