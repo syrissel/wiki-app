@@ -26,7 +26,7 @@ class PagesController < ApplicationController
     @page = Page.new(page_params)
 
     if (@page.save)
-      redirect_to page_show(@page)
+      redirect_to page_path(@page)
       flash[:notice] = 'Wiki created.'
     else
       render 'new'
@@ -36,6 +36,6 @@ class PagesController < ApplicationController
   private 
 
   def page_params
-    params.require(:page).permit(:title, :content)
+    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :page_type_id)
   end
 end
