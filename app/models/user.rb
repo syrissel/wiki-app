@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :user_level
+  has_many :pages
   accepts_nested_attributes_for :user_level
   has_secure_password
 

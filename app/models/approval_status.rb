@@ -1,3 +1,3 @@
 class ApprovalStatus < ApplicationRecord
-  belongs_to :page
+  has_many :pages
 end
