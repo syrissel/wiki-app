@@ -1,0 +1,6 @@
+<h1>Current Wikis pending for approval:</h1>
+<ul>
+  <% @pending_pages.each do |p| %>
+    <li><%= link_to p.title, p %> by: <%= p.user.username %></li>
+  <% end %>
+</ul>

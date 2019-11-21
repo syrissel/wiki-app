@@ -15,11 +15,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  # Need to revise these two methods
   def authenticate_supervisor
     if current_user.nil?
       redirect_to login_path, alert: "Not authorized. Please login."
     elsif current_user.user_level_id == UserLevel.find_by_level('Intern').id 
-      redirect_to login_path, alert: "Not authorized. Please find a supervisor to perform this action."
+      redirect_to root_path, alert: "Not authorized. Please find a supervisor to perform this action."
     end
   end
   

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'user/:id/destroy', to: 'users#destroy', as: 'destroy_user'
+  get 'review', to: 'pages#review'
 
   resources :users
   resources :sessions

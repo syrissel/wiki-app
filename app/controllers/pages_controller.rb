@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :authenticate_supervisor, only: [:review]
 
   def show
     @page = Page.find(params[:id])
@@ -31,6 +32,10 @@ class PagesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def review
+    @pending_pages = Page.where("approval_status_id = ?", 1)
   end
 
   private 

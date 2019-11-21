@@ -59,10 +59,12 @@
       <div class="header_nav">
         <ul>
           <li><%= link_to 'Home', root_path %></li>
-          <% if authorize_access %>
           <li>News</li>
           <li>MSDS</li>
           <li>Resource Centre</li>
+          <% if authorize_access %>
+          <li><%= link_to 'User Managment', users_path %></li>
+          <li><%= link_to 'Wiki Review', review_path %></li>
           <% end %>
         </ul>
       </div>
