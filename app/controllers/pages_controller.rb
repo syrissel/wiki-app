@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_action :authenticate_supervisor, only: [:review]
 
   def index
-    @pages = Page.where("approval_status_id = ?", 4)
+    @pages = Page.where("approval_status_id = ?", 5)
   end
 
   def show
@@ -39,7 +39,7 @@ class PagesController < ApplicationController
   end
 
   def review
-    @pending_pages = Page.where("approval_status_id = ?", 1)
+    @pending_pages = Page.where(approval_status_id: [1,2,4])
   end
 
   private 

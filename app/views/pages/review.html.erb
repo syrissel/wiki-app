@@ -3,7 +3,12 @@
   <% @pending_pages.each do |p| %>
     <li>
       <%= link_to p.title, p %> by: <%= p.user.username %>
-      
+      Status: 
+			<% if p.approval_status.id == 4 %>
+				<%= p.approval_status.status %> - Waiting for executive approval.
+			<% else %>
+				<%= p.approval_status.status %>
+			<% end %>
     </li>
   <% end %>
 </ul>

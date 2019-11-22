@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize_access
-    current_user.user_level_id == UserLevel.find_by_level('Supervisor').id unless current_user.nil?
+    current_user.user_level_id != UserLevel.find_by_level('Intern').id unless current_user.nil?
   end
   helper_method :authorize_access
 

@@ -16,5 +16,20 @@
 		<%= f.submit "Submit Status" %>
 		</div>
 	<% end %>
+
+	<% if current_user.user_level_id == 3 && @page.approval_status_id == 4 %>
+		<%= form_for @page do |f| %>
+			<div>
+				<%= hidden_field(:page, :title, value: @page.title) %>
+				<%= hidden_field(:page, :content, value: @page.content) %>
+				<%= hidden_field(:page, :page_type_id, value: 1) %>
+				<%= hidden_field(:page, :approval_status_id, value: 5) %>
+			</div>
+			<%= f.submit "Executive Approve"%>
+		<% end %>
+	<% end %>
+
 <% end %>
+
+
 
