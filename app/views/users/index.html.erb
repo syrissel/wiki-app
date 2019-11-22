@@ -5,7 +5,13 @@
   <li><%= link_to u.username, edit_user_path(u) %></li>
   <div style="margin-left: 10px"><%= u.user_level.level %></div>
   <div style="margin-left: 10px"><%= u.created_at %></div>
-  <div style="margin-left: 10px"><%= u.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %></div>
+  <div style="margin-left: 10px">
+    <% if u.last_login.nil? %>
+      User has not logged in yet.
+    <% else %>
+      <%= u.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %>
+    <% end %>
+  </div>
   <%= link_to 'Edit', edit_user_path(u) %>
   <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: "Delete user #{u.username}?"} %>
 <% end %>

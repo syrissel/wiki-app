@@ -58,3 +58,19 @@
 # user.encrypted_password = '#$taawktljasktlw4aaglj'
 # user.user_level_id = 1
 # user.save!
+
+UserLevel.create(level: 'Intern')
+UserLevel.create(level: 'Supervisor')
+UserLevel.create(level: 'Executive')
+
+ApprovalStatus.create(status: 'Pending')
+ApprovalStatus.create(status: 'Rejected')
+ApprovalStatus.create(status: 'Approved')
+
+User.create(username: 'supervisor', password: 'password', password_confirmation: 'password', user_level_id: 2)
+User.create(username: 'smireault', password: 'password', password_confirmation: 'password', user_level_id: 1)
+
+
+
+
+

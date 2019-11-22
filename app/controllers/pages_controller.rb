@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   before_action :authenticate_supervisor, only: [:review]
 
+  def index
+    @pages = Page.where("approval_status_id = ?", 4)
+  end
+
   def show
     @page = Page.find(params[:id])
   end
@@ -12,7 +16,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     
-    if (@page.update(title: params[:page][:title], content: params[:page][:content]))
+    if (@page.update(title: params[:page][:title], content: params[:page][:content], approval_status_id: params[:page][:approval_status_id]))
       
       redirect_to @page
       flash[:notice] = 'Wiki was updated.'

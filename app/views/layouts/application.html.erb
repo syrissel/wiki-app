@@ -73,7 +73,7 @@
       <ul>
         <li>Logged in as <%= current_user.username %></li>
         <li>User Level: <%= current_user.user_level.level %></li>
-        <li>Last login: <%= current_user.last_login %></li>
+        <li><%= current_user.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %></li>
         <li><%= link_to 'Logout', logout_path %></li>
       </ul>
       <% else %>
