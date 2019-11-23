@@ -2,6 +2,11 @@ class SessionsController < ApplicationController
   def new
   end
 
+  # Redirect if username/pw combination is wrong & user refreshes page.
+  def index
+    redirect_to root_path
+  end
+
   def create
     user = User.find_by_username(params[:username])
 

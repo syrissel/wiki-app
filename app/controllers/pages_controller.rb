@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   before_action :authenticate_supervisor, only: [:review]
+  before_action :authenticate_user, except: [:index]
 
   def index
-    @pages = Page.where("approval_status_id = ?", 5)
+    @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE)
   end
 
   def show

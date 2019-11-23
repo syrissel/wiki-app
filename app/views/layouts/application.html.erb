@@ -88,7 +88,17 @@
     </div>
     <div id="side_panel">
     <div class="side_panel_container">
-    <h3><a href="#">Production</a></h3>
+    <ul>
+    <% @page_types.each do |pt| %>
+      <li>
+        <%= pt.name %>
+        <% @pages.page_type.each do |pp| %>
+          <%= pp.title %>
+        <% end %>
+      </li>
+    <% end %>
+    <ul>
+    <!--<h3><a href="#">Production</a></h3>
       <ul class="make_list">
         <% @makes.each do |make| %>
           <li>
@@ -104,7 +114,7 @@
             </div>
           </li>
         <% end %>
-      </ul>
+      </ul> -->
       </div>
     </div>
     <div class="middle_content">

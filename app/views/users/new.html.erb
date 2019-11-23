@@ -19,7 +19,7 @@
   </div>
   <div class="field">
     <%= f.label :user_level_id %><br />
-    <%= collection_select :user, :user_level_id, UserLevel.order(:level), :id, :level, prompt: true %>
+    <%= collection_select :user, :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME), :id, :level, prompt: true %>
   </div>
   <div class="field">
     <%= f.label :password, params[:password] %><br />
