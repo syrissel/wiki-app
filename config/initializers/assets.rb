@@ -15,10 +15,12 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # Constants correspond with primary keys in UserLevel table
 # EXECUTIVE also represents primary key in ApprovalStatus table
-EXECUTIVE_NAME = 'Executive'
-EXECUTIVE_VALUE = 3
-SUPERVISOR_NAME = 'Supervisor'
-SUPERVISOR_VALUE = 2
-INTERN_NAME = 'Intern'
-INTERN_VALUE = 1
+EXECUTIVE_NAME = 'Executive'.freeze
+EXECUTIVE_VALUE = 3.freeze
+SUPERVISOR_NAME = 'Supervisor'.freeze
+SUPERVISOR_VALUE = 2.freeze
+INTERN_NAME = 'Intern'.freeze
+INTERN_VALUE = 1.freeze
+PENDING = 1.freeze
+REJECTED = 4.freeze
 

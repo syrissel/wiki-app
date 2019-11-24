@@ -39,6 +39,12 @@ class PagesController < ApplicationController
     end
   end
 
+  def destroy
+    @page = Page.find(params[:id])
+    redirect_to pages_path
+    @page.destroy
+  end
+
   def review
     @pending_pages = Page.where(approval_status_id: [1,2,4])
   end

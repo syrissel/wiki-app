@@ -1,0 +1,13 @@
+<h1>Current Categories:</h1>
+
+<% if @page_types.nil? %>
+  <h3>There are currently no categories.</h3>
+<% else %>
+  <ul>
+  <% @page_types.each do |pt| %>
+    <li><%= pt.name %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'New Category', categories_new_path %>

@@ -92,12 +92,17 @@
     <% @page_types.each do |pt| %>
       <li>
         <%= pt.name %>
-        <% @pages.page_type.each do |pp| %>
-          <%= pp.title %>
+        <% pages_of_type = @pages.where("page_type_id = ? AND approval_status_id = ?", pt.id, EXECUTIVE_VALUE)%>
+        <ul>
+        <% pages_of_type.each do |pof| %>
+          <li>
+          <%= pof.title %>
+          </li>
         <% end %>
+        </ul>
       </li>
     <% end %>
-    <ul>
+    </ul>
     <!--<h3><a href="#">Production</a></h3>
       <ul class="make_list">
         <% @makes.each do |make| %>

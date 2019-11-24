@@ -4,11 +4,14 @@
     <li>
       <%= link_to p.title, p %> by: <%= p.user.username %>
       Status: 
-			<% if p.approval_status.id == 4 %>
+			<% if p.approval_status.id == SUPERVISOR_VALUE %>
 				<%= p.approval_status.status %> - Waiting for executive approval.
 			<% else %>
 				<%= p.approval_status.status %>
 			<% end %>
+      <% if p.approval_status.id == REJECTED %>
+        <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"} %>
+      <% end %>
     </li>
   <% end %>
 </ul>
