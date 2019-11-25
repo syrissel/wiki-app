@@ -1,0 +1,12 @@
+<h1>Categories#new</h1>
+
+<%= form_for @category do |f| %>
+  <%= hidden_field(:category, :sort_number, value: sort_number_increment) %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.submit 'Create' %>
+  </div>
+<% end %>

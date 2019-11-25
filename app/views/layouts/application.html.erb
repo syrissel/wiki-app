@@ -89,10 +89,10 @@
     <div id="side_panel">
     <div class="side_panel_container">
     <ul>
-    <% @page_types.each do |pt| %>
+    <% @categories.each do |c| %>
       <li>
-        <%= pt.name %>
-        <% pages_of_type = @pages.where("page_type_id = ? AND approval_status_id = ?", pt.id, EXECUTIVE_VALUE)%>
+        <%= c.name %>
+        <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", c.id, EXECUTIVE_VALUE)%>
         <ul>
         <% pages_of_type.each do |pof| %>
           <li>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # get 'categories/new'
+  # # get 'categories/show'
+  # get 'categories/create'
+  # get 'categories/destroy'
   #get 'sessions/new'
   get 'register', to: 'users#new', as: 'register'
   get 'login', to: 'sessions#new', as: 'login'
@@ -7,12 +11,10 @@ Rails.application.routes.draw do
   get 'user/:id/destroy', to: 'users#destroy', as: 'destroy_user'
   delete 'pages/:id/destroy', to: 'pages#destroy', as: 'destroy_page'
   get 'review', to: 'pages#review'
-  get 'categories', to: 'page_type#index'
-  get 'categories/new', to: 'page_type#new'
-  get 'categories/:id', to: 'page_type#show'
-  
+  get 'categories/:id/move_up', to: 'categories#move_up', as: 'categories_move_up'
 
-  # resources :page_type
+  resources :categories
+
   resources :users
   resources :sessions
   resources :pages, only: [:index, :show, :new, :create, :edit, :update]

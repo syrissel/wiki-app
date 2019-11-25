@@ -69,9 +69,9 @@ UserLevel.create(level: INTERN_NAME)
 UserLevel.create(level: SUPERVISOR_NAME)
 UserLevel.create(level: EXECUTIVE_NAME)
 
-PageType.create(name: 'Production')
-PageType.create(name: 'Cataloguing')
-PageType.create(name: 'Computer Guides')
+Category.create(name: 'Production')
+Category.create(name: 'Cataloguing')
+Category.create(name: 'Computer Guides')
 
 ApprovalStatus.create(status: 'Pending')
 ApprovalStatus.create(status: 'Supervisor Approved')
@@ -81,6 +81,10 @@ ApprovalStatus.create(status: 'Rejected')
 User.create(username: 'Executive Director', password: 'password', password_confirmation: 'password', user_level_id: EXECUTIVE_VALUE)
 User.create(username: 'hpotter', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE)
 User.create(username: 'smireault', password: 'password', password_confirmation: 'password', user_level_id: INTERN_VALUE)
+
+Page.create(title: 'test1', content: 'test1', user_id: 3, approval_status_id: PENDING, category_id: 1)
+Page.create(title: 'test2', content: 'test2', user_id: 3, approval_status_id: PENDING, category_id: 1)
+Page.create(title: 'test3', content: 'test3', user_id: 3, approval_status_id: PENDING, category_id: 2)
 
 
 

@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   def set_layout_variables
     @makes = Make.all
     @pages = Page.all.order("updated_at desc")
-    @prod_pages = Page.where(page_type_id: 1)
-    @page_types = PageType.all
+    # @prod_pages = Page.where(category_id: 1)
+    @categories = Category.all
 
     # @pages_of_type_array = []
 
