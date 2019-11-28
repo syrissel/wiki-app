@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_042855) do
+ActiveRecord::Schema.define(version: 2019_11_27_013857) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_11_25_042855) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sort_number"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_categories_on_category_id"
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -88,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_042855) do
     t.index ["user_level_id"], name: "index_users_on_user_level_id"
   end
 
+  add_foreign_key "categories", "categories"
   add_foreign_key "models", "makes"
   add_foreign_key "models", "model_types"
   add_foreign_key "models", "pages"

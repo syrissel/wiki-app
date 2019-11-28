@@ -4,10 +4,13 @@
   <h3>There are currently no categories.</h3>
 <% else %>
   <ul>
-  <% @sorted_categories.each do |c| %>
-    <li><%= c.name %><%= link_to 'Move Up', categories_move_up_path(c) %> Sort:<%= c.sort_number %></li>
-  <% end %>
+    <% @categories_array.each do |c| %>
+      
+      <%= c %>
+
+    <% end %>
   </ul>
 <% end %>
 
 <%= link_to 'Create New Category', new_category_path %>
+

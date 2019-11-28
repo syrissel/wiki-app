@@ -4,7 +4,20 @@ class CategoriesController < ApplicationController
   end
 
   def index
+    @first = Category.first
     @sorted_categories = Category.order(:sort_number)
+    @sub_categories = Category.order(:sort_number).where("category_id IS NOT NULL")
+
+    root_categories = Category.where('category_id is null')
+    @child_categories = Category.where('category_id is not null')
+    @categories_array = []
+
+    root_categories.each do |cat|
+      @categories_array << [cat, 0]
+      find_children cat, 1
+    end
+
+    render json: @categories_array
   end
 
   def show
@@ -38,6 +51,8 @@ class CategoriesController < ApplicationController
   def move_up
     current = Category.find(params[:id])
 
+    
+
     unless (current.sort_number - 1) == 0
       current_sort_num = current.sort_number
       top_sort_num = current.sort_number - 1
@@ -54,5 +69,14 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name, :sort_number)
+  end
+
+  def find_children (category, generation)
+    @child_categories.each do |child|
+      if child.category == category
+        @categories_array << [child, generation] 
+        find_children child, generation+1
+      end
+    end
   end
 end
