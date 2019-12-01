@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
     @makes = Make.all
     @pages = Page.all.order("updated_at desc")
     # @prod_pages = Page.where(category_id: 1)
-    @categories = Category.all
+    @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
+    @root_categories = Category.order(:position).where("category_id IS NULL")
+
 
     # @pages_of_type_array = []
 
@@ -23,7 +25,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Not exactly sure how helper_method works; revisit later.
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end

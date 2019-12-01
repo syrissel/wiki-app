@@ -1,17 +1,15 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_supervisor
+  before_action :authenticate_user
+
   def new
     @category = Category.new
   end
 
   def index
     @first = Category.first
-    @sorted_categories = Category.order(:sort_number)
-    @sub_categories = Category.order(:sort_number).where("category_id IS NOT NULL")
-
-    @categories = Category.order(position: :asc).arrange_as_array
-    # @categories = Category.arrange(:order => :id)
-    
-    render json: @categories
+    # @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
+    # @root_categories = Category.order(:position).where("category_id IS NULL")
 
   end
 
@@ -67,10 +65,9 @@ class CategoriesController < ApplicationController
     redirect_to categories_path
   end
 
-
   private
 
   def category_params
-    params.require(:category).permit(:name, :sort_number)
+    params.require(:category).permit(:name, :position, :category_id)
   end
 end

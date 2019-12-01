@@ -36,7 +36,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'acts_as_list'
-gem 'ancestry'
 
 # WYSIWYG
 gem 'tinymce-rails', '~> 4.0'
