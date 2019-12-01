@@ -35,6 +35,9 @@ gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 gem 'carrierwave'
 gem 'mini_magick'
 
+gem 'acts_as_list'
+gem 'ancestry'
+
 # WYSIWYG
 gem 'tinymce-rails', '~> 4.0'
 # gem 'tinymce-rails-imageupload', github: 'PerfectlyNormal/tinymce-rails-imageupload'

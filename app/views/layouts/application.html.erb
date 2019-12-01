@@ -89,20 +89,7 @@
     <div id="side_panel">
     <div class="side_panel_container">
     <ul>
-    <% @categories.each do |c| %>
-      <li>
-        <%= c.name %>
-        <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", c.id, EXECUTIVE_VALUE)%>
-        <ul>
-        <% pages_of_type.each do |pof| %>
-          <li>
-          <%= pof.title %>
-          </li>
-        <% end %>
-        </ul>
-      </li>
-    <% end %>
-    </ul>
+
     <!--<h3><a href="#">Production</a></h3>
       <ul class="make_list">
         <% @makes.each do |make| %>

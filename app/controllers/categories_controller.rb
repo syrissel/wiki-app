@@ -8,16 +8,11 @@ class CategoriesController < ApplicationController
     @sorted_categories = Category.order(:sort_number)
     @sub_categories = Category.order(:sort_number).where("category_id IS NOT NULL")
 
-    root_categories = Category.where('category_id is null')
-    @child_categories = Category.where('category_id is not null')
-    @categories_array = []
+    @categories = Category.order(position: :asc).arrange_as_array
+    # @categories = Category.arrange(:order => :id)
+    
+    render json: @categories
 
-    root_categories.each do |cat|
-      @categories_array << [cat, 0]
-      find_children cat, 1
-    end
-
-    render json: @categories_array
   end
 
   def show
@@ -50,33 +45,32 @@ class CategoriesController < ApplicationController
   # Call this action on the move up link in the view, then redirect to index.
   def move_up
     current = Category.find(params[:id])
+    current.move_higher
+    # current = Category.find(params[:id])
 
-    
+    # unless (current.sort_number - 1) == 0
+    #   current_sort_num = current.sort_number
+    #   top_sort_num = current.sort_number - 1
+    #   top = Category.find_by_sort_number(top_sort_num)
 
-    unless (current.sort_number - 1) == 0
-      current_sort_num = current.sort_number
-      top_sort_num = current.sort_number - 1
-      top = Category.find_by_sort_number(top_sort_num)
-
-      current.update(sort_number: top_sort_num)
-      top.update(sort_number: current_sort_num)
-    end
+    #   current.update(sort_number: top_sort_num)
+    #   top.update(sort_number: current_sort_num)
+    # end
 
     redirect_to categories_path
   end
+
+  def move_down
+    current = Category.find(params[:id])
+    current.move_lower
+
+    redirect_to categories_path
+  end
+
 
   private
 
   def category_params
     params.require(:category).permit(:name, :sort_number)
-  end
-
-  def find_children (category, generation)
-    @child_categories.each do |child|
-      if child.category == category
-        @categories_array << [child, generation] 
-        find_children child, generation+1
-      end
-    end
   end
 end

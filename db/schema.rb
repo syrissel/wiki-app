@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_013857) do
+ActiveRecord::Schema.define(version: 2019_11_29_042750) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 2019_11_27_013857) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "sort_number"
     t.bigint "category_id"
+    t.integer "position"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
     t.index ["category_id"], name: "index_categories_on_category_id"
   end
 

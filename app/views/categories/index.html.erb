@@ -3,13 +3,9 @@
 <% if @categories.nil? %>
   <h3>There are currently no categories.</h3>
 <% else %>
-  <ul>
-    <% @categories_array.each do |c| %>
-      
-      <%= c %>
 
-    <% end %>
-  </ul>
+
+  <%= @categories %>
 <% end %>
 
 <%= link_to 'Create New Category', new_category_path %>
