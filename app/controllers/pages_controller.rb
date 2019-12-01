@@ -45,13 +45,14 @@ class PagesController < ApplicationController
     @page.destroy
   end
 
+  # Review this
   def review
-    @pending_pages = Page.where(approval_status_id: [1,2,4])
+    @pending_pages = Page.where(approval_status_id: [PENDING, SUPERVISOR_VALUE, REJECTED])
   end
 
   private 
 
   def page_params
-    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :page_type_id)
+    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 end
