@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_025046) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "approval_status_id", null: false
     t.bigint "category_id", null: false
     t.index ["approval_status_id"], name: "index_pages_on_approval_status_id"

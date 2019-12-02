@@ -13,7 +13,7 @@
     <% end %>
   </div>
   <%= link_to 'Edit', edit_user_path(u) %>
-  <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: "Delete user #{u.username}?"} %>
+  <%= link_to 'Delete', destroy_user_path(u), method: :delete, data: { confirm: "Delete user #{u.username}?"} %>
 <% end %>
 </ul>
 <%= link_to 'Register New User', register_path %>
