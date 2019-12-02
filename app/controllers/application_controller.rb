@@ -31,13 +31,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   # Need to revise these two methods
-  def authenticate_supervisor(supervisor_id = nil, user_id = nil)
+  def authenticate_supervisor
     if current_user.nil?
       redirect_to login_path, alert: "Not authorized. Please login."
     elsif current_user.user_level_id == INTERN_VALUE
       redirect_to root_path, alert: "Not authorized. Please find a supervisor to perform this action."
-    elsif supervisor_id == user_id
-      redirect_to review_path, alert: "Cannot review a page you created!"
     end
   end
 

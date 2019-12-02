@@ -4,6 +4,9 @@
 <%= link_to "Edit", edit_page_path %>
 
 <% if current_user.user_level_id != INTERN_VALUE %>
+	<% if @page.verify_not_same_reviewer %>
+		<p>Cannot review a page you created!</p>
+	<% else %>
 	<%= form_for @page do |f| %>
 		<div>
 				<%= hidden_field(:page, :title, value: @page.title) %>
@@ -15,6 +18,7 @@
 		<div>
 		<%= f.submit "Submit Status" %>
 		</div>
+		<% end %>
 	<% end %>
 
 	<% if current_user.user_level_id == EXECUTIVE_VALUE && @page.approval_status_id == SUPERVISOR_VALUE %>
