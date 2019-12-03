@@ -4,6 +4,7 @@ class Category < ApplicationRecord
 	         :dependent => :destroy
   belongs_to :category, class_name: "Category", optional: true
 
+	# Dynamic list sorting functionality.
   acts_as_list scope: :category
 
   category_list = Category.all

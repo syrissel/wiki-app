@@ -1,5 +1,5 @@
 class AddUserToPages < ActiveRecord::Migration[6.0]
   def change
-    add_reference :pages, :user, null: true, foreign_key: true
+    add_reference :pages, :user, null: true, foreign_key: true, on_delete: :nullify
   end
 end
