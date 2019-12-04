@@ -19,7 +19,7 @@ class PagesController < ApplicationController
     
     if (@page.update(title: params[:page][:title], content: params[:page][:content], approval_status_id: params[:page][:approval_status_id]))
       
-      redirect_to @page
+      redirect_to review_path
       flash[:notice] = 'Wiki was updated.'
     else
       render 'edit'
