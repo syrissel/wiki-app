@@ -45,13 +45,24 @@ class PagesController < ApplicationController
     @page.destroy
   end
 
+  # Review this
   def review
-    @pending_pages = Page.where(approval_status_id: [1,2,4])
+    @pending_pages = Page.where(approval_status_id: [PENDING, SUPERVISOR_VALUE, REJECTED])
   end
+
+  def verify_not_same_reviewer
+    @page = Page.find(params[:id])
+    if @page.user_id == current_user.id
+      unless current_user.user_level_id == EXECUTIVE_VALUE
+        redirect_to review_path, alert: "Cannot review a page you created!"
+      end
+    end
+  end
+  helper_method :verify_not_same_reviewer
 
   private 
 
   def page_params
-    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :page_type_id)
+    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 end

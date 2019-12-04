@@ -1,13 +1,43 @@
 <h1>Categories</h1>
 
-<% if @categories.nil? %>
+<% if @root_categories.nil? %>
   <h3>There are currently no categories.</h3>
 <% else %>
   <ul>
-  <% @sorted_categories.each do |c| %>
-    <li><%= c.name %><%= link_to 'Move Up', categories_move_up_path(c) %> Sort:<%= c.sort_number %></li>
-  <% end %>
+    <% @root_categories.each do |r| %>
+      <li>
+        <%= r.name %><%= link_to "Move Up", categories_move_up_path(r)%><%= link_to "Move Down", categories_move_down_path(r)%>
+      </li>
+      <% @sub_categories.each do |s| %>
+        <% if r.id == s.category_id %>
+          <ul>
+            <li>
+              <%= s.name %>
+            </li>
+            <% @sub_categories.each do |t| %>
+              <% if s.id == t.category_id %>
+                <ul>
+                  <li>
+                    <%= t.name %>
+                  </li>
+                  <% @sub_categories.each do |u| %>
+                    <% if t.id == u.category_id %>
+                      <ul>
+                        <li>
+                          <%= u.name %>
+                        </li>
+                      </ul>
+                    <% end %>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
   </ul>
 <% end %>
 
 <%= link_to 'Create New Category', new_category_path %>
+

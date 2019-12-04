@@ -88,21 +88,73 @@
     </div>
     <div id="side_panel">
     <div class="side_panel_container">
-    <ul>
-    <% @categories.each do |c| %>
-      <li>
-        <%= c.name %>
-        <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", c.id, EXECUTIVE_VALUE)%>
-        <ul>
-        <% pages_of_type.each do |pof| %>
-          <li>
-          <%= pof.title %>
-          </li>
+      <ul>
+      <% @root_categories.each do |r| %>
+        <li>
+          <%= r.name %>
+            <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", r.id, EXECUTIVE_VALUE)%>
+            <ul>
+            <% pages_of_type.each do |pot| %>
+              <li>
+                <%= link_to pot.title, pot %>
+              </li>
+            <% end %>
+            </ul>
+        </li>
+        <% @sub_categories.each do |s| %>
+          <% if r.id == s.category_id %>
+            <ul>
+              <li>
+                <%= s.name %>
+                <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", s.id, EXECUTIVE_VALUE)%>
+                  <ul>
+                  <% pages_of_type.each do |pot| %>
+                    <li>
+                      <%= pot.title %>
+                    </li>
+                  <% end %>
+                  </ul>
+              </li>
+              <% @sub_categories.each do |t| %>
+                <% if s.id == t.category_id %>
+                  <ul>
+                    <li>
+                      <%= t.name %>
+                      <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", t.id, EXECUTIVE_VALUE)%>
+                        <ul>
+                        <% pages_of_type.each do |pot| %>
+                          <li>
+                            <%= pot.title %>
+                          </li>
+                        <% end %>
+                        </ul>
+                    </li>
+                    <% @sub_categories.each do |u| %>
+                      <% if t.id == u.category_id %>
+                        <ul>
+                          <li>
+                            <%= u.name %>
+                            <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", u.id, EXECUTIVE_VALUE)%>
+                              <ul>
+                              <% pages_of_type.each do |pot| %>
+                                <li>
+                                  <%= pot.title %>
+                                </li>
+                              <% end %>
+                              </ul>
+                          </li>
+                        </ul>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
         <% end %>
-        </ul>
-      </li>
-    <% end %>
+      <% end %>
     </ul>
+
     <!--<h3><a href="#">Production</a></h3>
       <ul class="make_list">
         <% @makes.each do |make| %>
@@ -125,13 +177,13 @@
     <div class="middle_content">
       <%= yield %>
     </div>
-    <footer>
+  </div>
+      <footer>
      <ul class="footer_info">
       <li class="footer_info_lastmod">Last modified by smireault 18:30 Tuesday, November 12, 2019</li>
       <li class="footer_info_copyright">Copywrong Computers for Schools Manitoba 2019</li>
      </ul>
     </footer>
-  </div>
 
   
     

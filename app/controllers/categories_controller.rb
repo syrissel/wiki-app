@@ -1,10 +1,16 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_supervisor
+  before_action :authenticate_user
+
   def new
     @category = Category.new
   end
 
   def index
-    @sorted_categories = Category.order(:sort_number)
+    @first = Category.first
+    # @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
+    # @root_categories = Category.order(:position).where("category_id IS NULL")
+
   end
 
   def show
@@ -37,15 +43,24 @@ class CategoriesController < ApplicationController
   # Call this action on the move up link in the view, then redirect to index.
   def move_up
     current = Category.find(params[:id])
+    current.move_higher
+    # current = Category.find(params[:id])
 
-    unless (current.sort_number - 1) == 0
-      current_sort_num = current.sort_number
-      top_sort_num = current.sort_number - 1
-      top = Category.find_by_sort_number(top_sort_num)
+    # unless (current.sort_number - 1) == 0
+    #   current_sort_num = current.sort_number
+    #   top_sort_num = current.sort_number - 1
+    #   top = Category.find_by_sort_number(top_sort_num)
 
-      current.update(sort_number: top_sort_num)
-      top.update(sort_number: current_sort_num)
-    end
+    #   current.update(sort_number: top_sort_num)
+    #   top.update(sort_number: current_sort_num)
+    # end
+
+    redirect_to categories_path
+  end
+
+  def move_down
+    current = Category.find(params[:id])
+    current.move_lower
 
     redirect_to categories_path
   end
@@ -53,6 +68,6 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :sort_number)
+    params.require(:category).permit(:name, :position, :category_id)
   end
 end

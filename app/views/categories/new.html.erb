@@ -7,6 +7,10 @@
     <%= f.text_field :name %>
   </div>
   <div>
+    <%= f.label "Sub Category (if applicable)"%>
+    <%= collection_select :category, :category_id, Category.order(:id), :id, :name, include_blank: true %>
+  </div>
+  <div>
     <%= f.submit 'Create' %>
   </div>
 <% end %>
