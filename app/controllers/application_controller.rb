@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.user_level_id == INTERN_VALUE
       redirect_to root_path, alert: "Not authorized. Please find a supervisor to perform this action."
     end
-  end
+	end
 
   def authenticate_user
     redirect_to login_path, alert: "Please login to view content." if current_user.nil?

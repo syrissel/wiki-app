@@ -7,6 +7,7 @@
     <% @root_categories.each do |r| %>
       <li>
         <%= r.name %><%= link_to "Move Up", categories_move_up_path(r)%><%= link_to "Move Down", categories_move_down_path(r)%>
+				<%= link_to "Delete", destroy_category_path(r), method: :delete, data: { confirm: "Delete #{r.name}? All child categories will be deleted as well."}%>
       </li>
       <% @sub_categories.each do |s| %>
         <% if r.id == s.category_id %>

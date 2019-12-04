@@ -27,7 +27,10 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def destroy
+	def destroy
+		@category = Category.find(params[:id])
+		redirect_to categories_path
+		@category.destroy
   end
 
   # Auto increment sort number.
