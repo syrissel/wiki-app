@@ -1,6 +1,6 @@
 
-<h1><%= @page.title.html_safe %></h1>
-<p><%= @page.content.html_safe %></p>
+<h1><%= raw sanitize @page.title%></h1>
+<p><%= raw sanitize @page.content %></p>
 <%= link_to "Edit", edit_page_path %>
 
 <!-- Only a supervisor or ED can review a page. A supervisor cannot review a page they created. -->
