@@ -37,9 +37,6 @@ gem 'mini_magick'
 
 gem 'acts_as_list'
 
-# WYSIWYG
-gem 'tinymce-rails', '~> 4.0'
-# gem 'tinymce-rails-imageupload', github: 'PerfectlyNormal/tinymce-rails-imageupload'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
