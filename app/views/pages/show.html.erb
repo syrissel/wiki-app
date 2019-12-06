@@ -1,4 +1,6 @@
 
+<%= render plain: params[:page].inspect %>
+
 <h1><%= raw sanitize @page.title%></h1>
 <p><%= raw sanitize @page.content %></p>
 <%= link_to "Edit", edit_page_path %>
