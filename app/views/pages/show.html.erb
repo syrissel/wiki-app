@@ -1,8 +1,8 @@
 
 <%= render plain: params[:page].inspect %>
 
-<h1><%= raw sanitize @page.title%></h1>
-<p><%= raw sanitize @page.content %></p>
+<h1 class="form_group"><%= raw sanitize @page.title%></h1>
+<div class="form_group"><%= raw sanitize @page.content %></div>
 <%= link_to "Edit", edit_page_path %>
 
 <!-- Only a supervisor or ED can review a page. A supervisor cannot review a page they created. -->
