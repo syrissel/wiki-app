@@ -37,9 +37,14 @@
 		modules: {
 			toolbar: [
 				[{ header: [1, 2, 3, false] }],
-				['bold', 'italic', 'underline'],
-				['image', 'code'],
-				['list']
+				[{ 'font': [] }],
+				['bold', 'italic', 'underline', 'strike'],
+				[{ 'color': [] }, { 'background': [] }],
+				[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+				[{ 'align': [] }],
+				[{ 'indent': '-1'}, { 'indent': '+1' }], 
+				['blockquote', 'code-block'],
+				['image', 'video']
 			]
 		},
 		placeholder: 'Enter wiki content here.',
@@ -74,32 +79,32 @@ var float_right = function() {
 }
 
 
-var Embed = Quill.import('blots/block/embed');
+// var Embed = Quill.import('blots/block/embed');
 
-class Hr extends Embed {
-    static create(value) {
-        let node = super.create(value);
-        // give it some margin
-        node.setAttribute('style', "height:0px; margin-top:10px; margin-bottom:10px;");
-        return node;
-    }
-}
+// class Hr extends Embed {
+//     static create(value) {
+//         let node = super.create(value);
+//         // give it some margin
+//         node.setAttribute('style', "height:0px; margin-top:10px; margin-bottom:10px;");
+//         return node;
+//     }
+// }
 
-Hr.blotName = 'hr'; //now you can use .ql-hr classname in your toolbar
-Hr.className = 'my-hr';
-Hr.tagName = 'hr';
+// Hr.blotName = 'hr'; //now you can use .ql-hr classname in your toolbar
+// Hr.className = 'my-hr';
+// Hr.tagName = 'hr';
 
-var customHrHandler = function(){
-    // get the position of the cursor
-    var range = quill.getSelection();
-    if (range) {
-        // insert the <hr> where the cursor is
-        quill.insertEmbed(range.index,"hr","null")
-    }
-}
+// var customHrHandler = function(){
+//     // get the position of the cursor
+//     var range = quill.getSelection();
+//     if (range) {
+//         // insert the <hr> where the cursor is
+//         quill.insertEmbed(range.index,"hr","null")
+//     }
+// }
 
-Quill.register({
-    'formats/hr': Hr
-});
+// Quill.register({
+//     'formats/hr': Hr
+// });
 </script>
 
