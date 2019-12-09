@@ -27,6 +27,11 @@
         element.style.display = setStyle;
       }
 
+       function display() {
+        parent = document.querySelector('.parent');
+        alert("meow");
+      }
+
       document.addEventListener("DOMContentLoaded", load, false);
     </script>
   </head>
@@ -48,6 +53,8 @@
         snackbarContainer.className = "show";
         setTimeout(function(){ snackbarContainer.className = snackbarContainer.className.replace("show", ""); }, 3000);
       });
+
+     
 
 
     </script>
@@ -90,7 +97,7 @@
     <div class="side_panel_container">
       <ul>
       <% @root_categories.each do |r| %>
-        <li>
+        <li onclick="meow()">
           <%= r.name %>
             <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", r.id, EXECUTIVE_VALUE)%>
             <ul>
