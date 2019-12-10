@@ -202,6 +202,13 @@ html, body {
 	margin-top: 10px;
 }
 
+#show_title {
+	font-family: 'Acme', sans-serif;
+	font-style: italic;
+	font-size: 36px;
+	text-decoration: underline;
+
+}
 
 
 
@@ -834,7 +841,8 @@ html, body {
   }
 }
 .ql-snow {
-  box-sizing: border-box;
+	box-sizing: border-box;
+	border-bottom: 1px solid;
 }
 .ql-snow * {
   box-sizing: border-box;
