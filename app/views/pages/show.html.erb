@@ -12,7 +12,7 @@
 		<div>
 				<%= hidden_field(:page, :title, value: @page.title) %>
 				<%= hidden_field(:page, :content, value: @page.content) %>
-				<%= hidden_field(:page, :category_id, value: 1) %>
+				<%= hidden_field(:page, :category_id, value: @page.category_id) %>
 		</div>
 		<%= f.label :approval_status_id %>
 		<%= collection_select :page, :approval_status_id, ApprovalStatus.order(:status).where.not(id: EXECUTIVE_VALUE), :id, :status, prompt: true %>
@@ -30,8 +30,8 @@
 			<div>
 				<%= hidden_field(:page, :title, value: @page.title) %>
 				<%= hidden_field(:page, :content, value: @page.content) %>
-				<%= hidden_field(:page, :category_id, value: 1) %>
 				<%= hidden_field(:page, :approval_status_id, value: EXECUTIVE_VALUE) %>
+				<%= hidden_field(:page, :category_id, value: @page.category_id) %>
 			</div>
 			<%= f.submit "Executive Approve"%>
 		<% end %>
