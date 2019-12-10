@@ -1,8 +1,11 @@
 
-<%= render plain: params[:page].inspect %>
 
-<h1 class="form_group"><%= raw sanitize @page.title%></h1>
-<div class="form_group"><%= raw sanitize @page.content %></div>
+<%= render plain: params[:page].inspect %>
+<%= stylesheet_link_tag :application, "https://cdn.quilljs.com/1.3.6/quill.snow.css"%>
+<h1 class="form_group"><%= sanitize @page.title%></h1>
+<div class="ql-snow">
+<div class="form_group ql-editor"><%= sanitize @page.content %></div>
+</div>
 <%= link_to "Edit", edit_page_path %>
 
 <!-- Only a supervisor or ED can review a page. A supervisor cannot review a page they created. -->

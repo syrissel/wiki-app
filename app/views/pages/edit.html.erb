@@ -1,7 +1,7 @@
 
 <%= render plain: params[:page].inspect %>
 
-<h2 class="edit_title edit_font">Editing <%= @page.title %></h2>
+<h2 class="edit_title edit_font">Editing "<%= @page.title %>"</h2>
 <%= form_for @page, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
     <%= f.label :title, class: 'form_label' %><br>
@@ -33,9 +33,14 @@
 <!-- Initialize Quill editor -->
 <script>
 
+	var Size = Quill.import('attributors/style/size');
+	Size.whitelist = ['14px', '16px', '18px'];
+	Quill.register(Size, true);
+
 	var options = {
 		modules: {
 			toolbar: [
+				[{ 'size': ['14px', '16px', '18px'] }],
 				[{ header: [1, 2, 3, false] }],
 				[{ 'font': [] }],
 				['bold', 'italic', 'underline', 'strike'],

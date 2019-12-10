@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get 'review', to: 'pages#review'
   get 'categories/:id/move_up', to: 'categories#move_up', as: 'categories_move_up'
 	get 'categories/:id/move_down', to: 'categories#move_down', as: 'categories_move_down'
-	get 'categories/:id/destroy', to: 'categories#destroy', as: 'destroy_category'
+  get 'categories/:id/destroy', to: 'categories#destroy', as: 'destroy_category'
+  get 'admin', to: 'pages#admin'
 
   resources :categories
 

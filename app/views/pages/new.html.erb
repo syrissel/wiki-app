@@ -3,27 +3,27 @@
 <%= render plain: params[:page].inspect %>
 
 <%= form_for :page, url: pages_path, html: { id: 'page_form' } do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
-  <div>
+  <div class="form_group">
+    <%= f.label :title, class: "form_label" %><br>
+    <%= f.text_field :title, class: "text_field" %>
+  </div>
+  <div class="form_group">
     <%= hidden_field(:page, :user_id, value: current_user.id) %>
     <%= hidden_field(:page, :approval_status_id, value: 1) %>
   </div>
-	<div>
-		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, include_blank: true %>
+	<div class="category_label">
+    <%= f.label :category, "Category:" %>
+		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
-  <div>
-    <%= f.label :content %><br>
+  <div class="form_group">
+    <%= f.label :content, class: "form_label" %><br>
       <div class="form-group">
       <%= f.hidden_field :content, :id => "post-content", required: true %>
       <div id="editor-container" hidden="true"></div>
       <div id="editor"></div>
     </div>
   </div>
-
-  <div>
+  <div class="form_group">
     <%= f.submit "Post" %>
   </div>
 <% end %>
@@ -35,12 +35,18 @@
 <!-- Initialize Quill editor -->
 <script>
 
-	var options = {
+  var options = {
 		modules: {
 			toolbar: [
 				[{ header: [1, 2, 3, false] }],
-				['bold', 'italic', 'underline'],
-				['image', 'code']
+				[{ 'font': [] }],
+				['bold', 'italic', 'underline', 'strike'],
+				[{ 'color': [] }, { 'background': [] }],
+				[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+				[{ 'align': [] }],
+				[{ 'indent': '-1'}, { 'indent': '+1' }], 
+				['blockquote', 'code-block'],
+				['image', 'video']
 			]
 		},
 		placeholder: 'Enter wiki content here.',
