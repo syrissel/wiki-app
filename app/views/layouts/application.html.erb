@@ -10,29 +10,36 @@
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Acme&display=swap" %>
     <script>
       function load() {
-        var model_lists = document.getElementsByClassName("model_list");
-        var make_links = document.getElementsByClassName("makes");
 
-        for (let i=0; i < make_links.length; i++) {
-          model_lists[i].style.display = "none";
-        }
+      
+
+      function display() {
         
-        for (let i=0; i < make_links.length; i++) {
-          make_links[i].addEventListener("click", function() { hide_models(model_lists[i]); }, false);
+
+        var children = this.children;
+
+        for (var i = 0; i < children.length; i++) {
+          var child = children[i];
+          child.style.display = "none";
         }
+
       }
 
-      function hide_models(element) {
-        var setStyle = element.style.display === "block" ? "none" : "block";
-        element.style.display = setStyle;
-      }
 
-       function display() {
-        parent = document.querySelector('.parent');
-        alert("meow");
-      }
+      var $ = function (selector) {
+        return document.querySelector(selector);
+      };
 
-      document.addEventListener("DOMContentLoaded", load, false);
+      var links = $('#root_categories').getElementsByTagName('li');
+
+      // For each <li> inside #links
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        link.onclick = display;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", load, false);
     </script>
   </head>
 
@@ -95,12 +102,12 @@
     </div>
     <div id="side_panel">
     <div class="side_panel_container">
-      <ul>
+      <ul id="root_categories">
       <% @root_categories.each do |r| %>
-        <li onclick="meow()">
+        <li>
           <%= r.name %>
             <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", r.id, EXECUTIVE_VALUE)%>
-            <ul>
+            <ul id="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
                 <%= link_to pot.title, pot %>

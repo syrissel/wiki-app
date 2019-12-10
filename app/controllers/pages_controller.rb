@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   before_action :authenticate_supervisor, only: [:review]
   before_action :authenticate_user, except: [:index]
+  before_action :check_page_approved, only: [:show]
+  
 
   def index
     @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE)
@@ -64,5 +66,13 @@ class PagesController < ApplicationController
 
   def page_params
     params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
+  end
+
+  def check_page_approved
+    @page = Page.find(params[:id])
+
+    if current_user.user_level_id == INTERN_VALUE && @page.approval_status_id != EXECUTIVE_VALUE
+      redirect_to root_path, alert: "Page has not been approved yet."
+    end
   end
 end

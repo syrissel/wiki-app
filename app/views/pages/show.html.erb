@@ -21,7 +21,11 @@
 		</div>
 	<% end %>
 
-	<% if current_user.user_level_id == EXECUTIVE_VALUE && @page.approval_status_id == SUPERVISOR_VALUE %>
+	
+
+<% end %>
+
+<% if current_user.user_level_id == EXECUTIVE_VALUE && @page.approval_status_id == SUPERVISOR_VALUE %>
 		<%= form_for @page do |f| %>
 			<div>
 				<%= hidden_field(:page, :title, value: @page.title) %>
@@ -32,8 +36,6 @@
 			<%= f.submit "Executive Approve"%>
 		<% end %>
 	<% end %>
-
-<% end %>
 
 
 
