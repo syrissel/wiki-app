@@ -15,12 +15,16 @@
           <button class="ql-hr"></button> 
         </span>
 		</div>
+		
 		<div id="editor"><%= raw sanitize @page.content %></div>
+		<div id="counter">0</div>
 	</div>
-  <p>
-    <%= f.submit "Save changes" %>
-  </p>
+  <div class="form_group">
+    <%= f.submit "Save changes", class: "edit_button" %>
+  </div>
 <% end %>
+
+<button id="divider-button">Horizontal rule</button>
 
 <button id="right">Right</button>
 <button id="left">Left</button>
@@ -33,14 +37,27 @@
 <!-- Initialize Quill editor -->
 <script>
 
+	// Custom font size module.
 	var Size = Quill.import('attributors/style/size');
-	Size.whitelist = ['14px', '16px', '18px'];
+	Size.whitelist = ['14px', '16px', '18px', '24px'];
 	Quill.register(Size, true);
+
+	// Implement and register module
+	Quill.register('modules/counter', function(quill, options) {
+		var container = document.querySelector('#counter');
+		quill.on('text-change', function() {
+			var text = quill.getText();
+			// There are a couple issues with counting words
+			// this way but we'll fix these later
+			container.innerText = text.split(/\s+/).length;
+		});
+	});
+
 
 	var options = {
 		modules: {
 			toolbar: [
-				[{ 'size': ['14px', '16px', '18px'] }],
+				[{ 'size': ['14px', '16px', '18px', '24px'] }],
 				[{ header: [1, 2, 3, false] }],
 				[{ 'font': [] }],
 				['bold', 'italic', 'underline', 'strike'],
@@ -49,7 +66,7 @@
 				[{ 'align': [] }],
 				[{ 'indent': '-1'}, { 'indent': '+1' }], 
 				['blockquote', 'code-block'],
-				['image', 'video']
+				['link', 'image', 'video']
 			]
 		},
 		placeholder: 'Enter wiki content here.',
@@ -57,6 +74,54 @@
 	}
   var form = document.querySelector('#page_form');
   var quill = new Quill('#editor', options);
+
+// 	class Divider extends BlockEmbed {
+// 		static create(value) {
+// 			const node = super.create(value);
+// 			node.contentEditable = 'false';
+// 			this._addDivider(node, value);
+// 			return node;
+// 		}
+
+// 		static value(node) {
+// 			return node.getAttribute(Divider.blotName)
+// 		}
+
+// 		static _addDivider(node, value) {
+// 			node.setAttribute(Divider.blotName, value);
+
+// 			// This is a simple switch, but you can use
+// 			// whatever method of building HTML you need.
+// 			// Could even be async.
+// 			switch (value) {
+// 				case 1:
+// 					return this._addDivider1(node);
+// 				default:
+// 					throw new Error(`Unknown signature type ${ value }`);
+// 			}
+// 		}
+
+// 		static _addDivider1(node) {
+// 			const hr = document.createElement('hr');
+			
+// 			node.appendChild(hr);
+// 		}
+// 	}
+// 	Divider.blotName = 'divider';
+// 	Divider.tagName = 'hr';
+// 	Divider.className = 'ql-divider';
+
+// 	Quill.register(Divider);
+
+// 	document.querySelector('#divider-button').addEventListener('click', function() {
+// 		quill.updateContents([
+// 			{ insert: { divider: 1 } },
+// 		]);
+// 	});
+
+// 	quill.updateContents([
+//   { insert: { divider: 1 } },
+// ]);
 
   form.onsubmit = function() {
   var postContentInput = document.querySelector('#post-content');

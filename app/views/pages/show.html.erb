@@ -6,7 +6,13 @@
 <div class="ql-snow">
 <div class="form_group ql-editor"><%= sanitize @page.content %></div>
 </div>
-<%= link_to "Edit", edit_page_path %>
+<%= link_to "Edit", edit_page_path, class: "edit_button" %>
+<div>
+	<ul>
+		<li>Created by: <%= @page.user.username %></li>
+		<li>Last updated by: <%=  %></li>
+	<ul>
+</div>
 
 <!-- Only a supervisor or ED can review a page. A supervisor cannot review a page they created. -->
 <% if (current_user.user_level_id != INTERN_VALUE) && (current_user.id != @page.user_id) %>
