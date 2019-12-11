@@ -2,7 +2,7 @@
 <ul>
   <% @pending_pages.each do |p| %>
     <li>
-      <%= link_to p.title, p %> by: <%= p.user.username %>
+      <%= link_to p.title, review_wiki_path(p) %> by: <%= p.user.username %>
       Status: 
 			<% if p.approval_status.id == SUPERVISOR_VALUE %>
 				<%= p.approval_status.status %> - Waiting for executive approval.

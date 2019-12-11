@@ -4,12 +4,20 @@
 <h2 class="edit_title edit_font">Editing "<%= @page.title %>"</h2>
 <%= form_for @page, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
-    <%= f.label :title, class: 'form_label' %><br>
-    <%= f.text_field :title, class: 'text_field' %>
+    <%= f.label :title_review, "Title", class: 'form_label' %><br>
+    <%= f.text_field :title_review, class: 'text_field' %>
+  </div>
+	<div class="category_label form_group">
+    <%= f.label :category, "Category:" %>
+		<%= collection_select :page, :category_review, Category.order(:id), :id, :name, prompt: true, selected: @page.category_id %>
+	</div>
+	<div class="form_group">
+    <%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
+    <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
   </div>
 	<div class="form_group">
-		<%= f.label :content, 'Edit Content', class: 'form_label'%>
-		<%= f.hidden_field :content, :id => "post-content", required: true %>
+		<%= f.label :content_review, 'Edit Content', class: 'form_label'%>
+		<%= f.hidden_field :content_review, :id => "post-content", required: true %>
 		<div id="editor-container" hidden="true">
 			<span class="ql-formats">
           <button class="ql-hr"></button> 

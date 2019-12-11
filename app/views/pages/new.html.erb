@@ -1,24 +1,24 @@
 <h1 class="edit_title edit_font">New Wiki</h1>
 
-<%# render plain: params[:page].inspect %>
+<%= render plain: params[:page].inspect %>
 
 <%= form_for :page, url: pages_path, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
-    <%= f.label :title, class: "form_label" %><br>
-    <%= f.text_field :title, class: "text_field" %>
+    <%= f.label :title_review, "Title", class: "form_label" %><br>
+    <%= f.text_field :title_review, class: "text_field" %>
   </div>
   <div class="form_group">
     <%= hidden_field(:page, :user_id, value: current_user.id) %>
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
   </div>
-	<div class="category_label">
-    <%= f.label :category, "Category:" %>
+	<div class="category_label form_group">
+    <%= f.label :category_review, "Category:" %>
 		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
   <div class="form_group">
     <%= f.label :content, class: "form_label" %><br>
       <div class="form-group">
-      <%= f.hidden_field :content, :id => "post-content", required: true %>
+      <%= f.hidden_field :content_review, :id => "post-content", required: true %>
       <div id="editor-container" hidden="true"></div>
       <div id="toolbar">
 			<span class="ql-formats">

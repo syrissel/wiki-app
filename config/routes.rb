@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get 'categories/:id/move_up', to: 'categories#move_up', as: 'categories_move_up'
 	get 'categories/:id/move_down', to: 'categories#move_down', as: 'categories_move_down'
   get 'categories/:id/destroy', to: 'categories#destroy', as: 'destroy_category'
-  get 'admin', to: 'pages#admin'
+	get 'admin', to: 'pages#admin'
+	get 'review/wiki/:id', to: 'pages#review_wiki', as: 'review_wiki'
+	patch 'executive/update/:id', to: 'pages#executive_update', as: 'executive_update'
 
   resources :categories
 
@@ -29,8 +31,6 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "pages#index"
-
-  post '/tinymce_assets' => 'tinymce_assets#create'
 
   
 
