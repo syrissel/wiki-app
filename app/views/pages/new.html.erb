@@ -1,6 +1,6 @@
 <h1 class="edit_title edit_font">New Wiki</h1>
 
-<%= render plain: params[:page].inspect %>
+<%# render plain: params[:page].inspect %>
 
 <%= form_for :page, url: pages_path, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
@@ -12,22 +12,8 @@
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
   </div>
 	<div class="category_label">
-    <script>
-      var select = document.getElementById("page_category_id");
-      var selectValue = select.options[select.selectedIndex].value;
-
-      if (selectValue === 1) {
-        document.getElementById("hidden-select-1").style.display = "none";
-      }
-    </script>
-    
     <%= f.label :category, "Category:" %>
-    <div id="select">
-		  <%= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, prompt: true %>
-    </div>
-    <div id="hidden-select-1">
-      <%= collection_select :page, :category_id, Category.order(:id), :id, :name %>
-    </div>
+		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
   <div class="form_group">
     <%= f.label :content, class: "form_label" %><br>
