@@ -1,4 +1,4 @@
-<h1>New Wiki</h1>
+<h1 class="edit_title edit_font">New Wiki</h1>
 
 <%= render plain: params[:page].inspect %>
 
@@ -9,22 +9,88 @@
   </div>
   <div class="form_group">
     <%= hidden_field(:page, :user_id, value: current_user.id) %>
-    <%= hidden_field(:page, :approval_status_id, value: 1) %>
+    <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
   </div>
 	<div class="category_label">
+    <script>
+      var select = document.getElementById("page_category_id");
+      var selectValue = select.options[select.selectedIndex].value;
+
+      if (selectValue === 1) {
+        document.getElementById("hidden-select-1").style.display = "none";
+      }
+    </script>
+    
     <%= f.label :category, "Category:" %>
-		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
+    <div id="select">
+		  <%= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, prompt: true %>
+    </div>
+    <div id="hidden-select-1">
+      <%= collection_select :page, :category_id, Category.order(:id), :id, :name %>
+    </div>
 	</div>
   <div class="form_group">
     <%= f.label :content, class: "form_label" %><br>
       <div class="form-group">
       <%= f.hidden_field :content, :id => "post-content", required: true %>
       <div id="editor-container" hidden="true"></div>
+      <div id="toolbar">
+			<span class="ql-formats">
+				<select class="ql-font">
+					<option selected></option>
+					<option value="serif"></option>
+					<option value="monospace"></option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<select class="ql-size">
+					<option value="small"></option>
+					<option selected></option>
+					<option value="large"></option>
+					<option value="huge"></option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-header" value="1"></button>
+				<button class="ql-header" value="2"></button>
+				<button class="ql-blockquote"></button>
+				<button class="ql-code-block"></button>
+				<button class="ql-hr"><b>—</b></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-bold"></button>
+				<button class="ql-italic"></button>
+				<button class="ql-underline"></button>
+				<button class="ql-strike"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-list" value="ordered"></button>
+				<button class="ql-list" value="bullet"></button>
+				<button class="ql-indent" value="-1"></button>
+				<button class="ql-indent" value="+1"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-direction" value="rtl"></button>
+				<select class="ql-align">
+					<option selected></option>
+					<option value="center"></option>
+					<option value="right"></option>
+					<option value="justify"></option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-link"></button>
+				<button class="ql-image"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-clean"></button>
+			</span>
+		</div>
       <div id="editor"></div>
     </div>
   </div>
   <div class="form_group">
-    <%= f.submit "Post" %>
+    <%= f.submit "Create wiki", class: "edit_button" %>
   </div>
 <% end %>
 
@@ -35,29 +101,63 @@
 <!-- Initialize Quill editor -->
 <script>
 
-  var options = {
-		modules: {
-			toolbar: [
-				[{ header: [1, 2, 3, false] }],
-				[{ 'font': [] }],
-				['bold', 'italic', 'underline', 'strike'],
-				[{ 'color': [] }, { 'background': [] }],
-				[{ 'list': 'ordered'}, { 'list': 'bullet' }],
-				[{ 'align': [] }],
-				[{ 'indent': '-1'}, { 'indent': '+1' }], 
-				['blockquote', 'code-block'],
-				['image', 'video']
-			]
-		},
-		placeholder: 'Enter wiki content here.',
-		theme: 'snow'
+	let Inline = Quill.import('blots/inline'); 
+	class MarkBlot extends Inline { } 
+	MarkBlot.blotName = 'mark'; 
+	MarkBlot.tagName = 'mark'; 
+	Quill.register(MarkBlot);
+
+	let Embed = Quill.import('blots/block/embed');
+	class HR extends Embed { 
+		static create(value) {
+        let node = super.create(value);
+        // give it some margin
+        node.setAttribute('style', "height:0px; margin-top:10px; margin-bottom:10px;");
+        return node;
+    }
 	}
+	HR.blotName = 'hr';
+	HR.tagName = 'hr';
+	Quill.register(HR);
+
+	var customHrHandler = function(){
+    // get the position of the cursor
+    var range = quill.getSelection();
+    if (range) {
+        // insert the <hr> where the cursor is
+        quill.insertEmbed(range.index,"hr","null")
+    }
+	}
+
+	Quill.register({
+    'formats/hr': HR
+	});
+
+	// // Custom font size module.
+	// var Size = Quill.import('attributors/style/size');
+	// Size.whitelist = ['14px', '16px', '18px', '24px'];
+	// Quill.register(Size, true);
+
   var form = document.querySelector('#page_form');
-  var quill = new Quill('#editor', options);
+  var quill = new Quill('#editor', {
+		modules: {
+			toolbar: {
+				container: '#toolbar',
+				handlers: {
+					'hr': customHrHandler
+				}
+			}
+		},
+		theme: 'snow'
+	});
 
   form.onsubmit = function() {
   var postContentInput = document.querySelector('#post-content');
   postContentInput.value = quill.root.innerHTML;
 };
+
+
+
+
 </script>
 
