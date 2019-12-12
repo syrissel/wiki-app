@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   
 
   def index
-    @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE)
+    @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at")
   end
 
   def show
@@ -34,11 +34,6 @@ class PagesController < ApplicationController
     
 		if (@page.update(page_params))
 			
-			@page.title_review = nil
-			@page.content_review = nil
-			@page.category_review = nil
-			@page.save
-			
       redirect_to @page
       flash[:notice] = 'Wiki was updated.'
     else
@@ -46,12 +41,19 @@ class PagesController < ApplicationController
     end   
   end
 
-  # Instantiates new Page object with permitted values: title and content.
+  # Instantiates new Page object with permitted values. Duplicate content is stored
+  # in the table until it is approved. When it is approved, the update will be called
+  # and the review columns will be set to nil perserving space in the DB.
   def create
 
     @page = Page.new(page_params)
-
+    
     if (@page.save)
+
+      @page.title_review = @page.title
+      @page.content_review = @page.content
+      @page.category_review = @page.category_id
+      @page.save
       redirect_to page_path(@page)
       flash[:notice] = 'Wiki created.'
     else
@@ -61,7 +63,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page = Page.find(params[:id])
-    redirect_to pages_path
+    redirect_to review_path
     @page.destroy
   end
 
@@ -88,7 +90,7 @@ class PagesController < ApplicationController
 
   def page_params
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, :content_review, :category_review, :last_user_edit)
-		params.require(:page).permit(:approval_status_id, :user_id, :title_review, :content_review, :category_id)
+		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
   def check_page_approved

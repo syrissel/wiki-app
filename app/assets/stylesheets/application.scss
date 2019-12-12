@@ -217,16 +217,18 @@ html, body {
 }
 
 #cfs_divider {
-  background-color: currentColor;
+  background-color: #d4af37;
   min-width: 50%;
-  height: 2px;
+  height: 4px;
   border: none;
   margin: 32px 0px;
   position: relative;
+  border-radius: 10px;
   
   &:before {
     font-family: cursive;
     content: 'CFS';
+    color: #d4af37;
     display: block;
     width: 10%;
     padding: 0.3em;
