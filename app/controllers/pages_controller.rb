@@ -103,7 +103,9 @@ class PagesController < ApplicationController
   private 
 
   def page_params
-		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, :content_review, :category_review, :last_user_edit)
+		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
+																 :title_review, :content_review, :category_review, :last_user_edit, 
+																 :pinned)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
