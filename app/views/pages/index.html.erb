@@ -1,10 +1,18 @@
 <h2>Welcome to the Computers for Schools Wiki Site!</h2>
 <h3>Latest updates:</h3>
 
-<div class="cardview_container">
-  <% @pages.each do |page| %>
-    <ul>
-      <li class="cardview"><%= link_to page.title, page %></li>
-    </ul>
+<% @pages.each do |p| %>
+  <div class="card_exterior">
+  <%= link_to page_path(p) do %>
+    <div class="card">
+      <div class="cardview_container">
+        <h3><%= p.title %></h3>
+        <%= sanitize preview(p) %>
+        
+        <i>by <%= p.user.username %></i>
+      
+      </div>
+    </div>
   <% end %>
-</div>
+  </div>
+<% end %>

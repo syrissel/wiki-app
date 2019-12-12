@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   
 
   def index
-    @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at")
+    @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
   end
 
   def show
@@ -69,12 +69,26 @@ class PagesController < ApplicationController
 
   # Review this
   def review
-    @pending_pages = Page.where(approval_status_id: [PENDING, SUPERVISOR_VALUE, REJECTED])
+    @pending_pages = Page.where(approval_status_id: [PENDING, SUPERVISOR_VALUE, REJECTED]).order("updated_at desc")
 	end
 	
 	def review_wiki
 		@page = Page.find(params[:id])
-	end
+  end
+  
+  def preview(page)
+
+    text = page.content
+    words = text.split(" ")
+    result = ""
+    
+    words.each do |w|
+      result += " #{w}" if result.size + w.size < 500
+    end
+
+    result += "..."
+  end
+  helper_method :preview
 
   # def verify_not_same_reviewer
   #   @page = Page.find(params[:id])
@@ -89,8 +103,8 @@ class PagesController < ApplicationController
   private 
 
   def page_params
-		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, :content_review, :category_review, :last_user_edit)
-		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
+		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, :content_review, :category_review, :last_user_edit)
+		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
   def check_page_approved

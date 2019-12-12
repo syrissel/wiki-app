@@ -227,10 +227,10 @@ html, body {
   
   &:before {
     font-family: cursive;
-    content: 'CFS';
+    content: 'CFS Wiki';
     color: #d4af37;
     display: block;
-    width: 10%;
+    width: 18%;
     padding: 0.3em;
     font-size: 2em;
     text-align: center;
@@ -241,6 +241,36 @@ html, body {
     transform: translate(-50%, -50%);
     
   }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  margin: 15px 0px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.cardview_container {
+  padding: 2px 16px;
+}
+
+.card_exterior {
+  width: 100%;
+  background: #ffdea3;
+}
+
+.card_exterior a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardview_container i {
+  display: block;
+  text-align: right;
 }
 
 
