@@ -83,7 +83,7 @@ class PagesController < ApplicationController
     result = ""
     
     words.each do |w|
-      result += " #{w}" if result.size + w.size < 500
+      result += " #{w}" if result.size + w.size < 400
     end
 
     result += "..."
