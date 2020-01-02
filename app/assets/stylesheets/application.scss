@@ -35,6 +35,7 @@
   height: 150px;
   padding: 0px 0px 0px 0px;
   margin: 0px auto;
+  overflow: hidden;
 }
 
 .wiki_logo {
@@ -67,11 +68,11 @@
 }
 
 .user_login {
-  float: right;
-  margin: 70px 60px;
-  position: absolute;
-  top: -72px;
-  right: -40px;
+  float: left;
+}
+
+#search {
+  float: left;
 }
 
 .middle_content {
@@ -110,7 +111,8 @@ footer {
   color: #d4af37;
   font-size: 24px;
   position: relative;
-  padding: 85px;
+  padding-top: 85px;
+  float: left;
 }
 
 

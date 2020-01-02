@@ -16,13 +16,14 @@ Rails.application.routes.draw do
   get 'categories/:id/destroy', to: 'categories#destroy', as: 'destroy_category'
 	get 'admin', to: 'pages#admin'
 	get 'review/wiki/:id', to: 'pages#review_wiki', as: 'review_wiki'
-	patch 'executive/update/:id', to: 'pages#executive_update', as: 'executive_update'
+  patch 'executive/update/:id', to: 'pages#executive_update', as: 'executive_update'
+  get 'search', to: 'pages#search'
 
   resources :categories
 
   resources :users
   resources :sessions
-  resources :pages, only: [:index, :show, :new, :create, :edit, :update]
+  resources :pages
   # get 'user_admin', to: 'pages#user_admin'
 
 

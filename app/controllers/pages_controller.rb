@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
   def index
     @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
+    @result = Page.search(params[:search])
   end
 
   def show
@@ -90,6 +91,13 @@ class PagesController < ApplicationController
   end
   helper_method :preview
 
+  def search
+    
+
+    render 'search'
+    redirect_to search_path
+  end
+
   # def verify_not_same_reviewer
   #   @page = Page.find(params[:id])
   #   if @page.user_id == current_user.id
@@ -103,7 +111,8 @@ class PagesController < ApplicationController
   private 
 
   def page_params
-		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, :content_review, :category_review, :last_user_edit)
+    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, 
+                                 :content_review, :category_review, :last_user_edit, :search)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 

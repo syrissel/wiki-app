@@ -87,6 +87,7 @@
           <% end %>
         </ul>
       </div>
+
       <div class="user_login">
       <% if current_user %>
       <ul>
@@ -104,7 +105,16 @@
       </p>
       <% end %>
     </div>
+
+    <div id="search">
+        <%= form_tag(pages_path, action: :search, method: :get) do %>
+          <%= text_field_tag(:search, params[:search]) %>
+          <%= submit_tag("Search") %>
+        <% end %>
     </div>
+
+    </div>
+
     <div id="side_panel">
     <div class="side_panel_container">
       <ul id="root_categories">
