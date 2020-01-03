@@ -84,7 +84,7 @@ class PagesController < ApplicationController
     result = ""
     
     words.each do |w|
-      result += " #{w}" if result.size + w.size < 500
+      result += " #{w}" if result.size + w.size < 400
     end
 
     result += "..."
@@ -111,8 +111,14 @@ class PagesController < ApplicationController
   private 
 
   def page_params
+<<<<<<< HEAD
     params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, 
                                  :content_review, :category_review, :last_user_edit, :search)
+=======
+		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
+																 :title_review, :content_review, :category_review, :last_user_edit, 
+																 :pinned)
+>>>>>>> 9b78865773185c775729ffbf502c39cd30386bf2
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 

@@ -11,8 +11,8 @@
 
 
 <% @pages.each do |p| %>
+<%= link_to page_path(p) do %>
   <div class="card_exterior">
-  <%= link_to page_path(p) do %>
     <div class="card">
       <div class="cardview_container">
         <h3><%= p.title %></h3>
