@@ -8,7 +8,8 @@ class PagesController < ApplicationController
     if params[:query].present?
       @query = params[:query]
       @pages = Page.joins(:user).where("approval_status_id = #{EXECUTIVE_VALUE} AND title LIKE '%#{@query}%'
-                           OR approval_status_id = #{EXECUTIVE_VALUE} AND username LIKE '%#{@query}%'").order("updated_at desc").limit(10)
+                           OR approval_status_id = #{EXECUTIVE_VALUE} AND username LIKE '%#{@query}%'
+                           OR approval_status_id = #{EXECUTIVE_VALUE} AND content LIKE '%#{@query}%'").order("updated_at desc").limit(10)
     else
       @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
     end
@@ -83,16 +84,19 @@ class PagesController < ApplicationController
 		@page = Page.find(params[:id])
   end
   
+  # Displays preview card of wiki on homepage. Finds first occurence of <p> tag
+  # then substrings it upto 400 characters. Appends three dots to the end of the
+  # paragraph.
   def preview(page)
-
     text = page.content
-    words = text.split(" ")
-    result = ""
-    
-    words.each do |w|
-      result += " #{w}" if result.size + w.size < 400
-    end
 
+    if text.index("p>").nil?
+      result = "No preview available"
+    else
+      content = text.index("p>") + 2
+      result = text[content...400]
+    end
+    
     result += "..."
   end
   helper_method :preview
