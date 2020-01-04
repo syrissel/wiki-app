@@ -5,8 +5,14 @@ class PagesController < ApplicationController
   
 
   def index
-    @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
-    @result = Page.search(params[:search])
+    if params[:query].present?
+      @query = params[:query]
+      @pages = Page.joins(:user).where("approval_status_id = #{EXECUTIVE_VALUE} AND title LIKE '%#{@query}%'
+                           OR approval_status_id = #{EXECUTIVE_VALUE} AND username LIKE '%#{@query}%'").order("updated_at desc").limit(10)
+    else
+      @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
+    end
+    
   end
 
   def show
@@ -91,13 +97,6 @@ class PagesController < ApplicationController
   end
   helper_method :preview
 
-  def search
-    
-
-    render 'search'
-    redirect_to search_path
-  end
-
   # def verify_not_same_reviewer
   #   @page = Page.find(params[:id])
   #   if @page.user_id == current_user.id
@@ -111,14 +110,9 @@ class PagesController < ApplicationController
   private 
 
   def page_params
-<<<<<<< HEAD
-    params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id, :title_review, 
-                                 :content_review, :category_review, :last_user_edit, :search)
-=======
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
-																 :pinned)
->>>>>>> 9b78865773185c775729ffbf502c39cd30386bf2
+																 :pinned, :search)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 

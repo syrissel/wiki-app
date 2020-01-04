@@ -107,9 +107,9 @@
     </div>
 
     <div id="search">
-        <%= form_tag(pages_path, action: :search, method: :get) do %>
-          <%= text_field_tag(:search, params[:search]) %>
-          <%= submit_tag("Search") %>
+        <%= form_tag pages_path, method: :get do %>
+          <%= text_field_tag :query %>
+          <%= submit_tag "Search", name: nil %>
         <% end %>
     </div>
 

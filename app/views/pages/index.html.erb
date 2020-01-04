@@ -1,15 +1,6 @@
 <h2>Welcome to the Computers for Schools Wiki Site!</h2>
 <h3>Latest updates:</h3>
 
-<% if params[:search] %>
-  <% @result.each do |r| %>
-    <%= r.title %>
-  <% end %>
-<% else %>
-
-<% end %>
-
-
 <% @pages.each do |p| %>
 <%= link_to page_path(p) do %>
   <div class="card_exterior">
