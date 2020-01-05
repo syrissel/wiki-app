@@ -278,11 +278,21 @@ html, body {
 #review-table {
   border-collapse: collapse;
   width: 100%;
+  /* table-layout: fixed; */
 }
 
 #review-table td, #review-table th {
   border: 1px solid #ddd;
-  padding: 8px;
+  /* padding: 8px; */
+  padding: 3px;
+  overflow: hidden;
+}
+
+
+.status-text {
+  float: left;
+  padding-top: 5px;
+  padding-left: 5px;
 }
 
 #review-table tr:nth-child(even){background-color: #f2f2f2;}
@@ -295,6 +305,35 @@ html, body {
   text-align: left;
   background-color: #016383;
   color: white;
+}
+
+#review-table a {
+  text-decoration: none;
+  color: #000;
+}
+
+.delete-button {
+	text-decoration: none;
+	background-color:#d60d0d;
+	color:#FFFFFF !important;
+  float: right;
+  border-radius: 2px;
+  padding: 5px 8px;
+  margin-right: 5px;
+}
+
+.review-button {
+  text-decoration: none;
+	background-color:#0163DA;
+	color:#FFFFFF !important;
+  float: right;
+  border-radius: 2px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.errors {
+  color: #d60d0d;
 }
 
 

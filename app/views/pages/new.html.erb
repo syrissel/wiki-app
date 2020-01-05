@@ -1,6 +1,18 @@
 <h1 class="edit_title edit_font">New Wiki</h1>
 
-<%= render plain: params[:page].inspect %>
+<%#= render plain: params[:page].inspect %>
+<%#= @page.errors[:title] if @page.present? %>
+
+<div class="errors">
+<% if @page.present? && @page.errors.any? %>
+	<p><%= pluralize(@page.errors.count, "error") %> prevented this wiki from being saved:</p>
+	<ul>
+	<% @page.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
 
 <%= form_for :page, url: pages_path, html: { id: 'page_form' } do |f| %>
   <div class="form_group">

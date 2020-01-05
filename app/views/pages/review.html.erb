@@ -13,10 +13,13 @@
     <td><%= link_to p.title, review_wiki_path(p) %></td>
     <td><%= p.user.username %></td>
     <td>
+      <div class="status-text">
       <%= p.approval_status.status %>
+      </div>
       <% if p.approval_status.id == REJECTED %>
-        <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"} %>
+        <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"}, class: "delete-button"%>
       <% end %>
+      <%= link_to 'Review', review_wiki_path(p), class: 'review-button' %>
     </td>
   </tr>
 <% end %>

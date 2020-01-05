@@ -70,7 +70,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page = Page.find(params[:id])
-    redirect_to review_path
+    redirect_to review_path, notice: "#{@page.title} deleted."
     @page.destroy
   end
 
