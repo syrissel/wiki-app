@@ -20,7 +20,7 @@
 <!-- A supervisor cannot review a page they recently edited. -->
 <% unless current_user.username.eql? "#{@page.last_user_edit}" %>
 
-	<%= form_for @page do |f| %>
+	<%= form_for @page, :url => { :action => "supervisor_update" } do |f| %>
 		<div>
 				<%= hidden_field(:page, :title_review, value: @page.title_review) %>
 				<%= hidden_field(:page, :content_review, value: @page.content_review) %>

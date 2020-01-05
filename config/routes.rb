@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 	get 'admin', to: 'pages#admin'
 	get 'review/wiki/:id', to: 'pages#review_wiki', as: 'review_wiki'
   patch 'executive/update/:id', to: 'pages#executive_update', as: 'executive_update'
-  get 'search', to: 'pages#search'
+  patch 'supervisor/update/:id', to: 'pages#supervisor_update', as: 'supervisor_update'
+  # get 'search', to: 'pages#search'
 
   resources :categories
 

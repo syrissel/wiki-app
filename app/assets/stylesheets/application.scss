@@ -146,6 +146,10 @@ html, body {
   margin: 0px auto;
 }
 
+.alert {
+  color: rgb(224, 40, 7);
+}
+
 .side_panel_container ul {
   padding-left: 10px;
 }
@@ -269,6 +273,28 @@ html, body {
 .cardview_container i {
   display: block;
   text-align: right;
+}
+
+#review-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#review-table td, #review-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#review-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#review-table tr:hover {background-color: #ddd;}
+
+#review-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #016383;
+  color: white;
 }
 
 

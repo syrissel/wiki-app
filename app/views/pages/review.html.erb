@@ -1,17 +1,35 @@
 <h1>Current Wikis pending for approval:</h1>
-<ul>
-  <% @pending_pages.each do |p| %>
-    <li>
-      <%= link_to p.title, review_wiki_path(p) %> by: <%= p.user.username %>
-      Status: 
-			<% if p.approval_status.id == SUPERVISOR_VALUE %>
-				<%= p.approval_status.status %> - Waiting for executive approval.
-			<% else %>
-				<%= p.approval_status.status %>
-			<% end %>
+
+<%#= debug(params) %>
+
+<table id="review-table">
+<tr>
+  <th>Title</th>
+  <th>Author</th>
+  <th>Status</th>
+</tr>
+<% @pending_pages.each do |p| %>
+  <tr>
+    <td><%= link_to p.title, review_wiki_path(p) %></td>
+    <td><%= p.user.username %></td>
+    <td>
+      <%= p.approval_status.status %>
       <% if p.approval_status.id == REJECTED %>
         <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"} %>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<% if flash[:notice].present? %>
+  <script>
+  window.onload = function showSnackbar() {
+    var snackbar = document.getElementById("snackbar");
+    snackbar.className = "show";
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+  }
+  </script>
+<% end %>
+
+<div id="snackbar"><%= flash[:notice] %></div>

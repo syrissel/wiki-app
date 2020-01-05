@@ -24,29 +24,28 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
   end
 
+  # If the database fails at updating, render edit page. Otherwise commit changes.
+  def base_update
+    @page = Page.find(params[:id])
+    render 'edit' unless @page.update(page_params)
+  end
+
+  # For user edits.
   def update
-    @page = Page.find(params[:id])
-    
-    if (@page.update(page_params))
-			
-      redirect_to @page
-      flash[:notice] = 'Wiki was updated.'
-    else
-      render 'edit'
-    end   
-	end
-	
-	# Need the review columns to be deleted when the wiki is approved to save space in the database.
+    base_update
+    redirect_to root_path, notice: 'Edit successful. Submitted for review!'
+  end
+  
+  # These methods may be able to be refactored into one. See approval statuses with switch statement.
+  def supervisor_update
+    base_update
+    redirect_to review_path, notice: 'Status updated!'
+  end
+
+	# For Executive Approval, or when the wiki is published live.
 	def executive_update
-    @page = Page.find(params[:id])
-    
-		if (@page.update(page_params))
-			
-      redirect_to @page
-      flash[:notice] = 'Wiki was updated.'
-    else
-      render 'edit'
-    end   
+    base_update
+    redirect_to root_path, notice: 'Wiki is now live!'
   end
 
   # Instantiates new Page object with permitted values. Duplicate content is stored
