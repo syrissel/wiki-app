@@ -62,8 +62,8 @@ class PagesController < ApplicationController
       @page.content_review = @page.content
       @page.category_review = @page.category_id
       @page.save
-      redirect_to page_path(@page)
-      flash[:notice] = 'Wiki created.'
+      flash[:notice] = 'Wiki has been submitted for review!'
+      redirect_to pages_path
     else
       render 'new'
     end

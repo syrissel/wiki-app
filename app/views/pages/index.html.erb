@@ -16,3 +16,26 @@
   <% end %>
   </div>
 <% end %>
+
+<% if flash[:notice].present? %>
+  <script>
+  window.onload = function myFunction() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    // x.innerHTML = "MESSAGE";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+  </script>
+<% end %>
+
+<button onclick="myFunction()">Show Snackbar</button>
+
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= key %> | <%= value %></div>
+<% end %>
+
+<div id="snackbar"><%= flash[:notice] %></div>
+
+<script>
+
+</script>
