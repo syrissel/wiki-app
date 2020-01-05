@@ -27,13 +27,16 @@ class PagesController < ApplicationController
   # If the database fails at updating, render edit page. Otherwise commit changes.
   def base_update
     @page = Page.find(params[:id])
-    render 'edit' unless @page.update(page_params)
+    @page.update(page_params)
   end
 
   # For user edits.
   def update
-    base_update
-    redirect_to root_path, notice: 'Edit successful. Submitted for review!'
+    if base_update
+      redirect_to root_path, notice: 'Edit successful. Submitted for review!'
+    else
+      render 'edit'
+    end
   end
   
   # These methods may be able to be refactored into one. See approval statuses with switch statement.
@@ -45,7 +48,7 @@ class PagesController < ApplicationController
 	# For Executive Approval, or when the wiki is published live.
 	def executive_update
     base_update
-    redirect_to root_path, notice: 'Wiki is now live!'
+    redirect_to root_path, notice: "#{@page.title} is now live!"
   end
 
   # Instantiates new Page object with permitted values. Duplicate content is stored

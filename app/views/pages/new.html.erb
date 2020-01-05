@@ -100,7 +100,7 @@
 
 <!-- Initialize Quill editor -->
 <script>
-	function load() {
+	setTimeout(function load() {
 		let Inline = Quill.import('blots/inline'); 
 		class MarkBlot extends Inline { } 
 		MarkBlot.blotName = 'mark'; 
@@ -155,7 +155,7 @@
 		var postContentInput = document.querySelector('#post-content');
 		postContentInput.value = quill.root.innerHTML;
 	};
-}
+}, 1000)
 
 	function myFunction() {
   var x = document.getElementById("snackbar");
@@ -165,5 +165,6 @@
 }
 
 document.addEventListener("DOMContentLoaded", load(), false);
+
 
 </script>

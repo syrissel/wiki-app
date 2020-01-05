@@ -42,6 +42,6 @@
 			<%= hidden_field(:page, :approval_status_id, value: EXECUTIVE_VALUE) %>
 			<%= hidden_field(:page, :category_id, value: @page.category_review) %>
 		</div>
-		<%= f.submit "Executive Approve"%>
+		<%= f.submit "Executive Approve", data: { confirm: "Publish wiki?"} %>
 	<% end %>
 <% end %>

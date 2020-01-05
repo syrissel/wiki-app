@@ -2,6 +2,18 @@
 <%# render plain: params[:page].inspect %>
 
 <h2 class="edit_title edit_font">Editing "<%= @page.title %>"</h2>
+
+<div class="errors">
+<% if @page.present? && @page.errors.any? %>
+	<p><%= pluralize(@page.errors.count, "error") %> prevented this wiki from being saved:</p>
+	<ul>
+	<% @page.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
+
 <%= form_for @page, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
     <%= f.label :title_review, "Title", class: 'form_label' %><br>
@@ -82,7 +94,7 @@
 		<div id="editor"><%= sanitize @page.content_review %></div>
 	</div>
   <div class="form_group">
-    <%= f.submit "Save changes", class: "edit_button" %>
+    <%= f.submit "Save changes", class: "edit_button", data: { confirm: "Submit for review?"} %>
 		
   </div>
 <% end %>
@@ -93,7 +105,7 @@
 
 <!-- Initialize Quill editor -->
 <script>
-	function load() {
+	setTimeout(function load() {
 		let Inline = Quill.import('blots/inline'); 
 		class MarkBlot extends Inline { } 
 		MarkBlot.blotName = 'mark'; 
@@ -148,7 +160,7 @@
 		var postContentInput = document.querySelector('#post-content');
 		postContentInput.value = quill.root.innerHTML;
 	};
-}
+}, 1000)
 
 document.addEventListener("DOMContentLoaded", load(), false);
 </script>
