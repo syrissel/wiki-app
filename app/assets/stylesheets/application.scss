@@ -68,11 +68,13 @@
 }
 
 .user_login {
-  float: left;
+  float: right;
 }
 
 #search {
-  float: left;
+  position: absolute;
+  right: 88px;
+  top: 115px;
 }
 
 .middle_content {

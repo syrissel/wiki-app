@@ -61,6 +61,9 @@
         <ul>
           <li><%= link_to 'Home', root_path %></li>
           <li><%= link_to 'New Wiki', new_page_path %></li>
+          <% unless current_user %>
+            <li><%= link_to 'Login', login_path %></li>
+          <% end %>
           <% if authorize_access %>
           <li><%= link_to 'User Management', users_path %></li>
           <li><%= link_to 'Wiki Review', review_path %></li>
@@ -76,13 +79,6 @@
         <li><%= current_user.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %></li>
         <li><%= link_to 'Logout', logout_path %></li>
       </ul>
-      <% else %>
-      <p>
-        <%= link_to 'Admin portal', login_path, class: 'btn btn-primary btn-lg' %>
-      </p>
-      <p>
-        <%= link_to 'New Wiki', new_page_path %>
-      </p>
       <% end %>
     </div>
 
