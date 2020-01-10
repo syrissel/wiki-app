@@ -1,22 +1,29 @@
 <h1>Register User</h1>
 
 <%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-  <div class="error_messages">
-    <h2>Form is invalid</h2>
-    <ul>
-      <!-- Print out any errors in the array -->
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+<div class="errors">
+<% if @user.present? && @user.errors.any? %>
+	<p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
+	<ul>
+	<% @user.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
 
   <div class="field">
-    <%= f.label :username, params[:username] %><br />
+    <%= f.label "Username (required)", params[:username] %><br />
     <%= f.text_field :username %>
   </div>
+	<div class="field">
+		<%= f.label "First name (optional)", params[:first_name] %><br />
+    <%= f.text_field :first_name %>
+	</div>
+	<div class="field">
+		<%= f.label "Last name (optional)", params[:last_name] %><br />
+    <%= f.text_field :last_name %>
+	</div>
   <div class="field">
     <%= f.label :user_level_id %><br />
     <%= collection_select :user, :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME), :id, :level, prompt: true %>

@@ -20,7 +20,9 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
-  end
+	end
+	
+	
 
   def destroy
     @user = User.find(params[:id])
@@ -31,6 +33,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :user_level_id)
+    params.require(:user).permit(:username, :password, :password_confirmation, :user_level_id, :first_name, :last_name)
   end
 end
