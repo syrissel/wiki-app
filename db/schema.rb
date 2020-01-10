@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_10_160820) do
+ActiveRecord::Schema.define(version: 2020_01_10_192529) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 2020_01_10_160820) do
     t.bigint "category_review"
     t.string "last_user_edit"
     t.string "status"
+    t.string "image"
+    t.string "description"
     t.index ["approval_status_id"], name: "index_pages_on_approval_status_id"
     t.index ["category_id"], name: "index_pages_on_category_id"
     t.index ["user_id"], name: "index_pages_on_user_id"

@@ -6,6 +6,7 @@
   <div class="card_exterior">
     <div class="card">
       <div class="cardview_container">
+				<%= image_tag("#{p.image.preview.url}") %>
         <h3><%= p.title %></h3>
         <%= sanitize preview(p) %>
         

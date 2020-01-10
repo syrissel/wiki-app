@@ -16,10 +16,9 @@
 	<ul>
 </div>
 
-<h2>Supervisor Options</h2>
 <!-- A supervisor cannot review a page they recently edited. The executive can push a wiki live right away. -->
 <% if (current_user.user_level_id == EXECUTIVE_VALUE) || ((current_user.username != "#{@page.last_user_edit}") && (current_user.user_level_id == SUPERVISOR_VALUE)) %>
-
+	<h2>Supervisor Options:</h2>
 	<%= form_for @page, :url => { :action => "supervisor_update" } do |f| %>
 		<div>
 				<%= hidden_field(:page, :title_review, value: @page.title_review) %>
@@ -32,6 +31,8 @@
 		<%= f.submit "Submit Status", class: "edit_button" %>
 		</div>
 	<% end %>
+<% else %>
+	<h2>You cannot review a wiki you recently edited.</h2>
 <% end %>
 
 <% if current_user.user_level_id == EXECUTIVE_VALUE && @page.approval_status_id == SUPERVISOR_VALUE %>

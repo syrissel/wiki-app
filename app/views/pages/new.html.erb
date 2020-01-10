@@ -89,6 +89,9 @@
       <div id="editor"></div>
     </div>
   </div>
+	<div class="form-options">
+		<%= f.file_field :image %>
+	</div>
   <div class="form_group">
     <%= f.submit "Submit for review", class: "edit_button", html: { onClick: "showSnackbar()" }, data: { confirm: "Submit for review?"} %>
   </div>

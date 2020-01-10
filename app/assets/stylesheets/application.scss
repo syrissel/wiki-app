@@ -262,6 +262,11 @@ html, body {
   height: 100%;
 }
 
+.cardview_container img {
+	float: left;
+	padding-right: 5px;
+}
+
 .card_exterior {
   width: 100%;
   background: #ffdea3;
