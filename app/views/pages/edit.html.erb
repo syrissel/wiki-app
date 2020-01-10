@@ -16,11 +16,11 @@
 
 <%= form_for @page, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
-    <%= f.label :title_review, "Title", class: 'form_label' %><br>
+    <%= f.label :title_review, class: 'form_label' %><br>
     <%= f.text_field :title_review, class: 'text_field' %>
   </div>
 	<div class="category_label form_group">
-    <%= f.label :category, "Category:" %>
+    <%= f.label :category %><br />
 		<%= collection_select :page, :category_review, Category.order(:id), :id, :name, prompt: true, selected: @page.category_id %>
 	</div>
 	<div class="form_group">

@@ -16,7 +16,7 @@
 
 <%= form_for :page, url: pages_path, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
-    <%= f.label :title, "Title", class: "form_label" %><br>
+    <%= f.label :title, class: "form_label" %><br>
     <%= f.text_field :title, class: "text_field" %>
   </div>
   <div class="form_group">
@@ -24,8 +24,12 @@
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
 		<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
   </div>
-	<div class="category_label form_group">
-    <%= f.label :category, "Category:" %>
+	<div class="form_group">
+		<%= f.label 'Give a quick summary of what this wiki is about:', class: 'form_label' %>
+		<%= f.text_field :description, class: "text_field"%>
+		</div>
+	<div class="form_label form_group">
+    <%= f.label :category %><br />
 		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
   <div class="form_group">
@@ -89,9 +93,12 @@
       <div id="editor"></div>
     </div>
   </div>
-	<div class="form-options">
-		<%= f.file_field :image, id: 'preview_upload', class: 'hidden' %>
-		<img id="img_prev" src="#" />
+	<div class="form_aside">
+		<div class="form_group">
+			<%= f.label "Wiki photo (optional)"%>
+			<%= f.file_field :image, id: 'preview_upload' %>
+			<img id="img_prev" src="#", class="hidden" style="width:20%; height:20%;"/>
+		</div>
 	</div>
   <div class="form_group">
     <%= f.submit "Submit for review", class: "edit_button", html: { onClick: "showSnackbar()" }, data: { confirm: "Submit for review?"} %>
