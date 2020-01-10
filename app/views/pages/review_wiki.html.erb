@@ -17,8 +17,8 @@
 </div>
 
 <h2>Supervisor Options</h2>
-<!-- A supervisor cannot review a page they recently edited. -->
-<% unless current_user.username.eql? "#{@page.last_user_edit}" %>
+<!-- A supervisor cannot review a page they recently edited. The executive can push a wiki live right away. -->
+<% if (current_user.user_level_id == EXECUTIVE_VALUE) || ((current_user.username != "#{@page.last_user_edit}") && (current_user.user_level_id == SUPERVISOR_VALUE)) %>
 
 	<%= form_for @page, :url => { :action => "supervisor_update" } do |f| %>
 		<div>

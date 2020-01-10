@@ -11,7 +11,7 @@
 <% @pending_pages.each do |p| %>
   <tr>
     <td><%= link_to p.title, review_wiki_path(p) %></td>
-    <td><%= p.user.username %></td>
+    <td><%#= p.user.username %></td>
     <td>
       <div class="status-text">
       <%= p.approval_status.status %>
