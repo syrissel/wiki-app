@@ -29,7 +29,7 @@
 		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
   <div class="form_group">
-    <%= f.label :content, class: "form_label" %><br>
+    <%#= f.label :content, class: "form_label" %>
       <div class="form-group">
       <%= f.hidden_field :content, :id => "post-content", required: true %>
       <div id="editor-container" hidden="true"></div>
@@ -90,7 +90,8 @@
     </div>
   </div>
 	<div class="form-options">
-		<%= f.file_field :image %>
+		<%= f.file_field :image, id: 'preview_upload', class: 'hidden' %>
+		<img id="img_prev" src="#" />
 	</div>
   <div class="form_group">
     <%= f.submit "Submit for review", class: "edit_button", html: { onClick: "showSnackbar()" }, data: { confirm: "Submit for review?"} %>
@@ -182,13 +183,15 @@
 					}
 				}
 			},
-			theme: 'snow'
+			theme: 'snow',
+			placeholder: 'Compose your wiki here...'
 		});
 
 		form.onsubmit = function() {
 		var postContentInput = document.querySelector('#post-content');
 		postContentInput.value = quill.root.innerHTML;
 	};
+
 }, 1000)
 
 	function showSnackbar() {
@@ -197,6 +200,26 @@
 	snackbar.innerHTML = "Wiki submitted for review!"
   setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 }
+
+	$(function() {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#preview_upload").change(function(){
+    $('#img_prev').removeClass('hidden');
+    readURL(this);
+  	});
+	});
+
+
 
 document.addEventListener("DOMContentLoaded", load(), false);
 
