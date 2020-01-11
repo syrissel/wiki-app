@@ -35,7 +35,7 @@ gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
 gem 'file_validators'
-
+gem 'carrierwave-video'
 gem 'acts_as_list'
 
 

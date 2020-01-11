@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_10_192529) do
+ActiveRecord::Schema.define(version: 2020_01_11_065649) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -97,6 +97,12 @@ ActiveRecord::Schema.define(version: 2020_01_10_192529) do
     t.string "first_name"
     t.string "last_name"
     t.index ["user_level_id"], name: "index_users_on_user_level_id"
+  end
+
+  create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "path"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "categories", "categories"

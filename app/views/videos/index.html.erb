@@ -1,0 +1,9 @@
+<h2>Current Videos:</h2>
+
+<ul>
+<% @videos.each do |v| %>
+  <li><%= link_to v.path, video_path(v) %></li>
+<% end %>
+</ul>
+
+<%= link_to 'Create', new_video_path %>

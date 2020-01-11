@@ -1,0 +1,10 @@
+<%= form_for @video do |f| %>
+  <div class='form_group'>
+    <%= f.label 'Video path...'%>
+    <%= f.file_field :path %>
+    <%= hidden_field(:video, :page_id, value: 5) %>
+  </div>
+  <div class='form_group'>
+    <%= f.submit 'Upload' %>
+  </div>
+<% end %>

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :pages
+  resources :videos
   # get 'user_admin', to: 'pages#user_admin'
 
 
