@@ -16,6 +16,10 @@ class PagesController < ApplicationController
     
   end
 
+  def new
+    @videos = Video.all
+  end
+
   def show
     @page = Page.find(params[:id])
   end

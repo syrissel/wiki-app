@@ -85,6 +85,8 @@
 			<span class="ql-formats">
 				<button class="ql-link"></button>
 				<button class="ql-image"></button>
+				<button class="ql-video"><button>
+				
 			</span>
 			<span class="ql-formats">
 				<button class="ql-clean"></button>
@@ -104,6 +106,11 @@
     <%= f.submit "Submit for review", class: "edit_button", html: { onClick: "showSnackbar()" }, data: { confirm: "Submit for review?"} %>
   </div>
 <% end %>
+<button id="video_button" class="custom_video">CV</button>
+<div class="video_options">
+	<h2>Insert a video</h2>
+
+</div>
 
 <div id="snackbar"></div>
 
@@ -115,6 +122,7 @@
 <script type="module">
 	setTimeout(function load() {
 
+		let BlockEmbed = Quill.import('blots/block/embed');
 		let Inline = Quill.import('blots/inline'); 
 		class MarkBlot extends Inline { } 
 		MarkBlot.blotName = 'mark'; 
@@ -174,7 +182,65 @@
 		// var Size = Quill.import('attributors/style/size');
 		// Size.whitelist = ['14px', '16px', '18px', '24px'];
 		// Quill.register(Size, true);
-		
+	class VideoBlot extends BlockEmbed {
+		static create(url) {
+			let node = super.create();
+			node.setAttribute('src', url);
+			// Set non-format related attributes with static values
+			node.setAttribute('frameborder', '0');
+			node.setAttribute('allowfullscreen', true);
+			node.setAttribute('controls', 'controls');
+
+			return node;
+		}
+
+		static formats(node) {
+			// We still need to report unregistered embed formats
+			let format = {};
+			if (node.hasAttribute('height')) {
+				format.height = node.getAttribute('height');
+			}
+			if (node.hasAttribute('width')) {
+				format.width = node.getAttribute('width');
+			}
+			return format;
+		}
+
+		static value(node) {
+			return node.getAttribute('src');
+		}
+
+		format(name, value) {
+			// Handle unregistered embed formats
+			if (name === 'height' || name === 'width') {
+				if (value) {
+					this.domNode.setAttribute(name, value);
+				} else {
+					this.domNode.removeAttribute(name, value);
+				}
+			} else {
+				super.format(name, value);
+			}
+		}
+	}
+	VideoBlot.blotName = 'video';
+	VideoBlot.tagName = 'video';
+	Quill.register(VideoBlot);
+
+
+	$('#video_button').click(function() {
+		let range = quill.getSelection(true);
+		quill.insertText(range.index, '\n', Quill.sources.USER);
+		let url = "<%= Video.find(1).path %>";
+		quill.insertEmbed(range.index + 1, 'video', url, Quill.sources.USER);
+		quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
+		quill.setSelection(range.index + 2, Quill.sources.SILENT);
+	});
+
+
+
+
+
 
 		var form = document.querySelector('#page_form');
 		var quill = new Quill('#editor', {
@@ -208,23 +274,23 @@
   setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 }
 
-	$(function() {
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+$(function() {
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
 
-      reader.onload = function (e) {
-        $('#img_prev').attr('src', e.target.result);
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
+		reader.onload = function (e) {
+			$('#img_prev').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 
-  $("#preview_upload").change(function(){
-    $('#img_prev').removeClass('hidden');
-    readURL(this);
-  	});
+$("#preview_upload").change(function(){
+	$('#img_prev').removeClass('hidden');
+	readURL(this);
 	});
+});
 
 
 
