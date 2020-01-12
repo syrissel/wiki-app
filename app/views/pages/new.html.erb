@@ -86,7 +86,7 @@
 				<button class="ql-link"></button>
 				<button class="ql-image"></button>
 				<button class="ql-video"><button>
-				
+				<button id="video_button" class="ql-db-video">CV</button>
 			</span>
 			<span class="ql-formats">
 				<button class="ql-clean"></button>
@@ -106,11 +106,17 @@
     <%= f.submit "Submit for review", class: "edit_button", html: { onClick: "showSnackbar()" }, data: { confirm: "Submit for review?"} %>
   </div>
 <% end %>
-<button id="video_button" class="custom_video">CV</button>
+
+
+
 <div class="video_options">
 	<h2>Insert a video</h2>
 
 </div>
+
+<script>
+
+</script>
 
 <div id="snackbar"></div>
 
@@ -120,7 +126,7 @@
 
 <!-- Initialize Quill editor -->
 <script type="module">
-	setTimeout(function load() {
+	function load() {
 
 		let BlockEmbed = Quill.import('blots/block/embed');
 		let Inline = Quill.import('blots/inline'); 
@@ -130,8 +136,10 @@
 		Quill.register(MarkBlot);
 
 		
-
+		let Delta = Quill.import('delta');
 		let Embed = Quill.import('blots/block/embed');
+
+
 
 		class Border extends Embed {
 
@@ -190,6 +198,7 @@
 			node.setAttribute('frameborder', '0');
 			node.setAttribute('allowfullscreen', true);
 			node.setAttribute('controls', 'controls');
+			node.setAttribute('class', 'video-player');
 
 			return node;
 		}
@@ -223,7 +232,7 @@
 			}
 		}
 	}
-	VideoBlot.blotName = 'video';
+	VideoBlot.blotName = 'db-video';
 	VideoBlot.tagName = 'video';
 	Quill.register(VideoBlot);
 
@@ -232,14 +241,10 @@
 		let range = quill.getSelection(true);
 		quill.insertText(range.index, '\n', Quill.sources.USER);
 		let url = "<%= Video.find(1).path %>";
-		quill.insertEmbed(range.index + 1, 'video', url, Quill.sources.USER);
+		quill.insertEmbed(range.index + 1, 'db-video', url, Quill.sources.USER);
 		quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
 		quill.setSelection(range.index + 2, Quill.sources.SILENT);
 	});
-
-
-
-
 
 
 		var form = document.querySelector('#page_form');
@@ -260,12 +265,51 @@
 			placeholder: 'Compose your wiki here...'
 		});
 
+				// Store accumulated changes
+		let change = new Delta();
+		quill.on('text-change', function(delta) {
+			change = change.compose(delta);
+		});
+
+		// Save periodically
+		setInterval(function() {
+			if (change.length() > 0) {
+				console.log('Saving changes...', change);
+				// Save the entire updated text to localStorage
+				const data = JSON.stringify(quill.root.innerHTML);
+				localStorage.setItem('storedText', data);
+				change = new Delta();
+			}
+		}, 3000);
+
+		// Check for unsaved data
+		window.onbeforeunload = function() {
+			if (change.length() > 0) {
+				alert('There are unsaved changes. Are you sure you want to leave?');
+			}
+		}
+
+		// Load saved contents
+		window.onload = function() {
+			var storedText = JSON.parse(localStorage.getItem('storedText'));
+			
+			if (editor !== null) $('.ql-editor').html(storedText);
+		}
+
+
+
+		// Submit text editor content to database.
 		form.onsubmit = function() {
 		var postContentInput = document.querySelector('#post-content');
 		postContentInput.value = quill.root.innerHTML;
+
+		// Clear saved wiki contents in local storage
+		localStorage.clear();
 	};
 
-}, 1000)
+}
+
+
 
 	function showSnackbar() {
   var snackbar = document.getElementById("snackbar");
@@ -291,8 +335,6 @@ $("#preview_upload").change(function(){
 	readURL(this);
 	});
 });
-
-
 
 document.addEventListener("DOMContentLoaded", load(), false);
 
