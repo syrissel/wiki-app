@@ -2,7 +2,10 @@
 
 <ul>
 <% @videos.each do |v| %>
-  <li><%= link_to v.path, video_path(v) %></li>
+  <li>
+    <%= link_to v.name, video_path(v) %> 
+    <%= link_to 'Delete', video_path(v), method: :delete, data: { confirm: "Delete video?"} %>
+  </li>
 <% end %>
 </ul>
 

@@ -1,1 +1,40 @@
-<%= video_tag @video.path, :size => "854x480", :controls => true %>
+<%= video_tag @video.path, size: "854x480", controls: true, id: 'video', class: 'video-player' %>
+<h2 class='show_title'><%= @video.name %></h2>
+
+
+<button id="capture">
+  capture
+</button>
+<canvas id="canvas" class='hidden'></canvas>
+<img id='video_image' style="width:426px; height:240px; border:2px solid black;" src="" />
+
+<script>
+  function thumbnail(){
+    var canvas = document.getElementById('canvas');
+    var video = document.getElementById('video');
+    canvas.height = 240;
+    canvas.width = 426;
+    canvas.getContext('2d').drawImage(video, 0, 0, 426, 240);
+  }
+  document.getElementById('capture').addEventListener('click', function(){
+    thumbnail();	
+    addImg();
+  });
+
+  function addImg() {
+    var canvas = document.getElementById('canvas');
+
+    canvas.toBlob(function(blob) {
+      var img = document.getElementById('video_image'),
+          url = URL.createObjectURL(blob),
+          div = document.getElementsByClassName('middle_content')[0];
+
+      img.onload = function() {
+        // no longer need to read the blob so it's revoked
+        URL.revokeObjectURL(url);
+      };
+
+      img.src = url;
+    });
+  }
+</script>

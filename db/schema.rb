@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_11_065649) do
+ActiveRecord::Schema.define(version: 2020_01_13_042554) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -103,6 +103,9 @@ ActiveRecord::Schema.define(version: 2020_01_11_065649) do
     t.string "path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "image_id"
+    t.string "name"
+    t.index ["image_id"], name: "index_videos_on_image_id"
   end
 
   add_foreign_key "categories", "categories"
@@ -113,4 +116,5 @@ ActiveRecord::Schema.define(version: 2020_01_11_065649) do
   add_foreign_key "pages", "categories"
   add_foreign_key "pages", "users"
   add_foreign_key "users", "user_levels"
+  add_foreign_key "videos", "images"
 end

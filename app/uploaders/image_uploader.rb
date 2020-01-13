@@ -38,7 +38,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 	
 	version :preview do
 		process resize_to_fit: [90,90]
-	end
+  end
+  
+  version :video do
+    process resize_to_fit: [150,150]
+  end
 
 	
   # def store_dimensions
