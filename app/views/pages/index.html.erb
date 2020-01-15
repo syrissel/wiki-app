@@ -12,8 +12,12 @@
       <div class="cardview_container">
 				<%= image_tag("#{p.image.preview.url}") %>
         <h3><%= p.title %></h3>
-        <%= sanitize preview(p) %>
-        
+        <% if p.description.present? %>
+          <p><%= p.description %></p>
+        <% else %>
+          <p>No description provided.</p>
+        <%#= sanitize preview(p) %>
+        <% end %>
         <i>by <%= p.user.username %></i>
       
       </div>
