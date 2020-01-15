@@ -1,5 +1,5 @@
 <head>
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <h1 class="edit_title edit_font">New Wiki</h1>
@@ -36,25 +36,31 @@
     <%= f.label :category %><br />
 		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
-	<div class="video_options">
+	<div class="video_options hidden">
 	<h2>Insert a video</h2>
+	<ul>
+	<div class='radio_wrapper'>
 	<% @videos.each do |v| %>
-	<label for='id'><%= v.name %></label>
-
+	<li>
+	
+	<div class='radio_top'>
+	<strong><%= v.name %></strong>
+	</div>
 	<%# Store video path in data for retrieval by jquery %>
+	<div class='radio_bottom'>
 	<label>
+	
 	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path} do %>
 	<%= image_tag(v.image.path.url, size: '196x111') %>
 	<%# '295.783x166.367' %>
 	</label>
 	<% end %>
-	<%# <label>
-		<input type="radio">
-		<img src="http://placehold.it/40x60/0bf/fff&text=A">
-	</label> %>
+	</div>
+	</li>
 	<% end %>
+	</div>
+	</ul>
 	<button type='button' id="video_button">Insert</button>
-	<%= link_to 'Dead Link', '#'%>
 </div>
   <div class="form_group">
     <%#= f.label :content, class: "form_label" %>
@@ -83,7 +89,7 @@
 				<button class="ql-blockquote"></button>
 				<button class="ql-code-block"></button>
 				<button class="ql-hr"><b>—</b></button>
-				<button class="ql-border"><b>BR</b></button>
+				<%#<button class="ql-border"><b>BR</b></button>%>
 			</span>
 			<span class="ql-formats">
 				<button class="ql-bold"></button>
@@ -109,8 +115,8 @@
 			<span class="ql-formats">
 				<button class="ql-link"></button>
 				<button class="ql-image"></button>
+				<button class="fa fa-play custom_video_button" type='button' onclick="showVideoOptions()"></button>
 				<button class="ql-video"><button>
-				<button id="" class="ql-db-video">CV</button>
 			</span>
 			<span class="ql-formats">
 				<button class="ql-clean"></button>
@@ -127,22 +133,32 @@
 		</div>
 	</div>
   <div class="form_group">
-    <%= f.submit "Submit for review", class: "edit_button", html: { onClick: "showSnackbar()" }, data: { confirm: "Submit for review?"} %>
+    <%= f.submit "Submit for review", class: "edit_button", data: { confirm: "Submit for review?"} %>
   </div>
 <% end %>
 
 
-
-
 <script>
+		function showVideoOptions() {
+			let options = document.getElementsByClassName('video_options')[0];
+			//options.className = options.className.replace('hidden', '');
+			if (options.classList.contains('hidden')) {
+				options.className = options.className.replace("hidden", "");
+			} else {
+				options.classList.add("hidden");
+			}
+		  
+	}
+
 
 </script>
 
 <div id="snackbar"></div>
 
 <!-- Initialize Quill editor -->
-<script type="module">
+<script>
 	function load() {
+
 
 		let BlockEmbed = Quill.import('blots/block/embed');
 		let Inline = Quill.import('blots/inline'); 
@@ -321,34 +337,39 @@
 		localStorage.clear();
 	};
 
-}
 
+	$(function() {
+		function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
 
-
-	function showSnackbar() {
-  var snackbar = document.getElementById("snackbar");
-  snackbar.className = "show";
-	snackbar.innerHTML = "Wiki submitted for review!"
-  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
-}
-
-$(function() {
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-
-		reader.onload = function (e) {
-			$('#img_prev').attr('src', e.target.result);
+			reader.onload = function (e) {
+				$('#img_prev').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
 		}
-		reader.readAsDataURL(input.files[0]);
 	}
+
+	$("#preview_upload").change(function(){
+		$('#img_prev').removeClass('hidden');
+		readURL(this);
+		});
+	});
+
 }
 
-$("#preview_upload").change(function(){
-	$('#img_prev').removeClass('hidden');
-	readURL(this);
-	});
-});
+
+
+// 	function showSnackbar() {
+//   var snackbar = document.getElementById("snackbar");
+//   snackbar.className = "show";
+// 	snackbar.innerHTML = "Wiki submitted for review!"
+//   setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+// }
+
+	
+
+
 
 document.addEventListener("DOMContentLoaded", load(), false);
 

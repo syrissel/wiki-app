@@ -349,12 +349,32 @@ html, body {
 }
 
 .video_options {
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 10px;
+}
 
+.video_options li {
+  list-style: none;
+  margin: 15px 0px;
+}
+
+.video_options img {
+  border: 1px solid gray;
+}
+
+.video_options .radio_top {
+  margin-bottom: 2px;
+  margin-left: 2px;
 }
 
 .video-player {
   margin: 0px auto;
   display: block;
+}
+
+.move_left {
+  left: 150px;
 }
 
 /* HIDE RADIO */
@@ -1363,6 +1383,7 @@ html, body {
   margin: 0px;
   padding: 3px 5px;
   width: 170px;
+  left: 0px;
 }
 .ql-snow .ql-tooltip a.ql-preview {
   display: inline-block;
