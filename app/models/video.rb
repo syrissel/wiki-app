@@ -1,6 +1,6 @@
 class Video < ApplicationRecord
   # belongs_to :page, optional: true
-  has_one :image
+  belongs_to :image
 
   mount_uploader :path, VideoUploader
 

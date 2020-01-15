@@ -1,5 +1,9 @@
 <h2>Welcome to the Computers for Schools Wiki Site!</h2>
-<h3>Latest updates:</h3>
+<% if @query %>
+  <h3>Search results for "<%= @query %>"</h3>
+<% else %>
+  <h3>Latest updates:</h3>
+<% end %>
 
 <% @pages.each do |p| %>
 <%= link_to page_path(p) do %>

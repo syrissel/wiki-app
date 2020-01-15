@@ -36,6 +36,26 @@
     <%= f.label :category %><br />
 		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
+	<div class="video_options">
+	<h2>Insert a video</h2>
+	<% @videos.each do |v| %>
+	<label for='id'><%= v.name %></label>
+
+	<%# Store video path in data for retrieval by jquery %>
+	<label>
+	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path} do %>
+	<%= image_tag(v.image.path.url, size: '196x111') %>
+	<%# '295.783x166.367' %>
+	</label>
+	<% end %>
+	<%# <label>
+		<input type="radio">
+		<img src="http://placehold.it/40x60/0bf/fff&text=A">
+	</label> %>
+	<% end %>
+	<button type='button' id="video_button">Insert</button>
+	<%= link_to 'Dead Link', '#'%>
+</div>
   <div class="form_group">
     <%#= f.label :content, class: "form_label" %>
       <div class="form-group">
@@ -113,20 +133,6 @@
 
 
 
-<div class="video_options">
-	<h2>Insert a video</h2>
-	<ul>
-	<% @videos.each do |v| %>
-	<%= link_to v.name, request.params.merge(video: "#{v.id}") %>
-	<%# <label>
-		<input type="radio">
-		<img src="http://placehold.it/40x60/0bf/fff&text=A">
-	</label> %>
-	<% end %>
-	</ul>
-	<button id="video_button">Insert</button>
-	<%= link_to 'Dead Link', '#'%>
-</div>
 
 <script>
 
@@ -246,10 +252,9 @@
 	$('#video_button').click(function() {
 		let range = quill.getSelection(true);
 		quill.insertText(range.index, '\n', Quill.sources.USER);
-		let url_string = window.location.href;
-		let browser_url = new URL(url_string);
-		let video = browser_url.searchParams.get("video");
-		let url = "<%= Video.find(params[:video]).path if params[:video].present? %>";
+		
+		// Grab selected radio button by name. Return video path from database.
+		let url = $("input[name='video']:checked").data('video').url;
 		quill.insertEmbed(range.index + 1, 'db-video', url, Quill.sources.USER);
 		quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
 		quill.setSelection(range.index + 2, Quill.sources.SILENT);

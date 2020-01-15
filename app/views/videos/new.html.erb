@@ -9,6 +9,9 @@
     <%= hidden_field(:video, :page_id, value: 5) %>
   </div>
   <div class='form_group'>
+    <%= collection_select :video, :image_id, Image.order(:id), :id, :path, prompt: true %>
+  </div>
+  <div class='form_group'>
     <%= f.submit 'Upload' %>
   </div>
 <% end %>

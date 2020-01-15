@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_042554) do
+ActiveRecord::Schema.define(version: 2020_01_15_032030) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -28,11 +28,9 @@ ActiveRecord::Schema.define(version: 2020_01_13_042554) do
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "url"
-    t.string "hint"
-    t.string "alt"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "path"
   end
 
   create_table "makes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -103,8 +101,8 @@ ActiveRecord::Schema.define(version: 2020_01_13_042554) do
     t.string "path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "image_id"
     t.string "name"
+    t.bigint "image_id"
     t.index ["image_id"], name: "index_videos_on_image_id"
   end
 

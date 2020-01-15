@@ -8,8 +8,9 @@ class PagesController < ApplicationController
     if params[:query].present?
       @query = params[:query]
       @pages = Page.joins(:user).where("approval_status_id = #{EXECUTIVE_VALUE} AND title LIKE '%#{@query}%'
-                           OR approval_status_id = #{EXECUTIVE_VALUE} AND username LIKE '%#{@query}%'
-                           OR approval_status_id = #{EXECUTIVE_VALUE} AND content LIKE '%#{@query}%'").order("updated_at desc").limit(10)
+                           OR approval_status_id = #{EXECUTIVE_VALUE} AND username LIKE '%#{@query}%'").order("updated_at desc").limit(10)
+    
+      # @pages = Page.joins(:user).where("approval_status_id = ? AND title LIKE '%#{@query}%'", EXECUTIVE_VALUE)
     else
       @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
     end

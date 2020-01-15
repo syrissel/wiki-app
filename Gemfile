@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'jquery-rails'
+gem 'simple_form'
 
 # User authentication
 # gem 'devise'

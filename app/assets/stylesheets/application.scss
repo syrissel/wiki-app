@@ -58,7 +58,7 @@
   margin-top: -5px;
   background: rgb(179, 209, 219);
 	height: 100%;
-  font-family: 'Acme', sans-serif;
+  font-family: Arial;
   padding-right: 2.5em;
 }
 
@@ -166,12 +166,12 @@ html, body {
 }
 
 .edit_font {
-	font-family: 'Acme', sans-serif;
+	font-family: Arial;
 }
 
 .form_label {
 	font-size: 1.3em;
-	font-family: 'Acme', sans-serif;
+	font-family: Arial;
 }
 
 .text_field {
@@ -189,11 +189,11 @@ html, body {
 
 .category_label {
   font-size: 1.5em;
-  font-family: 'Acme', sans-serif;
+  font-family: Arial;
 }
 
 .edit_button {
-  font-family: 'Acme', sans-serif;
+  font-family: Arial;
 	text-decoration: none;
 	background-color:#156aa4;
 	color:#FFFFFF;
@@ -349,7 +349,7 @@ html, body {
 }
 
 .video_options {
-  float: right;
+
 }
 
 .video-player {
@@ -372,7 +372,7 @@ html, body {
 
 /* CHECKED STYLES */
 [type=radio]:checked + img {
-  outline: 2px solid #f00;
+  outline: 3px solid #00b7ff;
 }
 
 
