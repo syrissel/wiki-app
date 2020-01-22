@@ -392,6 +392,19 @@ html, body {
   font-size: 33px;
 }
 
+#video_description {
+	padding: 50px;
+}
+
+#video_image {
+	float: left;
+}
+
+#capture {
+	position: absolute;
+	bottom: 10px;
+}
+
 .move_left {
   left: 150px;
 }

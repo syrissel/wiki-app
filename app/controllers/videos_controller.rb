@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
-  before_action :authenticate_supervisor, only: :index
+	before_action :authenticate_supervisor, only: :index
+	before_action :set_video, only: [:show, :edit, :update, :destroy]
 
   def index
     @videos = Video.all
@@ -11,8 +12,10 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id])
-  end
+	end
+	
+	def edit
+	end
 
   def create
     @video = Video.new(video_params)
@@ -22,17 +25,28 @@ class VideosController < ApplicationController
     else
       render 'new'
     end
-  end
+	end
+	
+	def update
+		if @video.update(video_params)
+			redirect_to @video, notice: "#{@video.name} created."
+		else
+			render :edit
+		end
+	end
 
   def destroy
-    @video = Video.find(params[:id])
     redirect_to videos_path
     @video.destroy
   end
 
-  private
+	private
+	
+	def set_video
+		@video = Video.find(params[:id])
+	end
 
   def video_params
-    params.require(:video).permit(:path, :name, :image_id)
+    params.require(:video).permit(:path, :name, :image_id, :description)
   end
 end

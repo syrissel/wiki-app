@@ -90,7 +90,7 @@ ApprovalStatus.create(status: 'Supervisor Approved')
 ApprovalStatus.create(status: 'Executive Approved')
 ApprovalStatus.create(status: 'Rejected')
 
-User.create(username: 'Executive Director', password: 'password', password_confirmation: 'password', user_level_id: EXECUTIVE_VALUE)
+User.create(username: 'edirector', password: 'password', password_confirmation: 'password', user_level_id: EXECUTIVE_VALUE)
 User.create(username: 'hpotter', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE)
 User.create(username: 'jlennon', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE)
 User.create(username: 'smireault', password: 'password', password_confirmation: 'password', user_level_id: INTERN_VALUE)

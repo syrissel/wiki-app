@@ -1,12 +1,18 @@
-<%= video_tag @video.path, size: "854x480", controls: true, id: 'video', class: 'video-player' %>
 <h2 class='show_title'><%= @video.name %></h2>
+<%= video_tag @video.path, size: "854x480", controls: true, id: 'video', class: 'video-player' %>
+<div id="video_description"><%= @video.description %></div>
 
+<%# Only supervisors and the executive can add custom thumbnails %>
+<% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
+<h2>Create custom thumbnail</h2>
 
 <button id="capture">
   capture
 </button>
+
 <canvas id="canvas" class='hidden'></canvas>
 <img id='video_image' style="width:426px; height:240px; border:2px solid black;" src="" />
+<% end %>
 <%= form_for @video do |f| %>
   <%= hidden_field(:video, :image_id, value: current_user.id) %>
 <% end %>
