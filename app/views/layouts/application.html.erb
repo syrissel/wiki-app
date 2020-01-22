@@ -104,7 +104,7 @@
       <% @root_categories.each do |r| %>
         <li>
           <%= r.name %>
-            <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", r.id, EXECUTIVE_VALUE)%>
+            <% pages_of_type = @menu_pages.where("category_id = ? AND approval_status_id = ?", r.id, EXECUTIVE_VALUE)%>
             <ul id="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
@@ -118,7 +118,7 @@
             <ul>
               <li>
                 <%= s.name %>
-                <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", s.id, EXECUTIVE_VALUE)%>
+                <% pages_of_type = @menu_pages.where("category_id = ? AND approval_status_id = ?", s.id, EXECUTIVE_VALUE)%>
                   <ul>
                   <% pages_of_type.each do |pot| %>
                     <li>
@@ -132,7 +132,7 @@
                   <ul>
                     <li>
                       <%= t.name %>
-                      <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", t.id, EXECUTIVE_VALUE)%>
+                      <% pages_of_type = @menu_pages.where("category_id = ? AND approval_status_id = ?", t.id, EXECUTIVE_VALUE)%>
                         <ul>
                         <% pages_of_type.each do |pot| %>
                           <li>
@@ -146,7 +146,7 @@
                         <ul>
                           <li>
                             <%= u.name %>
-                            <% pages_of_type = @pages.where("category_id = ? AND approval_status_id = ?", u.id, EXECUTIVE_VALUE)%>
+                            <% pages_of_type = @menu_pages.where("category_id = ? AND approval_status_id = ?", u.id, EXECUTIVE_VALUE)%>
                               <ul>
                               <% pages_of_type.each do |pot| %>
                                 <li>
@@ -167,23 +167,7 @@
       <% end %>
     </ul>
 
-    <!--<h3><a href="#">Production</a></h3>
-      <ul class="make_list">
-        <% @makes.each do |make| %>
-          <li>
-            <a href="#" class="makes"><%= make.name%></a>
-            <div class="model_list">
-            <ul>
-              <% make.models.each do |model| %>
-              <li class="model_item">
-                <a href="#"><%= model.name %></a>
-              </li>
-              <% end %>
-            </ul>
-            </div>
-          </li>
-        <% end %>
-      </ul> -->
+
       </div>
     </div>
     <div class="middle_content">

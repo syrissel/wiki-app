@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :set_layout_variables
 
   def set_layout_variables
-    @makes = Make.all
-    @pages = Page.all.order("updated_at desc")
+
+    @menu_pages = Page.all
     # @prod_pages = Page.where(category_id: 1)
     @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
     @root_categories = Category.order(:position).where("category_id IS NULL")
