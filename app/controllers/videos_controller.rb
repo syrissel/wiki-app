@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  before_action :authenticate_supervisor, only: :index
 
   def index
     @videos = Video.all

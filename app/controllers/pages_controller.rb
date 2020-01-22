@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authenticate_supervisor, only: [:review]
+  before_action :authenticate_supervisor, only: [:review, :admin, :review_wiki]
   before_action :authenticate_user, except: [:index]
   before_action :check_page_approved, only: [:show]
   
@@ -92,6 +92,12 @@ class PagesController < ApplicationController
 	def review_wiki
 		@page = Page.find(params[:id])
   end
+
+  def admin
+
+  end
+
+  
   
   # Displays preview card of wiki on homepage. Finds first occurence of <p> tag
   # then substrings it upto 400 characters. Appends three dots to the end of the

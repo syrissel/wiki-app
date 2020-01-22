@@ -373,6 +373,25 @@ html, body {
   display: block;
 }
 
+#admin_menu .row .column {
+  background: #5daaf9;
+  width: 30%;
+  display: block;
+  float: left;
+  margin: 2px;
+  height: 6em;
+}
+
+.column:hover {
+  box-shadow: 2px 2px rgba(0,0,0,0.2);
+}
+
+#admin_menu a {
+  text-decoration: none;
+  color: #FFF;
+  font-size: 33px;
+}
+
 .move_left {
   left: 150px;
 }

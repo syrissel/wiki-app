@@ -1,1 +1,13 @@
 <h1>Administrative Tasks</h1>
+
+<div id="admin_menu">
+  <div class="row">
+    <%= link_to categories_path do %><div class="column">Categories</div><% end %>
+    <%= link_to images_path do %><div class="column">Images</div><% end %>
+    <%= link_to videos_path do %><div class="column">Videos</div><% end %>
+  </div>
+  <div class="row">
+    <%= link_to users_path do %><div class="column">Users</div><% end %>
+    <%= link_to review_path do %><div class="column">Wiki Review</div><% end %>
+  </div>
+</div>
