@@ -2,15 +2,26 @@ class PagesController < ApplicationController
   before_action :authenticate_supervisor, only: [:review]
   before_action :authenticate_user, except: [:index]
   before_action :check_page_approved, only: [:show]
+  before_action :clear_content_html, only: [:index]
   
 
   def index
     if params[:query].present?
       @query = params[:query]
-      @pages = Page.joins(:user).where("approval_status_id = #{EXECUTIVE_VALUE} AND title LIKE '%#{@query}%'
-                           OR approval_status_id = #{EXECUTIVE_VALUE} AND username LIKE '%#{@query}%'").order("updated_at desc").limit(10)
+      @pages = Page.joins(:user).where("approval_status_id = :executive AND sanitized_content LIKE :query
+                                        OR approval_status_id = :executive AND title LIKE :query
+                                        OR approval_status_id = :executive AND username LIKE :query
+                                        OR approval_status_id = :executive AND description LIKE :query", 
+                                        executive: EXECUTIVE_VALUE, query: "%#{@query}%" ).order("updated_at desc").limit(10)
     
       # @pages = Page.joins(:user).where("approval_status_id = ? AND title LIKE '%#{@query}%'", EXECUTIVE_VALUE)
+
+      @pages.each do |p|
+        p.content = ActionController::Base.helpers.strip_tags(p.content)
+        
+      end
+      
+      ActionController::Base.helpers.strip_tags("> A quote from Smith & Wesson")
     else
       @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
     end
@@ -67,6 +78,7 @@ class PagesController < ApplicationController
 
       @page.title_review = @page.title
       @page.content_review = @page.content
+      @page.sanitized_content = ActionController::Base.helpers.strip_tags(@page.content)
       @page.category_review = @page.category_id
       @page.save
       flash[:notice] = 'Wiki has been submitted for review!'
@@ -113,7 +125,7 @@ class PagesController < ApplicationController
   def page_params
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
-																 :pinned, :search, :image, :description)
+																 :pinned, :search, :image, :description, :sanitized_content)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
@@ -123,5 +135,9 @@ class PagesController < ApplicationController
     if current_user.user_level_id == INTERN_VALUE && @page.approval_status_id != EXECUTIVE_VALUE
       redirect_to root_path, alert: "Page has not been approved yet."
     end
+  end
+
+  def clear_content_html
+
   end
 end

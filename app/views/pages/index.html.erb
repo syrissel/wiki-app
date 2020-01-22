@@ -5,7 +5,9 @@
   <h3>Latest updates:</h3>
 <% end %>
 
+
 <% @pages.each do |p| %>
+<% p.content = ActionController::Base.helpers.strip_tags(p.content) %>
 <%= link_to page_path(p) do %>
   <div class="card_exterior">
     <div class="card">

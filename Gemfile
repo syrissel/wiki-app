@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'hirb', '~> 0.7.3'
 
 # User authentication
 # gem 'devise'

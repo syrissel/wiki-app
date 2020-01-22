@@ -6,10 +6,8 @@
   <div class='form_group'>
     <%= f.label 'Video path...'%>
     <%= f.file_field :path %>
-    <%= hidden_field(:video, :page_id, value: 5) %>
-  </div>
-  <div class='form_group'>
-    <%= collection_select :video, :image_id, Image.order(:id), :id, :path, prompt: true %>
+    <%#= hidden_field(:video, :page_id, value: 5) %>
+    <%= hidden_field(:video, :image_id, value: @default_image_path) %>
   </div>
   <div class='form_group'>
     <%= f.submit 'Upload' %>

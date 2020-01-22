@@ -6,6 +6,7 @@ class VideosController < ApplicationController
 
   def new
     @video = Video.new
+    @default_image_path = Image.find_by_path('default_video.png').id
   end
 
   def show
