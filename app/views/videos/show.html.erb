@@ -67,7 +67,6 @@
 
 				$.ajax({
 					data: 'base64=' + full_base64,
-					dataType: 'json',
 					type: 'POST',
 					url: "/videos/show/<%=@video.id%>"
 				});

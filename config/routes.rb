@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   patch 'supervisor/update/:id', to: 'pages#supervisor_update', as: 'supervisor_update'
 	post 'pages/:id/edit', to: 'pages#update', as: 'edit_pages_path'
 	post 'videos/parse_html', to: 'videos#parse_html'
-	post 'videos/show/:id/', to: 'videos#show'
+	post 'videos/show/:id', to: 'videos#show'
   # get 'search', to: 'pages#search'
 
   resources :categories
