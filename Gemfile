@@ -40,6 +40,9 @@ gem 'file_validators'
 gem 'carrierwave-video'
 gem 'acts_as_list'
 
+gem 'mime-types'
+gem 'carrierwave-base64'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

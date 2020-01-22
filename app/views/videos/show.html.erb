@@ -1,3 +1,5 @@
+
+<%= render plain: params[:video].inspect %>
 <h2 class='show_title'><%= @video.name %></h2>
 <%= video_tag @video.path, size: "854x480", controls: true, id: 'video', class: 'video-player' %>
 <div id="video_description"><%= @video.description %></div>
@@ -6,6 +8,8 @@
 <% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
 <h2>Create custom thumbnail</h2>
 
+<%= @base64 %>
+<% console %>
 <button id="capture">
   capture
 </button>
@@ -13,10 +17,14 @@
 <canvas id="canvas" class='hidden'></canvas>
 <img id='video_image' style="width:426px; height:240px; border:2px solid black;" src="" />
 <% end %>
-<%= form_for @video do |f| %>
-  <%= hidden_field(:video, :image_id, value: current_user.id) %>
+<%= form_for images_path do |f| %>
+  <%#= hidden_field(:video, :image_id, value: current_user.id) %>
+
 <% end %>
 <script>
+	
+	var blobReader = new FileReader();
+
   function thumbnail(){
     var canvas = document.getElementById('canvas');
     var video = document.getElementById('video');
@@ -42,7 +50,36 @@
     canvas.toBlob(function(blob) {
       var img = document.getElementById('video_image'),
           url = URL.createObjectURL(blob),
-          div = document.getElementsByClassName('middle_content')[0];
+					div = document.getElementsByClassName('middle_content')[0];
+			
+			var base64 = "";
+			blobReader.readAsDataURL(blob);
+			blobReader.onloadend = function() {
+				var result = blobReader.result;
+				base64 = result.substr(result.indexOf(',')+1);
+				var newImg = document.createElement('img');
+				newImg.src = "data:image/jpeg;base64," + base64;
+				newImg.id = "base64_image";
+				document.body.appendChild(newImg);
+				console.log(base64);
+
+				var full_base64 =  "data:image/jpeg;base64," + base64;
+
+				$.ajax({
+					data: 'base64=' + full_base64,
+					dataType: 'json',
+					type: 'POST',
+					url: "/videos/show/<%=@video.id%>"
+				});
+
+				var textBox = document.createElement('input');
+				textBox.type = 'text';
+				textBox.value = "data:image/jpeg;base64," + base64;
+				textBox.id = 'text'
+				document.body.appendChild(textBox);
+			}
+
+			
 
       img.onload = function() {
         // no longer need to read the blob so it's revoked

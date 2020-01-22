@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_151116) do
+ActiveRecord::Schema.define(version: 2020_01_22_162330) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_151116) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "path"
+    t.string "video_path"
   end
 
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
