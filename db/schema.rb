@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_162330) do
+ActiveRecord::Schema.define(version: 2020_01_23_054658) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -31,7 +31,33 @@ ActiveRecord::Schema.define(version: 2020_01_22_162330) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "path"
-    t.string "video_path"
+    t.text "video_path", size: :long
+  end
+
+  create_table "makes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "model_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "series"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "make_id", null: false
+    t.bigint "model_type_id", null: false
+    t.bigint "page_id", null: false
+    t.index ["make_id"], name: "index_models_on_make_id"
+    t.index ["model_type_id"], name: "index_models_on_model_type_id"
+    t.index ["page_id"], name: "index_models_on_page_id"
   end
 
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -80,10 +106,14 @@ ActiveRecord::Schema.define(version: 2020_01_22_162330) do
     t.string "name"
     t.bigint "image_id"
     t.text "description"
+    t.text "base64", size: :long
     t.index ["image_id"], name: "index_videos_on_image_id"
   end
 
   add_foreign_key "categories", "categories"
+  add_foreign_key "models", "makes"
+  add_foreign_key "models", "model_types"
+  add_foreign_key "models", "pages"
   add_foreign_key "pages", "approval_statuses"
   add_foreign_key "pages", "categories"
   add_foreign_key "pages", "users"

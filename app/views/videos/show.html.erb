@@ -8,7 +8,7 @@
 <% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
 <h2>Create custom thumbnail</h2>
 
-<%= @base64 %>
+<%= "base64 value:"%><%= @base64 %>
 <% console %>
 <button id="capture">
   capture
@@ -17,12 +17,20 @@
 <canvas id="canvas" class='hidden'></canvas>
 <img id='video_image' style="width:426px; height:240px; border:2px solid black;" src="" />
 <% end %>
-<%= form_for images_path do |f| %>
-  <%#= hidden_field(:video, :image_id, value: current_user.id) %>
-
+<%= form_for Image.new, html: {class: 'hidden', id: 'upload_form'} do |f| %>
+  <%= hidden_field(:image, :video_path, value: @video.base64) %>
+  <div class='form_group'>
+    <%= f.submit 'Create thumbnail' %>
+  </div>
 <% end %>
 <script>
-	
+  
+  var uploadForm = document.getElementById('upload_form');
+  <% if @video.base64.present? %>
+  upload_form.className = upload_form.className.replace("hidden", "");
+  <% end %>
+
+
 	var blobReader = new FileReader();
 
   function thumbnail(){
@@ -35,6 +43,8 @@
   document.getElementById('capture').addEventListener('click', function(){
     thumbnail();	
     addImg();
+    
+    
   });
 
   // document.getElementById('video_thumbnail_upload').addEventListener('click', function(){
@@ -68,14 +78,8 @@
 				$.ajax({
 					data: 'base64=' + full_base64,
 					type: 'POST',
-					url: "/videos/show/<%=@video.id%>"
+					url: "/videos/<%=@video.id%>/upload"
 				});
-
-				var textBox = document.createElement('input');
-				textBox.type = 'text';
-				textBox.value = "data:image/jpeg;base64," + base64;
-				textBox.id = 'text'
-				document.body.appendChild(textBox);
 			}
 
 			

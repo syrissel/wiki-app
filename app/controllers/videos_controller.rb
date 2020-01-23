@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
 	require 'nokogiri'
 	before_action :authenticate_supervisor, only: :index
-	before_action :set_video, only: [:show, :edit, :update, :destroy]
+	before_action :set_video, only: [:show, :edit, :update, :destroy, :base64_upload]
 
   def index
     @videos = Video.all
@@ -43,6 +43,12 @@ class VideosController < ApplicationController
     redirect_to videos_path
     @video.destroy
 	end
+
+	def base64_upload
+		@base64 = params[:base64]
+		@video.update(base64: @base64)
+		# redirect_to @video
+	end
 	
 	def parse_html
 		@video = params[:id]
@@ -58,12 +64,9 @@ class VideosController < ApplicationController
 	
 	def set_video
 		@video = Video.find(params[:id])
-		if params[:base64].present?
-			@base64 = params[:base64]
-		end
 	end
 
   def video_params
-    params.require(:video).permit(:path, :name, :image_id, :description)
+    params.require(:video).permit(:path, :name, :image_id, :description, :base64)
   end
 end

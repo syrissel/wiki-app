@@ -20,9 +20,10 @@ Rails.application.routes.draw do
   patch 'executive/update/:id', to: 'pages#executive_update', as: 'executive_update'
   patch 'supervisor/update/:id', to: 'pages#supervisor_update', as: 'supervisor_update'
 	post 'pages/:id/edit', to: 'pages#update', as: 'edit_pages_path'
-	post 'videos/parse_html', to: 'videos#parse_html'
-	post 'videos/show/:id', to: 'videos#show'
+	# post 'videos/parse_html', to: 'videos#parse_html'
+	# post 'videos/show/:id', to: 'videos#show'
   # get 'search', to: 'pages#search'
+  get 'videos/upload', to: 'videos#base64_upload', as: 'base64'
 
   resources :categories
 

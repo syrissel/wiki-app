@@ -4,7 +4,7 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.file_field :path %>
+    <%= hidden_field(:image, :video_path, value: Video.first.base64) %>
   </div>
 
   <div class="form-actions">
