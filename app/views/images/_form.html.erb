@@ -3,11 +3,26 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= hidden_field(:image, :video_path, value: Video.first.base64) %>
-  </div>
+	<div class="errors">
+<% if @image.present? && @image.errors.any? %>
+	<p><%= pluralize(@image.errors.count, "error") %> prevented this image from being saved:</p>
+	<ul>
+	<% @image.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
 
-  <div class="form-actions">
+  <div class="form_group">
+		<%= f.label :name, class: 'form_label' %><br />
+    <%= f.text_field :name %>
+  </div>
+	<div class="form_group">
+		<%= f.label :path, class: 'form_label' %><br />
+    <%= f.file_field :path %>
+  </div>
+  <div class="form_group">
     <%= f.button :submit %>
   </div>
 <% end %>

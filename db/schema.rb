@@ -35,32 +35,6 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
     t.string "name"
   end
 
-  create_table "makes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "model_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.string "series"
-    t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "make_id", null: false
-    t.bigint "model_type_id", null: false
-    t.bigint "page_id", null: false
-    t.index ["make_id"], name: "index_models_on_make_id"
-    t.index ["model_type_id"], name: "index_models_on_model_type_id"
-    t.index ["page_id"], name: "index_models_on_page_id"
-  end
-
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -112,9 +86,6 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
   end
 
   add_foreign_key "categories", "categories"
-  add_foreign_key "models", "makes"
-  add_foreign_key "models", "model_types"
-  add_foreign_key "models", "pages"
   add_foreign_key "pages", "approval_statuses"
   add_foreign_key "pages", "categories"
   add_foreign_key "pages", "users"

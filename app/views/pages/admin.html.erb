@@ -2,12 +2,12 @@
 
 <div id="admin_menu">
   <div class="row">
-    <%= link_to categories_path do %><div class="column">Categories</div><% end %>
-    <%= link_to images_path do %><div class="column">Images</div><% end %>
-    <%= link_to videos_path do %><div class="column">Videos</div><% end %>
+    <%= link_to categories_path do %><div class="column"><p>Categories</p></div><% end %>
+    <%= link_to images_path do %><div class="column"><p>Images</p><%= image_tag(Image.find_by_name('image_icon').path.preview.url) %></div><% end %>
+    <%= link_to videos_path do %><div class="column"><p>Videos</p></div><% end %>
   </div>
   <div class="row">
-    <%= link_to users_path do %><div class="column">Users</div><% end %>
-    <%= link_to review_path do %><div class="column">Wiki Review</div><% end %>
+    <%= link_to users_path do %><div class="column"><p>Users</p></div><% end %>
+    <%= link_to review_path do %><div class="column"><p>Wiki Review</p></div><% end %>
   </div>
 </div>

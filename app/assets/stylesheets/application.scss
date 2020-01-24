@@ -374,16 +374,26 @@ html, body {
 }
 
 #admin_menu .row .column {
-  background: #5daaf9;
+  background: #53708e;
   width: 30%;
   display: block;
   float: left;
-  margin: 2px;
+  margin: 4px;
   height: 6em;
 }
 
 .column:hover {
-  box-shadow: 2px 2px rgba(0,0,0,0.2);
+  box-shadow: 4px 4px rgba(0,0,0,0.2);
+}
+
+.column p {
+	margin: 0px;
+}
+
+.column img {
+	float: right;
+	margin-top: 65px;
+	margin-right: 4px;
 }
 
 #admin_menu a {
@@ -393,7 +403,7 @@ html, body {
 }
 
 #video_description {
-	padding: 50px;
+	margin: 50px;
 }
 
 #video_image {

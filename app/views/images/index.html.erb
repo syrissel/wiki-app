@@ -12,9 +12,18 @@
   <tbody>
     <% @images.each do |image| %>
       <tr>
-        <td><%= link_to 'Show', image %></td>
-        <td><%= link_to 'Edit', edit_image_path(image) %></td>
+				<div id="image_container">
+        <td>
+					<strong><%=image.name%></strong><br />
+					<% if image.path.present? %>
+					<%= link_to edit_image_path(image) do %><%=image_tag(image.path.preview.url)%><% end %>
+					<% else %>
+					<%= link_to edit_image_path(image) do %><%=image_tag(image.video_path.preview.url)%><% end %>
+					<% end %>
+				</td>
+        <%#<td><%= link_to 'Edit', edit_image_path(image) %><%#</td>%>
         <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				</div>
       </tr>
     <% end %>
   </tbody>
