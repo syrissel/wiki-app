@@ -43,3 +43,10 @@
 <%= link_to 'Create New Category', new_category_path %>
 <a href="javascript:history.back()">Back</a>
 
+<h2>Third-party Licences</h2>
+<ul>
+<% Gem.loaded_specs.each do |name, spec| %>%
+
+	<li><%=name%>% <%= spec.license %></li>
+<% end %>
+</ul>
