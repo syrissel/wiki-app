@@ -1,13 +1,15 @@
+ 
 <h1>Administrative Tasks</h1>
 
 <div id="admin_menu">
   <div class="row">
-    <%= link_to categories_path do %><div class="column"><p>Categories</p></div><% end %>
-    <%= link_to images_path do %><div class="column"><p>Images</p><%= image_tag(Image.find_by_name('image_icon').path.preview.url) %></div><% end %>
-    <%= link_to videos_path do %><div class="column"><p>Videos</p></div><% end %>
+    <%= link_to categories_path do %><div class="column"><p>Categories</p><box-icon class="icon" size="108px" type='solid' name='book-open'></box-icon></div><% end %>
+    <%= link_to images_path do %><div class="column"><p>Images</p><box-icon class="icon" size="108px" name='images' ></box-icon></div><% end %>
+    <%= link_to videos_path do %><div class="column"><p>Videos</p><box-icon class="icon" size="108px" type='solid' name='videos'></box-icon></div><% end %>
   </div>
   <div class="row">
-    <%= link_to users_path do %><div class="column"><p>Users</p></div><% end %>
-    <%= link_to review_path do %><div class="column"><p>Wiki Review</p></div><% end %>
+    <%= link_to users_path do %><div class="column"><p>Users</p><box-icon class="icon" size="108px" type='solid' name='group'></box-icon></div><% end %>
+    <%= link_to review_path do %><div class="column"><p>Wiki Review</p><box-icon class="icon" size="108px" type='solid' name='check-square'></box-icon></div><% end %>
   </div>
 </div>
+
