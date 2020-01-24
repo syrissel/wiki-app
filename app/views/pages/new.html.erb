@@ -36,7 +36,7 @@
     <%= f.label :category %><br />
 		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
 	</div>
-	<div class="video_options hidden">
+	<div class="video_options hidden clearfix">
 	<h2>Insert a video</h2>
 	<ul>
 	<div class='radio_wrapper'>
@@ -48,11 +48,15 @@
 	</div>
 	<%# Store video path in data for retrieval by jquery %>
 	<div class='radio_bottom'>
+	
 	<label>
 	
 	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path, thumbnail: Video.find(v.id).image.video_path.url} do %>
 	<% if v.image.video_path.present? %>
+		<%# <div class="video_image_wrapper"> %>
 		<%= image_tag(v.image.video_path.url, size: '196x111') %>
+		<%# <box-icon class="video_preview_icon" size="96px" color="#656565" name='play'></box-icon>
+		</div> %>
 	<% else %>
 		<%= image_tag(v.image.path.url, size: '196x111') %>
 	<% end %>
@@ -62,6 +66,7 @@
 	</div>
 	</li>
 	<% end %>
+	<%= paginate @videos, remote: true %>
 	</div>
 	</ul>
 	<button type='button' id="video_button">Insert</button>

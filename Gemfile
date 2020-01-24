@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'hirb', '~> 0.7.3'
-
+gem 'kaminari'
 # User authentication
 # gem 'devise'
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'

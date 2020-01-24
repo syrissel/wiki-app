@@ -19,7 +19,8 @@ class PagesController < ApplicationController
   end
 
   def new
-    @videos = Video.all
+		@videos = Video.all.page params[:page]
+		# @users = User.order(:name).page params[:page]
   end
 
   def show
@@ -121,7 +122,7 @@ class PagesController < ApplicationController
   def page_params
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
-																 :pinned, :search, :image, :description, :sanitized_content)
+																 :pinned, :search, :image, :description, :sanitized_content, :page)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 

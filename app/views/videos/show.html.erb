@@ -2,7 +2,7 @@
 <%= render plain: params[:video].inspect %>
 <h2 class='show_title'><%= @video.name %></h2>
 <%= video_tag @video.path, size: "854x480", controls: true, poster: @path, id: 'video', class: 'video-player' %>
-<div id="video_description"><%= @video.description %></div>
+<div id="show_video_description"><%= @video.description %></div>
 
 <%# Only supervisors and the executive can add custom thumbnails %>
 <% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
