@@ -2,8 +2,10 @@
 
 <ul>
 <% @videos.each do |v| %>
-  <li>
-    <%= link_to v.name, video_path(v) %> 
+  <li style="list-style:none;">
+    <%= link_to video_path(v) do %> 
+      <%= image_tag(v.image.video_path.url) %>
+    <% end %>
 		<%= link_to 'Edit', edit_video_path(v) %>
     <%= link_to 'Delete', video_path(v), method: :delete, data: { confirm: "Delete video?"} %>
   </li>
