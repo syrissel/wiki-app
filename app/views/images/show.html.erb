@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag(@image.video_path.url) %>
+<% if @image.name.present? %>
+  <h2><%= @image.name %></h2>
+<% end %>
+
+<% if @image.path.present? %>
+  <%= image_tag(@image.path.url) %>
+<% else %>
+  <%= image_tag(@image.video_path.url) %>
+<% end %>
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>

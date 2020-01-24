@@ -50,8 +50,12 @@
 	<div class='radio_bottom'>
 	<label>
 	
-	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path} do %>
-	<%= image_tag(v.image.path.url, size: '196x111') %>
+	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path, thumbnail: Video.find(v.id).image.video_path.url} do %>
+	<% if v.image.video_path.present? %>
+		<%= image_tag(v.image.video_path.url, size: '196x111') %>
+	<% else %>
+		<%= image_tag(v.image.path.url, size: '196x111') %>
+	<% end %>
 	<%# '295.783x166.367' %>
 	</label>
 	<% end %>
@@ -221,12 +225,14 @@
 	class VideoBlot extends BlockEmbed {
 		static create(url) {
 			let node = super.create();
+			let thumbnail = $("input[name='video']:checked").data('thumbnail');
 			node.setAttribute('src', url);
 			// Set non-format related attributes with static values
 			node.setAttribute('frameborder', '0');
 			node.setAttribute('allowfullscreen', true);
 			node.setAttribute('controls', 'controls');
 			node.setAttribute('class', 'video-player');
+			node.setAttribute('poster', thumbnail);
 
 			return node;
 		}

@@ -13,7 +13,13 @@ class VideosController < ApplicationController
   end
 
 	def show
-		
+		@path = ''
+		if @video.image.video_path.present?
+			@path = @video.image.video_path.url
+		elsif @video.image.path.present?
+			@path = @video.image.path.url
+		end
+
 		# @video.description = @base64
 		
 	end

@@ -1,34 +1,45 @@
 
 <%= render plain: params[:video].inspect %>
 <h2 class='show_title'><%= @video.name %></h2>
-<%= video_tag @video.path, size: "854x480", controls: true, id: 'video', class: 'video-player' %>
+<%= video_tag @video.path, size: "854x480", controls: true, poster: @path, id: 'video', class: 'video-player' %>
 <div id="video_description"><%= @video.description %></div>
 
 <%# Only supervisors and the executive can add custom thumbnails %>
 <% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
+<h2>Pick an existing image for thumbnail</h2>
+<%= form_for @video do |f| %>
+  <div class="form_group">
+    <%= collection_select :video, :image_id, Image.order(:id), :id, :id, prompt: true %>
+  </div>
+  <div class="form_group">
+    <%= f.submit 'Update thumbnail' %>
+  </div>
+<% end %>
+<h2>OR</h2>
 <h2>Create custom thumbnail</h2>
 
-<%= "base64 value:"%><%= @base64 %>
-<% console %>
-<button id="capture">
-  capture
-</button>
+<button id="capture">Capture</button>
 
 <canvas id="canvas" class='hidden'></canvas>
 <img id='video_image' style="width:426px; height:240px; border:2px solid black;" src="" />
 <% end %>
-<%= form_for Image.new, html: {class: 'hidden', id: 'upload_form'} do |f| %>
-  <%= hidden_field(:image, :video_path, value: @video.base64) %>
+<%= form_for Image.new, html: {class: '', id: 'upload_form'} do |f| %>
+  <%#= hidden_field(:image, :video_path, value: @video.base64) %>
+  <div class="form_group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.text_field :video_path, id: 'video_path_field' %>
+  </div>
   <div class='form_group'>
     <%= f.submit 'Create thumbnail' %>
   </div>
 <% end %>
 <script>
   
-  var uploadForm = document.getElementById('upload_form');
-  <% if @video.base64.present? %>
-  upload_form.className = upload_form.className.replace("hidden", "");
-  <% end %>
+  // var uploadForm = document.getElementById('upload_form');
+  // <% if @video.base64.present? %>
+  // upload_form.className = upload_form.className.replace("hidden", "");
+  // <% end %>
 
 
 	var blobReader = new FileReader();
@@ -74,12 +85,13 @@
 				console.log(base64);
 
 				var full_base64 =  "data:image/jpeg;base64," + base64;
+        document.querySelector('#video_path_field').value = full_base64;
 
-				$.ajax({
-					data: 'base64=' + full_base64,
-					type: 'POST',
-					url: "/videos/<%=@video.id%>/upload"
-				});
+				// $.ajax({
+				// 	data: 'base64=' + full_base64,
+				// 	type: 'POST',
+				// 	url: "/videos/<%=@video.id%>/upload"
+				// });
 			}
 
 			
