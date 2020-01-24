@@ -442,6 +442,28 @@ html, body {
 	left: 50px;
 }
 
+.link_button {
+	text-decoration: none;
+	background:#53708E;
+	color:#FFF;
+	padding: 5px;
+	border-radius: 2px;
+	float: right;
+}
+
+.link_button:hover {
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.432);
+}
+
+.category_ul {
+
+}
+
+.category_ul li {
+	list-style: none;
+	margin: 5px 0;
+}
+
 // .radio_video_wrapper {
 // 	float: left;
 // }

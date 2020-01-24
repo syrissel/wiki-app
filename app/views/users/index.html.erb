@@ -1,33 +1,24 @@
 <h1>Users</h1>
 
-
+<table id="review-table">
+<tr>
+  <th>Username</th>
+  <th>Last Login</th>
+  <th>User Level</th>
+</tr>
 <% @users.each do |u| %>
-  <li><%= link_to u.username, edit_user_path(u) %></li>
-  <div style="margin-left: 10px"><%= u.user_level.level %></div>
-  <div style="margin-left: 10px"><%= u.created_at %></div>
-  <div style="margin-left: 10px">
-    <% if u.last_login.nil? %>
+  <tr>
+		<td><%= link_to u.username, edit_user_path(u) %></td>
+		<td>
+			<% if u.last_login.nil? %>
       User has not logged in yet.
     <% else %>
-      <%= u.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %>
+      <%= u.last_login.strftime("%B %-d, %Y at %l:%M %p") %>
     <% end %>
-  </div>
-  <%= link_to 'Edit', edit_user_path(u) %>
-  <%= link_to 'Delete', user_path(u), method: :delete, data: { confirm: "Delete user #{u.username}?"} %>
+		</td>
+		<td><%= u.user_level.level %></td>
+  </tr>
 <% end %>
-<%= link_to 'Register New User', register_path %>
+</table>
 
-
-
-<% @users.each do |u| %>
-  <div class="card_exterior">
-  <%= link_to u.username, edit_user_path(u) %>
-    <div class="card">
-      <div class="cardview_container">
-        
-
-      
-      </div>
-    </div>
-  </div>
-<% end %>
+<%= link_to 'Register New User', register_path, class: 'link_button' %>
