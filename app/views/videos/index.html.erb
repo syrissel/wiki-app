@@ -1,5 +1,8 @@
+<% if @videos.present? %>
 <h2>Current Videos:</h2>
-
+<% else %>
+<h2>There are no videos here... <%= link_to 'Upload one!', new_video_path %></h2>
+<% end %>
 <ul>
 <% @videos.each do |v| %>
   <li style="list-style:none;">
@@ -12,4 +15,4 @@
 <% end %>
 </ul>
 
-<%= link_to 'Create', new_video_path %>
+<%= link_to 'Create', new_video_path, class: 'link_button' %>

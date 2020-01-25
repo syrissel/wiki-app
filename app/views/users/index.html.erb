@@ -5,6 +5,7 @@
   <th>Username</th>
   <th>Last Login</th>
   <th>User Level</th>
+  <th>Status</th>
 </tr>
 <% @users.each do |u| %>
   <tr>
@@ -17,6 +18,7 @@
     <% end %>
 		</td>
 		<td><%= u.user_level.level %></td>
+    <td><%=u.user_status.status%></td>
   </tr>
 <% end %>
 </table>

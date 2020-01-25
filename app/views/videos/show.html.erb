@@ -28,7 +28,7 @@
   <div class="form_group">
     <%= f.label :name %>
     <%= f.text_field :name %>
-    <%= f.text_field :video_path, id: 'video_path_field' %>
+    <%= f.text_field :video_path, id: 'video_path_field', class: 'hidden' %>
   </div>
   <div class='form_group'>
     <%= f.submit 'Create thumbnail' %>
@@ -36,10 +36,7 @@
 <% end %>
 <script>
   
-  // var uploadForm = document.getElementById('upload_form');
-  // <% if @video.base64.present? %>
-  // upload_form.className = upload_form.className.replace("hidden", "");
-  // <% end %>
+
 
 
 	var blobReader = new FileReader();

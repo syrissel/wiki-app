@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_24_050031) do
+ActiveRecord::Schema.define(version: 2020_01_25_015129) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "path"
-    t.text "video_path", size: :long
+    t.string "video_path"
     t.string "name"
   end
 
@@ -62,6 +62,12 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -71,7 +77,9 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
     t.datetime "last_login"
     t.string "first_name"
     t.string "last_name"
+    t.bigint "user_status_id", null: false
     t.index ["user_level_id"], name: "index_users_on_user_level_id"
+    t.index ["user_status_id"], name: "index_users_on_user_status_id"
   end
 
   create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -81,7 +89,6 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
     t.string "name"
     t.bigint "image_id"
     t.text "description"
-    t.text "base64", size: :long
     t.index ["image_id"], name: "index_videos_on_image_id"
   end
 
@@ -90,5 +97,6 @@ ActiveRecord::Schema.define(version: 2020_01_24_050031) do
   add_foreign_key "pages", "categories"
   add_foreign_key "pages", "users"
   add_foreign_key "users", "user_levels"
+  add_foreign_key "users", "user_statuses"
   add_foreign_key "videos", "images"
 end
