@@ -1,0 +1,42 @@
+
+
+<%= form_for current_user do |f| %>
+<div class="errors">
+<% if @user.present? && @user.errors.any? %>
+	<p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
+	<ul>
+	<% @user.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
+
+  <div class="user_form_group">
+    <%= hidden_field(:user, :user_status_id, value: UserStatus.find_by_status('Active').id) %>
+  </div>
+	<div class="user_form_group">
+		<%= f.label "First name (optional)", params[:first_name], class: 'user_label' %><br />
+    <%= f.text_field :first_name, class: 'user_text_field' %>
+	</div>
+	<div class="user_form_group">
+		<%= f.label "Last name (optional)", params[:last_name], class: 'user_label' %><br />
+    <%= f.text_field :last_name, class: 'user_text_field' %>
+	</div>
+  <div class="user_form_group">
+    <%= f.label :user_level_id, class: 'user_label' %><br />
+    <%= f.label :user_level_id, 'Intern' %>
+    <%= f.radio_button :user_level_id, UserLevel.find(INTERN_VALUE).id %>
+    <%= f.label :user_level_id, 'Supervisor' %>
+    <%= f.radio_button :user_level_id, UserLevel.find(SUPERVISOR_VALUE).id %>
+  </div>
+  <div class="user_form_group">
+    <%= f.label :password, params[:password], class: 'user_label' %><br />
+    <%= f.password_field :password, class: 'user_text_field' %>
+  </div>
+  <div class="user_form_group">
+    <%= f.label :password_confirmation, params[:password_confirmation], class: 'user_label' %><br />
+    <%= f.password_field :password_confirmation, class: 'user_text_field' %>
+  </div>
+  <div class="user_form_group"><%= f.submit "Save", class: 'user_button' %></div>
+<% end %>

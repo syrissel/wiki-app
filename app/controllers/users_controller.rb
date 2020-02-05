@@ -23,7 +23,13 @@ class UsersController < ApplicationController
     end
 	end
 	
-	
+	def update
+		@user = current_user
+		@active = UserStatus.find_by_status('Active').id
+
+		@user.update(user_params)
+		redirect_to pages_path
+	end
 
   def destroy
     @user = User.find(params[:id])
