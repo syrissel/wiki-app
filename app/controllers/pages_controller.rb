@@ -28,7 +28,8 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find(params[:id])
+		@page = Page.find(params[:id])
+		@videos = Video.all.page params[:page]
   end
 
   # If the database fails at updating, render edit page. Otherwise commit changes.

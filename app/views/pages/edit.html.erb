@@ -1,6 +1,8 @@
 
 <%# render plain: params[:page].inspect %>
-
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <h2 class="edit_title edit_font">Editing "<%= @page.title %>"</h2>
 
 <div class="errors">
@@ -19,10 +21,50 @@
     <%= f.label :title_review, class: 'form_label' %><br>
     <%= f.text_field :title_review, class: 'text_field' %>
   </div>
+		<div class="form_group">
+		<%= f.label 'Give a quick summary of what this wiki is about', class: 'form_label' %>
+		<%= f.text_field :description, class: "text_field"%>
+		</div>
 	<div class="category_label form_group">
     <%= f.label :category %><br />
 		<%= collection_select :page, :category_review, Category.order(:id), :id, :name, prompt: true, selected: @page.category_id %>
 	</div>
+		<div class="video_options hidden clearfix">
+	<h2>Insert a video</h2>
+	<ul>
+	<div class='radio_wrapper'>
+	<% @videos.each do |v| %>
+	<li>
+	
+	<div class='radio_top'>
+	<strong><%= v.name %></strong>
+	</div>
+	<%# Store video path in data for retrieval by jquery %>
+	<div class='radio_bottom'>
+	
+	<label>
+	
+	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path, thumbnail: Video.find(v.id).image.video_path.url} do %>
+	<% if v.image.video_path.present? %>
+		<%# <div class="video_image_wrapper"> %>
+		<%= image_tag(v.image.video_path.url, size: '196x111') %>
+		<%# <box-icon class="video_preview_icon" size="96px" color="#656565" name='play'></box-icon>
+		</div> %>
+	<% else %>
+		<%= image_tag(v.image.path.url, size: '196x111') %>
+	<% end %>
+	<%# '295.783x166.367' %>
+	</label>
+	<% end %>
+	</div>
+	</li>
+	<% end %>
+	<%= paginate @videos, remote: true %>
+	</div>
+	</ul>
+	<button type='button' id="video_button">Insert</button>
+	<%= link_to 'Upload', new_video_path %>
+</div>
 	<div class="form_group">
 		<%= hidden_field(:page, :id, value: @page.id) %>
 		<%= hidden_field(:page, :title, value: @page.title) %>
@@ -75,6 +117,12 @@
 				<button class="ql-indent" value="+1"></button>
 			</span>
 			<span class="ql-formats">
+				<select class="ql-color">
+				</select>
+				<select class="ql-background">
+				</select>
+			</span>
+			<span class="ql-formats">
 				<button class="ql-direction" value="rtl"></button>
 				<select class="ql-align">
 					<option selected></option>
@@ -86,6 +134,7 @@
 			<span class="ql-formats">
 				<button class="ql-link"></button>
 				<button class="ql-image"></button>
+				<button class="fa fa-play custom_video_button" type='button' onclick="showVideoOptions()"></button>
 			</span>
 			<span class="ql-formats">
 				<button class="ql-clean"></button>
@@ -94,7 +143,6 @@
 		
 	</div>
 	<div id="editor"></div>
-	<div id="editor_dupe" contenteditable='true'><%= raw @page.content_review %></div>
   <div class="form_group">
     <%= f.submit "Save changes", class: "edit_button", data: { confirm: "Submit for review?"} %>
 		
@@ -106,8 +154,250 @@
 <%# <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> %>
 <%= javascript_include_tag 'image-resize.min.js' %>
 
-<!-- Initialize Quill editor -->
+
+<%# Video options stuffs %>
 <script>
+		function showVideoOptions() {
+			let options = document.getElementsByClassName('video_options')[0];
+			//options.className = options.className.replace('hidden', '');
+			if (options.classList.contains('hidden')) {
+				options.className = options.className.replace("hidden", "");
+			} else {
+				options.classList.add("hidden");
+			}
+		  
+	}
+
+
+</script>
+
+
+
+<%# Quill editor %>
+<script>
+	function load() {
+
+
+		let BlockEmbed = Quill.import('blots/block/embed');
+		let Inline = Quill.import('blots/inline'); 
+		class MarkBlot extends Inline { } 
+		MarkBlot.blotName = 'mark'; 
+		MarkBlot.tagName = 'mark'; 
+		Quill.register(MarkBlot);
+
+		
+		let Delta = Quill.import('delta');
+		let Embed = Quill.import('blots/block/embed');
+
+
+
+		class Border extends Embed {
+
+			static create(value) {
+				let node = super.create(value);
+				
+			}
+		}
+		Border.blotName = 'border';
+		Border.tagName = 'border';
+		Quill.register(Border);
+
+		var customBorderHandler = function() {
+			var range = quill.getSelection();
+			var selectedContent = quill.getContents(range.index, range.length);
+
+			if (range) {
+				quill.insertEmbed(range.index, 'border', "null");
+			}
+		}
+
+		class HR extends Embed { 
+			static create(value) {
+					let node = super.create(value);
+					// give it some margin
+					node.setAttribute('style', "height:0px; margin-top:10px; margin-bottom:10px;");
+					return node;
+			}
+		}
+		HR.blotName = 'hr';
+		HR.tagName = 'hr';
+		Quill.register(HR);
+
+		var customHrHandler = function(){
+			// get the position of the cursor
+			var range = quill.getSelection();
+			if (range) {
+					// insert the <hr> where the cursor is
+					quill.insertEmbed(range.index,"hr","null");
+			}
+		}
+
+		Quill.register({
+			'formats/hr': HR
+		});
+
+	class VideoBlot extends BlockEmbed {
+		static create(url) {
+			let node = super.create();
+			let thumbnail = $("input[name='video']:checked").data('thumbnail');
+			node.setAttribute('src', url);
+			// Set non-format related attributes with static values
+			node.setAttribute('frameborder', '0');
+			node.setAttribute('allowfullscreen', true);
+			node.setAttribute('controls', 'controls');
+			node.setAttribute('class', 'video-player');
+			node.setAttribute('poster', thumbnail);
+
+			return node;
+		}
+
+		static formats(node) {
+			// We still need to report unregistered embed formats
+			let format = {};
+			if (node.hasAttribute('height')) {
+				format.height = node.getAttribute('height');
+			}
+			if (node.hasAttribute('width')) {
+				format.width = node.getAttribute('width');
+			}
+			return format;
+		}
+
+		static value(node) {
+			return node.getAttribute('src');
+		}
+
+		format(name, value) {
+			// Handle unregistered embed formats
+			if (name === 'height' || name === 'width') {
+				if (value) {
+					this.domNode.setAttribute(name, value);
+				} else {
+					this.domNode.removeAttribute(name, value);
+				}
+			} else {
+				super.format(name, value);
+			}
+		}
+	}
+	VideoBlot.blotName = 'db-video';
+	VideoBlot.tagName = 'video';
+	Quill.register(VideoBlot);
+
+
+	$('#video_button').click(function() {
+		let range = quill.getSelection(true);
+		quill.insertText(range.index, '\n', Quill.sources.USER);
+		
+		// Grab selected radio button by name. Return video path from database.
+		let url = $("input[name='video']:checked").data('video').url;
+		quill.insertEmbed(range.index + 1, 'db-video', url, Quill.sources.USER);
+		quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
+		quill.setSelection(range.index + 2, Quill.sources.SILENT);
+	});
+
+
+		var form = document.querySelector('#page_form');
+		var quill = new Quill('#editor', {
+			modules: {
+				imageResize: {
+					displaySize: true
+				},
+				toolbar: {
+					container: '#toolbar',
+					handlers: {
+						'hr': customHrHandler,
+						'border':customBorderHandler
+					}
+				}
+			},
+			theme: 'snow',
+			placeholder: 'Compose your wiki here...'
+		});
+
+		// // Store accumulated changes
+		// let change = new Delta();
+		// quill.on('text-change', function(delta) {
+		// 	change = change.compose(delta);
+		// });
+
+		// // Save periodically
+		// setInterval(function() {
+		// 	if (change.length() > 0) {
+		// 		console.log('Saving changes...', change);
+		// 		// Save the entire updated text to localStorage
+		// 		const data = JSON.stringify(quill.root.innerHTML);
+		// 		localStorage.setItem('storedText', data);
+		// 		change = new Delta();
+		// 	}
+		// }, 1000);
+
+		// // Check for unsaved data
+		// window.onbeforeunload = function() {
+		// 	if (change.length() > 0) {
+		// 		alert('There are unsaved changes. Are you sure you want to leave?');
+		// 	}
+		// }
+
+		// // Load saved contents
+		// setTimeout(window.onload = function() {
+		// 	var storedText = JSON.parse(localStorage.getItem('storedText'));
+			
+		// 	if (editor !== null) $('.ql-editor').html(storedText);
+		// }, 500);
+
+
+
+		// Submit text editor content to database.
+		form.onsubmit = function() {
+		var postContentInput = document.querySelector('#post-content');
+		postContentInput.value = quill.root.innerHTML;
+
+		// Clear saved wiki contents in local storage
+		localStorage.clear();
+	};
+
+
+	$(function() {
+		function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				$('#img_prev').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#preview_upload").change(function(){
+		$('#img_prev').removeClass('hidden');
+		readURL(this);
+		});
+	});
+
+	setTimeout(window.onload = function() {
+			// var storedText = JSON.parse(localStorage.getItem('storedText'));
+			let content = '<%= raw @page.content_review%>';
+			let editor = document.getElementsByClassName('ql-editor')[0];
+			editor.innerHTML = content;
+			//$('.ql-editor').append(content);
+		}, 500);
+
+}
+
+document.addEventListener("DOMContentLoaded", load(), false);
+
+
+</script>
+
+
+
+
+
+
+<!-- Initialize Quill editor -->
+<%# <script>
 	function load() {
 		let Inline = Quill.import('blots/inline'); 
 		class MarkBlot extends Inline { } 
@@ -168,12 +458,6 @@
 	};
 }
 
-setTimeout(window.onload = function() {
-			// var storedText = JSON.parse(localStorage.getItem('storedText'));
-			let content = "<%=@page.content_review%>";
-			$('.ql-editor').append(content);
-		}, 500);
 
-document.addEventListener("DOMContentLoaded", load(), false);
-</script>
+</script> %>
 
