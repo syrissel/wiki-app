@@ -88,10 +88,11 @@ Category.create(name: 'Computer Guides')
 # d = Category.create(:name => "d", :parent => b)
 # e = Category.create(:name => "e", :parent => c)
 
-ApprovalStatus.create(status: 'Pending')
+ApprovalStatus.create(status: 'Pending - New')
 ApprovalStatus.create(status: 'Supervisor Approved')
 ApprovalStatus.create(status: 'Executive Approved')
 ApprovalStatus.create(status: 'Rejected')
+ApprovalStatus.create(status: 'Pending - Review')
 
 User.create(username: 'edirector', password: 'password', password_confirmation: 'password', user_level_id: EXECUTIVE_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
 User.create(username: 'hpotter', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE, user_status_id: UserStatus.find_by_status('Active').id)

@@ -26,7 +26,7 @@
 				<%= hidden_field(:page, :category_review, value: @page.category_review) %>
 		</div>
 		<%= f.label :approval_status_id %>
-		<%= collection_select :page, :approval_status_id, ApprovalStatus.order(:status).where.not(id: EXECUTIVE_VALUE), :id, :status, prompt: true %>
+		<%= collection_select :page, :approval_status_id, ApprovalStatus.order(:status).where.not(id: [EXECUTIVE_VALUE, PENDING, REVIEW]), :id, :status, prompt: true %>
 		<div>
 		<%= f.submit "Submit Status", class: "edit_button" %>
 		</div>

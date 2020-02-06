@@ -71,7 +71,7 @@
 		<%= hidden_field(:page, :content, value: @page.content) %>
 		<%= hidden_field(:page, :category_id, value: @page.category_id) %>
     <%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
-    <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
+    <%= hidden_field(:page, :approval_status_id, value: REVIEW) %>
   </div>
 	<div class="form_group">
 		<%= f.label :content_review, 'Edit Content', class: 'form_label'%>

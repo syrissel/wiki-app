@@ -10,10 +10,14 @@ class PagesController < ApplicationController
       @pages = Page.joins(:user).where("approval_status_id = :executive AND sanitized_content LIKE :query
                                         OR approval_status_id = :executive AND title LIKE :query
                                         OR approval_status_id = :executive AND username LIKE :query
-                                        OR approval_status_id = :executive AND description LIKE :query", 
-                                        executive: EXECUTIVE_VALUE, query: "%#{@query}%" ).order("updated_at desc").limit(10)
+																				OR approval_status_id = :executive AND description LIKE :query
+																				OR approval_status_id = :review AND sanitized_content LIKE :query
+                                        OR approval_status_id = :review AND title LIKE :query
+                                        OR approval_status_id = :review AND username LIKE :query
+                                        OR approval_status_id = :review AND description LIKE :query", 
+                                        executive: EXECUTIVE_VALUE, review: REVIEW, query: "%#{@query}%" ).order("updated_at desc").limit(10)
     else
-      @pages = Page.where("approval_status_id = ?", EXECUTIVE_VALUE).order("updated_at desc").limit(10)
+      @pages = Page.where(approval_status_id: [EXECUTIVE_VALUE, REVIEW]).order("updated_at desc").limit(10)
     end
     
   end
@@ -88,7 +92,7 @@ class PagesController < ApplicationController
 
   # Review this
   def review
-    @pending_pages = Page.where(approval_status_id: [PENDING, SUPERVISOR_VALUE, REJECTED]).order("updated_at desc")
+    @pending_pages = Page.where(approval_status_id: [PENDING, REVIEW, SUPERVISOR_VALUE, REJECTED]).order("updated_at desc")
 	end
 	
 	def review_wiki

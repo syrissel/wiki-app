@@ -1,13 +1,15 @@
+<div class="registration_container">
 <h1>Log In</h1>
 <p class="alert margin_fix"><%= alert %></p>
-<%= form_tag sessions_path do %>
-  <div class="field">
-    <%= label_tag :username %><br />
-    <%= text_field_tag :username, params[:username] %>
+<%= form_for sessions_path, :url => { :action => "create" } do |f| %>
+  <div class="user_form_group">
+    <%= f.label :username, class: 'user_label' %><br />
+    <%= f.text_field :username, class: 'user_text_field' %>
   </div>
-  <div class="field">
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password%>
+  <div class="user_form_group">
+    <%= f.label :password, class: 'user_label' %><br />
+    <%= f.password_field :password, class: 'user_text_field' %>
   </div>
-  <div class="actions"><%= submit_tag "Log In" %></div>
+  <div class="user_form_group"><%= f.submit "Log In" %></div>
 <% end %>
+</div>

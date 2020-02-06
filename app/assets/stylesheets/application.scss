@@ -162,7 +162,7 @@ html, body {
 }
 
 #editor {
-	height: 700px;
+	height: 750px;
 }
 
 .edit_font {
@@ -286,6 +286,11 @@ html, body {
   border-collapse: collapse;
   width: 100%;
   /* table-layout: fixed; */
+}
+
+#review-table th a {
+	text-decoration: none;
+	color: #FFF;
 }
 
 #review-table td, #review-table th {
@@ -512,12 +517,15 @@ html, body {
   border-radius: 2px;
   font-size: 16px;
   height: 25px;
-  width: 15em;
+	width: 15em;
+	margin-top: 2px;
 }
 .user_label {
   margin-right: 98px;
   font-size: 15px;
-  font-weight: bold;
+	font-weight: bold;
+	float: left;
+	padding-left: 23.9em;
 }
 
 .user_button {
@@ -525,7 +533,11 @@ html, body {
 	background:#016383;
 	color:#FFF;
   padding: 5px;
-  font-size: 16px;
+	font-size: 16px;
+	float: right;
+	margin-right: 22.4em;
+	margin-top: 5px;
+	padding: 2px 5px;
 	//border-radius: 2px;
 }
 
@@ -535,6 +547,10 @@ html, body {
   cursor: pointer;
   // box-shadow: 2px 2px rgba(0, 0, 0, 0.432);
   // transition: background-color 0.3s ease-out;
+}
+
+.arrow_container {
+	float: right;
 }
 
 

@@ -1,11 +1,55 @@
 class UsersController < ApplicationController
-  before_action :authenticate_supervisor, only: [:new, :index]
+	before_action :authenticate_supervisor, only: [:new, :index]
+	before_action :set_user, only: [:edit, :update, :destroy]
 
   # What does this do?
   wrap_parameters :user, include: [:username, :password, :password_confirmation]
 
-  def index
-    @users = User.order(:username)
+	def index
+		@order_by = 'created_at'
+
+		# if params[:s].present?
+		# 	if @prev_order.present? && (@prev_order.eql? params[:s]) && (@prev_order.include? 'asc')
+		# 		@order_by = params[:s] + ' desc'
+		# 	else
+		# 		@order_by = params[:s] + ' asc'
+		# 	end
+		# end
+
+		# @prev_order = @order_by
+
+		if params[:s].present?
+			filter_params = params[:s]
+			if params[:s].include? 'desc'
+				
+				filter_params.slice! '_desc'
+				@order_by = filter_params + ' desc'
+			else
+				filter_params.slice! '_asc'
+				@order_by = filter_params + ' asc'
+			end
+		end
+
+		# if params[:s].present?
+		# 	sort_param = params[:s]
+		# 	if @prev_order.present? && (@prev_order.include? 'asc')
+		# 		# @prev_order.slice! ' asc'
+		# 		@order_by = sort_param + ' desc'
+		# 	else
+		# 		sort_param.slice! 'asc'
+		# 		@order_by = sort_param + ' asc'
+		# 	end
+			
+		# end
+
+		# @prev_order = @order_by
+		@users = User.order(@order_by)
+		
+		# case params[:s]
+		# when 'username'
+		# 	order_by = 'username'
+
+		# end
   end
 
   def new
@@ -14,30 +58,37 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+		@user = User.new(user_params)
+		@active = UserStatus.first.id
 
     if @user.save
-      redirect_to root_path, notice: "#{@user.username} has been created."
+      redirect_to admin_path, notice: "#{@user.username} has been created."
     else
       render 'new'
     end
 	end
+
+	def edit
+	end
 	
 	def update
-		@user = current_user
-		@active = UserStatus.find_by_status('Active').id
-
-		@user.update(user_params)
-		redirect_to pages_path
+		
+		if @user.update(user_params)
+			redirect_to admin_path, notice: "#{@user.username} has been updated."
+		end
 	end
 
+	# Worflow does not invlove deleting users permanently. They must be offboarded and kept in the database for record-keeping.
   def destroy
-    @user = User.find(params[:id])
-    redirect_to users_path, notice: "#{@user.username} has been deleted."
-    @user.destroy
+    # redirect_to users_path, notice: "#{@user.username} has been deleted."
+    # @user.destroy
   end
 
-  private
+	private
+	
+	def set_user
+		@user = User.find(params[:id])
+	end
 
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation, :user_level_id, :first_name, :last_name, :user_status_id)

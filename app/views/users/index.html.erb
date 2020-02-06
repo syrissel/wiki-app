@@ -2,10 +2,10 @@
 
 <table id="review-table">
 <tr>
-  <th>Username</th>
-  <th>Last Login</th>
-  <th>User Level</th>
-  <th>Status</th>
+  <th>Username<div class="arrow_container"><%= link_to users_path(s: 'username_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'username_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+  <th>Last Login<div class="arrow_container"><%= link_to users_path(s: 'last_login_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'last_login_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+  <th>User Level<div class="arrow_container"><%= link_to users_path(s: 'user_level_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'user_level_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+  <th>Status<div class="arrow_container"><%= link_to users_path(s: 'user_status_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'user_status_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
 </tr>
 <% @users.each do |u| %>
   <tr>
@@ -24,3 +24,5 @@
 </table>
 
 <%= link_to 'Register New User', register_path, class: 'link_button' %>
+
+<%= console %>
