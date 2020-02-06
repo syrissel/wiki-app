@@ -91,8 +91,10 @@
 				<button class="ql-clean"></button>
 			</span>
 		</div>
-		<div id="editor"><%= raw @page.content_review %></div>
+		
 	</div>
+	<div id="editor"></div>
+	<div id="editor_dupe" contenteditable='true'><%= raw @page.content_review %></div>
   <div class="form_group">
     <%= f.submit "Save changes", class: "edit_button", data: { confirm: "Submit for review?"} %>
 		
@@ -166,11 +168,11 @@
 	};
 }
 
-// setTimeout(window.onload = function() {
-// 			// var storedText = JSON.parse(localStorage.getItem('storedText'));
-			
-// 			$('.ql-editor').html('storedText');
-// 		}, 500);
+setTimeout(window.onload = function() {
+			// var storedText = JSON.parse(localStorage.getItem('storedText'));
+			let content = "<%=@page.content_review%>";
+			$('.ql-editor').append(content);
+		}, 500);
 
 document.addEventListener("DOMContentLoaded", load(), false);
 </script>
