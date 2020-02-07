@@ -30,12 +30,34 @@
           
         }
 
-      }
+			}
+			
+			
 
 			// Mimicking jquery.
       var $ = function (selector) {
         return document.querySelector(selector);
-      };
+			};
+			
+
+			window.onload = function() {
+
+				var links = $('#root_categories').getElementsByTagName('li');
+
+				for (var i = 0; i < links.length; i++) {
+        	var link = links[i];
+        	//link.style.display = "none";
+      	}
+
+				var children = this.children;
+
+				for (var i = 0; i < children.length; i++) {
+					var child = children[i];
+					
+					child.style.display = "none";
+					
+				}
+			};
 
       var links = $('#root_categories').getElementsByTagName('li');
 
