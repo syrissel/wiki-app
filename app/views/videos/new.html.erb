@@ -1,5 +1,14 @@
 <h1 class="edit_title edit_font">New Video</h1>
-
+<div class="errors">
+<% if @video.present? && @video.errors.any? %>
+	<p><%= pluralize(@video.errors.count, "error") %> prevented this video from being uploaded:</p>
+	<ul>
+	<% @video.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
 <%= form_for @video do |f| %>
   <div class='form_group'>
     <%= f.label :name, class: 'form_label' %>

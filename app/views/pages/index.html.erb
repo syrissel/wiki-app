@@ -30,6 +30,16 @@
   </div>
 <% end %>
 
+
+<% if params[:query].present? %>
+<h3>Video results:</h3>
+<ul>
+  <% @videos.each do |v| %>
+  <li><%= v.name %></li>
+  <% end %>
+</ul>
+<% end %>
+
 <%= render 'snackbar' %>
 
 <script>

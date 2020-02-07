@@ -9,7 +9,7 @@
 <h2>Pick an existing image for thumbnail</h2>
 <%= form_for @video do |f| %>
   <div class="form_group">
-    <%= collection_select :video, :image_id, Image.order(:id), :id, :id, prompt: true %>
+    <%= collection_select :video, :image_id, Image.order(:id), :id, :name, prompt: true %>
   </div>
   <div class="form_group">
     <%= f.submit 'Update thumbnail' %>

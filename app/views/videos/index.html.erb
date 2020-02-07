@@ -7,12 +7,18 @@
 <% @videos.each do |v| %>
   <li style="list-style:none;">
     <%= link_to video_path(v) do %> 
-      <%= image_tag(v.image.video_path.url) %>
+      <% if v.image.present? %>
+        <%= image_tag(v.image.video_path.url) %>
+      <% else %>
+        <%= v.name %>
+      <% end %>
     <% end %>
 		<%= link_to 'Edit', edit_video_path(v) %>
     <%= link_to 'Delete', video_path(v), method: :delete, data: { confirm: "Delete video?"} %>
   </li>
 <% end %>
 </ul>
+
+<%= paginate @videos %>
 
 <%= link_to 'Create', new_video_path, class: 'link_button' %>

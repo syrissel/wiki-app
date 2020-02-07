@@ -4,7 +4,7 @@ class VideosController < ApplicationController
 	before_action :set_video, only: [:show, :edit, :update, :destroy, :base64_upload]
 
   def index
-    @videos = Video.all
+    @videos = Video.all.page params[:page]
   end
 
   def new

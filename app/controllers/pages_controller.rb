@@ -16,6 +16,8 @@ class PagesController < ApplicationController
                                         OR approval_status_id = :review AND username LIKE :query
                                         OR approval_status_id = :review AND description LIKE :query", 
                                         executive: EXECUTIVE_VALUE, review: REVIEW, query: "%#{@query}%" ).order("updated_at desc").limit(10)
+
+      @videos = Video.where("name LIKE :query", query: "%#{@query}%")
     else
       @pages = Page.where(approval_status_id: [EXECUTIVE_VALUE, REVIEW]).order("updated_at desc").limit(10)
     end
@@ -67,7 +69,6 @@ class PagesController < ApplicationController
   # in the table until it is approved. When it is approved, the update will be called
   # and the review columns will be set to nil perserving space in the DB.
   def create
-
     @page = Page.new(page_params)
     
     if (@page.save)
@@ -123,6 +124,10 @@ class PagesController < ApplicationController
   helper_method :preview
 
   private 
+
+  def set_page
+
+  end
 
   def page_params
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,

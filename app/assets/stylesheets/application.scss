@@ -269,7 +269,8 @@ html, body {
 
 .card_exterior {
   width: 100%;
-  background: #ffdea3;
+  // background: #ffdea3;
+  background: #eaecee;
 }
 
 .card_exterior a {
@@ -366,7 +367,8 @@ html, body {
 
 .video_options li {
   list-style: none;
-  margin: 15px 0px;
+  margin: 5px 5px;
+  float: left;
 }
 
 .video_options img {
@@ -399,6 +401,10 @@ html, body {
 	box-shadow: 4px 4px rgba(0, 0, 0, 0.432);
   // rgba(0,0,0,0.2);
   //cursor: pointer;
+}
+
+#admin_menu .row .column p {
+  padding-left: 2px;
 }
 
 .column p {
@@ -436,7 +442,7 @@ html, body {
 
 .icon {
 	float: right;
-	margin: 60px 0 0 0;
+	margin: 55px 0 0 0;
 	size: 108px;
 }
 
@@ -537,8 +543,9 @@ html, body {
 	float: right;
 	margin-right: 22.4em;
 	margin-top: 5px;
-	padding: 2px 5px;
-	//border-radius: 2px;
+  padding: 5px 10px;
+  border: 0px;
+  border-radius: 2px;
 }
 
 .user_button:hover {

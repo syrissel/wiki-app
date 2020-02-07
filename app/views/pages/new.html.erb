@@ -38,6 +38,9 @@
 	</div>
 	<div class="video_options hidden clearfix">
 	<h2>Insert a video</h2>
+	<button type='button' id="video_button">Insert</button>
+	<button type='button' onclick="showVideoOptions()">Cancel</button>
+	<%= link_to 'Upload', new_video_path %>
 	<ul>
 	<div class='radio_wrapper'>
 	<% @videos.each do |v| %>
@@ -66,11 +69,9 @@
 	</div>
 	</li>
 	<% end %>
-	<%= paginate @videos, remote: true %>
+	<%= paginate @videos, params: { paginate: 'true' } %>
 	</div>
 	</ul>
-	<button type='button' id="video_button">Insert</button>
-	<%= link_to 'Upload', new_video_path %>
 </div>
   <div class="form_group">
     <%#= f.label :content, class: "form_label" %>
@@ -164,6 +165,13 @@
 			}
 		  
 	}
+
+	setTimeout(window.onload = function() {
+			if (window.location.search.substr(1).length > 0) {
+				let options = document.getElementsByClassName('video_options')[0];
+				options.className = options.className.replace("hidden", "");
+			}
+		}, 100);
 
 
 </script>
