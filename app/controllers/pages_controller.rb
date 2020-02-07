@@ -89,7 +89,7 @@ class PagesController < ApplicationController
 
   # Review this
 	def review
-		@order_by = 'approval_status_id asc'
+		@order_by = 'updated_at desc'
 
 		if params[:s].present?
 			filter_params = params[:s]

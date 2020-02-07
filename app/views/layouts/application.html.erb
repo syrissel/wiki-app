@@ -46,7 +46,7 @@
 
 				for (var i = 0; i < links.length; i++) {
         	var link = links[i];
-        	//link.style.display = "none";
+        	link.child.style.display = "none";
       	}
 
 				var children = this.children;
@@ -121,7 +121,7 @@
 
     <div id="side_panel">
     <div class="side_panel_container">
-      <ul id="root_categories">
+      <!--<ul id="root_categories">
       <% @root_categories.each do |r| %>
         <li>
           <%= r.name %>
@@ -156,7 +156,7 @@
                     <li>
                       <%= t.name %>
                       <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																														category: t.id, executive: PUBLISHED)%>
+																														category: t.id, publish: PUBLISHED)%>
                         <ul>
                         <% pages_of_type.each do |pot| %>
                           <li>
@@ -190,7 +190,83 @@
           <% end %>
         <% end %>
       <% end %>
-    </ul>
+    </ul> -->
+		<%= '*********' %>
+
+
+
+
+		<ul id='root_categories'>
+			<% @root_categories.each do |r| %>
+				<li>
+						<%= r.name %>
+            <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																									category: r.id, publish: PUBLISHED)%>
+            <ul id="root_pages">
+            <% pages_of_type.each do |pot| %>
+              <li>
+                <%= link_to pot.title, pot %>
+              </li>
+            <% end %>
+            </ul>
+						<% @sub_categories.each do |s| %>
+							<% if r.id == s.category_id %>
+								<ul>
+									<li>
+										<%= s.name %>
+										<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																													category: s.id, publish: PUBLISHED)%>
+                  <ul>
+                  <% pages_of_type.each do |pot| %>
+                    <li>
+                      <%= link_to pot.title, pot %>
+                    </li>
+                  <% end %>
+									</ul>
+									<% @sub_categories.each do |t| %>
+										<% if s.id == t.category_id %>
+											<ul>
+												<li>
+													<%= t.name %>
+                      		<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																																category: t.id, publish: PUBLISHED)%>
+                        	<ul>
+                        	<% pages_of_type.each do |pot| %>
+                          	<li>
+                            	<%= link_to pot.title, pot %>
+                          	</li>
+                        	<% end %>
+                        	</ul>
+													<% @sub_categories.each do |u| %>
+														<% if t.id == u.category_id %>
+															<ul>
+																<li>
+																	<%= u.name %>
+                            			<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																																				category: u.id, publish: PUBLISHED)%>
+                              		<ul>
+																	<% pages_of_type.each do |pot| %>
+																		<li>
+																			<%= link_to pot.title, pot %>
+																		</li>
+																	<% end %>
+                              		</ul>
+																</li>
+															</ul>
+														<% end %>
+													<% end %>
+												</li>
+											</ul>
+										<% end %>
+									<% end %>
+									</li>
+								</ul>
+							<% end %>
+						<% end %>
+				</li>
+			<% end %>
+		</ul>
+		<%= '************' %>
 
 
       </div>
