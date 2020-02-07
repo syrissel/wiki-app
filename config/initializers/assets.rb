@@ -24,5 +24,7 @@ INTERN_NAME = 'Intern'.freeze
 INTERN_VALUE = 1.freeze
 PENDING = 1.freeze
 REJECTED = 4.freeze
-REVIEW = 5.freeze
+REVIEW = 2.freeze
+PUBLISHED = 1.freeze
+UNPUBLISHED = 2.freeze
 

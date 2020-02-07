@@ -10,10 +10,10 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_username(params["/sessions"][:username])
 
-		if (user.user_status_id == UserStatus.last.id)
+	if user.present? && (user.user_status_id == UserStatus.last.id)
 			flash.now.alert = "User has been offboarded by an administrator."
 			render 'new'
-		elsif user && user.authenticate(params["/sessions"][:password])
+		elsif user.present? && user.authenticate(params["/sessions"][:password])
       session[:user_id] = user.id
       user.update_attribute(:last_login, Time.now)
       redirect_to root_path, notice: "Logged in successfully."

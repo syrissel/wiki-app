@@ -1,17 +1,25 @@
 <h1>Current Wikis pending for approval:</h1>
 
 <%#= debug(params) %>
-
+<p>Additional sorting options:</p>
+<div class="sorting_options">
+	<p>Newest</p>
+	<div class="arrow_container"><%= link_to review_path(s: 'updated_at_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'updated_at_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div>
+</div>
 <table id="review-table">
 <tr>
-  <th>Title</th>
-  <th>Author</th>
-  <th>Status</th>
+  <th>Title<div class="arrow_container"><%= link_to review_path(s: 'title_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'title_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+  <th>Last Edit<div class="arrow_container"><%= link_to review_path(s: 'last_user_edit_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'last_user_edit_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+	<th>Page Status<div class="arrow_container"><%= link_to review_path(s: 'page_publish_status_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'page_publish_status_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+  <th>Review Status<div class="arrow_container"><%= link_to review_path(s: 'approval_statuses.status_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'approval_statuses.status_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
 </tr>
 <% @pending_pages.each do |p| %>
   <tr>
     <td><%= link_to p.title, review_wiki_path(p) %></td>
-    <td><%= p.user.username %></td>
+    <td><%= p.last_user_edit %></td>
+		<td>
+			<%= p.page_publish_status.status %>
+		</td>
     <td>
       <div class="status-text">
       <%= p.approval_status.status %>
@@ -36,3 +44,5 @@
 <% end %>
 
 <div id="snackbar"><%= flash[:notice] %></div>
+
+<%= console %>

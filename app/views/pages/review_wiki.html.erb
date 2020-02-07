@@ -1,4 +1,10 @@
 <%= stylesheet_link_tag :application, "https://cdn.quilljs.com/1.3.6/quill.snow.css"%>
+<div id="page_header">
+	<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
+	<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
+	<%= link_to "Edit", edit_page_path, class: "link_button" %>
+</div>
+<hr id="show_hr" />
 <h1 class="form_group" id="show_title"><%= sanitize @page.title_review%></h1>
 <div class="ql-snow">
 <div class="form_group ql-editor"><%= raw @page.content_review %></div>
@@ -6,15 +12,7 @@
 <div id="divider_container">
 	<hr id="cfs_divider">
 </div>
-<%= link_to "Edit", edit_page_path, class: "edit_button" %>
-<div>
-	<ul>
-		<li>Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></li>
-		<% unless @page.last_user_edit.nil? %>
-			<li>Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></li>
-		<% end %>
-	<ul>
-</div>
+
 
 <!-- A supervisor cannot review a page they recently edited. The executive can push a wiki live right away. -->
 <% if (current_user.user_level_id == EXECUTIVE_VALUE) || ((current_user.username != "#{@page.last_user_edit}") && (current_user.user_level_id == SUPERVISOR_VALUE)) %>
@@ -26,9 +24,15 @@
 				<%= hidden_field(:page, :category_review, value: @page.category_review) %>
 		</div>
 		<%= f.label :approval_status_id %>
-		<%= collection_select :page, :approval_status_id, ApprovalStatus.order(:status).where.not(id: [EXECUTIVE_VALUE, PENDING, REVIEW]), :id, :status, prompt: true %>
+		<%= collection_select :page, :approval_status_id, ApprovalStatus.order(:status).where.not(id: [EXECUTIVE_VALUE, PENDING]), :id, :status, prompt: true %>
 		<div>
-		<%= f.submit "Submit Status", class: "edit_button" %>
+		<%= f.submit "Submit Status", class: "link_button review_button_fix" %>
+		</div>
+	<% end %>
+	<%= form_for @page, :url => { :action => "supervisor_update" } do |f| %>
+		<div class="form_group">
+			<%= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
+			<%= f.submit 'Unpublish', class: 'link_button', data: { confirm: "Unpublish wiki?"} %>
 		</div>
 	<% end %>
 <% else %>
@@ -42,6 +46,7 @@
 			<%= hidden_field(:page, :content, value: @page.content_review) %>
 			<%= hidden_field(:page, :approval_status_id, value: EXECUTIVE_VALUE) %>
 			<%= hidden_field(:page, :category_id, value: @page.category_review) %>
+			<%= hidden_field(:page, :page_publish_status_id, value: PUBLISHED) %>
 		</div>
 		<%= f.submit "Executive Approve", data: { confirm: "Publish wiki?"} %>
 	<% end %>

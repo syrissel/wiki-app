@@ -103,8 +103,8 @@
       <% @root_categories.each do |r| %>
         <li>
           <%= r.name %>
-            <% pages_of_type = @menu_pages.where("category_id = :category AND approval_status_id = :executive OR category_id = :category AND approval_status_id = :review", 
-																									category: r.id, executive: EXECUTIVE_VALUE, review: REVIEW)%>
+            <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																									category: r.id, publish: PUBLISHED)%>
             <ul id="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
@@ -118,8 +118,8 @@
             <ul>
               <li>
                 <%= s.name %>
-								<% pages_of_type = @menu_pages.where("category_id = :category AND approval_status_id = :executive OR category_id = :category AND approval_status_id = :review", 
-																											category: s.id, executive: EXECUTIVE_VALUE, review: REVIEW)%>
+								<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																											category: s.id, publish: PUBLISHED)%>
                   <ul>
                   <% pages_of_type.each do |pot| %>
                     <li>
@@ -133,8 +133,8 @@
                   <ul>
                     <li>
                       <%= t.name %>
-                      <% pages_of_type = @menu_pages.where("category_id = :category AND approval_status_id = :executive OR category_id = :category AND approval_status_id = :review", 
-																														category: t.id, executive: EXECUTIVE_VALUE, review: REVIEW)%>
+                      <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																														category: t.id, executive: PUBLISHED)%>
                         <ul>
                         <% pages_of_type.each do |pot| %>
                           <li>

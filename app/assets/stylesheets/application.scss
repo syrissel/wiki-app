@@ -207,7 +207,8 @@ html, body {
 	font-family: roboto_cond_regular_ycdt, Arial;
 	font-size: 30px;
   text-decoration: underline;
-  text-align: center;
+	text-align: center;
+	margin-top: 30px;
 }
 
 #cancel_button {
@@ -286,7 +287,7 @@ html, body {
 #review-table {
   border-collapse: collapse;
   width: 100%;
-  /* table-layout: fixed; */
+  // table-layout: fixed;
 }
 
 #review-table th a {
@@ -337,12 +338,22 @@ html, body {
 
 .review-button {
   text-decoration: none;
-	background-color:#0163DA;
+	//background-color:#0163DA;
+	background-color: #016383;
 	color:#FFFFFF !important;
   float: right;
   border-radius: 2px;
   padding: 5px;
-  margin-right: 5px;
+	margin-right: 5px;
+}
+
+.review-button:hover {
+	background-color: #147696;
+  cursor: pointer;
+}
+
+.review-button:active {
+  background-color: #3C9EBE;
 }
 
 .errors {
@@ -461,8 +472,9 @@ html, body {
 	text-decoration: none;
 	background:#016383;
 	color:#FFF;
-	padding: 5px;
-	//border-radius: 2px;
+	padding: 5px 10px;
+	border: 0px;
+	border-radius: 2px;
 	float: right;
 }
 
@@ -560,6 +572,30 @@ html, body {
 	float: right;
 }
 
+.page_header_font {
+	font-size: 12px;
+	text-align: right;
+	padding: 0px;
+	margin: 0px;
+}
+
+#show_hr {
+	opacity: 0.3;
+	margin-top: 32px;
+}
+
+.review_button_fix {
+	margin-top: 25px;
+	margin-left: 5px;
+}
+
+.sorting_options {
+	width: 10%;
+}
+
+.sorting_options p {
+	display: inline;
+}
 
 
 

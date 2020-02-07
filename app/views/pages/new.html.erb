@@ -27,6 +27,7 @@
     <%= hidden_field(:page, :user_id, value: current_user.id) %>
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
 		<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
+		<%= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
   </div>
 	<div class="form_group">
 		<%= f.label 'Give a quick summary of what this wiki is about', class: 'form_label' %>

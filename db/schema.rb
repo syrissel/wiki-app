@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_25_015129) do
+ActiveRecord::Schema.define(version: 2020_02_07_164051) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -35,6 +35,12 @@ ActiveRecord::Schema.define(version: 2020_01_25_015129) do
     t.string "name"
   end
 
+  create_table "page_publish_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -51,8 +57,10 @@ ActiveRecord::Schema.define(version: 2020_01_25_015129) do
     t.string "image"
     t.string "description"
     t.text "sanitized_content"
+    t.bigint "page_publish_status_id", null: false
     t.index ["approval_status_id"], name: "index_pages_on_approval_status_id"
     t.index ["category_id"], name: "index_pages_on_category_id"
+    t.index ["page_publish_status_id"], name: "index_pages_on_page_publish_status_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
@@ -95,6 +103,7 @@ ActiveRecord::Schema.define(version: 2020_01_25_015129) do
   add_foreign_key "categories", "categories"
   add_foreign_key "pages", "approval_statuses"
   add_foreign_key "pages", "categories"
+  add_foreign_key "pages", "page_publish_statuses"
   add_foreign_key "pages", "users"
   add_foreign_key "users", "user_levels"
   add_foreign_key "users", "user_statuses"

@@ -2,7 +2,8 @@ class Page < ApplicationRecord
 	mount_uploader :image, ImageUploader
   belongs_to :approval_status
   belongs_to :user, optional: true
-  belongs_to :category
+	belongs_to :category
+	belongs_to :page_publish_status
 
   
 

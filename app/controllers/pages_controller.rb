@@ -7,19 +7,15 @@ class PagesController < ApplicationController
   def index
     if params[:query].present?
       @query = params[:query]
-      @pages = Page.joins(:user).where("approval_status_id = :executive AND sanitized_content LIKE :query
-                                        OR approval_status_id = :executive AND title LIKE :query
-                                        OR approval_status_id = :executive AND username LIKE :query
-																				OR approval_status_id = :executive AND description LIKE :query
-																				OR approval_status_id = :review AND sanitized_content LIKE :query
-                                        OR approval_status_id = :review AND title LIKE :query
-                                        OR approval_status_id = :review AND username LIKE :query
-                                        OR approval_status_id = :review AND description LIKE :query", 
-                                        executive: EXECUTIVE_VALUE, review: REVIEW, query: "%#{@query}%" ).order("updated_at desc").limit(10)
+      @pages = Page.joins(:user).where("page_publish_status_id = :publish AND sanitized_content LIKE :query
+                                        OR page_publish_status_id = :publish AND title LIKE :query
+                                        OR page_publish_status_id = :publish AND username LIKE :query
+																				OR page_publish_status_id = :publish AND description LIKE :query", 
+                                        publish: PUBLISHED, query: "%#{@query}%" ).order("updated_at desc").limit(10)
 
       @videos = Video.where("name LIKE :query", query: "%#{@query}%")
     else
-      @pages = Page.where(approval_status_id: [EXECUTIVE_VALUE, REVIEW]).order("updated_at desc").limit(10)
+      @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").limit(10)
     end
     
   end
@@ -92,8 +88,22 @@ class PagesController < ApplicationController
   end
 
   # Review this
-  def review
-    @pending_pages = Page.where(approval_status_id: [PENDING, REVIEW, SUPERVISOR_VALUE, REJECTED]).order("updated_at desc")
+	def review
+		@order_by = 'approval_status_id asc'
+
+		if params[:s].present?
+			filter_params = params[:s]
+			if params[:s].include? 'desc'
+				
+				filter_params.slice! '_desc'
+				@order_by = filter_params + ' desc'
+			else
+				filter_params.slice! '_asc'
+				@order_by = filter_params + ' asc'
+			end
+		end
+
+		@pending_pages = Page.joins(:approval_status).order(@order_by)
 	end
 	
 	def review_wiki
@@ -132,15 +142,15 @@ class PagesController < ApplicationController
   def page_params
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
-																 :pinned, :search, :image, :description, :sanitized_content, :page)
+																 :pinned, :search, :image, :description, :sanitized_content, :page, :page_publish_status_id)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
   def check_page_approved
     @page = Page.find(params[:id])
 
-    if current_user.user_level_id == INTERN_VALUE && @page.approval_status_id != EXECUTIVE_VALUE
-      redirect_to root_path, alert: "Page has not been approved yet."
+    if current_user.user_level_id == INTERN_VALUE && @page.approval_status_id != EXECUTIVE_VALUE && @page.approval_status_id != REVIEW
+      redirect_to root_path, notice: "Page has not been approved yet."
     end
   end
 end
