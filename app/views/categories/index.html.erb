@@ -19,13 +19,13 @@
               <% if s.id == t.category_id %>
                 <ul>
                   <li>
-                    <%= t.name %>
+                    <%= t.name %><%= link_to "Move Up", categories_move_up_path(t)%><%= link_to "Move Down", categories_move_down_path(t)%>
                   </li>
                   <% @sub_categories.each do |u| %>
                     <% if t.id == u.category_id %>
                       <ul>
                         <li>
-                          <%= u.name %>
+                          <%= u.name %><%= link_to "Move Up", categories_move_up_path(u)%><%= link_to "Move Down", categories_move_down_path(u)%>
                         </li>
                       </ul>
                     <% end %>

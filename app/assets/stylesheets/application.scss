@@ -247,10 +247,10 @@ html, body {
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 100%;
-	margin: 15px 0px;
+	margin: 5px 0px;
 }
 
 .card:hover {
@@ -597,6 +597,15 @@ html, body {
 	display: inline;
 }
 
+.gen1, .gen2, .gen3, .gen4 {
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.sorting_arrow:hover {
+  color: red;
+}
 
 
 /* Dropdown menu */

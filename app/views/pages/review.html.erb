@@ -4,7 +4,7 @@
 <p>Additional sorting options:</p>
 <div class="sorting_options">
 	<p>Newest</p>
-	<div class="arrow_container"><%= link_to review_path(s: 'updated_at_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'updated_at_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div>
+	<div class="arrow_container"><%= link_to review_path(s: 'updated_at_asc') do %><box-icon class='sorting_arrow' size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'updated_at_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div>
 </div>
 <table id="review-table">
 <tr>

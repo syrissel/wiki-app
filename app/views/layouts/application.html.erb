@@ -11,61 +11,110 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 	  <%= javascript_include_tag 'image-resize.min.js' %>
     <script>
-      function load() {
-
-      
-
       function display() {
         
-        var children = this.children;
+        // var children = this.children;
 
-        for (var i = 0; i < children.length; i++) {
-          var child = children[i];
+        // for (var i = 0; i < children.length; i++) {
+        //   var child = children[i];
 
-          if (child.style.display === "none") {
-            child.style.display = "block";
-          } else {
-            child.style.display = "none";
-          }
+        //   if (child.style.display === "none") {
+        //     child.style.display = "block";
+        //   } else {
+        //     child.style.display = "none";
+        //   }
           
+        // }
+
+        let siblingElement = this.nextElementSibling;
+        if (siblingElement.style.display === 'none') {
+          siblingElement.style.display = 'block';
+        } else {
+          siblingElement.style.display = 'none';
         }
 
 			}
+      function load() {
+
+      
+      
+      
 			
-			
+			let gen1Links = document.getElementsByClassName('gen1');
+      let gen2Links = document.getElementsByClassName('gen2');
+      let gen3Links = document.getElementsByClassName('gen3');
+      let gen4Links = document.getElementsByClassName('gen4');
+      
+      window.onload = function() {
+        for (let i = 0; i < gen1Links.length; i++) {
+          let siblingElement = gen1Links[i].nextElementSibling;
+          siblingElement.style.display = 'none';
+        }
+
+        for (let i = 0; i < gen2Links.length; i++) {
+          let siblingElement = gen2Links[i].nextElementSibling;
+          siblingElement.style.display = 'none';
+        }
+
+        for (let i = 0; i < gen3Links.length; i++) {
+          let siblingElement = gen3Links[i].nextElementSibling;
+          siblingElement.style.display = 'none';
+        }
+
+        for (let i = 0; i < gen4Links.length; i++) {
+          let siblingElement = gen4Links[i].nextElementSibling;
+          siblingElement.style.display = 'none';
+        }
+      }
+
+      for (let i = 0; i < gen1Links.length; i++) {
+        gen1Links[i].onclick = display;
+      }
+
+      for (let i = 0; i < gen2Links.length; i++) {
+        gen2Links[i].onclick = display;
+      }
+
+      for (let i = 0; i < gen3Links.length; i++) {
+        gen3Links[i].onclick = display;
+      }
+
+      for (let i = 0; i < gen4Links.length; i++) {
+        gen4Links[i].onclick = display;
+      }
 
 			// Mimicking jquery.
-      var $ = function (selector) {
-        return document.querySelector(selector);
-			};
+      // var $ = function (selector) {
+      //   return document.querySelector(selector);
+			// };
 			
 
-			window.onload = function() {
+			// window.onload = function() {
 
-				var links = $('#root_categories').getElementsByTagName('li');
+			// 	var links = $('#root_categories').getElementsByTagName('li');
 
-				for (var i = 0; i < links.length; i++) {
-        	var link = links[i];
-        	link.child.style.display = "none";
-      	}
+			// 	for (var i = 0; i < links.length; i++) {
+      //   	var link = links[i];
+      //   	link.child.style.display = "none";
+      // 	}
 
-				var children = this.children;
+			// 	var children = this.children;
 
-				for (var i = 0; i < children.length; i++) {
-					var child = children[i];
+			// 	for (var i = 0; i < children.length; i++) {
+			// 		var child = children[i];
 					
-					child.style.display = "none";
+			// 		child.style.display = "none";
 					
-				}
-			};
+			// 	}
+			// }
 
-      var links = $('#root_categories').getElementsByTagName('li');
+      // var links = $('#root_categories').getElementsByTagName('li');
 
       // For each <li> inside #links
-      for (var i = 0; i < links.length; i++) {
-        var link = links[i];
-        link.onclick = display;
-      }
+      // for (var i = 0; i < links.length; i++) {
+      //   var link = links[i];
+      //   link.onclick = display;
+      // }
     }
 
     document.addEventListener("DOMContentLoaded", load, false);
@@ -198,8 +247,9 @@
 
 		<ul id='root_categories'>
 			<% @root_categories.each do |r| %>
-				<li>
-						<%= r.name %>
+        <p class='gen1'><%= r.name %></p>
+				<li class='gen1_list'>
+						
             <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
 																									category: r.id, publish: PUBLISHED)%>
             <ul id="root_pages">
@@ -212,8 +262,9 @@
 						<% @sub_categories.each do |s| %>
 							<% if r.id == s.category_id %>
 								<ul>
-									<li>
-										<%= s.name %>
+                  <p class='gen2'><%= s.name %></p>
+									<li class='gen2_list'>
+										
 										<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
 																													category: s.id, publish: PUBLISHED)%>
                   <ul>
@@ -226,8 +277,9 @@
 									<% @sub_categories.each do |t| %>
 										<% if s.id == t.category_id %>
 											<ul>
-												<li>
-													<%= t.name %>
+                        <p class='gen3'><%= t.name %></p>
+												<li class='gen3_list'>
+													
                       		<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
 																																category: t.id, publish: PUBLISHED)%>
                         	<ul>
@@ -240,8 +292,9 @@
 													<% @sub_categories.each do |u| %>
 														<% if t.id == u.category_id %>
 															<ul>
-																<li>
-																	<%= u.name %>
+                                <p class='gen4'><%= u.name %></p>
+																<li class='gen4_list'>
+																	
                             			<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
 																																				category: u.id, publish: PUBLISHED)%>
                               		<ul>
