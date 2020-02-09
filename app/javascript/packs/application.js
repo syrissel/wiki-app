@@ -15,7 +15,6 @@ require("channels")
 require("jquery")
 require("boxicons")
 require("custom/side_menu")
-require("custom/quill")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
