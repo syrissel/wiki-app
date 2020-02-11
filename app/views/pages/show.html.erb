@@ -2,19 +2,82 @@
 
 <%# render plain: params[:page].inspect %>
 <%= stylesheet_link_tag :application, "https://cdn.quilljs.com/1.3.6/quill.snow.css"%>
-<div id="page_header">
-	<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-	<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-	<%= link_to "Edit", edit_page_path, class: "link_button" %>
+<div id="page_header" style='overflow:auto;'>
+	<!--<table id="show_table">
+	<tr>
+		<td id="show_img"><%= image_tag('c4smb_logo_2.jpg') %></td>
+	
+	
+	
+		<td id="show_info">
+		<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
+		<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
+		<%= link_to "Edit", edit_page_path %>
+		</td>
+	</tr>
+	<tr><td><h1><%= sanitize @page.title %></h1></td></tr>
+	</table> -->
+	<div class="show_row_top">
+		<div class="show_img"><%= image_tag('c4smb_logo_2.jpg') %></div>
+		<div class="show_info">
+			<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
+			<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
+			<%= link_to "Edit", edit_page_path %>
+		</div>
+	</div>
+	<div class="show_row_bottom"><h1><%= sanitize @page.title %></h1></div>
+	
 </div>
 <hr id="show_hr" />
-<h1 class="form_group" id="show_title"><%= sanitize @page.title%></h1>
 <div class="ql-snow">
 <div class="form_group ql-editor"><%= raw @page.content %></div>
 </div>
 <div id="divider_container">
 	<hr id="cfs_divider">
 </div>
+
+<button type='button' onclick="window.print();return false;">Print</button>
+
+<style type="text/css">
+	@media print{
+		html, body {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		#middle_content {
+			margin: 0px;
+			border: 0px;
+			padding: 0px;
+			width: 100%;
+			
+		}
+
+		.header_container {
+			display: none;
+		}
+
+		#side_panel {
+			display: none;
+		}
+
+		footer {
+			display: none;
+		}
+
+		.show_info a {
+			display: none;
+		}
+
+		button {
+			display: none;
+		}
+
+		#divider_container {
+			display: none;
+		}
+}
+</style>
 
 
 

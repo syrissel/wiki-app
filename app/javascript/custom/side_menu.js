@@ -115,4 +115,5 @@ function load() {
 // }
 }
 
-document.addEventListener("DOMContentLoaded", load, false);
+//document.addEventListener("DOMContentLoaded", load, false);
+document.addEventListener('turbolinks:load', load);
