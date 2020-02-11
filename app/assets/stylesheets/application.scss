@@ -54,12 +54,21 @@
   border-bottom: 2px solid;
   /* padding: 10px 36px; */
   float: left;
-  position: relative;
+  position: absolute;
   margin-top: -5px;
   background: rgb(179, 209, 219);
-	height: 100%;
+  height: 100%;
+  width: 10%;
   font-family: Arial;
-  padding-right: 2.5em;
+
+  transition: width 0.5s ease;
+}
+
+.logo:hover {
+  #side_panel {
+
+    width: 15%;
+  }
 }
 
 .user_login a {

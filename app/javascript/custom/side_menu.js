@@ -15,19 +15,19 @@ function load() {
   for (let i = 0; i < gen2Links.length; i++) {
     let siblingElement = gen2Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow;
+    addMenuArrow(gen2Links[i]);
   }
 
   for (let i = 0; i < gen3Links.length; i++) {
     let siblingElement = gen3Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow;
+    addMenuArrow(gen3Links[i]);
   }
 
   for (let i = 0; i < gen4Links.length; i++) {
     let siblingElement = gen4Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow;
+    addMenuArrow(gen4Links[i]);
   }
 
   function addMenuArrow(item) {

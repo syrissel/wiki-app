@@ -65,81 +65,7 @@
 
     <div id="side_panel">
     <div class="side_panel_container">
-      <!--<ul id="root_categories">
-      <% @root_categories.each do |r| %>
-        <li>
-          <%= r.name %>
-            <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																									category: r.id, publish: PUBLISHED)%>
-            <ul id="root_pages">
-            <% pages_of_type.each do |pot| %>
-              <li>
-                <%= link_to pot.title, pot %>
-              </li>
-            <% end %>
-            </ul>
-        </li>
-        <% @sub_categories.each do |s| %>
-          <% if r.id == s.category_id %>
-            <ul>
-              <li>
-                <%= s.name %>
-								<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																											category: s.id, publish: PUBLISHED)%>
-                  <ul>
-                  <% pages_of_type.each do |pot| %>
-                    <li>
-                      <%= link_to pot.title, pot %>
-                    </li>
-                  <% end %>
-                  </ul>
-              </li>
-              <% @sub_categories.each do |t| %>
-                <% if s.id == t.category_id %>
-                  <ul>
-                    <li>
-                      <%= t.name %>
-                      <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																														category: t.id, publish: PUBLISHED)%>
-                        <ul>
-                        <% pages_of_type.each do |pot| %>
-                          <li>
-                            <%= link_to pot.title, pot %>
-                          </li>
-                        <% end %>
-                        </ul>
-                    </li>
-                    <% @sub_categories.each do |u| %>
-                      <% if t.id == u.category_id %>
-                        <ul>
-                          <li>
-                            <%= u.name %>
-                            <% pages_of_type = @menu_pages.where("category_id = :category AND approval_status_id = :executive OR category_id = :category AND approval_status_id = :review", 
-																																	category: u.id, executive: EXECUTIVE_VALUE, review: REVIEW)%>
-                              <ul>
-                              <% pages_of_type.each do |pot| %>
-                                <li>
-                                  <%= link_to pot.title, pot %>
-                                </li>
-                              <% end %>
-                              </ul>
-                          </li>
-                        </ul>
-                      <% end %>
-                    <% end %>
-                  </ul>
-                <% end %>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul> -->
-		<%= '*********' %>
-
-
-
-
+ 
 		<ul id='root_categories'>
 			<% @root_categories.each do |r| %>
         <p class='gen1'><%= r.name %></p>
@@ -214,7 +140,6 @@
 				</li>
 			<% end %>
 		</ul>
-		<%= '************' %>
 
 
       </div>
