@@ -86,10 +86,14 @@
   opacity: 1;
 }
 
+#side_panel:hover #menu_icon {
+  
+}
+
 #side_background {
   background-color:#5d5d5d;
-  height: 5em;
-  width: 5.5em;
+  height: 4.2em;
+  width: 4.8em;
 }
 
 
@@ -178,13 +182,26 @@ html, body {
   color: rgb(224, 40, 7);
 }
 
-.side_panel_container ul {
-  padding-left: 10px;
+.side_panel_container ul:not(first-of-type) {
+  padding-left: 20px;
 }
 
 .side_panel_container ul li {
-  padding: 0px;
+  padding: 2px 0 2px 0;
   list-style: none;
+}
+
+.side_panel_container ul li a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.side_panel_container ul li a:hover {
+  color: #d4af37;
+}
+
+.side_panel_container p:hover {
+  color: #d4af37;
 }
 
 #editor {

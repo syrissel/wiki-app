@@ -65,12 +65,12 @@
 
     <div id="side_panel">
     
-    <div id='side_background'><box-icon name='menu' size='84px' animation='fade-up-hover' color='#d4af37'></box-icon></div>
+    <div id='side_background'><box-icon id='menu_icon' name='menu' size='72px' color='#d4af37'></box-icon></div>
     <div class="side_panel_container">
     
 		<ul id='root_categories'>
 			<% @root_categories.each do |r| %>
-        <p class='gen1'><%= r.name %></p>
+        <p class='gen1'><%= r.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon></p>
 				<li class='gen1_list'>
 						
             <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
@@ -78,14 +78,14 @@
             <ul id="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
-                <%= link_to pot.title, pot %><box-icon name='file'></box-icon>
+                <%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'>
               </li>
             <% end %>
             </ul>
 						<% @sub_categories.each do |s| %>
 							<% if r.id == s.category_id %>
 								<ul>
-                  <p class='gen2'><%= s.name %></p>
+                  <p class='gen2'><%= s.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon></p>
 									<li class='gen2_list'>
 										
 										<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
@@ -93,14 +93,14 @@
                   <ul>
                   <% pages_of_type.each do |pot| %>
                     <li>
-                      <%= link_to pot.title, pot %>
+                      <%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'></box-icon>
                     </li>
                   <% end %>
 									</ul>
 									<% @sub_categories.each do |t| %>
 										<% if s.id == t.category_id %>
 											<ul>
-                        <p class='gen3'><%= t.name %></p>
+                        <p class='gen3'><%= t.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon></p>
 												<li class='gen3_list'>
 													
                       		<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
@@ -108,14 +108,14 @@
                         	<ul>
                         	<% pages_of_type.each do |pot| %>
                           	<li>
-                            	<%= link_to pot.title, pot %>
+                            	<%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'>
                           	</li>
                         	<% end %>
                         	</ul>
 													<% @sub_categories.each do |u| %>
 														<% if t.id == u.category_id %>
 															<ul>
-                                <p class='gen4'><%= u.name %></p>
+                                <p class='gen4'><%= u.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon></p>
 																<li class='gen4_list'>
 																	
                             			<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
@@ -123,7 +123,7 @@
                               		<ul>
 																	<% pages_of_type.each do |pot| %>
 																		<li>
-																			<%= link_to pot.title, pot %>
+																			<%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'>
 																		</li>
 																	<% end %>
                               		</ul>
