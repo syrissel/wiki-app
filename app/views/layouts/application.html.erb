@@ -64,8 +64,10 @@
     </div>
 
     <div id="side_panel">
+    
+    <div id='side_background'><box-icon name='menu' size='84px' animation='fade-up-hover' color='#d4af37'></box-icon></div>
     <div class="side_panel_container">
- 
+    
 		<ul id='root_categories'>
 			<% @root_categories.each do |r| %>
         <p class='gen1'><%= r.name %></p>
@@ -76,7 +78,7 @@
             <ul id="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
-                <%= link_to pot.title, pot %>
+                <%= link_to pot.title, pot %><box-icon name='file'></box-icon>
               </li>
             <% end %>
             </ul>

@@ -81,6 +81,35 @@ function load() {
     gen4Links[i].onclick = display;
   }
 
+  // Get top position of side_panel. Set event listener for scroll on window.
+  // If value of the scroll of the top of the page is greater than the top of the side panel,
+  // set it to position fixed so that it stays on the screen.
+  var sidePanelTop = $('#side_panel').offset().top;
+  $(window).scroll(function() {
+    var currentScroll = $(window).scrollTop();
+    if (currentScroll >= sidePanelTop) {
+        $('#side_panel').css({
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            'padding-bottom': '35px'
+        });
+    } else {
+        $('#side_panel').css({
+          position: 'absolute',
+          top: 'unset',
+          left: 'unset',
+          'padding-bottom': '0px'
+        });
+    }
+});
+
+  // if (!($('.ql-container').length)) {
+  //   $('#side_panel').css({
+  //     'padding-bottom': '35px'
+  //   });
+  // }
+
 // Mimicking jquery.
 // var $ = function (selector) {
 //   return document.querySelector(selector);
