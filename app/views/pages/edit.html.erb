@@ -71,7 +71,7 @@
 		<%= hidden_field(:page, :content, value: @page.content) %>
 		<%= hidden_field(:page, :category_id, value: @page.category_id) %>
     <%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
-    <%= hidden_field(:page, :approval_status_id, value: REVIEW) %>
+    <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
   </div>
 	<div class="form_group">
 		<%= f.hidden_field :content_review, :id => "post-content", required: true %>

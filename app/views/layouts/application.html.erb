@@ -25,25 +25,11 @@
       <div class="logo"></div>
       <h2 class="wiki_logo">wiki</h2>
       <% end %>
-      <div class="header_nav">
-        <ul>
-          <li><%= link_to 'Home', root_path %></li>
-          <li><%= link_to 'New Wiki', new_page_path %></li>
-          <% unless current_user %>
-            <li><%= link_to 'Login', login_path %></li>
-          <% end %>
-          <% if authorize_access %>
-          <li><%= link_to 'Admin Portal', admin_path %></li>
-          <% end %>
-        </ul>
-      </div>
 
       <div class="user_login">
       <% if current_user %>
       <ul>
-        <li>Logged in as <%= current_user.username %></li>
-        <li>User Level: <%= current_user.user_level.level %></li>
-        <li><%= current_user.last_login.strftime("Last login: %B %-d, %Y at %l:%M %p") %></li>
+        <li><%= current_user.username %></li>
         <li><%= link_to 'Logout', logout_path, onclick: "clearStorage()" %></li>
       </ul>
       <% end %>
@@ -56,15 +42,26 @@
 
     <div id="search">
         <%= form_tag pages_path, method: :get do %>
-          <%= text_field_tag :query %>
-          <%= submit_tag "Search", name: nil %>
+          <%= text_field_tag :query, nil, :placeholder => 'Search' %>
+          <%= submit_tag "", name: nil %>
         <% end %>
     </div>
 
     </div>
 
     <div id="side_panel">
-    
+    <div id='side_menu_nav'>
+        <ul>
+          <% unless current_user %>
+            <li><%= link_to 'Login', login_path %></li>
+          <% else %>
+            <li><%= link_to 'New Wiki', new_page_path %></li>
+          <% end %>
+          <% if authorize_access %>
+          <li><%= link_to 'Admin Portal', admin_path %></li>
+          <% end %>
+        </ul>
+      </div>
     <div id='side_background'><box-icon id='menu_icon' name='menu' size='72px' color='#d4af37'></box-icon></div>
     <div class="side_panel_container">
     
@@ -75,7 +72,7 @@
 						
             <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
 																									category: r.id, publish: PUBLISHED)%>
-            <ul id="root_pages">
+            <ul class="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
                 <%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'>

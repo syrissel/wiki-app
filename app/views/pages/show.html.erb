@@ -28,13 +28,14 @@
 	<div class="show_row_bottom"><h1><%= sanitize @page.title %></h1></div>
 	
 </div>
-<hr id="show_hr" />
+<hr class="show_hr" />
 <div class="ql-snow">
 <div class="form_group ql-editor"><%= raw @page.content %></div>
 </div>
 <div id="divider_container">
 	<hr id="cfs_divider">
 </div>
+<hr class="show_hr" />
 
 <button type='button' onclick="window.print();return false;">Print</button>
 
@@ -74,6 +75,10 @@
 		}
 
 		#divider_container {
+			display: none;
+		}
+
+		title {
 			display: none;
 		}
 }

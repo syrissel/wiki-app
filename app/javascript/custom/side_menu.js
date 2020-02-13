@@ -34,8 +34,10 @@ function load() {
 
     let siblingElement = item.nextElementSibling;
     let childrenCount = siblingElement.childElementCount;
+    let rootPages = siblingElement.getElementsByTagName('ul')[0];
+    let rootChildrenCount = rootPages.childElementCount;
   
-    if (childrenCount > 1) {
+    if (childrenCount > 1 || rootChildrenCount > 0) {
       item.innerHTML += "<box-icon size='16px' name='chevron-down'></box-icon>"
     }
   }
