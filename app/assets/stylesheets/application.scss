@@ -137,11 +137,11 @@
 
 .user_login {
   float: right;
-  margin: 87px;
+  margin: 3em;
 }
 
 #search {
-  margin: 108px 560px;
+  margin: 6.7em 32em;
 }
 
 #search input[type="submit"] {
@@ -261,7 +261,7 @@ html, body {
 }
 
 #editor {
-	height: 750px;
+	height: 650px;
 }
 
 .edit_font {
@@ -768,6 +768,10 @@ html, body {
 .show_info a {
   float: right;
   padding: 5px 10px;
+}
+
+#show_container {
+  margin: 0 3.5em;
 }
 
 
@@ -1382,7 +1386,7 @@ html, body {
   }
 }
 .ql-snow {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 .ql-snow * {
   box-sizing: border-box;
