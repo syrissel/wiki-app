@@ -28,7 +28,8 @@
 }
 
 .header_container {
-  background: url(header_container_external_bg.png) repeat-x top center;
+  //background: url(header_container_external_bg.png) repeat-x top center;
+  background-color: #016383;
   top: 0px;
   left: 0;
   width: 100%;
@@ -55,7 +56,7 @@
   /* padding: 10px 36px; */
   float: left;
   position: absolute;
-  margin-top: -5px;
+  //margin-top: -5px; // need this on windows machines?
   //background: rgb(179, 209, 219);
   background-color: #353535;
   height: 1%;
@@ -175,7 +176,7 @@
   background:#FFFF;
   border: 3px solid rgb(80, 80, 80);
   padding: 10px 25px;
-  margin: 0px auto;
+  margin: 10px auto;
 	width: 60em;
 	overflow: auto;
 }
