@@ -21,7 +21,8 @@ class PagesController < ApplicationController
   end
 
   def new
-		@videos = Video.all.page params[:page]
+    @videos = Video.all.page params[:page]
+    @images = Image.where('path IS NOT NULL')
 		# @users = User.order(:name).page params[:page]
   end
 

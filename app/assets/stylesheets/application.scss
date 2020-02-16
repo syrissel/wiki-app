@@ -856,7 +856,18 @@ html, body {
   to {bottom: 0; opacity: 0;}
 }
 
+.svg_position {
+  display: none;
+  visibility: hidden;
+}
 
+.quill-image-container {
+  border: 1px solid black;
+  display: inline-block;
+  background-color: #464748;
+  padding: 3px 3px 0px 3px;
+  float: right;
+}
 
 
 

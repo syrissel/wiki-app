@@ -1,5 +1,6 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <h1 class="edit_title edit_font">New Wiki</h1>
@@ -76,6 +77,44 @@
 	</div>
 	</ul>
 </div>
+
+
+<div class="image_options hidden clearfix">
+	<h2>Insert an image</h2>
+	<button type='button' id="image_button">Insert</button>
+	<button type='button' onclick="showImageOptions()">Cancel</button>
+	<%= link_to 'Upload', new_image_path %>
+	<ul>
+	<div class='radio_wrapper'>
+	<% if @images.present? %>
+	<% @images.each do |i| %>
+	<li>
+	
+	<div class='radio_top'>
+	<strong><%= i.name %></strong>
+	</div>
+	<%# Store video path in data for retrieval by jquery %>
+	<div class='radio_bottom'>
+	
+	<label>
+	
+	<%= content_tag :input, type: 'radio', name: 'image', data: {image: Image.find(i.id).path} do %>
+	<% if i.path.present? %>
+		<%# <div class="video_image_wrapper"> %>
+		<%= image_tag(i.path.url, size: '196x111') %>
+	<% end %>
+	<%# '295.783x166.367' %>
+	</label>
+	<% end %>
+	</div>
+	</li>
+	<% end %>
+	<%#= paginate @images, params: { paginate: 'true' } %>
+	<% end %>
+	</div>
+	</ul>
+</div>
+
   <div class="form_group">
     <%#= f.label :content, class: "form_label" %>
       <div class="form-group">
@@ -124,21 +163,18 @@
 				</select>
 			</span>
 			<span class="ql-formats">
-				<button class="ql-direction" value="rtl"></button>
-				<select class="ql-align">
-					<option selected></option>
-					<option value="center"></option>
-					<option value="right"></option>
-					<option value="justify"></option>
-				</select>
-			</span>
-			<span class="ql-formats">
 				<button class="ql-link"></button>
-				<button class="ql-image"></button>
+				<button class="bx bx-image" type='button' onclick="showImageOptions()"></button>
 				<button class="fa fa-play custom_video_button" type='button' onclick="showVideoOptions()"></button>
 			</span>
 			<span class="ql-formats">
 				<button class="ql-clean"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-align" value=""></button>
+				<button class="ql-align" value="center"></button>
+				<button class="ql-align" value="right"></button>
+				<button class="ql-align" value="justify"></button>
 			</span>
 		</div>
       <div id="editor"></div>
@@ -167,6 +203,16 @@
 				options.classList.add("hidden");
 			}
 		  
+	}
+
+	function showImageOptions() {
+		let options = document.getElementsByClassName('image_options')[0];
+
+		if (options.classList.contains('hidden')) {
+			options.className = options.className.replace("hidden", "");
+		} else {
+			options.classList.add("hidden");
+		}
 	}
 
 	setTimeout(window.onload = function() {
@@ -244,6 +290,88 @@
 			'formats/hr': HR
 		});
 
+	// class ImageContainerBlot extents BlockEmbed {
+
+	// }
+
+	class ImageBlotContainer extends BlockEmbed {
+
+		static blotName = 'image-container';
+		static tagName = 'p';
+
+		static create(value) {
+			let node = super.create();
+			let url = 'https://kanbanize.com/wp-content/uploads/website-images/Agile/pdca-cycle-3.png';
+			
+
+			
+			return node;
+		}
+	} 
+	Quill.register(ImageBlotContainer);
+
+	class ImageBlot extends BlockEmbed {
+		static create(url) {
+			let node = super.create();
+			//node.setAttribute('class', 'quill-image-container');
+			let imgNode = document.createElement('img');
+			imgNode.setAttribute('src', url);
+			//imgNode.setAttribute('display', 'inline');
+			node.appendChild(imgNode);
+
+			return node;
+		}
+
+		static value(domNode) {
+			return domNode.querySelector('img').getAttribute('src');
+		}
+
+		static formats(node) {
+			let format = {};
+			if (node.hasAttribute('height')) {
+				format.height = node.getAttribute('height');
+			}
+			if (node.hasAttribute('width')) {
+				format.width = node.getAttribute('width');
+			}
+			return format;
+		}
+
+		static value(node) {
+			return node.getAttribute('src');
+		}
+
+		format(name, value) {
+			// Handle unregistered embed formats
+			if (name === 'height' || name === 'width') {
+				if (value) {
+					this.domNode.setAttribute(name, value);
+				} else {
+					this.domNode.removeAttribute(name, value);
+				}
+			} else {
+				super.format(name, value);
+			}
+		}
+	}
+	ImageBlot.blotName = 'custom-image';
+	ImageBlot.tagName = 'p';
+	Quill.register(ImageBlot);
+
+	$('#image_button').click(function() {
+		let range = quill.getSelection(true);
+		quill.insertText(range.index, '\n', Quill.sources.USER);
+		
+		// Grab selected radio button by name. Return image path from database.
+		//let url = $("input[name='image']:checked").data('image').url;
+		let url = $("input[name='image']:checked").data('image').url;
+		//quill.insertText(range.index, '<p>', Quill.sources.USER);
+		quill.insertEmbed(range.index + 1, 'custom-image', url, Quill.sources.USER);
+		//quill.insertText(range.index, '</p>', Quill.sources.USER);
+		//quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
+		quill.setSelection(range.index + 2, Quill.sources.SILENT);
+	});
+
 	class VideoBlot extends BlockEmbed {
 		static create(url) {
 			let node = super.create();
@@ -308,9 +436,9 @@
 		var form = document.querySelector('#page_form');
 		var quill = new Quill('#editor', {
 			modules: {
-				imageResize: {
-					displaySize: true
-				},
+				// imageResize: {
+				// 	displaySize: true
+				// },
 				toolbar: {
 					container: '#toolbar',
 					handlers: {

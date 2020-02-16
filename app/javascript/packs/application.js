@@ -15,7 +15,7 @@ require("channels")
 require("jquery")
 require("boxicons")
 require("custom/side_menu")
-require("custom/image-resize.min")
+//require("custom/image-resize")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
