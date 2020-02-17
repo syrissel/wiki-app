@@ -181,13 +181,22 @@
 		</div>
 		
 	</div>
-	<div id="editor"><%= raw @page.content_review %></div>
+	<%= content_tag :div, id: 'content_review', data: {contentreview: Page.find(params[:id]).content_review} do %>
+	<% end %>
+	<!--<div id="editor"><%= raw @page.content_review %></div>-->
+	<div id="editor"><%#= raw @page.content_review %></div>
   <div class="form_group">
     <%= f.submit "Save changes", class: "edit_button", data: { confirm: "Submit for review?"} %>
 		
   </div>
 <% end %>
-
+		<script>
+			setTimeout(window.onload = function() {
+				let content = $("#content_review").data('contentreview');
+				$(".ql-editor").html(content);
+				
+			}, 100);
+		</script>
 <a href="javascript:history.back()" class="edit_button" id="cancel_button">Cancel</a>
 
 <%# <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> %>

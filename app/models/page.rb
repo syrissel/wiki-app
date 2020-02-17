@@ -5,7 +5,7 @@ class Page < ApplicationRecord
 	belongs_to :category
 	belongs_to :page_publish_status
 
-  
+  paginates_per 10
 
 	#validates :image, file_size: { less_than: 5.megabytes }
   validates :title, presence: true, uniqueness: true, length: { maximum: 40 }

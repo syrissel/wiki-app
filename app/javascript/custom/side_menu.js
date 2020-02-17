@@ -36,9 +36,10 @@ function load() {
     let childrenCount = siblingElement.childElementCount;
     let rootPages = siblingElement.getElementsByTagName('ul')[0];
     let rootChildrenCount = rootPages.childElementCount;
+    let arrowPresent = item.getElementsByClassName('chevron')[0];
   
-    if (childrenCount > 1 || rootChildrenCount > 0) {
-      item.innerHTML += "<box-icon size='16px' name='chevron-down'></box-icon>"
+    if ((childrenCount > 1 || rootChildrenCount > 0) && !arrowPresent) {
+      item.innerHTML += "<box-icon class='chevron' size='16px' name='chevron-down'></box-icon>"
     }
   }
   
@@ -106,45 +107,6 @@ function load() {
     }
 });
 
-  // if (!($('.ql-container').length)) {
-  //   $('#side_panel').css({
-  //     'padding-bottom': '35px'
-  //   });
-  // }
-
-// Mimicking jquery.
-// var $ = function (selector) {
-//   return document.querySelector(selector);
-// };
-
-
-// window.onload = function() {
-
-// 	var links = $('#root_categories').getElementsByTagName('li');
-
-// 	for (var i = 0; i < links.length; i++) {
-//   	var link = links[i];
-//   	link.child.style.display = "none";
-// 	}
-
-// 	var children = this.children;
-
-// 	for (var i = 0; i < children.length; i++) {
-// 		var child = children[i];
-    
-// 		child.style.display = "none";
-    
-// 	}
-// }
-
-// var links = $('#root_categories').getElementsByTagName('li');
-
-// For each <li> inside #links
-// for (var i = 0; i < links.length; i++) {
-//   var link = links[i];
-//   link.onclick = display;
-// }
 }
 
-//document.addEventListener("DOMContentLoaded", load, false);
 document.addEventListener('turbolinks:load', load);

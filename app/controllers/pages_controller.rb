@@ -111,7 +111,7 @@ class PagesController < ApplicationController
 			end
 		end
 
-		@pending_pages = Page.joins(:approval_status).order(@order_by)
+		@pending_pages = Page.joins(:approval_status).order(@order_by).page params[:page]
 	end
 	
 	def review_wiki

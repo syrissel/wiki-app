@@ -33,6 +33,8 @@
 <% end %>
 </table>
 
+<%= paginate @pending_pages %>
+
 <% if flash[:notice].present? %>
   <script>
   window.onload = function showSnackbar() {
@@ -44,5 +46,3 @@
 <% end %>
 
 <div id="snackbar"><%= flash[:notice] %></div>
-
-<%= console %>
