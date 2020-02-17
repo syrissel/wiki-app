@@ -9,12 +9,14 @@ window.jQuery = $;
 window.$ = $;
 
 require("@rails/ujs").start()
+global.Rails = Rails;
 require("turbolinks").start()
 require("@rails/activestorage").start()
-require("channels")
-require("jquery")
-require("boxicons")
-require("custom/side_menu")
+import "channels";
+import "jquery";
+import "boxicons";
+import "custom/side_menu";
+import "custom/image_show";
 //require("custom/image-resize")
 
 

@@ -14,7 +14,7 @@
   <div class="card_exterior">
     <div class="card">
       <div class="cardview_container">
-				<%= image_tag("#{p.image.preview.url}") %>
+				<box-icon class='box_cardview' size='84px' style='float:left;' name='file'></box-icon>
         <h3><%= p.title %></h3>
         <% if p.description.present? %>
           <p><%= p.description %></p>
@@ -22,7 +22,7 @@
           <p>No description provided.</p>
         <%#= sanitize preview(p) %>
         <% end %>
-        <i>by <%= p.user.username %></i>
+        <div class="cardview_author"><p>by <%= p.user.username %></p><p> | last edit: <%= p.last_user_edit %></p></div>
       
       </div>
     </div>

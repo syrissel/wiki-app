@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user, except: [:index]
   before_action :check_page_approved, only: [:show]
   
+  
 
   def index
     if params[:query].present?
@@ -22,8 +23,13 @@ class PagesController < ApplicationController
 
   def new
     @videos = Video.all.page params[:page]
-    @images = Image.where('path IS NOT NULL')
-		# @users = User.order(:name).page params[:page]
+    @images = Image.where('path IS NOT NULL').page params[:page]
+    # @users = User.order(:name).page params[:page]
+    
+    # respond_to do |format|
+    #   format.html { render 'new' } 
+    #   format.js
+    # end
   end
 
   def show
@@ -32,7 +38,8 @@ class PagesController < ApplicationController
 
   def edit
 		@page = Page.find(params[:id])
-		@videos = Video.all.page params[:page]
+    @videos = Video.all.page params[:page]
+    @images = Image.where('path IS NOT NULL').page params[:page]
   end
 
   # If the database fails at updating, render edit page. Otherwise commit changes.

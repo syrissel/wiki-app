@@ -351,7 +351,8 @@ html, body {
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 100%;
-	margin: 5px 0px;
+  margin: 10px 0px;
+  height: 6em;
 }
 
 .card:hover {
@@ -359,14 +360,25 @@ html, body {
 }
 
 .cardview_container {
-	padding: 2px 16px;
+	padding: 0px 16px 2px 0px;
   border: 1px solid black;
   height: 100%;
+  background-color: #eaecee;
+}
+
+.cardview_container .box_cardview {
+  margin-top: 10px;
 }
 
 .cardview_container img {
+  margin: 18px 0px;
 	float: left;
 	padding-right: 5px;
+}
+
+.cardview_container p {
+  margin: 0px;
+  display: inline;
 }
 
 .card_exterior {
@@ -381,8 +393,12 @@ html, body {
 }
 
 .cardview_container i {
-  display: block;
   text-align: right;
+}
+
+.cardview_author {
+  float: right;
+  margin: 18px 0px;
 }
 
 #review-table {
@@ -466,28 +482,28 @@ html, body {
 	display: none;
 }
 
-.video_options {
+.video_options, .image_options {
   border: 1px solid black;
   padding: 5px;
 	margin-top: 10px;
-	height: 400px;
+	height: 425px;
 }
 
 .clearfix {
 	overflow: auto;
 }
 
-.video_options li {
+.video_options li, .image_options li {
   list-style: none;
   margin: 5px 5px;
   float: left;
 }
 
-.video_options img {
+.video_options img, .image_options img {
   border: 1px solid gray;
 }
 
-.video_options .radio_top {
+.video_options .radio_top, .image_options .radio_top {
   margin-bottom: 2px;
   margin-left: 2px;
 }
@@ -605,7 +621,7 @@ html, body {
 // }
 
 /* Hide radio */
-.video_options [type=radio] { 
+.video_options [type=radio], .image_options [type=radio] { 
   position: absolute;
   opacity: 0;
   width: 0;
@@ -613,12 +629,12 @@ html, body {
 }
 
 /* Image styles */
-.video_options [type=radio] + img {
+.video_options [type=radio] + img, .image_options [type=radio] + img {
   cursor: pointer;
 }
 
 /* Checked styles */
-.video_options [type=radio]:checked + img {
+.video_options [type=radio]:checked + img, .image_options [type=radio]:checked + img {
   outline: 3px solid #00b7ff;
 }
 
@@ -775,7 +791,22 @@ html, body {
   margin: 0 3.5em;
 }
 
+.quill_image_container {
+  display: inline;
+  float: left;
+}
 
+.quill_image_container img {
+  display: inline;
+}
+
+.image_resize_slider {
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+  margin: 0px auto;
+  width: 100%;
+}
 
 
 /* Dropdown menu */
@@ -869,7 +900,16 @@ html, body {
   float: right;
 }
 
+.pagination {
+  text-align: center;
+  float: right;
+  width: 100%;
+}
 
+.media_options_wrapper {
+  float: right;
+  margin-top: 20px;
+}
 
 
 
