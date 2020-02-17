@@ -325,25 +325,7 @@
 			'formats/hr': HR
 		});
 
-	// class ImageContainerBlot extents BlockEmbed {
 
-	// }
-
-	class ImageBlotContainer extends BlockEmbed {
-
-		static blotName = 'image-container';
-		static tagName = 'p';
-
-		static create(value) {
-			let node = super.create();
-			let url = 'https://kanbanize.com/wp-content/uploads/website-images/Agile/pdca-cycle-3.png';
-			
-
-			
-			return node;
-		}
-	} 
-	Quill.register(ImageBlotContainer);
 
 	class ImageBlot extends BlockEmbed {
 		static create(url) {
