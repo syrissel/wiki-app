@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_action :authenticate_supervisor, only: [:review, :admin, :review_wiki]
   before_action :authenticate_user, except: [:index]
-  before_action :check_page_approved, only: [:show]
+  #before_action :check_page_approved, only: [:show]
   
   
 
@@ -16,7 +16,7 @@ class PagesController < ApplicationController
 
       @videos = Video.where("name LIKE :query", query: "%#{@query}%")
     else
-      @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").limit(10)
+      @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").limit(10).page params[:page]
     end
     
   end

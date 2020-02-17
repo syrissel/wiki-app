@@ -348,15 +348,16 @@ html, body {
 }
 
 .card {
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
+  //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  //transition: 0.3s;
   width: 100%;
   margin: 10px 0px;
   height: 6em;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  //box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 3px 7px rgba(0, 0, 0, 0.432);
 }
 
 .cardview_container {

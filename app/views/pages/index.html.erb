@@ -30,6 +30,8 @@
   </div>
 <% end %>
 
+<%= paginate @pages %>
+
 
 <% if params[:query].present? && @videos.present? %>
 <h3>Video results:</h3>
