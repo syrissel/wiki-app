@@ -342,7 +342,7 @@
 			sliderNode.setAttribute('class', 'image_resize_slider');
 			//imgNode.setAttribute('display', 'inline');
 			node.appendChild(imgNode);
-			node.appendChild(sliderNode);
+			//node.appendChild(sliderNode);
 
 			return node;
 		}
@@ -461,9 +461,9 @@
 		var form = document.querySelector('#page_form');
 		var quill = new Quill('#editor', {
 			modules: {
-				// imageResize: {
-				// 	displaySize: true
-				// },
+				imageResize: {
+					displaySize: true
+				},
 				toolbar: {
 					container: '#toolbar',
 					handlers: {
