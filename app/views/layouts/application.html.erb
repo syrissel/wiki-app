@@ -70,15 +70,7 @@
         <p class='gen1'><%= r.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon></p>
 				<li class='gen1_list'>
 						
-            <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																									category: r.id, publish: PUBLISHED)%>
-            <ul class="root_pages">
-            <% pages_of_type.each do |pot| %>
-              <li>
-                <%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'>
-              </li>
-            <% end %>
-            </ul>
+            
 						<% @sub_categories.each do |s| %>
 							<% if r.id == s.category_id %>
 								<ul>
@@ -136,6 +128,16 @@
 								</ul>
 							<% end %>
 						<% end %>
+
+            <% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
+																									category: r.id, publish: PUBLISHED)%>
+            <ul class="root_pages">
+            <% pages_of_type.each do |pot| %>
+              <li>
+                <%= link_to pot.title, pot %><box-icon style='margin-right:2px; float:left;' size='18px' name='file'>
+              </li>
+            <% end %>
+            </ul>
 				</li>
 			<% end %>
 		</ul>

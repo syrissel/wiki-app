@@ -1,7 +1,7 @@
 <h1>Categories</h1>
 
 <% if @root_categories.nil? %>
-  <h3>There are currently no categories.</h3>
+  <h3>There are currently no categories. <%= link_to 'Create one', new_category_path %></h3>
 <% else %>
   <ul class="category_ul">
     <% @root_categories.each do |r| %>

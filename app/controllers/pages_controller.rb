@@ -24,6 +24,7 @@ class PagesController < ApplicationController
   def new
     @videos = Video.all.page params[:page]
     @images = Image.where('path IS NOT NULL').page params[:page]
+    @categories = Category.order(:id).where('category_id IS NULL')
     # @users = User.order(:name).page params[:page]
     
     # respond_to do |format|

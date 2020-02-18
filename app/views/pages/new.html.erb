@@ -36,7 +36,18 @@
 		</div>
 	<div class="form_label form_group">
     <%= f.label :category %><br />
-		<%= collection_select :page, :category_id, Category.order(:id), :id, :name, prompt: true %>
+		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
+
+		<%= render 'category_select' %>
+
+
+		<script>
+			let div = document.getElementById('select_test');
+			div.innerHTML = 'General Kenobi';
+		</script>
+
+
+
 	</div>
 	<div class="video_options hidden clearfix">
 	<h2>Insert a video</h2>
