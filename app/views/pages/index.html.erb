@@ -7,30 +7,13 @@
   <h3>There are currently no wikis published... <%= link_to 'Create one!', new_page_path %></h3>
 <% end %>
 
+<div id="pages">
+  <%= render @pages %>
+</div>
 
-<% @pages.each do |p| %>
-<% p.content = ActionController::Base.helpers.strip_tags(p.content) %>
-<%= link_to page_path(p) do %>
-  <div class="card_exterior">
-    <div class="card">
-      <div class="cardview_container">
-				<box-icon class='box_cardview' size='84px' style='float:left;' name='file'></box-icon>
-        <h3><%= p.title %></h3>
-        <% if p.description.present? %>
-          <p><%= p.description %></p>
-        <% else %>
-          <p>No description provided.</p>
-        <%#= sanitize preview(p) %>
-        <% end %>
-        <div class="cardview_author"><p>by <%= p.user.username %></p><p> | last edit: <%= p.last_user_edit %></p></div>
-      
-      </div>
-    </div>
-  <% end %>
-  </div>
-<% end %>
-
-<%= paginate @pages, remote: true %>
+<div id="paginator">
+  <%= paginate @pages, remote: true %>
+</div>  
 
 
 <% if params[:query].present? && @videos.present? %>

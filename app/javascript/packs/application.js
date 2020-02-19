@@ -17,6 +17,7 @@ import "jquery";
 import "boxicons";
 import "custom/side_menu";
 import "custom/image_show";
+//import "custom/kaminari"
 //require("custom/image-resize")
 
 

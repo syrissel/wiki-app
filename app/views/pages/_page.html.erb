@@ -1,0 +1,19 @@
+
+<%= link_to page_path(page) do %>
+  <div class="card_exterior">
+    <div class="card">
+      <div class="cardview_container">
+				<box-icon class='box_cardview' size='84px' style='float:left;' name='file'></box-icon>
+        <h3><%= page.title %></h3>
+        <% if page.description.present? %>
+          <p><%= page.description %></p>
+        <% else %>
+          <p>No description provided.</p>
+        <%#= sanitize preview(p) %>
+        <% end %>
+        <div class="cardview_author"><p>by <%= page.user.username %></p><p> | last edit: <%= page.last_user_edit %></p></div>
+      
+      </div>
+    </div>
+  <% end %>
+  </div>
