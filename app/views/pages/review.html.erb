@@ -35,14 +35,4 @@
 
 <%= paginate @pending_pages %>
 
-<% if flash[:notice].present? %>
-  <script>
-  window.onload = function showSnackbar() {
-    var snackbar = document.getElementById("snackbar");
-    snackbar.className = "show";
-    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
-  }
-  </script>
-<% end %>
-
-<div id="snackbar"><%= flash[:notice] %></div>
+<%= render 'layouts/snackbar' %>

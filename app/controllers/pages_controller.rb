@@ -23,7 +23,17 @@ class PagesController < ApplicationController
 
   def new
     @videos = Video.all.page params[:page]
-    @images = Image.where('path IS NOT NULL').page params[:page]
+
+    if params["/pages/new"].present?
+      if params["/pages/new"][:imageq].present?
+        @query = params["/pages/new"][:imageq]
+        @images = Image.where("name LIKE :query", query: "%#{@query}%").page params[:page]
+      else
+        @images = Image.where('path IS NOT NULL').page params[:page]
+      end
+    else
+      @images = Image.where('path IS NOT NULL').page params[:page]
+    end
     @categories = Category.order(:id).where('category_id IS NULL')
     # @users = User.order(:name).page params[:page]
     
@@ -31,6 +41,10 @@ class PagesController < ApplicationController
     #   format.html { render 'new' } 
     #   format.js
     # end
+  end
+
+  def image_upload
+
   end
 
   def show
@@ -112,7 +126,7 @@ class PagesController < ApplicationController
 			end
 		end
 
-		@pending_pages = Page.joins(:approval_status).order(@order_by).page params[:page]
+		@pending_pages = Page.joins(:approval_status).where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page params[:page]
 	end
 	
 	def review_wiki

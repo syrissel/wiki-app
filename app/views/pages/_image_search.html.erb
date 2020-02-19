@@ -1,0 +1,9 @@
+<div id="image_search">
+  <%= simple_form_for new_page_path, method: :get, remote: true do |f| %>
+		<%= f.text_field :imageq %>
+		<%= f.submit 'Search'  %>
+	<% end %>
+	<div id="images">
+		<%= render @images %>
+	</div>
+</div>

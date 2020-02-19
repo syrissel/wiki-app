@@ -92,26 +92,7 @@
 </div>
 
 
-<div class="image_options hidden clearfix">
-	<h2>Insert an image</h2>
-	<ul>
-	<div class='radio_wrapper'>
-	<% if @images.present? %>
-	<div id="images">
-		<%= render @images %>
-	</div>
-	<div id="paginator">
-		<%= paginate @images, remote: true %>
-	</div>
-		<div class="media_options_wrapper">
-		<button type='button' id="image_button">Insert</button>
-		<button type='button' onclick="showImageOptions()">Cancel</button>
-		<%= link_to 'Upload', new_image_path %>
-	</div>
-	<% end %>
-	</div>
-	</ul>
-</div>
+
 
   <div class="form_group">
     <%#= f.label :content, class: "form_label" %>
@@ -193,6 +174,24 @@
   </div>
 <% end %>
 
+<div class="image_options hidden clearfix">
+	<h2>Insert an image</h2>
+	<ul>
+	<div class='radio_wrapper'>
+	<% if @images.present? %>
+		<%= render 'image_search' %>
+	<div id="paginator">
+		<%= paginate @images, remote: true %>
+	</div>
+		<div class="media_options_wrapper">
+		<button type='button' id="image_button">Insert</button>
+		<button type='button' onclick="showImageOptions()">Cancel</button>
+		<%= link_to 'Upload', new_image_path %>
+	</div>
+	<% end %>
+	</div>
+	</ul>
+</div>
 
 
 <script>

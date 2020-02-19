@@ -6,6 +6,11 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
     @images = Image.all
+
+    respond_to do |format|
+      format.html { redirect_to images_path }
+      format.js
+    end
   end
 
   # GET /images/1

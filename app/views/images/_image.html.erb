@@ -1,20 +1,14 @@
 <li>
-
-<div class='radio_top'>
-<strong><%= image.name %></strong>
-</div>
-<%# Store video path in data for retrieval by jquery %>
-<div class='radio_bottom'>
-
-<label>
-
-<%= content_tag :input, type: 'radio', name: 'image', data: {image: Image.find(image.id).path} do %>
-<% if image.path.present? %>
-  <%# <div class="video_image_wrapper"> %>
-  <%= image_tag(image.path.url, size: '196x111') %>
-<% end %>
-<%# '295.783x166.367' %>
-</label>
-<% end %>
-</div>
+  <div class='radio_top'>
+    <strong><%= image.name %></strong>
+  </div>
+  <div class='radio_bottom'>
+    <label>
+    <%= content_tag :input, type: 'radio', name: 'image', data: {image: Image.find(image.id).path} do %>
+      <% if image.path.present? %>
+        <%= image_tag(image.path.url, size: '196x111') %>
+      <% end %>
+    </label>
+    <% end %>
+  </div>
 </li>
