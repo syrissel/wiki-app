@@ -12,7 +12,7 @@ class PagesController < ApplicationController
                                         OR page_publish_status_id = :publish AND title LIKE :query
                                         OR page_publish_status_id = :publish AND username LIKE :query
 																				OR page_publish_status_id = :publish AND description LIKE :query", 
-                                        publish: PUBLISHED, query: "%#{@query}%" ).order("updated_at desc").limit(10)
+                                        publish: PUBLISHED, query: "%#{@query}%" ).order("updated_at desc").limit(10).page params[:page]
 
       @videos = Video.where("name LIKE :query", query: "%#{@query}%")
     else

@@ -210,8 +210,6 @@
   </div>
 <% end %>
 
-<!--<input type="range" min="10" max="100" value="100" onchange="adjustWidth(this)">-->
-<div id="test-div">Dummy text.</div>
 
 
 <script>
@@ -406,6 +404,7 @@
 		//quill.insertText(range.index, '</p>', Quill.sources.USER);
 		//quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
 		quill.setSelection(range.index + 2, Quill.sources.SILENT);
+		quill.insertText(range.index, '\n', Quill.sources.USER);
 	});
 
 	class VideoBlot extends BlockEmbed {

@@ -30,7 +30,7 @@
   </div>
 <% end %>
 
-<%= paginate @pages %>
+<%= paginate @pages, remote: true %>
 
 
 <% if params[:query].present? && @videos.present? %>
