@@ -44,6 +44,10 @@ class ImageUploader < CarrierWave::Uploader::Base
     process resize_to_fit: [150,150]
   end
 
+  version :show do
+    process resize_to_fit: [400, nil]
+  end
+
 	
   # def store_dimensions
   #   if file && model

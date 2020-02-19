@@ -17,9 +17,9 @@
         <td>
 					<strong><%=image.name%></strong><br />
 					<% if image.path.present? %>
-					<%= link_to edit_image_path(image) do %><%=image_tag(image.path.preview.url)%><% end %>
+					<%= link_to image_path(image) do %><%=image_tag(image.path.preview.url)%><% end %>
 					<% else %>
-					<%= link_to edit_image_path(image) do %><%=image_tag(image.video_path.preview.url)%><% end %>
+					<%= link_to image_path(image) do %><%=image_tag(image.video_path.preview.url)%><% end %>
 					<% end %>
 				</td>
         <%#<td><%= link_to 'Edit', edit_image_path(image) %><%#</td>%>

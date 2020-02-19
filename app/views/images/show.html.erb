@@ -5,11 +5,13 @@
 <% end %>
 
 <% if @image.path.present? %>
-  <%= image_tag(@image.path.url) %>
+  <%= image_tag(@image.path.show.url) %>
 <% else %>
   <%= image_tag(@image.video_path.url) %>
 <% end %>
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
+
+<%= link_to 'Full resolution', @image.path.url, target: '_blank' %>
 
 <%= link_to 'New Image', new_image_path, class: 'link_button' %>

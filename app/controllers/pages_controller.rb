@@ -14,7 +14,7 @@ class PagesController < ApplicationController
 																				OR page_publish_status_id = :publish AND description LIKE :query", 
                                         publish: PUBLISHED, query: "%#{@query}%" ).order("updated_at desc").limit(10).page params[:page]
 
-      @videos = Video.where("name LIKE :query", query: "%#{@query}%")
+      @videos = Video.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36)
     else
       @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").limit(10).page params[:page]
     end
@@ -22,17 +22,17 @@ class PagesController < ApplicationController
   end
 
   def new
-    @videos = Video.all.page params[:page]
+    @videos = Video.order(:created_at).limit(36).page params[:page]
 
     if params["/pages/new"].present?
       if params["/pages/new"][:imageq].present?
         @query = params["/pages/new"][:imageq]
-        @images = Image.where("name LIKE :query", query: "%#{@query}%").page params[:page]
+        @images = Image.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36).page params[:page]
       else
-        @images = Image.where('path IS NOT NULL').page params[:page]
+        @images = Image.where('path IS NOT NULL').order(:created_at).limit(36).page params[:page]
       end
     else
-      @images = Image.where('path IS NOT NULL').page params[:page]
+      @images = Image.where('path IS NOT NULL').order(:created_at).limit(36).page params[:page]
     end
     @categories = Category.order(:id).where('category_id IS NULL')
     # @users = User.order(:name).page params[:page]
@@ -53,8 +53,8 @@ class PagesController < ApplicationController
 
   def edit
 		@page = Page.find(params[:id])
-    @videos = Video.all.page params[:page]
-    @images = Image.where('path IS NOT NULL').page params[:page]
+    @videos = Video.order(:created_at).limit(36).page params[:page]
+    @images = Image.where('path IS NOT NULL').order(:created_at).limit(36).page params[:page]
   end
 
   # If the database fails at updating, render edit page. Otherwise commit changes.
