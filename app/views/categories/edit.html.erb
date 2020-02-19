@@ -1,0 +1,16 @@
+<h2>Editing <%= @category.name %></h2>
+
+<%= form_for @category do |f| %>
+  <%#= hidden_field(:category, :sort_number, value: sort_number_increment) %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label "Parent Category (if applicable)"%>
+    <%= collection_select :category, :category_id, Category.order(:id), :id, :name, include_blank: true %>
+  </div>
+  <div>
+    <%= f.submit 'Submit' %>
+  </div>
+<% end %>

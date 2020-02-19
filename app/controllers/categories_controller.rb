@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_supervisor
   before_action :authenticate_user
+  before_action :set_category, only: [:edit, :show, :update, :destroy]
 
   def new
     @category = Category.new
@@ -14,7 +15,9 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+  end
+
+  def edit
   end
 
   def create
@@ -27,8 +30,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def update
+    if @category.update(category_params)
+      redirect_to categories_path, notice: "#{@category.name} saved."
+    else
+      render :edit
+    end
+  end
+
 	def destroy
-		@category = Category.find(params[:id])
 		redirect_to categories_path
 		@category.destroy
   end
@@ -69,6 +79,10 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
   def category_params
     params.require(:category).permit(:name, :position, :category_id)

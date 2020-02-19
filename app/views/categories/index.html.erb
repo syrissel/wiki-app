@@ -6,26 +6,26 @@
   <ul class="category_ul">
     <% @root_categories.each do |r| %>
       <li>
-        <%= r.name %><%= link_to "Move Up", categories_move_up_path(r)%><%= link_to "Move Down", categories_move_down_path(r)%>
+        <%= link_to r.name, edit_category_path(r) %><%= link_to "Move Up", categories_move_up_path(r)%><%= link_to "Move Down", categories_move_down_path(r)%>
 				<%= link_to "Delete", category_path(r), method: :delete, data: { confirm: "Delete #{r.name}? All child categories will be deleted as well."}%>
       </li>
       <% @sub_categories.each do |s| %>
         <% if r.id == s.category_id %>
           <ul>
             <li>
-              <%= s.name %><%= link_to "Move Up", categories_move_up_path(s)%><%= link_to "Move Down", categories_move_down_path(s)%>
+              <%= link_to s.name, edit_category_path(s) %><%= link_to "Move Up", categories_move_up_path(s)%><%= link_to "Move Down", categories_move_down_path(s)%>
             </li>
             <% @sub_categories.each do |t| %>
               <% if s.id == t.category_id %>
                 <ul>
                   <li>
-                    <%= t.name %><%= link_to "Move Up", categories_move_up_path(t)%><%= link_to "Move Down", categories_move_down_path(t)%>
+                    <%= link_to t.name, edit_category_path(t) %><%= link_to "Move Up", categories_move_up_path(t)%><%= link_to "Move Down", categories_move_down_path(t)%>
                   </li>
                   <% @sub_categories.each do |u| %>
                     <% if t.id == u.category_id %>
                       <ul>
                         <li>
-                          <%= u.name %><%= link_to "Move Up", categories_move_up_path(u)%><%= link_to "Move Down", categories_move_down_path(u)%>
+                          <%= link_to u.name, edit_category_path(u) %><%= link_to "Move Up", categories_move_up_path(u)%><%= link_to "Move Down", categories_move_down_path(u)%>
                         </li>
                       </ul>
                     <% end %>
@@ -50,3 +50,5 @@
 	<li><%=name%>% <%= spec.license %></li>
 <% end %>
 </ul>
+
+<%= render 'layouts/snackbar' %>
