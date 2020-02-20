@@ -1,7 +1,4 @@
 <li>
-  <div class='radio_top'>
-    <strong><%= image.name %></strong>
-  </div>
   <div class='radio_bottom'>
     <label>
     <%= content_tag :input, type: 'radio', name: 'image', data: {image: Image.find(image.id).path} do %>
@@ -10,5 +7,8 @@
       <% end %>
     </label>
     <% end %>
+  </div>
+    <div class='radio_top'>
+    <strong><%= image.name %></strong>
   </div>
 </li>

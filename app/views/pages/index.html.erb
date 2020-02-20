@@ -7,9 +7,11 @@
   <h3>There are currently no wikis published... <%= link_to 'Create one!', new_page_path %></h3>
 <% end %>
 
+<%= link_to_prev_page @pages, 'Prev Page', class: 'prev_page' %>
 <div id="pages">
   <%= render @pages %>
 </div>
+<%= link_to_next_page @pages, 'Next Page', class: 'next_page' %>
 
 <div id="paginator">
   <%= paginate @pages, remote: true %>
