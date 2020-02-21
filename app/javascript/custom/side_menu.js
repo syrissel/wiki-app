@@ -9,25 +9,25 @@ function load() {
   for (let i = 0; i < gen1Links.length; i++) {
     let siblingElement = gen1Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow(gen1Links[i]);
+    //addMenuArrow(gen1Links[i]);
   }
 
   for (let i = 0; i < gen2Links.length; i++) {
     let siblingElement = gen2Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow(gen2Links[i]);
+    //addMenuArrow(gen2Links[i]);
   }
 
   for (let i = 0; i < gen3Links.length; i++) {
     let siblingElement = gen3Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow(gen3Links[i]);
+    //addMenuArrow(gen3Links[i]);
   }
 
   for (let i = 0; i < gen4Links.length; i++) {
     let siblingElement = gen4Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    addMenuArrow(gen4Links[i]);
+    //addMenuArrow(gen4Links[i]);
   }
 
   function addMenuArrow(item) {
@@ -44,19 +44,6 @@ function load() {
   }
   
   function display() {
-    
-    // var children = this.children;
-  
-    // for (var i = 0; i < children.length; i++) {
-    //   var child = children[i];
-  
-    //   if (child.style.display === "none") {
-    //     child.style.display = "block";
-    //   } else {
-    //     child.style.display = "none";
-    //   }
-      
-    // }
   
     let siblingElement = this.nextElementSibling;
   

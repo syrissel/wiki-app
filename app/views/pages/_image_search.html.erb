@@ -3,6 +3,7 @@
 		<%= f.text_field :imageq %>
 		<%= f.submit 'Search'  %>
 	<% end %>
+	<div class="media_options_upload_wrapper"><%= link_to 'Upload', new_image_path, class: 'media_options_upload' %></div>
 	<div id="images">
 		<%= render @images %>
 	</div>
