@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :authenticate_supervisor, only: [:new, :index]
-	before_action :set_user, only: [:edit, :update, :destroy]
+	before_action :set_user, only: [:edit, :update, :destroy, :password, :admin_update, :user_update]
+	before_action :verify_user, only: [:password]
 
   # What does this do?
   wrap_parameters :user, include: [:username, :password, :password_confirmation]
@@ -72,9 +73,22 @@ class UsersController < ApplicationController
 	end
 	
 	def update
-		
-		if @user.update(user_params)
+		@user.update(user_params)
+	end
+
+	def admin_update
+		if update
 			redirect_to admin_path, notice: "#{@user.username} has been updated."
+		else
+			render :edit
+		end
+	end
+
+	def user_update
+		if update
+			redirect_to root_path, notice: 'Password updated!'
+		else
+			render :password
 		end
 	end
 
@@ -82,9 +96,18 @@ class UsersController < ApplicationController
   def destroy
     # redirect_to users_path, notice: "#{@user.username} has been deleted."
     # @user.destroy
-  end
+	end
+
+	def password
+	end
 
 	private
+
+	def verify_user
+		if current_user.id != @user.id
+			redirect_to root_path, notice: 'Cannot change another user\'s password!'
+		end
+	end
 	
 	def set_user
 		@user = User.find(params[:id])

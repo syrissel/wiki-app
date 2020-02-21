@@ -18,15 +18,17 @@ Rails.application.routes.draw do
 	get 'admin', to: 'pages#admin'
 	get 'review/wiki/:id', to: 'pages#review_wiki', as: 'review_wiki'
   patch 'executive/update/:id', to: 'pages#executive_update', as: 'executive_update'
-  patch 'supervisor/update/:id', to: 'pages#supervisor_update', as: 'supervisor_update'
+	patch 'supervisor/update/:id', to: 'pages#supervisor_update', as: 'supervisor_update'
+	patch 'admin/user/update/:id', to: 'users#admin_update', as: 'admin_update'
+	patch 'user/update/:id', to: 'users#user_update', as: 'user_update'
 	post 'pages/:id/edit', to: 'pages#update', as: 'edit_pages_path'
 	# post 'videos/parse_html', to: 'videos#parse_html'
 	# post 'videos/show/:id', to: 'videos#show'
   # get 'search', to: 'pages#search'
-  get 'videos/upload', to: 'videos#base64_upload', as: 'base64'
+	get 'videos/upload', to: 'videos#base64_upload', as: 'base64'
+	get 'password/:id', to: 'users#password', as: 'password_change'
 
   resources :categories
-
   resources :users
   resources :sessions
   resources :pages

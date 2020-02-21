@@ -1,7 +1,6 @@
 <div class="registration_container">
 <h1 class="edit_font edit_title">Editing <%= @user.username %></h1>
 
-<%= form_for @user do |f| %>
 <div class="errors">
 <% if @user.present? && @user.errors.any? %>
 	<p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
@@ -12,6 +11,9 @@
 	</ul>
 <% end %>
 </div>
+
+<%= form_for @user, url: { action: :admin_update } do |f| %>
+
 
   <div class="user_form_group">
     <%= f.label "Username (required)", params[:username], class: 'user_label' %><br />
