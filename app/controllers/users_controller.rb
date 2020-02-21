@@ -105,7 +105,7 @@ class UsersController < ApplicationController
 
 	def verify_user
 		if current_user.id != @user.id
-			redirect_to root_path, notice: 'Cannot change another user\'s password!'
+			redirect_to password_change_path(current_user), notice: 'Cannot change another user\'s password!'
 		end
 	end
 	
