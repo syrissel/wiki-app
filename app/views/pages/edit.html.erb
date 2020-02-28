@@ -19,21 +19,145 @@
 
 <%= form_for @page, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
-    <%= f.label 'Title', class: 'form_label' %><br>
-    <%= f.text_field :title_review, class: 'text_field' %>
+    <%= f.label :title, class: "form_label" %><br>
+    <%= f.text_field :title, class: "text_field" %>
   </div>
-		<div class="form_group">
+  <div class="form_group">
+    <%= hidden_field(:page, :user_id, value: current_user.id) %>
+    <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
+		<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
+		<%= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
+  </div>
+	<div class="form_group">
 		<%= f.label 'Give a quick summary of what this wiki is about', class: 'form_label' %>
 		<%= f.text_field :description, class: "text_field"%>
 		</div>
-	<div class="category_label form_group">
+	<div class="form_label form_group">
     <%= f.label :category %><br />
-		<%= collection_select :page, :category_review, Category.order(:id), :id, :name, prompt: true, selected: @page.category_id %>
+		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
+	
+	<button type="button" onclick="showCategoryOptions()">Select Category</button>
+	<div class="category_select hidden">
+		<div class="image_options_header">
+			<h2>Choose Category</h2>
+			<button type='button' onclick="showCategoryOptions()">x</button>
+		</div>
+		<%= render 'category_select' %>
+		<button type='button' onclick="showCategoryOptions()" style="float:right;">OK</button>
 	</div>
-		<div class="video_options hidden clearfix">
-	<h2>Insert a video</h2>
+	</div>
+
+  <div class="form_group">
+    <%#= f.label :content, class: "form_label" %>
+      <div class="form-group">
+      <%= f.hidden_field :content, :id => "post-content", required: true %>
+      <div id="editor-container" hidden="true"></div>
+      <div id="toolbar">
+			<span class="ql-formats">
+				<select class="ql-font">
+					<option selected></option>
+					<option value="serif"></option>
+					<option value="monospace"></option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<select class="ql-size">
+					<option value="small"></option>
+					<option selected></option>
+					<option value="large"></option>
+					<option value="huge"></option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-header" value="1"></button>
+				<button class="ql-header" value="2"></button>
+				<button class="ql-blockquote"></button>
+				<button class="ql-code-block"></button>
+				<button class="ql-hr"><b>—</b></button>
+				<%#<button class="ql-border"><b>BR</b></button>%>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-bold"></button>
+				<button class="ql-italic"></button>
+				<button class="ql-underline"></button>
+				<button class="ql-strike"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-list" value="ordered"></button>
+				<button class="ql-list" value="bullet"></button>
+				<button class="ql-indent" value="-1"></button>
+				<button class="ql-indent" value="+1"></button>
+			</span>
+			<span class="ql-formats">
+				<select class="ql-color">
+				</select>
+				<select class="ql-background">
+				</select>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-link"></button>
+				<button class="bx bx-image" type='button' onclick="showImageOptions()"></button>
+				<button class="fa fa-play custom_video_button" type='button' onclick="showVideoOptions()"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-clean"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-align" value=""></button>
+				<button class="ql-align" value="center"></button>
+				<button class="ql-align" value="right"></button>
+				<button class="ql-align" value="justify"></button>
+			</span>
+		</div>
+    </div>
+  </div>
+	<%= content_tag :div, id: 'content_review', data: {contentreview: Page.find(params[:id]).content_review} do %>
+	<% end %>
+	<!--<div id="editor"><%= raw @page.content_review %></div>-->
+	<div id="editor"><%#= raw @page.content_review %></div>
+  <div class="form_group">
+    <%= f.submit "Save changes", class: "edit_button", data: { confirm: "Submit for review?"} %>
+		
+  </div>
+<% end %>
+		<script>
+			setTimeout(window.onload = function() {
+				let content = $("#content_review").data('contentreview');
+				$(".ql-editor").html(content);
+				
+			}, 100);
+		</script>
+<a href="javascript:history.back()" class="edit_button" id="cancel_button">Cancel</a>
+
+<%# <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> %>
+<%= javascript_include_tag 'image-resize.js' %>
+
+<div class="image_options hidden clearfix">
+	<div class="image_options_header">
+		<h2>Insert Image</h2>
+		<button type='button' onclick="showImageOptions()">x</button>
+	</div>
 	<ul>
 	<div class='radio_wrapper'>
+	<% if @images.present? %>
+		<%= render 'image_search' %>
+	<div id="paginator">
+		<%= paginate @images, remote: true %>
+	</div>
+		<div class="media_options_wrapper">
+		<button type='button' id="image_button">Insert</button>
+		<button type='button' onclick="showImageOptions()">Cancel</button>
+	</div>
+	<% end %>
+	</div>
+	</ul>
+</div>
+
+	<div class="video_options hidden clearfix">
+	<h2>Insert Video</h2>
+	<ul>
+	<div class='radio_wrapper'>
+	<% if @videos.present? %>
 	<% @videos.each do |v| %>
 	<li>
 	
@@ -61,146 +185,15 @@
 	</li>
 	<% end %>
 	<%= paginate @videos, params: { video: true } %>
-	</div>
-	</ul>
-	<button type='button' id="video_button">Insert</button>
-	<%= link_to 'Upload', new_video_path %>
-</div>
-
-<div class="image_options hidden clearfix">
-	<h2>Insert an image</h2>
-	<ul>
-	<div class='radio_wrapper'>
-	<% if @images.present? %>
-	<% @images.each do |i| %>
-	<li>
-	
-	<div class='radio_top'>
-	<strong><%= i.name %></strong>
-	</div>
-	<%# Store video path in data for retrieval by jquery %>
-	<div class='radio_bottom'>
-	
-	<label>
-	
-	<%= content_tag :input, type: 'radio', name: 'image', data: {image: Image.find(i.id).path} do %>
-	<% if i.path.present? %>
-		<%# <div class="video_image_wrapper"> %>
-		<%= image_tag(i.path.url, size: '196x111') %>
-	<% end %>
-	<%# '295.783x166.367' %>
-	</label>
-	<% end %>
-	</div>
-	</li>
-	<% end %>
-	<%= paginate @images, params: { image: true } %>
 		<div class="media_options_wrapper">
-		<button type='button' id="image_button">Insert</button>
-		<button type='button' onclick="showImageOptions()">Cancel</button>
-		<%= link_to 'Upload', new_image_path %>
+		<button type='button' id="video_button">Insert</button>
+		<button type='button' onclick="showVideoOptions()">Cancel</button>
+		<%= link_to 'Upload', new_video_path %>
 	</div>
 	<% end %>
 	</div>
 	</ul>
 </div>
-	<div class="form_group">
-		<%= hidden_field(:page, :id, value: @page.id) %>
-		<%= hidden_field(:page, :title, value: @page.title) %>
-		<%= hidden_field(:page, :content, value: @page.content) %>
-		<%= hidden_field(:page, :category_id, value: @page.category_id) %>
-    <%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
-    <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
-  </div>
-	<div class="form_group">
-		<%= f.hidden_field :content_review, :id => "post-content", required: true %>
-		<div id="editor-container" hidden="true">
-			<span class="ql-formats">
-          <button class="ql-hr"></button> 
-        </span>
-		</div>
-		<div id="toolbar">
-			<span class="ql-formats">
-				<select class="ql-font">
-					<option selected></option>
-					<option value="serif"></option>
-					<option value="monospace"></option>
-				</select>
-			</span>
-			<span class="ql-formats">
-				<select class="ql-size">
-					<option value="small"></option>
-					<option selected></option>
-					<option value="large"></option>
-					<option value="huge"></option>
-				</select>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-header" value="1"></button>
-				<button class="ql-header" value="2"></button>
-				<button class="ql-blockquote"></button>
-				<button class="ql-code-block"></button>
-				<button class="ql-hr"><b>—</b></button>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-bold"></button>
-				<button class="ql-italic"></button>
-				<button class="ql-underline"></button>
-				<button class="ql-strike"></button>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-list" value="ordered"></button>
-				<button class="ql-list" value="bullet"></button>
-				<button class="ql-indent" value="-1"></button>
-				<button class="ql-indent" value="+1"></button>
-			</span>
-			<span class="ql-formats">
-				<select class="ql-color">
-				</select>
-				<select class="ql-background">
-				</select>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-direction" value="rtl"></button>
-				<select class="ql-align">
-					<option selected></option>
-					<option value="center"></option>
-					<option value="right"></option>
-					<option value="justify"></option>
-				</select>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-link"></button>
-				<button class="ql-image"></button>
-				<button class="bx bx-image" type='button' onclick="showImageOptions()"></button>
-				<button class="fa fa-play custom_video_button" type='button' onclick="showVideoOptions()"></button>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-clean"></button>
-			</span>
-		</div>
-		
-	</div>
-	<%= content_tag :div, id: 'content_review', data: {contentreview: Page.find(params[:id]).content_review} do %>
-	<% end %>
-	<!--<div id="editor"><%= raw @page.content_review %></div>-->
-	<div id="editor"><%#= raw @page.content_review %></div>
-  <div class="form_group">
-    <%= f.submit "Save changes", class: "edit_button", data: { confirm: "Submit for review?"} %>
-		
-  </div>
-<% end %>
-		<script>
-			setTimeout(window.onload = function() {
-				let content = $("#content_review").data('contentreview');
-				$(".ql-editor").html(content);
-				
-			}, 100);
-		</script>
-<a href="javascript:history.back()" class="edit_button" id="cancel_button">Cancel</a>
-
-<%# <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> %>
-<%= javascript_include_tag 'image-resize.js' %>
 
 
 <%# Video options stuffs %>
@@ -216,8 +209,18 @@
 		  
 	}
 
-		function showImageOptions() {
+	function showImageOptions() {
 		let options = document.getElementsByClassName('image_options')[0];
+
+		if (options.classList.contains('hidden')) {
+			options.className = options.className.replace("hidden", "");
+		} else {
+			options.classList.add("hidden");
+		}
+	}
+
+	function showCategoryOptions() {
+		let options = document.getElementsByClassName('category_select')[0];
 
 		if (options.classList.contains('hidden')) {
 			options.className = options.className.replace("hidden", "");
