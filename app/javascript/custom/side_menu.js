@@ -9,25 +9,25 @@ function load() {
   for (let i = 0; i < gen1Links.length; i++) {
     let siblingElement = gen1Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    // addMenuArrow(gen1Links[i]);
+    addMenuArrow(gen1Links[i]);
   }
 
   for (let i = 0; i < gen2Links.length; i++) {
     let siblingElement = gen2Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    // addMenuArrow(gen2Links[i]);
+    addMenuArrow(gen2Links[i]);
   }
 
   for (let i = 0; i < gen3Links.length; i++) {
     let siblingElement = gen3Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    // addMenuArrow(gen3Links[i]);
+    addMenuArrow(gen3Links[i]);
   }
 
   for (let i = 0; i < gen4Links.length; i++) {
     let siblingElement = gen4Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
-    // addMenuArrow(gen4Links[i]);
+    addMenuArrow(gen4Links[i]);
   }
 
   function addMenuArrow(item) {
@@ -35,11 +35,15 @@ function load() {
     let siblingElement = item.nextElementSibling;
     let childrenCount = siblingElement.childElementCount;
     let rootPages = siblingElement.getElementsByTagName('ul')[0];
-    let rootChildrenCount = rootPages.childElementCount;
-    let arrowPresent = item.getElementsByClassName('chevron')[0];
-  
-    if ((childrenCount > 1 || rootChildrenCount > 0) && !arrowPresent) {
-      item.innerHTML += "<box-icon class='chevron' size='16px' name='chevron-down'></box-icon>"
+   
+    let arrowPresent = item.getElementsByClassName('chevron')[0]; 
+
+    if (siblingElement && rootPages) {
+
+      let rootChildrenCount = rootPages.childElementCount;
+      if ((childrenCount > 1 || rootChildrenCount > 0) && !arrowPresent) {
+        item.innerHTML += "<box-icon class='chevron' size='16px' name='chevron-down'></box-icon>"
+      }
     }
   }
   

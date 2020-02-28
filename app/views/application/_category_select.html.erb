@@ -1,66 +1,41 @@
-<ul class='root_categories'>
-	<% @root_categories.each do |r| %>
-		<p class='gen1'><%= r.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, r.id %></p>
-		<li class='gen1_list'>
-				
-				
-				<% @sub_categories.each do |s| %>
-					<% if r.id == s.category_id %>
-						<ul>
-							<p class='gen2'><%= s.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, s.id %></p>
-							<li class='gen2_list'>
-								
-								<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																											category: s.id, publish: PUBLISHED)%>
-							<ul>
-							<% pages_of_type.each do |pot| %>
-								<li>
-									
-								</li>
-							<% end %>
-							</ul>
-							<% @sub_categories.each do |t| %>
-								<% if s.id == t.category_id %>
-									<ul>
-										<p class='gen3'><%= t.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, t.id %></p>
-										<li class='gen3_list'>
-											
-											<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																														category: t.id, publish: PUBLISHED)%>
+		<ul class='root_categories'>
+			<% @root_categories.each do |r| %>
+        <p class='gen1'><%= r.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, r.id %></p>
+				<li class='gen1_list'>
+						
+            
+						<% @sub_categories.each do |s| %>
+							<% if r.id == s.category_id %>
+								<ul>
+                  <p class='gen2'><%= s.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, s.id %></p>
+									<li class='gen2_list'>
+										
+
+									<% @sub_categories.each do |t| %>
+										<% if s.id == t.category_id %>
 											<ul>
-											<% pages_of_type.each do |pot| %>
-												<li>
+                        <p class='gen3'><%= t.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, t.id %></p>
+												<li class='gen3_list'>
 													
-												</li>
-											<% end %>
-											</ul>
-											<% @sub_categories.each do |u| %>
-												<% if t.id == u.category_id %>
-													<ul>
-														<p class='gen4'><%= u.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, u.id %></p>
-														<li class='gen4_list'>
-															
-															<% pages_of_type = @menu_pages.where("category_id = :category AND page_publish_status_id = :publish", 
-																																		category: u.id, publish: PUBLISHED)%>
+													<% @sub_categories.each do |u| %>
+														<% if t.id == u.category_id %>
 															<ul>
-															<% pages_of_type.each do |pot| %>
-																<li>
+                                <p class='gen4'><%= u.name %><box-icon style='margin-right:2px; float:left;' size='18px' name='folder'></box-icon><%= radio_button :page, :category_id, u.id %></p>
+																<li class='gen4_list'>
 																	
 																</li>
-															<% end %>
 															</ul>
-														</li>
-													</ul>
-												<% end %>
-											<% end %>
-										</li>
-									</ul>
-								<% end %>
+														<% end %>
+													<% end %>
+												</li>
+											</ul>
+										<% end %>
+									<% end %>
+									</li>
+								</ul>
 							<% end %>
-							</li>
-						</ul>
-					<% end %>
-				<% end %>
-		</li>
-	<% end %>
-</ul>
+						<% end %>
+
+				</li>
+			<% end %>
+		</ul>

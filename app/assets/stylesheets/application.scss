@@ -505,13 +505,14 @@ html, body {
 	position: fixed;
   top: 15em;
   margin: 0px auto;
-  background-color: #353535;
+  background-color: #464748;
   color: #FFF;
   border: 1px solid black;
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.432);
 	border-radius: 2px;
 	z-index: 1;
-	width: 46.1em;
+  width: 46.1em;
+  overflow: auto;
 }
 
 #image_search {
