@@ -51,7 +51,7 @@
 		<%= image_tag(v.image.video_path.url, size: '196x111') %>
 		<%# <box-icon class="video_preview_icon" size="96px" color="#656565" name='play'></box-icon>
 		</div> %>
-	<% else %>
+	<% elsif v.image.path.present? %>
 		<%= image_tag(v.image.path.url, size: '196x111') %>
 	<% end %>
 	<%# '295.783x166.367' %>

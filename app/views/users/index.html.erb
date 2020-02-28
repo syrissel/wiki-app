@@ -1,5 +1,12 @@
 <h1>Users</h1>
 
+<div>
+ <%= simple_form_for users_path, method: :get do |f| %>
+		<%= f.text_field :userq %>
+		<%= f.submit 'Search'  %>
+	<% end %>
+</div>
+
 <table id="review-table">
 <tr>
   <th>Username<div class="arrow_container"><%= link_to users_path(s: 'username_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'username_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
@@ -24,3 +31,5 @@
 </table>
 
 <%= link_to 'Register New User', register_path, class: 'link_button' %>
+
+<%= console %>

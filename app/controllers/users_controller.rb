@@ -9,16 +9,6 @@ class UsersController < ApplicationController
 	def index
 		@order_by = 'created_at'
 
-		# if params[:s].present?
-		# 	if @prev_order.present? && (@prev_order.eql? params[:s]) && (@prev_order.include? 'asc')
-		# 		@order_by = params[:s] + ' desc'
-		# 	else
-		# 		@order_by = params[:s] + ' asc'
-		# 	end
-		# end
-
-		# @prev_order = @order_by
-
 		if params[:s].present?
 			filter_params = params[:s]
 			if params[:s].include? 'desc'
@@ -31,26 +21,19 @@ class UsersController < ApplicationController
 			end
 		end
 
-		# if params[:s].present?
-		# 	sort_param = params[:s]
-		# 	if @prev_order.present? && (@prev_order.include? 'asc')
-		# 		# @prev_order.slice! ' asc'
-		# 		@order_by = sort_param + ' desc'
-		# 	else
-		# 		sort_param.slice! 'asc'
-		# 		@order_by = sort_param + ' asc'
-		# 	end
-			
-		# end
+		if params["/users"].present?
+      if params["/users"][:userq].present?
+        @query = params["/users"][:userq]
+        @users = User.where("username LIKE :query", query: "%#{@query}%").order(@order_by).limit(36)
+      else
+        @users = User.order(@order_by).limit(36)
+      end
+    else
+      @users = User.order(@order_by).limit(36)
+    end
 
-		# @prev_order = @order_by
-		@users = User.order(@order_by)
+		# @users = User.order(@order_by)
 		
-		# case params[:s]
-		# when 'username'
-		# 	order_by = 'username'
-
-		# end
   end
 
   def new
