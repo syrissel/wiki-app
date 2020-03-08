@@ -20,13 +20,17 @@
 <%= form_for @page, html: { id: 'page_form' } do |f| %>
   <div class="form_group">
     <%= f.label :title, class: "form_label" %><br>
-    <%= f.text_field :title, class: "text_field" %>
+    <%= f.text_field :title_review, class: "text_field" %>
   </div>
   <div class="form_group">
+		<%= hidden_field(:page, :id, value: @page.id) %>
+		<%= hidden_field(:page, :title, value: @page.title) %>
+		<%= hidden_field(:page, :content, value: @page.content) %>
+		<%= hidden_field(:page, :category_id, value: @page.category_id) %>
     <%= hidden_field(:page, :user_id, value: current_user.id) %>
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
 		<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
-		<%= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
+		<%#= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
   </div>
 	<div class="form_group">
 		<%= f.label 'Give a quick summary of what this wiki is about', class: 'form_label' %>
@@ -42,7 +46,7 @@
 			<h2>Choose Category</h2>
 			<button type='button' onclick="showCategoryOptions()">x</button>
 		</div>
-		<%= render 'category_select' %>
+		<%= render 'category_review_select' %>
 		<button type='button' onclick="showCategoryOptions()" style="float:right;">OK</button>
 	</div>
 	</div>
@@ -50,7 +54,7 @@
   <div class="form_group">
     <%#= f.label :content, class: "form_label" %>
       <div class="form-group">
-      <%= f.hidden_field :content, :id => "post-content", required: true %>
+      <%= f.hidden_field :content_review, :id => "post-content", required: true %>
       <div id="editor-container" hidden="true"></div>
       <div id="toolbar">
 			<span class="ql-formats">
