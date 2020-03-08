@@ -1,22 +1,13 @@
 class UsersController < ApplicationController
 	before_action :authenticate_supervisor, only: [:new, :index]
-	before_action :set_user, only: [:edit, :update, :destroy]
+	before_action :set_user, only: [:edit, :update, :destroy, :password, :admin_update, :user_update]
+	before_action :verify_user, only: [:password]
 
   # What does this do?
   wrap_parameters :user, include: [:username, :password, :password_confirmation]
 
 	def index
 		@order_by = 'created_at'
-
-		# if params[:s].present?
-		# 	if @prev_order.present? && (@prev_order.eql? params[:s]) && (@prev_order.include? 'asc')
-		# 		@order_by = params[:s] + ' desc'
-		# 	else
-		# 		@order_by = params[:s] + ' asc'
-		# 	end
-		# end
-
-		# @prev_order = @order_by
 
 		if params[:s].present?
 			filter_params = params[:s]
@@ -30,26 +21,19 @@ class UsersController < ApplicationController
 			end
 		end
 
-		# if params[:s].present?
-		# 	sort_param = params[:s]
-		# 	if @prev_order.present? && (@prev_order.include? 'asc')
-		# 		# @prev_order.slice! ' asc'
-		# 		@order_by = sort_param + ' desc'
-		# 	else
-		# 		sort_param.slice! 'asc'
-		# 		@order_by = sort_param + ' asc'
-		# 	end
-			
-		# end
+		if params["/users"].present?
+      if params["/users"][:userq].present?
+        @query = params["/users"][:userq]
+        @users = User.where("username LIKE :query", query: "%#{@query}%").order(@order_by).limit(36)
+      else
+        @users = User.order(@order_by).limit(36)
+      end
+    else
+      @users = User.order(@order_by).limit(36)
+    end
 
-		# @prev_order = @order_by
-		@users = User.order(@order_by)
+		# @users = User.order(@order_by)
 		
-		# case params[:s]
-		# when 'username'
-		# 	order_by = 'username'
-
-		# end
   end
 
   def new
@@ -72,9 +56,22 @@ class UsersController < ApplicationController
 	end
 	
 	def update
-		
-		if @user.update(user_params)
+		@user.update(user_params)
+	end
+
+	def admin_update
+		if update
 			redirect_to admin_path, notice: "#{@user.username} has been updated."
+		else
+			render :edit
+		end
+	end
+
+	def user_update
+		if update
+			redirect_to root_path, notice: 'Password updated!'
+		else
+			render :password
 		end
 	end
 
@@ -82,9 +79,18 @@ class UsersController < ApplicationController
   def destroy
     # redirect_to users_path, notice: "#{@user.username} has been deleted."
     # @user.destroy
-  end
+	end
+
+	def password
+	end
 
 	private
+
+	def verify_user
+		if current_user.id != @user.id
+			redirect_to password_change_path(current_user), notice: 'Cannot change another user\'s password!'
+		end
+	end
 	
 	def set_user
 		@user = User.find(params[:id])

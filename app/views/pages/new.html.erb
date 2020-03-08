@@ -37,17 +37,16 @@
 	<div class="form_label form_group">
     <%= f.label :category %><br />
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
-
+	
+	<button type="button" onclick="showCategoryOptions()">Select Category</button>
+	<div class="category_select hidden">
+		<div class="image_options_header">
+			<h2>Choose Category</h2>
+			<button type='button' onclick="showCategoryOptions()">x</button>
+		</div>
 		<%= render 'category_select' %>
-
-
-		<script>
-			let div = document.getElementById('select_test');
-			div.innerHTML = 'General Kenobi';
-		</script>
-
-
-
+		<button type='button' onclick="showCategoryOptions()" style="float:right;">OK</button>
+	</div>
 	</div>
 
   <div class="form_group">
@@ -111,9 +110,6 @@
 				<button class="ql-align" value="right"></button>
 				<button class="ql-align" value="justify"></button>
 			</span>
-			<span>
-				<button class="ql-image"></button>
-			</span>
 		</div>
       <div id="editor"></div>
     </div>
@@ -132,7 +128,7 @@
 
 <div class="image_options hidden clearfix">
 	<div class="image_options_header">
-		<h2>Insert image</h2>
+		<h2>Insert Image</h2>
 		<button type='button' onclick="showImageOptions()">x</button>
 	</div>
 	<ul>
@@ -144,7 +140,7 @@
 	</div>
 		<div class="media_options_wrapper">
 		<button type='button' id="image_button">Insert</button>
-		<%= link_to 'Upload', new_image_path %>
+		<button type='button' onclick="showImageOptions()">Cancel</button>
 	</div>
 	<% end %>
 	</div>
@@ -152,7 +148,7 @@
 </div>
 
 	<div class="video_options hidden clearfix">
-	<h2>Insert a video</h2>
+	<h2>Insert Video</h2>
 	<ul>
 	<div class='radio_wrapper'>
 	<% if @videos.present? %>
@@ -173,7 +169,7 @@
 		<%= image_tag(v.image.video_path.url, size: '196x111') %>
 		<%# <box-icon class="video_preview_icon" size="96px" color="#656565" name='play'></box-icon>
 		</div> %>
-	<% else %>
+	<% elsif v.image.path.present? %>
 		<%= image_tag(v.image.path.url, size: '196x111') %>
 	<% end %>
 	<%# '295.783x166.367' %>
@@ -208,6 +204,16 @@
 
 	function showImageOptions() {
 		let options = document.getElementsByClassName('image_options')[0];
+
+		if (options.classList.contains('hidden')) {
+			options.className = options.className.replace("hidden", "");
+		} else {
+			options.classList.add("hidden");
+		}
+	}
+
+	function showCategoryOptions() {
+		let options = document.getElementsByClassName('category_select')[0];
 
 		if (options.classList.contains('hidden')) {
 			options.className = options.className.replace("hidden", "");

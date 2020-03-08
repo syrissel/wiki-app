@@ -35,28 +35,19 @@ function load() {
     let siblingElement = item.nextElementSibling;
     let childrenCount = siblingElement.childElementCount;
     let rootPages = siblingElement.getElementsByTagName('ul')[0];
-    let rootChildrenCount = rootPages.childElementCount;
-    let arrowPresent = item.getElementsByClassName('chevron')[0];
-  
-    if ((childrenCount > 1 || rootChildrenCount > 0) && !arrowPresent) {
-      item.innerHTML += "<box-icon class='chevron' size='16px' name='chevron-down'></box-icon>"
+   
+    let arrowPresent = item.getElementsByClassName('chevron')[0]; 
+
+    if (siblingElement && rootPages) {
+
+      let rootChildrenCount = rootPages.childElementCount;
+      if ((childrenCount > 1 || rootChildrenCount > 0) && !arrowPresent) {
+        item.innerHTML += "<box-icon class='chevron' size='16px' name='chevron-down'></box-icon>"
+      }
     }
   }
   
   function display() {
-    
-    // var children = this.children;
-  
-    // for (var i = 0; i < children.length; i++) {
-    //   var child = children[i];
-  
-    //   if (child.style.display === "none") {
-    //     child.style.display = "block";
-    //   } else {
-    //     child.style.display = "none";
-    //   }
-      
-    // }
   
     let siblingElement = this.nextElementSibling;
   
