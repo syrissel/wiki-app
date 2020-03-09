@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :pages
   resources :videos
+  resources :notifications
   # get 'user_admin', to: 'pages#user_admin'
 
 
