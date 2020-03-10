@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
     @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
     @root_categories = Category.order(:position).where("category_id IS NULL")
 
+    if current_user
+      @notifications = Notification.joins("INNER JOIN users ON users.id = notifications.recipient_id WHERE users.id = #{current_user.id}")
+    else
+      @notifications = nil
+    end
+
 
   end
 

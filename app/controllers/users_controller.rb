@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate_supervisor, only: [:new, :index]
+	before_action :authenticate_supervisor, only: [:new, :index]	
 	before_action :set_user, only: [:edit, :update, :destroy, :password, :admin_update, :user_update]
 	before_action :verify_user, only: [:password]
 

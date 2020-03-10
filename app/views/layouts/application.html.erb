@@ -25,13 +25,18 @@
       <div class="logo"></div>
       <h2 class="wiki_logo">wiki</h2>
       <% end %>
-
       <div class="user_login">
       <% if current_user %>
       <ul>
         <li><%= current_user.username %></li>
         <li><%= link_to 'Logout', logout_path, onclick: "clearStorage()" %></li>
 				<li><%= link_to 'Change Password', password_change_path(current_user) %></li>
+
+        <% if @notifications.present? %>
+          <li><box-icon name='bell-ring' type='solid' animation='tada' color='#d4af37' ></box-icon></li>
+        <% else %>
+          <li><box-icon name='bell' color='#d4af37' ></box-icon></li>
+        <% end %>
       </ul>
       <% end %>
     </div>
@@ -161,3 +166,6 @@
     
   </body>
 </html>
+
+
+<%= console %>
