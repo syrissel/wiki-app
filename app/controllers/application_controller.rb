@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
     @root_categories = Category.order(:position).where("category_id IS NULL")
 
     if current_user
-      @notifications = Notification.joins("INNER JOIN users ON users.id = notifications.recipient_id WHERE users.id = #{current_user.id}")
+			#@notifications = Notification.joins("INNER JOIN users ON users.id = notifications.recipient_id WHERE users.id = #{current_user.id}")
+			@notifications = Notification.where(recipient_id: current_user.id).order(created_at: :desc)
+			@unread_notifications = @notifications.where('read_at IS NULL')
     else
       @notifications = nil
     end

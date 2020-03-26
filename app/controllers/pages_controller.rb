@@ -18,7 +18,21 @@ class PagesController < ApplicationController
     else
       @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").limit(10).page params[:page]
     end
-    
+		
+		if params[:clear].present?
+			#@user_notifications = Notification.where('recipient_id = ?', current_user.id)
+			@notifications.each do |n|
+				n.destroy
+			end
+		end
+
+		if params[:read].present?
+			#@user_notifications = Notification.where('recipient_id = ?', current_user.id)
+			@notifications.each do |n|
+				n.update(read_at: Time.now)
+			end
+		end
+
   end
 
   def new

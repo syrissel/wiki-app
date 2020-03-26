@@ -1,0 +1,10 @@
+<% if @unread_notifications.present? %>
+	<%= link_to pages_path(read: 'true'), remote: true do %>
+		<li><box-icon name='bell-ring' type='solid' animation='tada' color='#d4af37' ></box-icon></li>
+	<% end %>
+<% else %>
+	<%= link_to pages_path, remote: true do %>
+		<li><box-icon name='bell' color='#d4af37' ></box-icon></li>
+	<% end %>
+<% end %>
+

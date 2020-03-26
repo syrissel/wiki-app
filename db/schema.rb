@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_025716) do
+ActiveRecord::Schema.define(version: 2020_03_26_150942) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_03_10_025716) do
     t.string "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "read_at"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end

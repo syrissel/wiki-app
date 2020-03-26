@@ -32,14 +32,24 @@
         <li><%= link_to 'Logout', logout_path, onclick: "clearStorage()" %></li>
 				<li><%= link_to 'Change Password', password_change_path(current_user) %></li>
 
-        <% if @notifications.present? %>
-          <li><box-icon name='bell-ring' type='solid' animation='tada' color='#d4af37' ></box-icon></li>
-        <% else %>
-          <li><box-icon name='bell' color='#d4af37' ></box-icon></li>
-        <% end %>
+        <div id="notification_bell">
+					<%= render 'layouts/notification_bell'%>
+				</div>
       </ul>
       <% end %>
     </div>
+
+		<div id="notifications">
+				<ul>
+					<%#= render partial: 'notifications/notification', collection: @notifications %>
+					<% if @notifications.present? %>
+						<%= render @notifications %>
+					<% end %>
+				</ul>
+				<%= link_to 'Clear Notifications', pages_path(clear: 'true'), remote: true %>
+		</div>
+
+		<%# When the user clicks "Logout", the browser's local storage will be erased. %>
     <script>
       function clearStorage() {
         localStorage.clear();
@@ -166,3 +176,5 @@
     
   </body>
 </html>
+
+<%= console %>
