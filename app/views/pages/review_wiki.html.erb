@@ -61,8 +61,18 @@
 	<% end %>
 <% end %>
 
-<style>
-.image_resize_slider {
-	display: none;
-}
-</style>
+<%= link_to 'Open Foum', review_wiki_path(@page, forum: 'true'), remote: true, class: 'link_button', data: { confirm: 'Open a new forum?' } %>
+<%= simple_form_for page_forums_path, remote: true do |f| %>
+	<div>
+		<%= hidden_field(:page_forum, :title, value: @page.title_review) %>
+		<%= hidden_field(:page_forum, :page_id, value: @page.id) %>
+		<%= hidden_field(:page_forum, :user_id, value: User.find_by_username(@page.last_user_edit)) %>
+		<%= f.submit "Open Forum!" %>
+	</div>
+<% end %>
+
+<div id="page_forum">
+	<% if @page_forum.present? %>
+		<%= render 'page_forums/forum_content' %>
+	<% end %>
+</div>

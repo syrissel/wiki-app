@@ -178,13 +178,21 @@
 </html>
 
 <script>
-  const checkRating = () => {
-    fetch("<%= bell_toggle_path %>")
-      .then(response => response.text())
-      .then(response => {
-        document.getElementById("notification_bell").innerHTML = response;
-      });
-  };
+  // const checkNotifications = () => {
+  //   fetch("<%= bell_toggle_path %>")
+  //     .then(response => response.text())
+  //     .then(response => {
+  //       document.getElementById("notification_bell").innerHTML = response;
+  //     });
+  // };
 
-  setInterval(checkRating, 10000);
+	// setInterval(checkNotifications, 10000);
+	
+	// document.body.addEventListener('click', function() {
+	// 	let menu = document.getElementById("notifications");
+	// 	menu.style.display = 'none';
+	// });
 </script>
+
+
+<%= console %>

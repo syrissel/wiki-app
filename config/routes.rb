@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 	get 'videos/upload', to: 'videos#base64_upload', as: 'base64'
 	get 'password/:id', to: 'users#password', as: 'password_change'
 	get 'bell-toggle', to: 'pages#bell_ring', as: 'bell_toggle'
+	post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
 
 
   resources :categories
@@ -35,7 +36,8 @@ Rails.application.routes.draw do
   resources :sessions
   resources :pages
   resources :videos
-  resources :notifications
+	resources :notifications
+	resources :page_forums
   # get 'user_admin', to: 'pages#user_admin'
 
 
