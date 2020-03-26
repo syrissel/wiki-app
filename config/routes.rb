@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   # get 'search', to: 'pages#search'
 	get 'videos/upload', to: 'videos#base64_upload', as: 'base64'
 	get 'password/:id', to: 'users#password', as: 'password_change'
+	get 'bell-toggle', to: 'pages#bell_ring', as: 'bell_toggle'
+
 
   resources :categories
   resources :users

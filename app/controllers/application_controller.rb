@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   def set_layout_variables
 
     @menu_pages = Page.all
-    # @prod_pages = Page.where(category_id: 1)
     @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
     @root_categories = Category.order(:position).where("category_id IS NULL")
 

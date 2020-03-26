@@ -57,10 +57,6 @@ class PagesController < ApplicationController
     # end
   end
 
-  def image_upload
-
-  end
-
   def show
     @page = Page.find(params[:id])
   end
@@ -149,7 +145,11 @@ class PagesController < ApplicationController
 
   def admin
 
-  end
+	end
+	
+	def bell_ring
+		render partial: 'layouts/notification_bell'
+	end
 
   
   

@@ -177,4 +177,14 @@
   </body>
 </html>
 
-<%= console %>
+<script>
+  const checkRating = () => {
+    fetch("<%= bell_toggle_path %>")
+      .then(response => response.text())
+      .then(response => {
+        document.getElementById("notification_bell").innerHTML = response;
+      });
+  };
+
+  setInterval(checkRating, 10000);
+</script>
