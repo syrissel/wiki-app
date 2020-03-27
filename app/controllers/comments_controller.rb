@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
 		if @comment.save
 			recipient = User.find_by_username(@comment.page_forum.page.last_user_edit)
 			actor = User.find(params[:comment][:user_id])
-			Notification.create(recipient_id: recipient.id, actor_id: actor.id, message: "New message from #{actor.username}!")
+			notification = Notification.create(recipient_id: recipient.id, actor_id: actor.id, message: "New message from #{actor.username}!", comment_id: @comment.id)
+			@comment.update(notification_id: notification.id)
 			flash[:notice] = 'Comment posted!'
 		else
 			redirect_to pages_path
@@ -29,6 +30,6 @@ class CommentsController < ApplicationController
 	private
 
 	def comment_params
-		params.fetch(:comment, {}).permit(:title, :body, :user_id, :page_forum_id)
+		params.fetch(:comment, {}).permit(:title, :body, :user_id, :page_forum_id, :notification_id)
 	end
 end

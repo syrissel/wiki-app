@@ -1,7 +1,4 @@
 <h1><%= @page_forum.title %></h1>
 
-<%= render partial: 'comments/comment', collection: @page_forum.comments %>
-
-<% @page_forum.comments.each do |c| %>
-	<%= c.body%>
-<% end %>
+<%= render partial: 'page_forum', locals: { page_forum: @page_forum } %>
+<%= render partial: 'comments/form', locals: { page_forum: @page_forum } %>

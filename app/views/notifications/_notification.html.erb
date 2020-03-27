@@ -1,1 +1,1 @@
-<li><%= notification.message %></li>
+<li><%= link_to notification.message, page_forum_path(notification.comment.page_forum) %></li>
