@@ -18,7 +18,31 @@ class ApplicationController < ActionController::Base
 
   end
 
-  private
+	private
+	
+	def get_message_time(post_time)
+		minutes = ((Time.now - post_time)/60).round
+		hours = ((Time.now - post_time)/3600).round
+		days = ((Time.now - post_time)/86400).round
+		years = ((Time.now - post_time)/31536000).round
+
+		result = nil
+
+		if years > 0
+			result = "#{helpers.pluralize(years, 'year')}"
+		elsif days > 0
+			result = "#{helpers.pluralize(days, 'day')}"
+		elsif hours > 0
+			result = "#{helpers.pluralize(hours, 'hour')}"
+		elsif minutes > 0
+			result = "#{helpers.pluralize(minutes, 'minute')}"
+		else
+			result = "#{helpers.pluralize((Time.now - post_time).round, 'second')}"
+		end
+
+		result
+	end
+	helper_method :get_message_time
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

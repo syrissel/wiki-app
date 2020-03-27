@@ -1,0 +1,22 @@
+<%= simple_form_for :page_forum, url: '/page_forums', method: :post do |f| %>
+
+
+	<div class="errors">
+<% if @page_forum.present? && @page_forum.errors.any? %>
+	<p><%= pluralize(@page_forum.errors.count, "error") %> prevented this conversation from being saved:</p>
+	<ul>
+	<% @page_forum.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
+  <div class="form_group">
+		<%= hidden_field(:page_forum, :title, value: @page.title_review) %>
+		<%= hidden_field(:page_forum, :page_id, value: @page.id) %>
+		<%= hidden_field(:page_forum, :user_id, value: User.find_by_username(@page.last_user_edit).id) %>
+  </div>
+  <div class="form_group">
+    <%= f.button :submit, 'Open Conversation' %>
+  </div>
+<% end %>

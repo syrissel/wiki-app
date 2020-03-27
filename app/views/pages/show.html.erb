@@ -22,7 +22,11 @@
 		<div class="show_info">
 			<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
 			<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-			<%= link_to "Edit", edit_page_path %>
+			<% if @page.approval_status_id == EXECUTIVE_VALUE %>
+				<%= link_to "Edit", edit_page_path %>
+			<% else %>
+				<p id="review_message">This wiki is currently under review.</p>
+			<% end %>
 		</div>
 	</div>
 	<div class="show_row_bottom"><h1><%= sanitize @page.title %></h1></div>
@@ -46,6 +50,10 @@
 		html, body {
 			margin: 0px;
 			padding: 0px;
+		}
+
+		#review_message {
+			display: none;
 		}
 
 		#middle_content {

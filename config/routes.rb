@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  # get 'comments/create'
+  # get 'comments/update'
+  # get 'comments/destroy'
   resources :images
   # get 'categories/new'
   # # get 'categories/show'
@@ -38,6 +41,7 @@ Rails.application.routes.draw do
   resources :videos
 	resources :notifications
 	resources :page_forums
+	resources :comments
   # get 'user_admin', to: 'pages#user_admin'
 
 

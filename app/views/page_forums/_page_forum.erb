@@ -1,0 +1,16 @@
+<div id="conversation_container">
+	<h3>Conversation for <i><%= page_forum.title %></i></h3>
+	<% if page_forum.comments.present? %>
+	<%= render partial: 'comments/comment', collection: @page_forum.comments %>
+<% end %>
+
+</div>
+
+<style>
+#conversation_container {
+	background-color: #5e6e77;
+	overflow: auto;
+	width: 100%;
+	height: 50em;
+}
+</style>
