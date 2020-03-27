@@ -1,1 +1,7 @@
-<h1>Index</h1>
+<h1>Conversations</h1>
+
+<ul>
+<% @page_forums.each do |p| %>
+	<li><%= link_to p.title, page_forum_path(p) %></li>
+<% end %>
+</ul>

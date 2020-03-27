@@ -4,6 +4,10 @@ class PageForumsController < ApplicationController
 		
 	end
 
+	def index
+		@page_forums = PageForum.all
+	end
+
 	def create
 		@page_forum = PageForum.new(page_forum_params)
 
