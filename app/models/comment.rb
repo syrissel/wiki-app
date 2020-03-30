@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
   belongs_to :user
 	belongs_to :page_forum
-	has_one :notification
+	has_many :notifications
 end

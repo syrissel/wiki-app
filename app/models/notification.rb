@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
   belongs_to :recipient, class_name: 'User', foreign_key: :recipient_id
 	belongs_to :actor, class_name: 'User', foreign_key: :actor_id
-	has_one :comment
+	belongs_to :comment
   # belongs_to :user
 end

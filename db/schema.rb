@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_27_210631) do
+ActiveRecord::Schema.define(version: 2020_03_30_152354) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -34,10 +34,17 @@ ActiveRecord::Schema.define(version: 2020_03_27_210631) do
     t.bigint "page_forum_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "notification_id"
-    t.index ["notification_id"], name: "index_comments_on_notification_id"
     t.index ["page_forum_id"], name: "index_comments_on_page_forum_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "forum_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "page_forum_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_forum_id"], name: "index_forum_users_on_page_forum_id"
+    t.index ["user_id"], name: "index_forum_users_on_user_id"
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -139,9 +146,10 @@ ActiveRecord::Schema.define(version: 2020_03_27_210631) do
   end
 
   add_foreign_key "categories", "categories"
-  add_foreign_key "comments", "notifications"
   add_foreign_key "comments", "page_forums"
   add_foreign_key "comments", "users"
+  add_foreign_key "forum_users", "page_forums"
+  add_foreign_key "forum_users", "users"
   add_foreign_key "notifications", "comments"
   add_foreign_key "page_forums", "pages"
   add_foreign_key "page_forums", "users"
