@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 	before_action :authenticate_user, except: [:index]
 	
 	# This will prevent people from viewing the page when it's published but also being reviewed.
-  #before_action :check_page_approved, only: [:show]
+  before_action :check_page_pending, only: [:edit]
   
   
 
@@ -194,11 +194,11 @@ class PagesController < ApplicationController
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
-  def check_page_approved
+  def check_page_pending
     @page = Page.find(params[:id])
 
-    if current_user.user_level_id == INTERN_VALUE && @page.approval_status_id != EXECUTIVE_VALUE && @page.approval_status_id != REVIEW
-      redirect_to root_path, notice: "Page has not been approved yet."
+    if (@page.approval_status_id != SUPERVISOR_VALUE) || (@page.approval_status_id != EXECUTIVE_VALUE)
+      redirect_to root_path, notice: "Cannot edit #{@page.title}. It is currently being reviewed."
     end
   end
 end
