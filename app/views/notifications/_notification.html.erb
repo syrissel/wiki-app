@@ -1,1 +1,8 @@
-<li><%= link_to notification.message, page_forum_path(notification.comment.page_forum) %></li>
+
+<% if current_user.user_level_id < SUPERVISOR_VALUE %>
+	<li><%= link_to notification.message, page_forum_path(notification.comment.page_forum) %></li>
+<% else %>
+	<li><%= link_to notification.message, review_wiki_path(notification.page) %></li>
+<% end %>
+
+

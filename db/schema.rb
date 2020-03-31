@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_152354) do
+ActiveRecord::Schema.define(version: 2020_03_31_140917) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "status"
@@ -63,8 +63,10 @@ ActiveRecord::Schema.define(version: 2020_03_30_152354) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "read_at"
     t.bigint "comment_id"
+    t.bigint "page_id"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["page_id"], name: "index_notifications_on_page_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
@@ -109,6 +111,14 @@ ActiveRecord::Schema.define(version: 2020_03_30_152354) do
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "image"
+    t.integer "favicon"
+    t.integer "theme"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "level"
     t.datetime "created_at", precision: 6, null: false
@@ -151,6 +161,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_152354) do
   add_foreign_key "forum_users", "page_forums"
   add_foreign_key "forum_users", "users"
   add_foreign_key "notifications", "comments"
+  add_foreign_key "notifications", "pages"
   add_foreign_key "page_forums", "pages"
   add_foreign_key "page_forums", "users"
   add_foreign_key "pages", "approval_statuses"
