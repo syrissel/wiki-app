@@ -4,7 +4,7 @@ class Page < ApplicationRecord
   belongs_to :user, optional: true
 	belongs_to :category
 	belongs_to :page_publish_status
-	has_one :page_forum
+	has_one :page_forum, dependent: :destroy
 
   paginates_per 6
 

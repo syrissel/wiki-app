@@ -124,7 +124,9 @@ class PagesController < ApplicationController
   def destroy
     @page = Page.find(params[:id])
     redirect_to review_path, notice: "#{@page.title} deleted."
-    @page.destroy
+		@page.destroy!
+	rescue ActiveRecord::RecordNotDestroyed => error
+		puts "errors that prevented destruction: #{error.record.errors}"
   end
 
   # Review this

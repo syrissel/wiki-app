@@ -1,5 +1,5 @@
 class PageForum < ApplicationRecord
-	has_one :page
+	has_one :page, dependent: :destroy
 	has_many :users
 	has_many :comments
 	has_many :users, through: :comments

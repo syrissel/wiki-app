@@ -1,4 +1,7 @@
 <h1><%= @page_forum.title %></h1>
+<div id="show_info">
+	<%= link_to "Edit", edit_page_path(@page_forum.page) %>
+</div>
 
 <div id="page_forum">
 	<%= render partial: 'page_forum', locals: { page_forum: @page_forum } %>
