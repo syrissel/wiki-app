@@ -1,14 +1,37 @@
 <% if current_user == comment.user %>
 	<div class="message-container darker">
-		<img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Avatar" class="right">
-		<p><%= comment.body %></p>
-		<span class="time-right">commented <%= get_message_time(comment.created_at) %> ago</span>
+		
+		<div class="body-container">
+			<div class="image-container">
+				
+				<div class="image-wrapper"><img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Avatar"></div>
+				
+				
+			</div>		
+		<div id="body-content-container">
+			<b><%= comment.user.username %></b>
+			<p><%= raw comment.body %></p>
+			<div><span class="time-right">commented <%= get_message_time(comment.created_at) %> ago</span></div>
+		</div>
+		</div>
 	</div>
 <% else %>
+
+
 	<div class="message-container">
-		<img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Avatar">
-		<p><%= comment.body %></p>
-		<span class="time-left">commented <%= get_message_time(comment.created_at) %> ago</span>
+		
+		<div class="body-container">
+			<div class="image-container">
+				<div class="image-wrapper"><img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Avatar"></div>
+				
+				
+			</div>		
+		<div id="body-content-container">
+			<b><%= comment.user.username %></b>
+			<p><%= raw comment.body %></p>
+			<div><span class="time-left">commented <%= get_message_time(comment.created_at) %> ago</span></div>
+		</div>
+		</div>
 	</div>
 <% end %>
 
@@ -22,6 +45,16 @@
   padding: 10px;
 	margin: 10px auto;
 	width: 90%;
+}
+
+
+.darker .image-container {
+	float: right;
+}
+
+.darker .image-container .image-wrapper {
+	padding-left: 120px;
+	padding-bottom: 2px;
 }
 
 /* Darker chat container */
