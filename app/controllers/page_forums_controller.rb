@@ -31,6 +31,10 @@ class PageForumsController < ApplicationController
 		@comments = Comment.where(page_forum_id: @page_forum.id)
 	end
 
+	def refresh_forum
+		@page_forum = PageForum.find(params[:id])
+		render partial: 'page_forum', locals: { page_forum: @page_forum }
+	end
 	private
 
 	def page_forum_params

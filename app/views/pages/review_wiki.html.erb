@@ -68,18 +68,13 @@
 <div id="page_forum">
 	<% if @page.page_forum_id.present? %>
 		<%= render partial: 'page_forums/page_forum', locals: { page_forum: @page_forum } %>
-		<%= render partial: 'comments/form', locals: { page_forum: @page_forum } %>
 	<% end %>
-
-	
 </div>
 
-<script>
-  $("#comment_input").keypress(function(event) {
-    if (event.which == 13) {
-        event.preventDefault();
-        $("#comment_submit").click();
-    }
-  });
+<% if @page.page_forum_id.present? %>
+	<%= render partial: 'comments/form', locals: { page_forum: @page_forum } %>
+<% end %>
 
-</script>
+
+
+

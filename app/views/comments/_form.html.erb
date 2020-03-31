@@ -1,11 +1,20 @@
-<h3>Enter a comment:</h3>
 <%= simple_form_for :comment, url: '/comments', html: {id: 'comment_form'}, method: :post, remote: true do |f| %>
-  <div class="form_group">
+  <div class="">
 		<%= f.text_area :body, id: "comment_input", style: "width: 335px; height: 91px;" %>
 		<%= hidden_field(:comment, :user_id, value: current_user.id) %>
 		<%= hidden_field(:comment, :page_forum_id, value: page_forum.id) %>
   </div>
-  <div class="form_group">
+  <div class="">
     <%= f.button :submit, id: 'comment_submit' %>
   </div>
 <% end %>
+
+<script>
+  $("#comment_input").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        $("#comment_submit").click();
+    }
+  });
+
+</script>

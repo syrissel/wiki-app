@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 	get 'videos/upload', to: 'videos#base64_upload', as: 'base64'
 	get 'password/:id', to: 'users#password', as: 'password_change'
 	get 'bell-toggle', to: 'pages#bell_ring', as: 'bell_toggle'
+	get 'refresh-forum/:id', to: 'page_forums#refresh_forum', as: 'refresh_forum'
 	post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
 
 

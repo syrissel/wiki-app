@@ -1,5 +1,5 @@
+<h3>Conversation for <i><%= page_forum.title %></i></h3>
 <div id="conversation_container">
-	<h3>Conversation for <i><%= page_forum.title %></i></h3>
 	<% if page_forum.comments.present? %>
 	<%= render partial: 'comments/comment', collection: @page_forum.comments %>
 <% end %>
@@ -11,7 +11,32 @@
 	background-color: #e6eff4;
 	overflow: auto;
 	width: 100%;
-	height: 50em;
+	height: 35em;
 	border: 1px solid black;
+	margin-top: 100px
+}
+
+@media (max-width: 1440px) {
+	#conversation_container {
+		height: 20em;
+	}
 }
 </style>
+
+<script>
+<% if page_forum.comments.present? %>
+// $('#conversation_container').scrollTop(9999999);
+//   const refresh = () => {
+//     fetch("<%= refresh_forum_path(@page_forum.id) %>")
+//       .then(response => response.text())
+//       .then(response => {
+// 	      document.getElementById("page_forum").innerHTML = response;
+// 				 $('#conversation_container').scrollTop(9999999);
+//       });
+//   };
+
+// 	setInterval(refresh, 10000);
+
+<% end %>
+	
+</script>
