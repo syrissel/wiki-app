@@ -24,18 +24,18 @@
 </style>
 
 <script>
-<% if page_forum.comments.present? %>
-//  $('#conversation_container').scrollTop(9999999);
-//   const refresh = () => {
-//     fetch("<%= refresh_forum_path(@page_forum.id) %>")
-//       .then(response => response.text())
-//       .then(response => {
-// 	      document.getElementById("page_forum").innerHTML = response;
-// 				 $('#conversation_container').scrollTop(9999999);
-//       });
-//   };
+<% if page_forum.present? %>
+ $('#conversation_container').scrollTop(9999999);
+  const refresh = () => {
+    fetch("<%= refresh_forum_path(@page_forum.id) %>")
+      .then(response => response.text())
+      .then(response => {
+	      document.getElementById("page_forum").innerHTML = response;
+				 $('#conversation_container').scrollTop(9999999);
+      });
+  };
 
-// 	setInterval(refresh, 10000);
+	setInterval(refresh, 10000);
 
 <% end %>
 	

@@ -17,7 +17,7 @@
 </script>
 
 <script>
-  $("#comment_input").keypress(function(event) {
+  $("#comment-editor").keypress(function(event) {
     if (event.which == 13) {
         event.preventDefault();
         $("#comment_submit").click();
@@ -25,15 +25,20 @@
 	});
 	
 	var quill = new Quill('#comment-editor', {
-    theme: 'snow'
+		theme: 'snow',
+		placeholder: 'Write a comment...'
 	});
 	
+	quill.focus();
+
 	function load() {
 	var form = document.querySelector('#comment_form');
 	form.onsubmit = function() {
 		var postContentInput = document.querySelector('#post-content');
 		postContentInput.value = quill.root.innerHTML;
+		quill.root.innerHTML = "";
 	}
+
 }
 
 document.addEventListener("turbolinks:load", load(), false);
