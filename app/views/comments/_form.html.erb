@@ -1,11 +1,46 @@
-<h3>Enter a comment:</h3>
 <%= simple_form_for :comment, url: '/comments', html: {id: 'comment_form'}, method: :post, remote: true do |f| %>
-  <div class="form_group">
-		<%= f.text_area :body, id: "comment_input", style: "width: 335px; height: 91px;" %>
+  <div class="">
+		<%#= f.text_area :body, id: "comment_input", style: "width: 335px; height: 91px;" %>
 		<%= hidden_field(:comment, :user_id, value: current_user.id) %>
 		<%= hidden_field(:comment, :page_forum_id, value: page_forum.id) %>
-  </div>
-  <div class="form_group">
-    <%= f.button :submit, id: 'comment_submit' %>
+		<%= f.hidden_field :body, :id => "post-content", required: true %>
+	</div>
+	<div id="comment-editor"></div>
+  <div class="">
+    <%= f.button :submit, value: 'Post', id: 'comment_submit', class: 'link_button' %>
   </div>
 <% end %>
+
+<!-- Initialize Quill editor -->
+<script>
+
+</script>
+
+<script>
+  $("#comment-editor").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        $("#comment_submit").click();
+    }
+	});
+	
+	var quill = new Quill('#comment-editor', {
+		theme: 'snow',
+		placeholder: 'Write a comment...'
+	});
+	
+	quill.focus();
+
+	function load() {
+	var form = document.querySelector('#comment_form');
+	form.onsubmit = function() {
+		var postContentInput = document.querySelector('#post-content');
+		postContentInput.value = quill.root.innerHTML;
+		quill.root.innerHTML = "";
+	}
+
+}
+
+document.addEventListener("turbolinks:load", load(), false);
+
+</script>

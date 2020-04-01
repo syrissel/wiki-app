@@ -18,7 +18,7 @@ class NotificationsController < ApplicationController
   private
 
   def notification_params
-    params.require(:notification).permit(:recipient_id, :actor_id, :message, :comment_id)
+    params.fetch(:notification, {}).permit(:recipient_id, :actor_id, :message, :comment_id)
   end
   
 end

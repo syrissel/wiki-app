@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 	before_action :authenticate_user, except: [:index]
 	
 	# This will prevent people from viewing the page when it's published but also being reviewed.
-  #before_action :check_page_approved, only: [:show]
+  before_action :check_page_pending, only: [:edit]
   
   
 
@@ -108,7 +108,12 @@ class PagesController < ApplicationController
       @page.content_review = @page.content
       @page.sanitized_content = ActionController::Base.helpers.strip_tags(@page.content)
       @page.category_review = @page.category_id
-      @page.save
+			@page.save
+			
+			User.supervisors.each do |s|
+				Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "New wiki submitted by #{current_user.username}", page_id: @page.id)
+			end
+			Notification.create(recipient_id: EXECUTIVE_VALUE, actor_id: current_user.id, message: "")
       flash[:notice] = 'Wiki has been submitted for review!'
       redirect_to pages_path
     else
@@ -119,7 +124,9 @@ class PagesController < ApplicationController
   def destroy
     @page = Page.find(params[:id])
     redirect_to review_path, notice: "#{@page.title} deleted."
-    @page.destroy
+		@page.destroy!
+	rescue ActiveRecord::RecordNotDestroyed => error
+		puts "errors that prevented destruction: #{error.record.errors}"
   end
 
   # Review this
@@ -187,11 +194,11 @@ class PagesController < ApplicationController
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
-  def check_page_approved
+  def check_page_pending
     @page = Page.find(params[:id])
 
-    if current_user.user_level_id == INTERN_VALUE && @page.approval_status_id != EXECUTIVE_VALUE && @page.approval_status_id != REVIEW
-      redirect_to root_path, notice: "Page has not been approved yet."
+    if (@page.approval_status_id != SUPERVISOR_VALUE) || (@page.approval_status_id != EXECUTIVE_VALUE)
+      redirect_to root_path, notice: "Cannot edit #{@page.title}. It is currently being reviewed."
     end
   end
 end

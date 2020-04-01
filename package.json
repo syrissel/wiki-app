@@ -8,6 +8,7 @@
     "@rails/webpacker": "^4.0.7",
     "boxicons": "^2.0.4",
     "jquery": "^3.4.1",
+    "quill-emoji": "^0.1.7",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
