@@ -3,7 +3,8 @@ class PagesController < ApplicationController
 	before_action :authenticate_user, except: [:index]
 	
 	# This will prevent people from viewing the page when it's published but also being reviewed.
-  before_action :check_page_pending, only: [:edit]
+	before_action :check_pending, only: [:edit]
+	before_action :check_published, only: [:show]
   
   
 
@@ -194,11 +195,25 @@ class PagesController < ApplicationController
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
-  def check_page_pending
-    @page = Page.find(params[:id])
+  def check_pending
+		@page = Page.find(params[:id])
+		@user = User.find_by_username(@page.last_user_edit)
 
-    if (@page.approval_status_id != SUPERVISOR_VALUE) || (@page.approval_status_id != EXECUTIVE_VALUE)
-      redirect_to root_path, notice: "Cannot edit #{@page.title}. It is currently being reviewed."
+		# If the current user is either the Executive Director or a Supervisor, render the edit page.
+		# If the current user is not in that category, if the page's approval status is not 'pending', render the edit page.
+		# Finally, if the page is pending and the current user is not the user who last edited the wiki, they will be redirected the home page.
+		if (current_user.user_level_id == EXECUTIVE_VALUE || current_user.user_level_id == SUPERVISOR_VALUE) || (@page.approval_status_id != PENDING) || (current_user == @user)
+			render :edit
+		else
+			redirect_to root_path, notice: "Cannot edit #{@page.title}. It is currently being reviewed."
     end
-  end
+	end
+	
+	def check_published
+		@page = Page.find(params[:id])
+
+		if @page.page_publish_status_id == UNPUBLISHED
+			redirect_to root_path, notice: 'Page has not been published yet.'
+		end
+	end
 end

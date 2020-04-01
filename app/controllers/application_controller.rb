@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
     @menu_pages = Page.all
     @sub_categories = Category.order(:position).where("category_id IS NOT NULL")
-    @root_categories = Category.order(:position).where("category_id IS NULL")
+		@root_categories = Category.order(:position).where("category_id IS NULL")
+		@random_page = Page.where(page_publish_status_id: PUBLISHED).order('RAND()').first
 
     if current_user
 			#@notifications = Notification.joins("INNER JOIN users ON users.id = notifications.recipient_id WHERE users.id = #{current_user.id}")
