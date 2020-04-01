@@ -18,7 +18,7 @@
 					<strong><%=image.name%></strong><br />
 					<% if image.path.present? %>
 					<%= link_to image_path(image) do %><%=image_tag(image.path.preview.url)%><% end %>
-					<% else %>
+				<% elsif image.video_path.present? %>
 					<%= link_to image_path(image) do %><%=image_tag(image.video_path.preview.url)%><% end %>
 					<% end %>
 				</td>

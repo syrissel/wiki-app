@@ -38,7 +38,8 @@ class PagesController < ApplicationController
 
   end
 
-  def new
+	def new
+		@confirm = ['Submitting for supervisor approval. Continue?', 'Publishing page. Continue?']
     @videos = Video.order(:created_at).limit(36).page params[:page]
 
     if params["/pages/new"].present?
@@ -101,7 +102,7 @@ class PagesController < ApplicationController
   # in the table until it is approved. When it is approved, the update will be called
   # and the review columns will be set to nil perserving space in the DB.
   def create
-    @page = Page.new(page_params)
+		@page = Page.new(page_params)
     
     if (@page.save)
 
@@ -109,9 +110,15 @@ class PagesController < ApplicationController
       @page.content_review = @page.content
       @page.sanitized_content = ActionController::Base.helpers.strip_tags(@page.content)
       @page.category_review = @page.category_id
-			@page.save
 			
-			User.supervisors.each do |s|
+			if @page.user.user_level_id == EXECUTIVE_VALUE
+				@page.approval_status_id = EXECUTIVE_VALUE
+				@page.page_publish_status_id = PUBLISHED
+			end
+
+			@page.save
+		
+			(User.supervisors.uniq - [current_user]).each do |s|
 				Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "New wiki submitted by #{current_user.username}", page_id: @page.id)
 			end
 			Notification.create(recipient_id: EXECUTIVE_VALUE, actor_id: current_user.id, message: "")
