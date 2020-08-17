@@ -111,14 +111,6 @@ ActiveRecord::Schema.define(version: 2020_03_31_194458) do
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
-  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "image"
-    t.integer "favicon"
-    t.integer "theme"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "user_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "level"
     t.datetime "created_at", precision: 6, null: false
