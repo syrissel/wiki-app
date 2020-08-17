@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	before_action :verify_user, only: [:password]
 
   # What does this do?
-  wrap_parameters :user, include: [:username, :password, :password_confirmation]
+  wrap_parameters :user, include: [:username, :password, :password_confirmation, :new_password, :current_password]
 
 	def index
 		@order_by = 'created_at'
@@ -75,7 +75,18 @@ class UsersController < ApplicationController
 		end
 	end
 
-	# Worflow does not invlove deleting users permanently. They must be offboarded and kept in the database for record-keeping.
+	def change_password
+		if !current_user.authenticate(params[:current_password])
+			flash[:error] = 'Password is incorrect.'
+		elsif params[:new_password] != params[:password_confirmation]
+			flash[:error] = 'New password and password confirmation do not match.'
+		else
+			self.update
+		end
+		render :password
+	end
+
+	# Worflow does not involve deleting users permanently. They must be offboarded and kept in the database for record-keeping.
   def destroy
     # redirect_to users_path, notice: "#{@user.username} has been deleted."
     # @user.destroy
@@ -97,6 +108,6 @@ class UsersController < ApplicationController
 	end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :user_level_id, :first_name, :last_name, :user_status_id)
+    params.require(:user).permit(:username, :password, :password_confirmation, :new_password, :current_password, :user_level_id, :first_name, :last_name, :user_status_id)
   end
 end
