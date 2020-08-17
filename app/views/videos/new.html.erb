@@ -1,30 +1,35 @@
-<h1 class="edit_title edit_font">New Video</h1>
-<div class="errors">
-<% if @video.present? && @video.errors.any? %>
-	<p><%= pluralize(@video.errors.count, "error") %> prevented this video from being uploaded:</p>
-	<ul>
-	<% @video.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-	<% end %>
-	</ul>
-<% end %>
-</div>
-<%= form_for @video do |f| %>
-  <div class='form_group'>
-    <%= f.label :name, class: 'form_label' %>
-    <%= f.text_field :name, class: 'text_field' %>
+<% if @error.nil? %>
+  <h1 class="edit_title edit_font">New Video</h1>
+  <div class="errors">
+  <% if @video.present? && @video.errors.any? %>
+    <p><%= pluralize(@video.errors.count, "error") %> prevented this video from being uploaded:</p>
+    <ul>
+    <% @video.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
   </div>
-	<div class='form_group'>
-		<%= f.label 'Description (optional)' %>
-		<%= f.text_area :description, style: "width: 959px; height: 166px;"%>
-	</div>
-  <div class='form_group'>
-    <%= f.label 'Video path...' %>
-    <%= f.file_field :path %>
-    <%#= hidden_field(:video, :page_id, value: 5) %>
-    <%= hidden_field(:video, :image_id, value: @default_image_path) %>
-  </div>
-  <div class='form_group'>
-    <%= f.submit 'Upload' %>
-  </div>
+  <%= form_for @video do |f| %>
+    <div class='form_group'>
+      <%= f.label :name, class: 'form_label' %>
+      <%= f.text_field :name, class: 'text_field' %>
+    </div>
+    <div class='form_group'>
+      <%= f.label 'Description (optional)' %>
+      <%= f.text_area :description, style: "width: 959px; height: 166px;"%>
+    </div>
+    <div class='form_group'>
+      <%= f.label 'Video path...' %>
+      <%= f.file_field :path %>
+      <%#= hidden_field(:video, :page_id, value: 5) %>
+      <%= hidden_field(:video, :image_id, value: @default_image_path) %>
+    </div>
+    <div class='form_group'>
+      <%= f.submit 'Upload' %>
+    </div>
+  <% end %>
+<% else %>
+  <p><%= @error %></p>
+  <p><%= link_to('Create new image.', new_image_path) %></p>
 <% end %>
