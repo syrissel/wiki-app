@@ -7,8 +7,10 @@
   <h3>There are currently no wikis published... <%= link_to 'Create one!', new_page_path %></h3>
 <% end %>
 
-<div id="pages">
-  <%= render @pages %>
+<div id="pages_container">
+  <div id="pages">
+    <%= render @pages %>
+  </div>
 </div>
 
 <div id="paginator">

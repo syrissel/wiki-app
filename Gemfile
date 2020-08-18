@@ -42,6 +42,7 @@ gem 'acts_as_list'
 
 gem 'mime-types'
 gem 'carrierwave-base64'
+gem 'client_side_validations'
 
 
 # Reduces boot times through caching; required in config/boot.rb

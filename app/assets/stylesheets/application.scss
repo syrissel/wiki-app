@@ -890,8 +890,9 @@ html, body {
 }
 
 #pages {
-  float: left;
+  // float: left;
   width: 80%;
+  margin: 0 auto;
 }
 
 .next_page {
@@ -1021,7 +1022,7 @@ html, body {
 
 .pagination a {
 	text-decoration: none;
-	color: #FFF;
+	color: #7C8893;
 }
 
 #notifications {
@@ -1084,6 +1085,7 @@ html, body {
 #comment-editor {
 	height: 8em;
 }
+
 
 
 

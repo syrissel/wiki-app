@@ -17,6 +17,8 @@ import "jquery";
 import "boxicons";
 import "custom/side_menu";
 import "custom/header";
+import 'custom/wiki-validate';
+import '@client-side-validations/client-side-validations'
 //import "custom/image_show";
 //import "custom/kaminari"
 //require("custom/image-resize")

@@ -12,7 +12,7 @@
 <% end %>
 </div>
 
-<%= form_for @user, url: { action: :admin_update } do |f| %>
+<%= form_for @user, url: { action: :admin_update }, validate: true do |f| %>
 
 
   <div class="user_form_group">

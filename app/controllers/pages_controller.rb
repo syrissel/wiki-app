@@ -38,7 +38,8 @@ class PagesController < ApplicationController
 
   end
 
-	def new
+  def new
+    @page = Page.new
 		@confirm = ['Submitting for supervisor approval. Continue?', 'Publishing page. Continue?']
     @videos = Video.order(:created_at).limit(36).page params[:page]
 

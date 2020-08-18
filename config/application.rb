@@ -13,6 +13,8 @@ module DocsApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.time_zone = 'Central Time (US & Canada)'
+    config.action_view.automatically_disable_submit_tag = false
+
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

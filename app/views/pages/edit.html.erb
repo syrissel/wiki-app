@@ -272,6 +272,33 @@
 
 <%# Quill editor %>
 <script>
+
+	$('#page_form').submit(function(event) {
+		let valid = true;
+		let title = $.trim($('#page_title').val());
+		let category = $('input[name="page[category_id]"]:checked').val();
+
+		if (title.length < 1) {
+			$('#title_error').html('Please enter a title.');
+			valid = false;
+		} else {
+			$('#title_error').html('');
+		}
+
+		if (category == null) {
+			$('#category_error').html('Please select a category.');
+			valid = false;
+		} else {
+			$('#category_error').html('');
+		}
+
+		if (!valid) {
+			event.preventDefault();
+		} else {
+			$(this).submit();
+		}
+	});
+	
 	function load() {
 
 
