@@ -29,3 +29,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+/public/image/*
+/public/page/*
+/public/tmp/*
+/public/video/*
+/public/videos/*
+/public/uploads/image/*

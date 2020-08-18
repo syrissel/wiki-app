@@ -7,7 +7,7 @@
 <% @videos.each do |v| %>
   <li style="list-style:none;">
     <%= link_to video_path(v) do %> 
-      <% if v.image.present? %>
+      <% if v.image.present? && v.image.video_path.present? %>
         <%= image_tag(v.image.video_path.url) %>
       <% else %>
         <%= v.name %>

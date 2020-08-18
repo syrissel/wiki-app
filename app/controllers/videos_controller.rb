@@ -8,8 +8,18 @@ class VideosController < ApplicationController
   end
 
   def new
-    @video = Video.new
-    @default_image_path = Image.find_by_path('default_video.png').id
+	@video = Video.new
+	
+	if Image.find_by_path('default_video.png').present?
+		@default_image_path = Image.find_by_path('default_video.png').id
+	else
+		raise StandardError.new('No default image. Please upload a default video image before proceeding.')
+	end
+
+  rescue StandardError => e
+		@error = e.message
+
+    #@default_image_path = Image.find_by_path('default_video.png').id
   end
 
 	def show
