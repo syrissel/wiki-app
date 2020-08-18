@@ -76,12 +76,14 @@ class UsersController < ApplicationController
 	end
 
 	def change_password
-		if !current_user.authenticate(params[:current_password])
+		@user = User.find(params[:id])
+		if !@user.authenticate(params[:user][:current_password])
 			flash[:error] = 'Password is incorrect.'
-		elsif params[:new_password] != params[:password_confirmation]
+		elsif params[:user][:new_password] != params[:user][:password_confirmation]
 			flash[:error] = 'New password and password confirmation do not match.'
 		else
-			self.update
+			params[:password] = params[:new_password]
+			@user.update(:password)
 		end
 		render :password
 	end

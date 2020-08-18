@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 	get 'bell-toggle', to: 'pages#bell_ring', as: 'bell_toggle'
 	get 'refresh-forum/:id', to: 'page_forums#refresh_forum', as: 'refresh_forum'
   post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
-  post 'change_password', to: 'users#change_password'
+  patch 'change_password/:id', to: 'users#change_password'
 
 
   resources :categories
