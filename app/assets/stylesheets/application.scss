@@ -715,6 +715,10 @@ html, body {
   text-align: center;
 }
 
+.user_form_group {
+  margin: 0.6rem 0 0.6rem 0;
+}
+
 .user_form_group .user_text_field:focus {
   border-color: #2188ff;
   outline: none;

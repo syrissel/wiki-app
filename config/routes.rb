@@ -32,7 +32,8 @@ Rails.application.routes.draw do
 	get 'password/:id', to: 'users#password', as: 'password_change'
 	get 'bell-toggle', to: 'pages#bell_ring', as: 'bell_toggle'
 	get 'refresh-forum/:id', to: 'page_forums#refresh_forum', as: 'refresh_forum'
-	post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
+  post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
+  patch 'change_password/:id', to: 'users#change_password'
 
 
   resources :categories
@@ -42,7 +43,8 @@ Rails.application.routes.draw do
   resources :videos
 	resources :notifications
 	resources :page_forums
-	resources :comments
+  resources :comments
+  resources :passwords
   # get 'user_admin', to: 'pages#user_admin'
 
 

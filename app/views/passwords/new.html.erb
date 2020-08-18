@@ -1,0 +1,28 @@
+<div class="registration_container">
+<%= form_for @password_form, url: passwords_path, method: :post do |f| %>
+  <% if @password_form.errors.any? %>
+    <div class="error_messages">
+      <ul>
+        <% @password_form.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="user_form_group">
+    <%= f.label 'Original Password', class: 'user_label' %><br />
+    <%= f.password_field :original_password, class: 'user_text_field' %>
+  </div>
+  <div class="user_form_group">
+    <%= f.label 'New Password', class: 'user_label' %><br />
+    <%= f.password_field :new_password, class: 'user_text_field' %>
+  </div>
+  <div class="user_form_group">
+    <%= f.label 'Confirm Password', class: 'user_label' %><br />
+    <%= f.password_field :new_password_confirmation, class: 'user_text_field' %>
+  </div>
+  <div>
+    <%= f.submit 'Change Password', class: 'user_button' %>
+  </div>
+<% end %>
+</div>
