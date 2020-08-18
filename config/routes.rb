@@ -43,7 +43,8 @@ Rails.application.routes.draw do
   resources :videos
 	resources :notifications
 	resources :page_forums
-	resources :comments
+  resources :comments
+  resources :passwords
   # get 'user_admin', to: 'pages#user_admin'
 
 

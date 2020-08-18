@@ -30,7 +30,7 @@
       <ul>
         <li><%= current_user.username %></li>
         <li><%= link_to 'Logout', logout_path, onclick: "clearStorage()" %></li>
-				<li><%= link_to 'Change Password', password_change_path(current_user) %></li>
+				<li><%= link_to 'Change Password', new_password_path %></li>
 
         <div id="notification_bell">
 					<%= render 'layouts/notification_bell'%>
