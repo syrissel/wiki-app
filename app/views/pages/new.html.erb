@@ -1,7 +1,5 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-	<script src="/node_modules/quill-image-resize-module/image-resize.min.js"></script>
 
 </head>
 
@@ -41,7 +39,7 @@
     <%= f.label :category %><br />
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
 	
-	<button type="button" class="show-category-options" onclick="showCategoryOptions()">Select Category</button>
+	<button type="button" class="show-category-options">Select Category</button>
 	<div class="category_select hidden">
 		<div class="image_options_header">
 			<h2>Choose Category</h2>
@@ -102,8 +100,8 @@
 			</span>
 			<span class="ql-formats">
 				<button class="ql-link"></button>
-				<button class="bx bx-image show-image-options" type='button'></button>
-				<button class="fa fa-play custom_video_button show-video-options" type='button'></button>
+				<button class="show-image-options" type='button'><box-icon size="16" type='solid' name='image-alt'></box-icon></button>
+				<button class="custom_video_button show-video-options" type='button'><box-icon size="16" name='video' type='solid' ></box-icon></button>
 			</span>
 			<span class="ql-formats">
 				<button class="ql-clean"></button>

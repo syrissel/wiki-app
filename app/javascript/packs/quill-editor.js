@@ -20,7 +20,7 @@ document.addEventListener("turbolinks:load", function(event) {
 			},
 			blotFormatter: {}
 		},
-		placeholder: 'Compose an epic...',
+		placeholder: 'Compose a document...',
 		theme: 'snow'
 	});
 
