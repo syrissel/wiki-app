@@ -41,14 +41,14 @@
     <%= f.label :category %><br />
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
 	
-	<button type="button" onclick="showCategoryOptions()">Select Category</button>
+	<button type="button" class="show-category-options" onclick="showCategoryOptions()">Select Category</button>
 	<div class="category_select hidden">
 		<div class="image_options_header">
 			<h2>Choose Category</h2>
-			<button type='button' onclick="showCategoryOptions()">x</button>
+			<button type='button' class="show-category-options">x</button>
 		</div>
 		<%= render 'category_select' %>
-		<button type='button' onclick="showCategoryOptions()" style="float:right;">OK</button>
+		<button type='button' class="show-category-options" style="float:right;">OK</button>
 	</div>
 	</div>
 	<div class="errors" id="category_error"></div>

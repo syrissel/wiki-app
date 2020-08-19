@@ -28,31 +28,15 @@ document.addEventListener('turbolinks:load', function() {
 		}
     });
 
-    // Validate before form submission.
-    $('#page_form').submit(function(event) {
-		let valid = true;
-		let title = $.trim($('#page_title').val());
-		let category = $('input[name="page[category_id]"]:checked').val();
+    // Show or hide the category select window.
+    $('.show-category-options').click(function() {
+        let options = document.getElementsByClassName('category_select')[0];
 
-		if (title.length < 1) {
-			$('#title_error').html('Please enter a title.');
-			valid = false;
+		if (options.classList.contains('hidden')) {
+			options.className = options.className.replace("hidden", "");
 		} else {
-			$('#title_error').html('');
+			options.classList.add("hidden");
 		}
-
-		if (category == null) {
-			$('#category_error').html('Please select a category.');
-			valid = false;
-		} else {
-			$('#category_error').html('');
-		}
-
-		if (!valid) {
-			event.preventDefault();
-		} else {
-			$(this).submit();
-		}
-	});
+    });
 
 }, false);

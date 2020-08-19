@@ -60,4 +60,34 @@ document.addEventListener("turbolinks:load", function(event) {
 		quill.setSelection(range.index + 2, Quill.sources.SILENT);
 		quill.insertText(range.index, '\n', Quill.sources.USER);
 	});
+
+	// Validate before form submission.
+	$('#page_form').submit(function(event) {
+		let valid = true;
+		let title = $.trim($('#page_title').val());
+		let category = $('input[name="page[category_id]"]:checked').val();
+		var postContentInput = document.querySelector('#post-content');
+		postContentInput.value = quill.root.innerHTML;
+
+		if (title.length < 1) {
+			$('#title_error').html('Please enter a title.');
+			valid = false;
+		} else {
+			$('#title_error').html('');
+		}
+
+		if (category == null) {
+			$('#category_error').html('Please select a category.');
+			valid = false;
+		} else {
+			$('#category_error').html('');
+		}
+
+		if (!valid) {
+			event.preventDefault();
+		}
+
+		// Clear wiki contents in local storage.
+		localStorage.clear();
+	});
 });
