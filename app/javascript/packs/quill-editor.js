@@ -1,15 +1,24 @@
 import Quill from 'quill';
+// import ImageResize from 'quill-image-resize-module';
+// import BlotFormatter from 'quill-blot-formatter';
+import BlotFormatter from 'quill-blot-formatter'
 import 'custom/quill-classes/VideoBlot';
+import 'custom/quill-classes/ImageBlot';
 
+Quill.register('modules/blotFormatter', BlotFormatter);
+
+// Quill.register('modules/imageResize', ImageResize);
 export default Quill;
 
 document.addEventListener("turbolinks:load", function(event) {
 
+
 	var quill = new Quill('#editor', {
 		modules: {
-		toolbar: {
-			container: '#toolbar'
-		}
+			toolbar: {
+				container: '#toolbar'
+			},
+			blotFormatter: {}
 		},
 		placeholder: 'Compose an epic...',
 		theme: 'snow'
@@ -35,5 +44,20 @@ document.addEventListener("turbolinks:load", function(event) {
 
 		// Show cursor.
 		quill.setSelection(range.index + 2, Quill.sources.USER);
+	});
+
+	$('#image_button').click(function() {
+		let range = quill.getSelection(true);
+		quill.insertText(range.index, '\n', Quill.sources.USER);
+		
+		// Grab selected radio button by name. Return image path from database.
+		//let url = $("input[name='image']:checked").data('image').url;
+		let url = $("input[name='image']:checked").data('image').url;
+		//quill.insertText(range.index, '<p>', Quill.sources.USER);
+		quill.insertEmbed(range.index, 'custom-image', url, Quill.sources.USER);
+		//quill.insertText(range.index, '</p>', Quill.sources.USER);
+		//quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
+		quill.setSelection(range.index + 2, Quill.sources.SILENT);
+		quill.insertText(range.index, '\n', Quill.sources.USER);
 	});
 });

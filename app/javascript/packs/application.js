@@ -21,7 +21,6 @@ import 'custom/wiki-validate';
 import '@client-side-validations/client-side-validations'
 //import "custom/image_show";
 //import "custom/kaminari"
-//require("custom/image-resize")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
