@@ -4,6 +4,7 @@ import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter'
 import 'custom/quill-classes/VideoBlot';
 import 'custom/quill-classes/ImageBlot';
+const Delta = Quill.import('delta');
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
@@ -51,15 +52,36 @@ document.addEventListener("turbolinks:load", function(event) {
 		quill.insertText(range.index, '\n', Quill.sources.USER);
 		
 		// Grab selected radio button by name. Return image path from database.
-		//let url = $("input[name='image']:checked").data('image').url;
 		let url = $("input[name='image']:checked").data('image').url;
-		//quill.insertText(range.index, '<p>', Quill.sources.USER);
 		quill.insertEmbed(range.index, 'custom-image', url, Quill.sources.USER);
-		//quill.insertText(range.index, '</p>', Quill.sources.USER);
-		//quill.formatText(range.index + 1, 1, { height: '360', width: '640' });
 		quill.setSelection(range.index + 2, Quill.sources.SILENT);
 		quill.insertText(range.index, '\n', Quill.sources.USER);
 	});
+
+	// Store accumulated changes
+	let change = new Delta();
+
+	quill.on('text-change', function(delta) {
+		change = change.compose(delta);
+	});
+
+	// Save periodically
+	setInterval(function() {
+		if (change.length() > 0) {
+			console.log('Saving changes...', change);
+			// Save the entire updated text to localStorage
+			const data = JSON.stringify(quill.root.innerHTML);
+			localStorage.setItem('storedText', data);
+			change = new Delta();
+		}
+	}, 1000);
+
+	// Load saved contents
+	setTimeout(window.onload = function() {
+		var storedText = JSON.parse(localStorage.getItem('storedText'));
+		
+		if (editor !== null) $('.ql-editor').html(storedText);
+	}, 500);
 
 	// Validate before form submission.
 	$('#page_form').submit(function(event) {
