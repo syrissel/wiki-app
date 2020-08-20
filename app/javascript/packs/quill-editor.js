@@ -1,4 +1,4 @@
-import Quill from 'quill';
+const Quill = require('quill');
 // import ImageResize from 'quill-image-resize-module';
 // import BlotFormatter from 'quill-blot-formatter';
 import BlotFormatter from 'quill-blot-formatter'
