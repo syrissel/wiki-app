@@ -1,5 +1,6 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<%= javascript_pack_tag 'summernote', 'data-turbolinks-track': 'reload' %>
 
 </head>
 
@@ -50,72 +51,10 @@
 	</div>
 	</div>
 	<div class="errors" id="category_error"></div>
-
-  <div class="form_group">
-    <%#= f.label :content, class: "form_label" %>
-      <div class="form-group">
-      <%= f.hidden_field :content, :id => "post-content", required: true %>
-      <div id="editor-container" hidden="true"></div>
-      <div id="toolbar">
-			<span class="ql-formats">
-				<select class="ql-font">
-					<option selected></option>
-					<option value="serif"></option>
-					<option value="monospace"></option>
-				</select>
-			</span>
-			<span class="ql-formats">
-				<select class="ql-size">
-					<option value="small"></option>
-					<option selected></option>
-					<option value="large"></option>
-					<option value="huge"></option>
-				</select>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-header" value="1"></button>
-				<button class="ql-header" value="2"></button>
-				<button class="ql-blockquote"></button>
-				<button class="ql-code-block"></button>
-				<button class="ql-hr"><b>—</b></button>
-				<%#<button class="ql-border"><b>BR</b></button>%>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-bold"></button>
-				<button class="ql-italic"></button>
-				<button class="ql-underline"></button>
-				<button class="ql-strike"></button>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-list" value="ordered"></button>
-				<button class="ql-list" value="bullet"></button>
-				<button class="ql-indent" value="-1"></button>
-				<button class="ql-indent" value="+1"></button>
-			</span>
-			<span class="ql-formats">
-				<select class="ql-color">
-				</select>
-				<select class="ql-background">
-				</select>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-link"></button>
-				<button class="show-image-options" type='button'><box-icon size="16" type='solid' name='image-alt'></box-icon></button>
-				<button class="custom_video_button show-video-options" type='button'><box-icon size="16" name='video' type='solid' ></box-icon></button>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-clean"></button>
-			</span>
-			<span class="ql-formats">
-				<button class="ql-align" value=""></button>
-				<button class="ql-align" value="center"></button>
-				<button class="ql-align" value="right"></button>
-				<button class="ql-align" value="justify"></button>
-			</span>
-		</div>
-      <div id="editor"></div>
-    </div>
-  </div>
+	<button type="button" class="show-image-options">Image</button>
+	<div class="form_group">
+		<div id="summernote">Compose a document...</div>
+	</div>
 	<div class="form_aside">
 		<div class="form_group">
 			<%= f.label "Wiki photo (optional)"%>
