@@ -1,7 +1,7 @@
 require('bootstrap')
 require('summernote/dist/summernote-bs4')
 
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
     $('#summernote').summernote({
         toolbar: [
             ['style', ['style']],
