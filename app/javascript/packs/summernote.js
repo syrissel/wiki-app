@@ -1,5 +1,5 @@
-
-require('summernote/dist/summernote-lite')
+require('bootstrap')
+require('summernote/dist/summernote-bs4')
 
 $(document).on('turbolinks:load', function() {
     $('#summernote').summernote({
