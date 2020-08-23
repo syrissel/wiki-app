@@ -1,6 +1,10 @@
 $(document).on('turbolinks:load', function () {
     $('.admin-item-wrapper').hover(function () {
-        $(this).children('.icon').attr('animation', 'burst')
+        if ($(this).children('.icon').attr('name') == 'cog') {
+            $(this).children('.icon').attr('animation', 'spin')
+        } else {
+            $(this).children('.icon').attr('animation', 'tada')
+        }
         $(this).children('p').animate({
             'font-size': '30px'
         }, 250)
