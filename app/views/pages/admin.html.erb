@@ -1,20 +1,20 @@
-<%= javascript_pack_tag 'admin.js', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'admin.js' %>
 <h1>Administrative Tasks</h1>
 
 <table class="table mx-auto mt-4" style="width:0 !important;">
   <tbody>
     <tr class="row">
-      <td class="admin-td"><%= link_to categories_path do %><div class="admin-item-wrapper"><p>Categories</p><box-icon class='icon' size='108px' type='solid' name='customize'></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to images_path do %><div class="admin-item-wrapper"><p>Images</p><box-icon class="icon" size="108px" name='images' ></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to videos_path do %><div class="admin-item-wrapper"><p>Videos</p><box-icon class="icon" size="108px" type='solid' name='videos'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to categories_path do %><div class="admin-item-wrapper"><h4>Categories</h4><box-icon class='icon' size='108px' type='solid' name='customize'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to images_path do %><div class="admin-item-wrapper"><h4>Images</h4><box-icon class="icon" size="108px" name='images' ></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to videos_path do %><div class="admin-item-wrapper"><h4>Videos</h4><box-icon class="icon" size="108px" type='solid' name='videos'></box-icon></div><% end %></td>
     <tr class="row">
-      <td class="admin-td"><%= link_to users_path do %><div class="admin-item-wrapper"><p>Users</p><box-icon class="icon" size="108px" type='solid' name='group'></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><p>Wiki Review</p><box-icon class="icon" size="108px" name='select-multiple'></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><p>Settings</p><box-icon class="icon" size="108px" type='solid' name='cog'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to users_path do %><div class="admin-item-wrapper"><h4>Users</h4><box-icon class="icon" size="108px" type='solid' name='group'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>Wiki Review</h4><box-icon class="icon" size="108px" name='select-multiple'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>Settings</h4><box-icon class="icon" size="108px" type='solid' name='cog'></box-icon></div><% end %></td>
     </tr>
     <tr class="row">
-      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><p>Job Postings</p><box-icon class="icon" size="108px" type='solid' name='briefcase'></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to edit_user_path(current_user) do %><div class="admin-item-wrapper"><p>Test</p><box-icon class="icon" size="108px" type='solid' name='briefcase'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>Job Postings</h4><box-icon class="icon" size="108px" type='solid' name='briefcase'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to edit_user_path(current_user) do %><div class="admin-item-wrapper"><h4>Test</h4><box-icon class="icon" size="108px" type='solid' name='briefcase'></box-icon></div><% end %></td>
       <td class="admin-td"></td>
     </tr>
   </tbody>
