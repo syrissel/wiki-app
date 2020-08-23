@@ -34,7 +34,11 @@ class PagesController < ApplicationController
 			@notifications.each do |n|
 				n.update(read_at: Time.now)
 			end
-		end
+    end
+    
+    respond_to do |format| 
+      format.js { render :content_type => 'text/javascript' }
+    end
 
   end
 
