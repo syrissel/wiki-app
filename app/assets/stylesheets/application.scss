@@ -673,6 +673,7 @@ html, body {
   text-decoration: none !important;
   margin: 0px;
   padding: 0px;
+  position: absolute;
 }
 
 #show_video_description {
@@ -694,7 +695,7 @@ html, body {
 
 .icon {
 	float: right;
-	margin: 55px 0 0 0;
+	margin-top: 5rem;
 	size: 108px;
 }
 
