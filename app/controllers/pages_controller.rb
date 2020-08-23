@@ -35,10 +35,6 @@ class PagesController < ApplicationController
 				n.update(read_at: Time.now)
 			end
     end
-    
-    respond_to do |format| 
-      format.js { render :content_type => 'text/javascript' }
-    end
 
   end
 
