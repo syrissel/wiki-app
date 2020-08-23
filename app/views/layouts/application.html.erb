@@ -21,34 +21,50 @@
 
   <div class="container-fluid p-0">
     <div class="header_container">
+    <div class="row">
+      <div class="col-4">
+        <%= link_to root_path do %>
+          <div class="logo"></div>
+          <h2 class="wiki_logo">wiki</h2>
+        <% end %>
+      </div>
+      <div class="col-4">
+        <div id="" class="mx-auto my-5">
+            <%= form_tag pages_path, method: :get do %>
+              <%= text_field_tag :query, nil, :placeholder => 'Search', class: 'form-control w-75 float-left mr-2' %>
+              <%= submit_tag "Search", name: nil, class: 'btn btn-primary' %>
+            <% end %>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="user_login">
+          <% if current_user %>
+          <ul>
+            <li><%= current_user.username %></li>
+            <li><%= link_to 'Logout', logout_path, onclick: "clearStorage()" %></li>
+            <li><%= link_to 'Change Password', new_password_path %></li>
 
-      <%= link_to root_path do %>
-      <div class="logo"></div>
-      <h2 class="wiki_logo">wiki</h2>
-      <% end %>
-      <div class="user_login">
-      <% if current_user %>
-      <ul>
-        <li><%= current_user.username %></li>
-        <li><%= link_to 'Logout', logout_path, onclick: "clearStorage()" %></li>
-				<li><%= link_to 'Change Password', new_password_path %></li>
+            <div id="notification_bell">
+              <%= render 'layouts/notification_bell'%>
+            </div>
+          </ul>
+          <% end %>
+        </div>
 
-        <div id="notification_bell">
-					<%= render 'layouts/notification_bell'%>
-				</div>
-      </ul>
-      <% end %>
-    </div>
+        <div id="notifications">
+            <ul>
+              <%#= render partial: 'notifications/notification', collection: @notifications %>
+              <% if @notifications.present? %>
+                <%= render @notifications %>
+              <% end %>
+            </ul>
+            <%= link_to 'Clear Notifications', pages_path(clear: 'true'), remote: true %>
+        </div>
+      </div>
+    </div><!--row-->
 
-		<div id="notifications">
-				<ul>
-					<%#= render partial: 'notifications/notification', collection: @notifications %>
-					<% if @notifications.present? %>
-						<%= render @notifications %>
-					<% end %>
-				</ul>
-				<%= link_to 'Clear Notifications', pages_path(clear: 'true'), remote: true %>
-		</div>
+
+
 
 		<%# When the user clicks "Logout", the browser's local storage will be erased. %>
     <script>
@@ -57,12 +73,7 @@
       }
     </script>
 
-    <div id="search">
-        <%= form_tag pages_path, method: :get do %>
-          <%= text_field_tag :query, nil, :placeholder => 'Search' %>
-          <%= submit_tag "", name: nil %>
-        <% end %>
-    </div>
+
 
     </div>
 
