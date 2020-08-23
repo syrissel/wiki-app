@@ -29,10 +29,16 @@
         <% end %>
       </div>
       <div class="col-4">
-        <div id="" class="mx-auto my-5">
+        <div id="" class="mx-auto">
+            <div class="row"><div class="col py-5"></div></div>
             <%= form_tag pages_path, method: :get do %>
               <%= text_field_tag :query, nil, :placeholder => 'Search', class: 'form-control w-75 float-left mr-2' %>
-              <%= submit_tag "Search", name: nil, class: 'btn btn-primary' %>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+              <%
+=begin%>
+ <%= submit_tag '<i class="fa fa-search" aria-hidden="true"></i>', name: nil, class: 'btn btn-primary' %> 
+<%
+=end%>
             <% end %>
         </div>
       </div>

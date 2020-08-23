@@ -73,7 +73,7 @@
   height: 1%;
   width: 1%;
   font-family: Arial;
-  z-index: 1;
+  z-index: 1000;
   transition: width 0.5s ease, height 0.3s ease-out;
   //transition: height 0.5s ease;
   opacity: 0.9;
@@ -188,7 +188,8 @@
   border: 3px solid rgb(80, 80, 80);
   padding: 10px 25px;
   margin: 0px auto;
-  margin-top: 10px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 	width: 60em;
 	overflow: auto;
 }
@@ -245,7 +246,7 @@ footer ul {
 }
 
 footer {
-  height: 150px !important;
+  height: 100px !important;
   background: black !important;
   color:#C2C8CF;
   display: table-row;
@@ -372,18 +373,24 @@ html, body {
   }
 }
 
-.card {
-  //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  //transition: 0.3s;
-  width: 100%;
-  margin: 10px 0px;
-  height: 6em;
+// Custom Summernote height
+
+.note-editable {
+  height: 35rem;
 }
 
-.card:hover {
-  //box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  box-shadow: 3px 7px rgba(0, 0, 0, 0.432);
-}
+// .card {
+//   //box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+//   //transition: 0.3s;
+//   width: 100%;
+//   margin: 10px 0px;
+//   height: 6em;
+// }
+
+// .card:hover {
+//   //box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+//   box-shadow: 3px 7px rgba(0, 0, 0, 0.432);
+// }
 
 .cardview_container {
 	padding: 0px 16px 2px 0px;
