@@ -35,3 +35,4 @@ yarn-debug.log*
 /public/video/*
 /public/videos/*
 /public/uploads/image/*
+/public/uploads/
