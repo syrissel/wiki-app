@@ -1,55 +1,47 @@
-<div class="registration_container">
-<h1 class="edit_font edit_title">Editing <%= @user.username %></h1>
-
-<div class="errors">
-<% if @user.present? && @user.errors.any? %>
-	<p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
-	<ul>
-	<% @user.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-	<% end %>
-	</ul>
-<% end %>
-</div>
-
-<%= form_for @user, url: { action: :admin_update }, validate: true do |f| %>
-
-
-  <div class="user_form_group">
-    <%= f.label "Username (required)", params[:username], class: 'user_label' %><br />
-    <%= f.text_field :username, class: 'user_text_field' %>
+<div class="row">
+<div class="col-3"></div>
+  <div class="col-6">
+  <h5>Editing <%= @user.username %></h5>
+  <hr>
+  <div class="errors">
+    <% if @user.present? && @user.errors.any? %>
+      <p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
   </div>
-	<div class="user_form_group">
-		<%= f.label "First name (optional)", params[:first_name], class: 'user_label' %><br />
-    <%= f.text_field :first_name, class: 'user_text_field' %>
-	</div>
-	<div class="user_form_group">
-		<%= f.label "Last name (optional)", params[:last_name], class: 'user_label' %><br />
-    <%= f.text_field :last_name, class: 'user_text_field' %>
-	</div>
-  <div class="user_form_group">
-    <%= f.label :user_level_id, class: 'user_label' %><br />
-    <%= f.label :user_level_id, 'Intern' %>
-    <%= f.radio_button :user_level_id, UserLevel.find(INTERN_VALUE).id %>
-    <%= f.label :user_level_id, 'Supervisor' %>
-    <%= f.radio_button :user_level_id, UserLevel.find(SUPERVISOR_VALUE).id %>
-  </div>
-	<div class="user_form_group">
-		<%= f.label :user_status_id, class: 'user_label' %><br />
-		<%= f.label :user_status_id, 'Active' %>
-		<%= f.radio_button :user_status_id, UserStatus.first.id %>
-		<%= f.label :user_status_id, 'Inactive'%>
-		<%= f.radio_button :user_status_id, UserStatus.last.id %>
 
-	</div>
-  <div class="user_form_group">
-    <%= f.label :password, params[:password], class: 'user_label' %><br />
-    <%= f.password_field :password, class: 'user_text_field' %>
-  </div>
-  <div class="user_form_group">
-    <%= f.label :password_confirmation, params[:password_confirmation], class: 'user_label' %><br />
-    <%= f.password_field :password_confirmation, class: 'user_text_field' %>
-  </div>
-  <div class="user_form_group"><%= f.submit "Save", class: 'user_button' %></div>
-<% end %>
-</div>
+  <%= form_for @user, url: { action: :admin_update }, validate: true do |f| %>
+    <div class="form-group">
+      <%= f.label "Username (required)", params[:username] %>
+      <%= f.text_field :username, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label "First name (optional)", params[:first_name] %>
+      <%= f.text_field :first_name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label "Last name (optional)", params[:last_name] %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :user_level %>
+      <%= f.select :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME).map { |u| [ u.level, u.id ] }, { }, { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.label :user_status %>
+      <%= f.select :user_status_id, UserStatus.all.map { |s| [ s.status, s.id ] }, { }, { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Save", class: 'btn btn-primary' %>
+      <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
+    </div>
+  <% end %>
+  </div><!--col-6-->
+<div class="col-3"></div>
+</div><!--row-->
+
+<%= console %>
