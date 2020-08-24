@@ -26,7 +26,7 @@ let VideoButton = function (context) {
     let ui = $.summernote.ui;
 
     let button = ui.button({
-        contents: '<i class="fa fa-video-camera" aria-hidden="true"></i>',
+        contents: '<i class="fa fa-play" aria-hidden="true"></i>',
         tooltip: 'Video',
         click: function () {
             let options = document.getElementsByClassName('video_options')[0];
