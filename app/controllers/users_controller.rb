@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
 	def admin_update
 		if update
-			redirect_to admin_path, notice: "#{@user.username} has been updated."
+			redirect_to users_path, notice: "#{@user.username} has been updated."
 		else
 			render :edit
 		end

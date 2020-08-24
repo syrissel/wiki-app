@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+
+	def fullname
+		self.first_name + ' ' + self.last_name
+	end
+
   belongs_to :user_level
   has_many :pages, dependent: :nullify
   has_many :notifications

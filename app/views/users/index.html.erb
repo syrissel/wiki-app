@@ -7,29 +7,33 @@
 	<% end %>
 </div>
 
-<table id="review-table">
-<tr>
-  <th>Username<div class="arrow_container"><%= link_to users_path(s: 'username_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'username_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-  <th>Last Login<div class="arrow_container"><%= link_to users_path(s: 'last_login_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'last_login_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-  <th>User Level<div class="arrow_container"><%= link_to users_path(s: 'user_level_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'user_level_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-  <th>Status<div class="arrow_container"><%= link_to users_path(s: 'user_status_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'user_status_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-</tr>
-<% @users.each do |u| %>
+<table class="table table-bordered">
+<thead class="thead-dark">
   <tr>
-		<td><%= link_to u.username, edit_user_path(u) %></td>
-		<td>
-			<% if u.last_login.nil? %>
-      User has not logged in yet.
-    <% else %>
-      <%= u.last_login.strftime("%B %-d, %Y at %l:%M %p") %>
-    <% end %>
-		</td>
-		<td><%= u.user_level.level %></td>
-    <td><%=u.user_status.status%></td>
+    <th>Username<div class="arrow_container"><%= link_to users_path(s: 'username_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'username_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Last Login<div class="arrow_container"><%= link_to users_path(s: 'last_login_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'last_login_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>User Level<div class="arrow_container"><%= link_to users_path(s: 'user_level_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'user_level_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Status<div class="arrow_container"><%= link_to users_path(s: 'user_status_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'user_status_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Action</th>
   </tr>
-<% end %>
+</thead>
+<tbody>
+  <% @users.each do |u| %>
+    <tr>
+      <td><%= u.fullname %></td>
+      <td>
+        <% if u.last_login.nil? %>
+        User has not logged in yet.
+      <% else %>
+        <%= u.last_login.strftime("%B %-d, %Y at %l:%M %p") %>
+      <% end %>
+      </td>
+      <td><%= u.user_level.level %></td>
+      <td class="<%= u.user_status.status == 'Active' ? 'text-success' : 'text-danger' %>" ><%=u.user_status.status%></td>
+      <td><%= link_to 'Edit', edit_user_path(u), class: '' %></td>
+    </tr>
+  <% end %>
+</tbody>
 </table>
 
-<%= link_to 'Register New User', register_path, class: 'link_button' %>
-
-<%= console %>
+<%= link_to 'Register New User', register_path, class: 'btn btn-primary' %>
