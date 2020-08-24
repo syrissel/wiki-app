@@ -53,7 +53,7 @@ $(document).ready(function() {
             ['table', ['table']],
             ['insert', ['link', 'btnImage', 'btnVideo']],
             ['view', ['fullscreen', 'codeview', 'help']],
-            ['tableofcontent']
+            ['tableOfContents']
           ],
         buttons: {
             btnImage: ImageButton,

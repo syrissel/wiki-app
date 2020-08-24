@@ -55,7 +55,7 @@
 	<button type="button" class="show-image-options">Image</button>
 	<button type="button" class="show-video-options">Video</button>
 	<div class="form_group">
-		<div id="summernote">Compose a document...</div>
+		<%= f.text_area :content, id: :summernote %>
 	</div>
 	<div class="form_aside">
 		<div class="form_group">

@@ -1,9 +1,8 @@
 /**
  * 
- * copyright 2018 Nicolas Fournier.
- * email: nicolas@rousseaufournier.com
- * license: buy me a beer or a house.
- * 
+ * Author: Steph Mireault
+ * Date:   August 24, 2020
+ * License: MIT
  */
 (function (factory) {
     /* Global define */
@@ -29,7 +28,7 @@
       /**
        * @param {Object} context - context object has status of editor.
        */
-      'tableofcontent': function(context) {
+      'tableOfContents': function(context) {
         var self = this;
   
         // ui has renders to build ui elements.
@@ -43,70 +42,54 @@
         var options  = context.options;
         var lang     = options.langInfo;
         // add tableofcontent button
-        context.memo('button.tableofcontent', function() {
+        context.memo('button.tableOfContents', function() {
           // create button
           var button = ui.button({
-            contents: 'ToC',
-            tooltip: 'Create a table of content',
+            contents: '<i class="fa fa-list-alt" aria-hidden="true"></i>',
+            tooltip: 'Table of contents',
             click: function() {
-              // invoke insertText method with 'hello' on editor module.
-              if ($editable.find("div[id='toc']").length!=0)
-                  $editable.find("div[id='toc']").remove();
-              var h1 = $editable.find('h1');
-              var hList= "<h3>Table of Contents</h3><ul id='tableofcontent'>";
+              var h1 = $editable.find('h1, h2, h3, h4');
+              var hList= "<h5>Table of Contents</h5><ul id='table_of_contents_list' style='list-style-type:lower-roman;'>";
               var node = document.createElement('div');
+              var br = document.createElement('br')
   
-              
-              node.od = id='toc';
               for (var i = 0; i < h1.length; i++)
               {
-                  if ($(h1[i]).text()!="")
-                  {
-                      if ($(h1[i]).text().replace(/^\s+/, '').replace(/\s+$/, '')  == '')
-                      {
-                          //Whitespace
-                      }
-                      else
-                      {
-                          //$(h1[i]).append("<a name='h1_" + i + "'/>"); //Update???
-                          $(h1[i]).attr("id","h1_" + i);
-                          hList += "<li><a href='#h1_"+ i + "'>" +$(h1[i]).text().replace(/(\r\n\t|\n|\r\t)/gm,"") + "</a></li>";	
-                      }
-                  }
-                  
-                  //H2
-                  var h2 = $(h1[i]).find('h2');
-                  if (h2.length>0)
-                  {
-                      hList+= "<ul>";
-                      for (var j = 0; j < h2.length; j++)
-                      {
-                          if ($(h2[i]).text()!="")
-                          {
-                              if ($(h2[i]).text().replace(/^\s+/, '').replace(/\s+$/, '')  == '')
-                              {
-                                  //Whitespace
-                              }
-                              else
-                              {
-                                  //$(h2[j]).append("<a name='h2_" +i + "_"+ j + "'/>");
-                                  $(h2[j]).attr("id","h2_" +i + "_"+ j);
-                                  hList += "<li><a href='#h1_"+ i + "'>" +$(h2[j]).text().replace(/(\r\n\t|\n|\r\t)/gm,"") + "</a></li>";	
-                              }
-                          }					
-                      }				
-                      hList += "</ul>";
-                  }
+                if ($.trim($(h1[i]).text()) != "")
+                {
+
+                    $(h1[i]).attr("id","title_" + i);
+                    hList += "<li><a href='#title_"+ i + "'>" + $(h1[i]).text() + "</a></li>";	
+                    
+                }
               }
+              const range = $.summernote.range;
+              const rng = range.create($note, 0, $note, 0)
+
               hList += "</ul>";
               node.innerHTML = hList;
-              
+              node.setAttribute('id', 'table_of_contents')
+              node.setAttribute('class', 'border')
+              node.setAttribute('style', 'width:18rem; padding:1rem; float: right, margin: 10px;')
+              node.setAttribute('contenteditable', 'false')
+              node.addEventListener('click', function () {
+                  if ($(this).css('float') == 'left') {
+                    $(this).css('float', 'right')
+                  } else {
+                    $(this).css('float', 'left')
+                  }
+              })
+
+              $note.summernote('editor.setLastRange', rng.collapse(true))
+              console.log(rng.collapse(true))
               $note.summernote('insertNode', node);
+              $note.summernote('editor.focus')
+              $note.summernote('insertHTML', '<br/>')
+              $note.summernote('insertText', ' ')
           }});
   
           // create jQuery object from button instance.
-          var $tableofcontent = button.render();
-          return $tableofcontent;
+          return button.render();
         });
   
         // This method will be called when editor is initialized by $('..').summernote();
