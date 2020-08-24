@@ -61,7 +61,8 @@ $(document).on('turbolinks:load', function() {
             btnImage: ImageButton,
             btnVideo: VideoButton
         },
-        tabDisable: true
+        tabDisable: true,
+        disableDragAndDrop: true
     });
 
     var helloButton = function (context) {
