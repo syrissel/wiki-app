@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 	get 'refresh-forum/:id', to: 'page_forums#refresh_forum', as: 'refresh_forum'
   post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
   patch 'change_password/:id', to: 'users#change_password'
+  get 'wiki_management', to: 'pages#wiki_management'
 
 
   resources :categories

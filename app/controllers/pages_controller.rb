@@ -171,6 +171,9 @@ class PagesController < ApplicationController
 		render partial: 'layouts/notification_bell'
 	end
 
+  def wiki_management
+    @pages = Page.all
+  end
   
   
   # Displays preview card of wiki on homepage. Finds first occurence of <p> tag
