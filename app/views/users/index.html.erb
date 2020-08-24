@@ -1,13 +1,16 @@
-<h1>Users</h1>
+<h3>Users</h3>
+<hr>
 
-<div>
+<div class="row">
+<div class="col">
  <%= simple_form_for users_path, method: :get do |f| %>
-		<%= f.text_field :userq %>
-		<%= f.submit 'Search'  %>
+		<%= f.text_field :userq, class: 'form-control w-25 float-left mr-2' %>
+		<%= f.submit 'Search', class: 'btn btn-primary' %>
 	<% end %>
 </div>
+</div>
 
-<table class="table table-bordered">
+<table class="table table-bordered mt-4">
 <thead class="thead-dark">
   <tr>
     <th>Username<div class="arrow_container"><%= link_to users_path(s: 'username_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to users_path(s: 'username_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
@@ -37,3 +40,4 @@
 </table>
 
 <%= link_to 'Register New User', register_path, class: 'btn btn-primary' %>
+<button type="button" class="btn btn-secondary" onclick="history.back()">Back</button>
