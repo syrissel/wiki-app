@@ -1,48 +1,51 @@
-<div class="registration_container">
-<h1 class="edit_title edit_font">Register User</h1>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h5>Register User</h5>
+    <hr>
 
-<%= form_for @user, validate: true do |f| %>
-<div class="errors">
-<% if @user.present? && @user.errors.any? %>
-	<p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
-	<ul>
-	<% @user.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-	<% end %>
-	</ul>
-<% end %>
-</div>
+    <%= form_for @user, validate: true do |f| %>
+    <div class="errors">
+    <% if @user.present? && @user.errors.any? %>
+      <p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </div>
 
-  <div class="user_form_group">
-    <%= f.label "Username (required)", params[:username], class: 'user_label' %><br />
-    <%= f.text_field :username, class: 'user_text_field' %>
-    <%= hidden_field(:user, :user_status_id, value: @active) %>
-  </div>
-	<div class="user_form_group">
-		<%= f.label "First name (optional)", params[:first_name], class: 'user_label' %><br />
-    <%= f.text_field :first_name, class: 'user_text_field' %>
-	</div>
-	<div class="user_form_group">
-		<%= f.label "Last name (optional)", params[:last_name], class: 'user_label' %><br />
-    <%= f.text_field :last_name, class: 'user_text_field' %>
-	</div>
-  <div class="user_form_group">
-    <%= f.label :user_level_id, class: 'user_label' %><br />
-    <%= f.label :user_level_id, 'Intern' %>
-    <%= f.radio_button :user_level_id, UserLevel.find(INTERN_VALUE).id %>
-    <%= f.label :user_level_id, 'Supervisor' %>
-    <%= f.radio_button :user_level_id, UserLevel.find(SUPERVISOR_VALUE).id %>
-    <%#= collection_select :user, :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME), :id, :level, prompt: true %>
-  </div>
-  <div class="user_form_group">
-    <%= f.label :password, params[:password], class: 'user_label' %><br />
-    <%= f.password_field :password, class: 'user_text_field' %>
-  </div>
-  <div class="user_form_group">
-    <%= f.label :password_confirmation, params[:password_confirmation], class: 'user_label' %><br />
-    <%= f.password_field :password_confirmation, class: 'user_text_field' %>
-  </div>
-  <div class="user_form_group"><%= f.submit "Register", class: 'user_button' %></div>
-<% end %>
-</div>
+      <div class="form-group">
+        <%= f.label "Username (required)", params[:username] %>
+        <%= f.text_field :username, class: 'form-control' %>
+        <%= hidden_field(:user, :user_status_id, value: @active) %>
+      </div>
+      <div class="form-group">
+        <%= f.label "First name (optional)", params[:first_name] %>
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Last name (optional)", params[:last_name] %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.select :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME).map { |u| [ u.level, u.id ] }, { prompt: true }, { class: 'form-control' } %>
+        <%# <%= collection_select :user, :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME), :id, :level, { class: 'form-control', prompt: true } %> 
+      </div>
+      <div class="form-group">
+        <%= f.label :password, params[:password] %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, params[:password_confirmation] %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Register", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <div class="col-3"></div>
+  </div><!--col-6-->
+</div><!--row-->
 
