@@ -1,15 +1,20 @@
-<div class="registration_container">
-<h1 class="edit_title edit_font">Login</h1>
-<p class="alert margin_fix"><%= alert %></p>
-<%= form_for sessions_path, :url => { :action => "create" } do |f| %>
-  <div class="user_form_group">
-    <%= f.label :username, class: 'user_label' %><br />
-    <%= f.text_field :username, class: 'user_text_field' %>
-  </div>
-  <div class="user_form_group">
-    <%= f.label :password, class: 'user_label' %><br />
-    <%= f.password_field :password, class: 'user_text_field' %>
-  </div>
-  <div class="user_form_group"><%= f.submit "Login", class: 'user_button' %></div>
-<% end %>
+<div class="row">
+<div class="col-3"></div>
+<div class="col-6">
+  <h5>Login</h5>
+  <hr>
+  <p class="alert margin_fix"><%= alert %></p>
+  <%= form_for sessions_path, :url => { :action => "create" } do |f| %>
+    <div class="form-group">
+      <%= f.label :username %>
+      <%= f.text_field :username, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+    <div class="form-group"><%= f.submit "Login", class: 'btn btn-primary' %></div>
+  <% end %>
+</div>
+<div class="col-3"></div>
 </div>
