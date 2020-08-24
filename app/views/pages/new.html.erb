@@ -1,14 +1,11 @@
 <head>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<%= javascript_pack_tag 'summernote', 'data-turbolinks-track': 'reload' %>
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
 </head>
 
-<h1 class="edit_title edit_font">New Wiki</h1>
-
-<%#= render plain: params[:page].inspect %>
-<%#= @page.errors[:title] if @page.present? %>
+<h5>New Wiki</h5>
+<hr>
 
 <div class="errors">
 <% if @page.present? && @page.errors.any? %>
@@ -22,26 +19,24 @@
 </div>
 
 <%= form_for @page, url: pages_path, html: { id: 'page_form' }, validate: true do |f| %>
-  <div class="form_group">
-    <%= f.label :title, class: "form_label" %><br>
-    <%= f.text_field :title, class: "text_field" %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
 		<div class="errors" id="title_error"></div>
   </div>
-  <div class="form_group">
+  <div class="form-group">
     <%= hidden_field(:page, :user_id, value: current_user.id) %>
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
 		<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
 		<%= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
   </div>
-	<div class="form_group">
-		<%= f.label 'Give a quick summary of what this wiki is about', class: 'form_label' %>
-		<%= f.text_field :description, class: "text_field"%>
+	<div class="form-group">
+		<%= f.label 'Give a quick summary of what this wiki is about (optional)' %>
+		<%= f.text_field :description, class: "form-control"%>
 		</div>
-	<div class="form_label form_group">
-    <%= f.label :category %><br />
+	<div class="form-group">
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
-	
-	<button type="button" class="show-category-options">Select Category</button>
+	<button type="button" class="btn btn-secondary show-category-options">Select Category</button>
 	<div class="category_select hidden">
 		<div class="image_options_header">
 			<h2>Choose Category</h2>
@@ -52,19 +47,17 @@
 	</div>
 	</div>
 	<div class="errors" id="category_error"></div>
-	<button type="button" class="show-image-options">Image</button>
-	<button type="button" class="show-video-options">Video</button>
-	<div class="form_group">
+	<div class="form-group">
 		<%= f.text_area :content, id: :summernote %>
 	</div>
 	<div class="form_aside">
-		<div class="form_group">
+		<div class="form-group">
 			<%= f.label "Wiki photo (optional)"%>
 			<%= f.file_field :image, id: 'preview_upload' %>
 			<img id="img_prev" src="#", class="hidden" style="width:20%; height:20%;"/>
 		</div>
 	</div>
-  <div class="form_group">
+  <div class="form-group">
     <%= f.submit "Submit", class: "link_button", data: { confirm: "Submit wiki?" } %>
   </div>
 <% end %>

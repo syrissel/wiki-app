@@ -42,18 +42,20 @@ let VideoButton = function (context) {
     return button.render()
 }
 
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
     $('#summernote').summernote({
         toolbar: [
             ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
+            ['font', ['bold', 'underline', 'italic', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['table', ['table']],
             ['insert', ['link', 'btnImage', 'btnVideo']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-            ['tableOfContents']
+            ['tableOfContents'],
+            ['view', ['fullscreen', 'codeview', 'help']]
           ],
         buttons: {
             btnImage: ImageButton,
