@@ -2,5 +2,5 @@ $('#pages').html('<%= escape_javascript render(@pages) %>');
 $('#paginator').html('<%= escape_javascript(paginate(@pages, remote: true).to_s) %>');
 $('#notifications ul').html('<%= escape_javascript(render(@notifications)) %>');
 $('#notification_bell').html('<%= escape_javascript(render('layouts/notification_bell')) %>');
-if ($('#notifications').css('display') === 'none') { $('#notifications').show(); } else { $('#notifications').hide(); }
+<%# if ($('#notifications').css('display') === 'none') { $('#notifications').show(); } else { $('#notifications').hide(); } %>
 $('body').click(function(){$('#notifications').hide();});

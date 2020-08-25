@@ -34,11 +34,6 @@
             <%= form_tag pages_path, method: :get do %>
               <%= text_field_tag :query, nil, :placeholder => 'Search', class: 'form-control w-75 float-left mr-2' %>
               <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-              <%
-=begin%>
- <%= submit_tag '<i class="fa fa-search" aria-hidden="true"></i>', name: nil, class: 'btn btn-primary' %> 
-<%
-=end%>
             <% end %>
         </div>
       </div>
@@ -57,7 +52,11 @@
           <% end %>
         </div>
 
-        <div id="notifications">
+
+      </div>
+    </div><!--row-->
+  </div><!--header_container-->
+          <div id="notifications">
             <ul>
               <%#= render partial: 'notifications/notification', collection: @notifications %>
               <% if @notifications.present? %>
@@ -66,22 +65,6 @@
             </ul>
             <%= link_to 'Clear Notifications', pages_path(clear: 'true'), remote: true %>
         </div>
-      </div>
-    </div><!--row-->
-
-
-
-
-		<%# When the user clicks "Logout", the browser's local storage will be erased. %>
-    <script>
-      function clearStorage() {
-        localStorage.clear();
-      }
-    </script>
-
-
-
-    </div>
 
     <div id="side_panel">
     <div id='side_menu_nav'>
@@ -101,10 +84,7 @@
       </div>
     <div id='side_background'><box-icon id='menu_icon' name='menu' size='72px' color='#d4af37'></box-icon></div>
     <div class="side_panel_container">
-    
         <%= render partial: 'application/category_select', locals: { is_form: false } %>
-
-
       </div>
     </div>
     <div id="middle_content">

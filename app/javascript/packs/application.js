@@ -20,6 +20,16 @@ import "custom/side_menu";
 import "custom/header";
 import 'custom/wiki-validate';
 
+$(document).on('turbolinks:load', function () {
+    $('#notification_bell').click(function () {
+        if ($('#notifications').css('display') === 'block') {
+            $('#notifications').hide()
+        } else {
+            $('#notifications').show()
+        }
+    })
+})
+
 //import '@client-side-validations/client-side-validations'
 //import "custom/image_show";
 //import "custom/kaminari"
