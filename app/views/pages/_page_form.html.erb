@@ -19,11 +19,11 @@
 	<button type="button" class="btn btn-secondary show-category-options">Select Category</button>
 	<div class="category_select hidden">
 		<div class="image_options_header">
-			<h2>Choose Category</h2>
+			<h4>Choose Category</h4>
 			<button type='button' class="show-category-options">x</button>
 		</div>
 		<%= render partial: 'category_select', locals: { is_form: true } %>
-		<button type='button' class="show-category-options" style="float:right;">OK</button>
+		<button type='button' class="show-category-options btn btn-primary">OK</button>
 	</div>
 	</div>
 	<div class="errors" id="category_error"></div>

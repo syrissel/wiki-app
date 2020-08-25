@@ -548,6 +548,14 @@ html, body {
   overflow: auto;
 }
 
+.category_select button {
+  float: right;
+}
+
+.category_select .btn {
+  margin: 5px;
+}
+
 #image_search {
   margin-top: 30px;
 }
@@ -593,6 +601,11 @@ html, body {
   margin: 0px;
   float: left;
   padding: 8px 0 3px 12px;
+}
+
+.image_options_header h4 {
+  padding: 0.5rem;
+  float: left;
 }
 
 .clearfix {
