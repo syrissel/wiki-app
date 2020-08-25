@@ -109,4 +109,15 @@ $(document).on('turbolinks:load', function() {
         // $('#summernote').summernote('editor.setLastRange', range.createFromNodeAfter(video).select())
         console.log($('#summernote').summernote('editor.getLastRange'))
     })
+
+    $('#range_test_button').click(function () {
+        let range = new Range();
+        const summernote = $('.note-editable')[0]
+
+        range.setStart(summernote, 0);
+        range.setEnd(summernote, 0);
+        // let rng = range.create(summernote, 0, summernote, 0)
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(range);
+    })
 })

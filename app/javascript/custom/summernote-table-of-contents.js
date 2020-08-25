@@ -63,29 +63,35 @@
                     
                 }
               }
-              const range = $.summernote.range;
-              const rng = range.create($note, 0, $note, 0)
 
               hList += "</ul>";
               node.innerHTML = hList;
               node.setAttribute('id', 'table_of_contents')
               node.setAttribute('class', 'border')
-              node.setAttribute('style', 'width:18rem; padding:1rem; float: right, margin: 10px;')
+              node.setAttribute('style', 'width:18rem; padding:1rem; float: right; margin: 10px;')
               node.setAttribute('contenteditable', 'false')
               node.addEventListener('click', function () {
-                  if ($(this).css('float') == 'left') {
-                    $(this).css('float', 'right')
-                  } else {
-                    $(this).css('float', 'left')
-                  }
+
+                  // // Change float.
+                  // if ($(this).css('float') == 'left') {
+                  //   $(this).css('float', 'right')
+                  // } else {
+                  //   $(this).css('float', 'left')
+                  // }
+                  $(this).remove()
               })
 
-              $note.summernote('editor.setLastRange', rng.collapse(true))
-              console.log(rng.collapse(true))
+              const summernoteEditor = $('.note-editable')[0]
+
+              // Set cursor to beginning of editor.
+              let range = new Range()
+              range.setStart(summernoteEditor, 0)
+              range.setEnd(summernoteEditor, 0)
+              document.getSelection().removeAllRanges()
+              document.getSelection().addRange(range)
+
+              // Insert table of contents.
               $note.summernote('insertNode', node);
-              $note.summernote('editor.focus')
-              $note.summernote('insertHTML', '<br/>')
-              $note.summernote('insertText', ' ')
           }});
   
           // create jQuery object from button instance.
