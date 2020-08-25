@@ -3,29 +3,38 @@
 <% if @root_categories.nil? %>
   <h3>There are currently no categories. <%= link_to 'Create one', new_category_path %></h3>
 <% else %>
-  <ul class="category_ul">
+  <ul class="list-group w-75">
     <% @root_categories.each do |r| %>
-      <li>
-        <%= link_to r.name, edit_category_path(r) %><%= link_to "Move Up", categories_move_up_path(r)%><%= link_to "Move Down", categories_move_down_path(r)%>
-				<%= link_to "Delete", category_path(r), method: :delete, data: { confirm: "Delete #{r.name}? All child categories will be deleted as well."}%>
+      <li class="list-group-item">
+        <div class="btn-group-sm btn-group float-right ml-1" role="group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Delete</button>
+				  <div class="dropdown-menu">
+            <%= link_to 'Delete', category_path(r), method: :delete, data: { confirm: "Delete #{r.name}? All child categories and pages will be deleted as well."}, class: 'dropdown-item' %>
+          </div>
+        </div>
+        <%= link_to 'Edit', edit_category_path(r), class: 'btn btn-secondary btn-sm float-right ml-4' %>
+        <%= r.name %><div class="float-right"><%= link_to categories_move_up_path(r), class: 'mr-2' do %> <i class="fa fa-arrow-up" aria-hidden="true"></i><% end %><%= link_to categories_move_down_path(r) do %><i class="fa fa-arrow-down" aria-hidden="true"></i><% end %></div>
       </li>
       <% @sub_categories.each do |s| %>
         <% if r.id == s.category_id %>
-          <ul>
-            <li>
-              <%= link_to s.name, edit_category_path(s) %><%= link_to "Move Up", categories_move_up_path(s)%><%= link_to "Move Down", categories_move_down_path(s)%>
+          <ul class="list-group pl-4">
+            <li class="list-group-item">
+              <%= link_to category_path(s), method: :delete, data: { confirm: "Delete #{s.name}? All child categories will be deleted as well."}, class: 'float-right text-danger ml-2' do %><i class="fa fa-trash" aria-hidden="true"></i><% end %>
+              <%= link_to s.name, edit_category_path(s) %><div class="float-right"><%= link_to categories_move_up_path(s), class: 'mr-2' do %> <i class="fa fa-arrow-up" aria-hidden="true"></i><% end %><%= link_to categories_move_down_path(s) do %><i class="fa fa-arrow-down" aria-hidden="true"></i><% end %></div>
             </li>
             <% @sub_categories.each do |t| %>
               <% if s.id == t.category_id %>
-                <ul>
-                  <li>
-                    <%= link_to t.name, edit_category_path(t) %><%= link_to "Move Up", categories_move_up_path(t)%><%= link_to "Move Down", categories_move_down_path(t)%>
+                <ul class="list-group pl-4">
+                  <li class="list-group-item">
+                    <%= link_to category_path(t), method: :delete, data: { confirm: "Delete #{t.name}? All child categories will be deleted as well."}, class: 'float-right text-danger ml-2' do %><i class="fa fa-trash" aria-hidden="true"></i><% end %>
+                    <%= link_to t.name, edit_category_path(t) %><div class="float-right"><%= link_to categories_move_up_path(t), class: 'mr-2' do %> <i class="fa fa-arrow-up" aria-hidden="true"></i><% end %><%= link_to categories_move_down_path(t) do %><i class="fa fa-arrow-down" aria-hidden="true"></i><% end %></div>
                   </li>
                   <% @sub_categories.each do |u| %>
                     <% if t.id == u.category_id %>
-                      <ul>
-                        <li>
-                          <%= link_to u.name, edit_category_path(u) %><%= link_to "Move Up", categories_move_up_path(u)%><%= link_to "Move Down", categories_move_down_path(u)%>
+                      <ul class="list-group pl-4">
+                        <li class="list-group-item">
+                          <%= link_to category_path(u), method: :delete, data: { confirm: "Delete #{u.name}? All child categories will be deleted as well."}, class: 'float-right text-danger ml-2' do %><i class="fa fa-trash" aria-hidden="true"></i><% end %>
+                          <%= link_to u.name, edit_category_path(u) %><div class="float-right"><%= link_to categories_move_up_path(u), class: 'mr-2' do %> <i class="fa fa-arrow-up" aria-hidden="true"></i><% end %><%= link_to categories_move_down_path(u) do %><i class="fa fa-arrow-down" aria-hidden="true"></i><% end %></div>
                         </li>
                       </ul>
                     <% end %>
@@ -40,15 +49,7 @@
   </ul>
 <% end %>
 
-<%= link_to 'Create New Category', new_category_path %>
-<a href="javascript:history.back()">Back</a>
-
-<h2>Third-party Licences</h2>
-<ul>
-<% Gem.loaded_specs.each do |name, spec| %>%
-
-	<li><%=name%>% <%= spec.license %></li>
-<% end %>
-</ul>
+<%= link_to 'Create New Category', new_category_path, class: 'btn btn-primary' %>
+<a class="btn btn-secondary" href="javascript:history.back()">Back</a>
 
 <%= render 'snackbar' %>
