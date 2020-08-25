@@ -1,6 +1,8 @@
 <li class="list-group-item">
   <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-secondary btn-sm float-right ml-4' %>
-  <%= link_to new_category_path(id: category.id), class: 'float-right ml-2 text-success', "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Add sub-category" do %><i class="fa fa-plus-square" aria-hidden="true"></i><% end %>
+  <% if parent %>
+    <%= link_to new_category_path(id: category.id), class: 'float-right ml-2 text-success', "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Add sub-category" do %><i class="fa fa-plus-square" aria-hidden="true"></i><% end %>
+  <% end %>
   <%= category.name %>
   <div class="float-right">
     <%= link_to categories_move_up_path(category), class: 'mr-2', "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Move up" do %> <i class="fa fa-arrow-up" aria-hidden="true"></i><% end %>

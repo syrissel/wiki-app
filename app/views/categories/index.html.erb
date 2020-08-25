@@ -6,19 +6,26 @@
 <% else %>
   <ul class="list-group w-50 mx-auto">
     <% @root_categories.each do |r| %>
-        <%= render partial: 'category', locals: { category: r } %>
+        <%= render partial: 'category', locals: { category: r, parent: true } %>
       <% @sub_categories.each do |s| %>
         <% if r.id == s.category_id %>
           <ul class="list-group pl-4">
-            <%= render partial: 'category', locals: { category: s } %>
+            <%= render partial: 'category', locals: { category: s, parent: true } %>
             <% @sub_categories.each do |t| %>
               <% if s.id == t.category_id %>
                 <ul class="list-group pl-4">
-                  <%= render partial: 'category', locals: { category: t } %>
+                  <%= render partial: 'category', locals: { category: t, parent: true } %>
                   <% @sub_categories.each do |u| %>
                     <% if t.id == u.category_id %>
                       <ul class="list-group pl-4">
-                        <%= render partial: 'category', locals: { category: u } %>
+                        <%= render partial: 'category', locals: { category: u, parent: true } %>
+                        <% @sub_categories.each do |v| %>
+                          <% if u.id == v.category_id %>
+                            <ul class="list-group pl-4">
+                              <%= render partial: 'category', locals: { category: v, parent: false } %>
+                            </ul>
+                          <% end %>
+                        <% end %>
                       </ul>
                     <% end %>
                   <% end %>
