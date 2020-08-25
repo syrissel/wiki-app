@@ -22,7 +22,7 @@
 			<h2>Choose Category</h2>
 			<button type='button' class="show-category-options">x</button>
 		</div>
-		<%= render 'category_select' %>
+		<%= render partial: 'category_select', locals: { is_form: true } %>
 		<button type='button' class="show-category-options" style="float:right;">OK</button>
 	</div>
 	</div>
