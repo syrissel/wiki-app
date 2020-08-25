@@ -5,6 +5,10 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+
+    if params[:id].present?
+      @parent = Category.find(params[:id])
+    end
   end
 
   def index
@@ -39,7 +43,7 @@ class CategoriesController < ApplicationController
   end
 
 	def destroy
-		redirect_to categories_path
+    redirect_to categories_path, notice: "#{@category.name} has been deleted"
 		@category.destroy
   end
 

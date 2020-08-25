@@ -1,16 +1,4 @@
-<h1>Create new category</h1>
+<h5>Create new category <i><%= @parent.present? ? 'for ' + @parent.name : '' %></i></h5>
+<hr>
 
-<%= form_for @category do |f| %>
-  <%= hidden_field(:category, :sort_number, value: sort_number_increment) %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label "Parent Category (if applicable)"%>
-    <%= collection_select :category, :category_id, Category.order(:id), :id, :name, include_blank: true %>
-  </div>
-  <div>
-    <%= f.submit 'Create' %>
-  </div>
-<% end %>
+<%= render 'category_form' %>

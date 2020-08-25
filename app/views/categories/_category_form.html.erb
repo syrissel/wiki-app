@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <%= form_for @category do |f| %>
+      <%= hidden_field(:category, :sort_number, value: sort_number_increment) %>
+      <% if params[:action] == 'new' %>
+        <%= hidden_field(:category, :category_id, value: @parent.present? ? @parent.id : '') %>
+      <% elsif params[:action] == 'edit' %>
+        <%= hidden_field(:category, :category_id, value: @category.category_id.present? ? @category.id : '') %>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <% if params[:action] == 'edit' %>
+        <div class="form-group">
+          <%= f.label 'Parent Category' %>
+          <%= f.select :category_id, Category.where.not(id: @category.category_id).where.not(id: @category.id).map { |c| [ c.name, c.id ] }, {}, { class: 'form-control' } %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+        <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-3"></div>
+</div><!--row-->

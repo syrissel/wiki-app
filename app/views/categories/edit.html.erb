@@ -1,16 +1,11 @@
-<h2>Editing <%= @category.name %></h2>
+<h5>Editing <i><%= @category.name %></i></h5>
+<hr>
 
-<%= form_for @category do |f| %>
-  <%#= hidden_field(:category, :sort_number, value: sort_number_increment) %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<%= render 'category_form' %>
+
+<div class="btn-group-sm btn-group float-right ml-1" role="group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Delete</button>
+  <div class="dropdown-menu">
+    <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: "Delete #{@category.name}? All child categories and pages will be deleted as well."}, class: 'dropdown-item' %>
   </div>
-  <div>
-    <%= f.label "Parent Category (if applicable)"%>
-    <%= collection_select :category, :category_id, Category.order(:id), :id, :name, include_blank: true %>
-  </div>
-  <div>
-    <%= f.submit 'Submit' %>
-  </div>
-<% end %>
+</div>
