@@ -6,7 +6,8 @@ class Page < ApplicationRecord
 	belongs_to :page_publish_status
 	has_one :page_forum, dependent: :destroy
 
-  paginates_per 6
+  # Temp. Should change this later.
+  paginates_per 10
 
 	#validates :image, file_size: { less_than: 5.megabytes }
   validates :title, presence: true, uniqueness: true, length: { maximum: 40 }

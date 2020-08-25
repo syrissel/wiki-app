@@ -19,7 +19,7 @@ class PagesController < ApplicationController
 
       @videos = Video.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36)
     else
-      @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").limit(10).page params[:page]
+      @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").page params[:page]
     end
 		
 		if params[:clear].present?
@@ -154,7 +154,9 @@ class PagesController < ApplicationController
 			end
 		end
 
-		@pending_pages = Page.joins(:approval_status).where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page params[:page]
+    # @pending_pages = Page.joins(:approval_status).where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page(params[:page]).per(20)
+    @pending_pages = Page.all.page(params[:page]).per(20)
+
 	end
 	
 	def review_wiki

@@ -14,6 +14,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_level
   has_secure_password
 
+	paginates_per 5
+
 	validates_uniqueness_of :username
 	validates :username, presence: true, length: { minimum: 2 }, format: { with: /\A[a-z]+\z/ }
 	validates :password, presence: true, length: { minimum: 5 }, on: :create
