@@ -24,7 +24,9 @@ class UsersController < ApplicationController
 		if params["/users"].present?
       if params["/users"][:userq].present?
         @query = params["/users"][:userq]
-        @users = User.where("username LIKE :query", query: "%#{@query}%").order(@order_by).page(params[:page])
+				@users = User.where("username LIKE :query
+														 OR first_name LIKE :query
+														 OR last_name LIKE :query", query: "%#{@query}%").order(@order_by).page(params[:page])
       else
         @users = User.order(@order_by).page(params[:page])
       end
