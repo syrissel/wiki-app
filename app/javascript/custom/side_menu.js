@@ -85,15 +85,13 @@ function load() {
         $('#side_panel').css({
             position: 'fixed',
             top: '0',
-            left: '0',
-            'padding-bottom': '35px'
+            left: '0'
         });
     } else {
         $('#side_panel').css({
           position: 'absolute',
           top: 'unset',
-          left: 'unset',
-          'padding-bottom': '0px'
+          left: 'unset'
         });
     }
 });
