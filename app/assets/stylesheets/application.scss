@@ -92,6 +92,7 @@ hr {
   transition: opacity 0.5s, width 0.1s;
   border-top: 2px solid #FFF;
   padding-top: 10px;
+  overflow: scroll;
 }
 
 #side_panel:hover {
