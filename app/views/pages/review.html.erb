@@ -1,17 +1,28 @@
 <h1>Current Wikis pending for approval:</h1>
 
-<p>Additional sorting options:</p>
+<div class="row">
+<div class="col">
+ <%= simple_form_for review_path, method: :get do |f| %>
+		<%= f.text_field :reviewq, class: 'form-control w-25 float-left mr-2' %>
+		<%= f.submit 'Search', class: 'btn btn-primary' %>
+	<% end %>
+</div>
+</div>
 <div class="sorting_options">
 	<p>Newest</p>
 	<div class="arrow_container"><%= link_to review_path(s: 'updated_at_asc') do %><box-icon class='sorting_arrow' size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'updated_at_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div>
 </div>
 <table id="review-table">
-<tr>
-  <th>Title<div class="arrow_container"><%= link_to review_path(s: 'title_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'title_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-  <th>Last Edit<div class="arrow_container"><%= link_to review_path(s: 'last_user_edit_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'last_user_edit_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-	<th>Page Status<div class="arrow_container"><%= link_to review_path(s: 'page_publish_status_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'page_publish_status_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-  <th>Review Status<div class="arrow_container"><%= link_to review_path(s: 'approval_statuses.status_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'approval_statuses.status_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
-</tr>
+<thead>
+  <tr>
+    <th>Title<div class="arrow_container"><%= link_to review_path(s: 'title_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'title_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Last Edit<div class="arrow_container"><%= link_to review_path(s: 'last_user_edit_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'last_user_edit_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Page Status<div class="arrow_container"><%= link_to review_path(s: 'page_publish_status_id_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'page_publish_status_id_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Review Status<div class="arrow_container"><%= link_to review_path(s: 'approval_statuses.status_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'approval_statuses.status_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
+    <th>Action</th>
+  </tr>
+</thead>
+<tbody>
 <% @pending_pages.each do |p| %>
   <tr>
     <td><%= link_to p.title, review_wiki_path(p) %></td>
@@ -23,6 +34,8 @@
       <div class="status-text">
       <%= p.approval_status.status %>
       </div>
+    </td>
+    <td>
       <% if p.approval_status.id == REJECTED %>
         <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"}, class: "delete-button"%>
       <% end %>
@@ -30,6 +43,7 @@
     </td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <%= paginate @pending_pages %>

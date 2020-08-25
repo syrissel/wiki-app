@@ -152,11 +152,18 @@ class PagesController < ApplicationController
 				filter_params.slice! '_asc'
 				@order_by = filter_params + ' asc'
 			end
-		end
-
-    # @pending_pages = Page.joins(:approval_status).where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page(params[:page]).per(20)
-    @pending_pages = Page.all.page(params[:page]).per(20)
-
+    end
+    
+    if params['/review'].present? && params['/review'][:reviewq].present?
+      query = params['/review'][:reviewq]
+      @pending_pages = Page.where("title LIKE :query
+                                   OR last_user_edit LIKE :query", query: "%#{query}%")
+                            .order(@order_by)
+                            .page(params[:page])
+                            .per(20)
+    else
+      @pending_pages = Page.where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page(params[:page]).per(20)
+    end
 	end
 	
 	def review_wiki
