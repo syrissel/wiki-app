@@ -621,7 +621,7 @@ html, body {
 	overflow: auto;
 }
 
-.video_options li, .image_options li {
+.video_options li, .image_options .image-container {
   list-style: none;
   margin: 5px 5px;
   display: flex;
@@ -1089,6 +1089,7 @@ html, body {
   position: absolute;
   right: 0;
   margin: 5px;
+  width: 100%;
 }
 
 .media_options_upload {
