@@ -35,9 +35,10 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
+        @images = Image.where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
         format.json { render :show, status: :created, location: @image }
-        format.js { render 'image_search' }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @image.errors, status: :unprocessable_entity }

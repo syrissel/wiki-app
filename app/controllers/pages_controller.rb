@@ -41,17 +41,13 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
 		@confirm = ['Submitting for supervisor approval. Continue?', 'Publishing page. Continue?']
-    @videos = Video.order(:created_at).limit(36).page params[:page]
+    @videos = Video.order(created_at: :desc).page params[:page]
 
-    if params["/pages/new"].present?
-      if params["/pages/new"][:imageq].present?
-        @query = params["/pages/new"][:imageq]
-        @images = Image.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36).page params[:page]
-      else
-        @images = Image.where('path IS NOT NULL').order(:created_at).limit(36).page params[:page]
-      end
+    if params["/pages/new"].present? && params["/pages/new"][:imageq].present?
+      @query = params["/pages/new"][:imageq]
+      @images = Image.where("name LIKE :query", query: "%#{@query}%").where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
     else
-      @images = Image.where('path IS NOT NULL').order(:created_at).limit(36).page params[:page]
+      @images = Image.where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
     end
     @categories = Category.order(:id).where('category_id IS NULL')
     # @users = User.order(:name).page params[:page]

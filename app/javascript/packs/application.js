@@ -13,22 +13,15 @@ global.Rails = Rails;
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require('@client-side-validations/client-side-validations')
+require('custom/image-form-validations')
+require('custom/notifications')
+require('custom/image-select')
 import "channels";
 import "jquery";
 import "boxicons";
 import "custom/side_menu";
 import "custom/header";
 import 'custom/wiki-validate';
-
-$(document).on('turbolinks:load', function () {
-    $('#notification_bell').click(function () {
-        if ($('#notifications').css('display') == 'block') {
-            $('#notifications').hide()
-        } else {
-            $('#notifications').show()
-        }
-    })
-})
 
 //import '@client-side-validations/client-side-validations'
 //import "custom/image_show";
