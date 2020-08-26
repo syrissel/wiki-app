@@ -545,10 +545,18 @@ html, body {
   margin: 5px;
 }
 
+.image_options ul {
+  padding: 0;
+}
+
 #image_search {
-  margin-top: 30px;
+  // margin-top: 30px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  /* margin: 0 auto; */
+  /* margin-left: auto; */
+  margin: 1rem;
 }
 
 #image_search .simple_form {
@@ -561,6 +569,15 @@ html, body {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  background: #3e3e3e;
+  /* align-self: flex-start; */
+  margin: 20px auto;
+  /* float: left; */
+  border-bottom: 2px solid #767fea;
+  border-top: 2px solid #767fea;
+  padding: 1rem 0;
 }
 
 .images-top {
