@@ -15,7 +15,6 @@ require("@rails/activestorage").start()
 require('@client-side-validations/client-side-validations')
 require('custom/image-form-validations')
 require('custom/notifications')
-require('custom/image-select')
 import "channels";
 import "jquery";
 import "boxicons";
