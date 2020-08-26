@@ -51,7 +51,7 @@ $(document).on('turbolinks:load', function() {
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
+            ['para', ['ul', 'ol', 'paragraph', 'height']],
             ['table', ['table']],
             ['insert', ['link', 'btnImage', 'btnVideo']],
             ['tableOfContents'],
