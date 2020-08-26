@@ -1,3 +1,7 @@
+<head>
+	<%= javascript_pack_tag 'image-form-validations', 'data-turbolinks-track': 'reload' %>
+</head>
+
 <%= form_for @page, validate: true do |f| %>
   <div class="form-group">
     <%= f.label :title %>

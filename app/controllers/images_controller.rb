@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_supervisor
+  before_action :authenticate_supervisor, only: [ :index, :edit ]
 
   # GET /images
   # GET /images.json
@@ -17,6 +17,11 @@ class ImagesController < ApplicationController
   # GET /images/new
   def new
     @image = Image.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /images/1/edit
@@ -32,9 +37,11 @@ class ImagesController < ApplicationController
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
         format.json { render :show, status: :created, location: @image }
+        format.js { render 'image_search' }
       else
         format.html { render :new }
         format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end

@@ -1,9 +1,7 @@
 
-<%= simple_form_for(@image) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= form_for @image, validate: true, remote: true do |f| %>
 
-	<div class="errors">
+<div class="errors">
 <% if @image.present? && @image.errors.any? %>
 	<p><%= pluralize(@image.errors.count, "error") %> prevented this image from being saved:</p>
 	<ul>
@@ -14,15 +12,26 @@
 <% end %>
 </div>
 
-  <div class="form_group">
-		<%= f.label 'Name', class: 'form_label' %><br />
-    <%= f.text_field :name %>
+  <div class="form-group">
+		<%= f.label 'Name' %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-	<div class="form_group">
-		<%= f.label :path, class: 'form_label' %><br />
-    <%= f.file_field :path %>
+	<div class="form-group">
+		<%= f.label :path %>
+    <%= f.file_field :path, class: 'form-control-file' %>
   </div>
-  <div class="form_group">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<script>
+$('#new_image').submit(function () {
+    let name = $.trim($('#image_name').val())
+
+    if (name.length < 1) {
+        $('#image_name').addClass('is-invalid')
+        event.preventDefault();
+    }
+})
+</script>
