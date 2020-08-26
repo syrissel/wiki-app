@@ -576,6 +576,14 @@ html, body {
   flex-wrap: wrap;
 }
 
+.images-top {
+  display: flex;
+}
+
+.images-top .btn {
+  margin-left: auto;
+}
+
 .image_options_header {
   margin: 0px;
   padding: 0px;
