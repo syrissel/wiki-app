@@ -55,7 +55,7 @@ $(document).on('turbolinks:load', function() {
             ['table', ['table']],
             ['insert', ['link', 'btnImage', 'btnVideo']],
             ['tableOfContents'],
-            ['view', ['fullscreen', 'codeview', 'help']]
+            ['view', ['fullscreen', 'help']]
         ],
         placeholder: 'Compose a wiki',
         buttons: {
