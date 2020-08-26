@@ -1,0 +1,31 @@
+<div class="image_options hidden">
+	<div class="image_options_header">
+		<h4>Insert Image</h4>
+		<button type='button' class="show-image-options">x</button>
+	</div>
+	<ul>
+	<div class='radio_wrapper'>
+	<% if @images.present? %>
+		<%= render 'images/image_search' %>
+        <div id="images">
+		    <%= render @images %>
+        </div>
+	<% end %>
+	</div>
+	</ul>
+
+	<div class="media_options_wrapper">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+				<div id="paginator">
+					<%= paginate @images, remote: true %>
+				</div>
+			</div>
+			<div class="col-4">
+				<button type='button' id="image_button" class="btn btn-primary float-right my-2 mx-1">Insert</button>
+				<button type='button' class="show-image-options btn btn-secondary float-right my-2">Close</button>
+			</div><!--col-4-->
+		</div><!--row-->
+	</div>
+</div>

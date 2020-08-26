@@ -1,0 +1,36 @@
+<% if @images.present? %>
+<h3>Images</h3>
+<hr>
+<% else %>
+<h2>There are no images here... <%= link_to 'Upload one!', new_image_path %></h2>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @images.each do |image| %>
+      <tr>
+				<div id="image_container">
+        <td>
+					<strong><%=image.name%></strong><br />
+					<% if image.path.present? %>
+					<%= link_to image_path(image) do %><%=image_tag(image.path.preview.url)%><% end %>
+				<% elsif image.video_path.present? %>
+					<%= link_to image_path(image) do %><%=image_tag(image.video_path.preview.url)%><% end %>
+					<% end %>
+				</td>
+        <%#<td><%= link_to 'Edit', edit_image_path(image) %><%#</td>%>
+        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				</div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @images %>
+
+<%= link_to 'New Image', new_image_path, class: 'link_button' %>
