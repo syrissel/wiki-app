@@ -1,3 +1,14 @@
+<div class="errors">
+<% if @page.present? && @page.errors.any? %>
+	<p><%= pluralize(@page.errors.count, "error") %> prevented this wiki from being saved:</p>
+	<ul>
+	<% @page.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
+
 <%= form_for @page, validate: true do |f| %>
   <div class="form-group">
     <%= f.label :title %>

@@ -1,15 +1,4 @@
 <h5>New Wiki</h5>
 <hr>
 
-<div class="errors">
-<% if @page.present? && @page.errors.any? %>
-	<p><%= pluralize(@page.errors.count, "error") %> prevented this wiki from being saved:</p>
-	<ul>
-	<% @page.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-	<% end %>
-	</ul>
-<% end %>
-</div>
-
 <%= render 'page_form' %>

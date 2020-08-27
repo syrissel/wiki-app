@@ -68,6 +68,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :authorize_access
 
-  
+  def image_search
+    if params["/images"].present? && params["/images"][:imageq].present?
+      @query = params["/images"][:imageq]
+      @images = Image.where("name LIKE :query", query: "%#{@query}%").where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
+    else
+      @images = Image.where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
+    end
+  end
+  helper_method :image_search
 
 end

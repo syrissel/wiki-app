@@ -5,7 +5,9 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all.order(created_at: :desc).page params[:page]
+    @images = image_search(params['/images'])
+
+
   end
 
   # GET /images/1

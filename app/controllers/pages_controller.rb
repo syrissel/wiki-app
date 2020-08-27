@@ -42,13 +42,8 @@ class PagesController < ApplicationController
     @page = Page.new
 		@confirm = ['Submitting for supervisor approval. Continue?', 'Publishing page. Continue?']
     @videos = Video.order(created_at: :desc).page params[:page]
+    @images = image_search
 
-    if params["/pages/new"].present? && params["/pages/new"][:imageq].present?
-      @query = params["/pages/new"][:imageq]
-      @images = Image.where("name LIKE :query", query: "%#{@query}%").where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
-    else
-      @images = Image.where('path IS NOT NULL').where(video_path: nil).order(created_at: :desc).page params[:page]
-    end
     @categories = Category.order(:id).where('category_id IS NULL')
     # @users = User.order(:name).page params[:page]
     
@@ -63,9 +58,15 @@ class PagesController < ApplicationController
   end
 
   def edit
+    @images = image_search(params['/pages/4/edit'])
+    byebug
 		@page = Page.find(params[:id])
     @videos = Video.order(:created_at).limit(36).page params[:page]
-    @images = Image.where('path IS NOT NULL').order(:created_at).limit(36).page params[:page]
+
+    respond_to do |format|
+      format.html { render :edit }
+      format.js
+    end
   end
 
   # If the database fails at updating, render edit page. Otherwise commit changes.
@@ -213,7 +214,15 @@ class PagesController < ApplicationController
 
   def check_pending
 		@page = Page.find(params[:id])
-		@user = User.find_by_username(@page.last_user_edit)
+    @user = User.find_by_username(@page.last_user_edit)
+    @videos = Video.order(created_at: :desc).page params[:page]
+    @images = image_search
+    @categories = Category.order(:id).where('category_id IS NULL')
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
 		# If the current user is either the Executive Director or a Supervisor, render the edit page.
 		# If the current user is not in that category, if the page's approval status is not 'pending', render the edit page.

@@ -19,7 +19,9 @@
 			<div class="col-4"></div>
 			<div class="col-4">
 				<div id="paginator">
+					<% if @images.present? %>
 					<%= paginate @images, remote: true %>
+					<% end %>
 				</div>
 			</div>
 			<div class="col-4">
