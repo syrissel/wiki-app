@@ -6,7 +6,7 @@ class Category < ApplicationRecord
 	         :dependent => :destroy
   belongs_to :category, class_name: "Category", optional: true
 
-  validates :page_limit, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
+  validates :page_limit, presence: true, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
 
 	# Dynamic list sorting functionality.
   acts_as_list scope: :category
