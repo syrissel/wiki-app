@@ -1,21 +1,26 @@
 <ul class='root_categories'>
 			<% @root_categories.each do |r| %>
-        <p class='gen1'><%= r.name %><box-icon class='mr-1 my-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, r.id) : '' %></p>
+        <p class='gen1'><%= r.name %><box-icon class='mr-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, r.id) : '' %></p>
+				
 				<li class='gen1_list'>
-						
-            
+						<ul>
+						<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(r.id) %>
+						</ul>
 						<% @sub_categories.each do |s| %>
 							<% if r.id == s.category_id %>
 								<ul>
-                  <p class='gen2'><%= s.name %><box-icon class='mr-1 my-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, s.id) : '' %></p>
+                  <p class='gen2'><%= s.name %><box-icon class='mr-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, s.id) : '' %></p>
 									<li class='gen2_list'>
+									<ul>
+									<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(s.id) %>
+									</ul>
 									<% if !is_form %>
 										<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
 																													category: s.id, publish: PUBLISHED).limit(Category.find(s.id).page_limit) %>
                   <ul>
                   <% pages_of_type.each do |pot| %>
                     <li>
-                      <%= link_to pot.title, pot %><box-icon class='mr-1 my-1 float-left' size='20px' name='file'></box-icon>
+                      <%= link_to pot.title, pot %><box-icon class='mr-1 float-left' size='20px' name='file'></box-icon>
                     </li>
                   <% end %>
 									</ul>
@@ -23,15 +28,18 @@
 									<% @sub_categories.each do |t| %>
 										<% if s.id == t.category_id %>
 											<ul>
-                        <p class='gen3'><%= t.name %><box-icon class='mr-1 my-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, t.id) : '' %></p>
+                        <p class='gen3'><%= t.name %><box-icon class='mr-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, t.id) : '' %></p>
 												<li class='gen3_list'>
+													<ul>
+													<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(t.id) %>
+													</ul>
 													<% if !is_form %>
                       		<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
 																																category: t.id, publish: PUBLISHED).limit(Category.find(t.id).page_limit) %>
                         	<ul>
                         	<% pages_of_type.each do |pot| %>
                           	<li>
-                            	<%= link_to pot.title, pot %><box-icon class='mr-1 my-1 float-left' size='20px' name='file'>
+                            	<%= link_to pot.title, pot %><box-icon class='mr-1 float-left' size='20px' name='file'>
                           	</li>
                         	<% end %>
                         	</ul>
@@ -39,15 +47,18 @@
 													<% @sub_categories.each do |u| %>
 														<% if t.id == u.category_id %>
 															<ul>
-                                <p class='gen4'><%= u.name %><box-icon class='mr-1 my-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, u.id) : '' %></p>
+                                <p class='gen4'><%= u.name %><box-icon class='mr-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, u.id) : '' %></p>
 																<li class='gen4_list'>
+																	<ul>
+																	<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(u.id) %>
+																	</ul>
 																	<% if !is_form %>
                             			<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
 																																				category: u.id, publish: PUBLISHED).limit(Category.find(u.id).page_limit)  %>
                               		<ul>
 																	<% pages_of_type.each do |pot| %>
 																		<li>
-																			<%= link_to pot.title, pot %><box-icon class='mr-1 my-1 float-left' size='20px' name='file'>
+																			<%= link_to pot.title, pot %><box-icon class='mr-1 float-left' size='20px' name='file'>
 																		</li>
 																	<% end %>
                               		</ul>
@@ -55,13 +66,16 @@
 																	<% @sub_categories.each do |v| %>
 																		<% if u.id == v.category_id %>
 																			<ul>
-																				<p class='gen5'><%= v.name %><box-icon class='mr-1 my-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, v.id) : '' %></p>
+																				<p class='gen5'><%= v.name %><box-icon class='mr-1 float-left' size='20px' name='folder'></box-icon><%= is_form ? (radio_button :page, :category_id, v.id) : '' %></p>
 																				<% if !is_form %>
 																				<li class="gen5_list">
+																					<ul>
+																					<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(v.id) %>
+																					</ul>
 																					<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", category: v.id, publish: PUBLISHED).limit(Category.find(v.id).page_limit) %>
 																					<ul>
 																						<% pages_of_type.each do |pot| %>
-																							<%= link_to pot.title, pot %><box-icon class='mr-1 my-1 float-left' size='20px' name='file'>
+																							<%= link_to pot.title, pot %><box-icon class='mr-1 float-left' size='20px' name='file'>
 																						<% end %>
 																					</ul>
 																				</li>
@@ -87,7 +101,7 @@
             <ul class="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
-                <%= link_to pot.title, pot %><box-icon class='mr-1 my-1 float-left' size='20px' name='file'>
+                <%= link_to pot.title, pot %><box-icon class='mr-1 float-left' size='20px' name='file'>
               </li>
             <% end %>
             </ul>

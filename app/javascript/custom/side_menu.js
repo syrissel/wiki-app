@@ -4,6 +4,7 @@ function load() {
   let gen2Links = document.getElementsByClassName('gen2');
   let gen3Links = document.getElementsByClassName('gen3');
   let gen4Links = document.getElementsByClassName('gen4');
+  let gen5Links = document.getElementsByClassName('gen5');
 
 
   for (let i = 0; i < gen1Links.length; i++) {
@@ -28,6 +29,12 @@ function load() {
     let siblingElement = gen4Links[i].nextElementSibling;
     siblingElement.style.display = 'none';
     addMenuArrow(gen4Links[i]);
+  }
+
+  for (let i = 0; i < gen5Links.length; i++) {
+    let siblingElement = gen5Links[i].nextElementSibling;
+    siblingElement.style.display = 'none';
+    addMenuArrow(gen5Links[i]);
   }
 
   function addMenuArrow(item) {
@@ -73,6 +80,10 @@ function load() {
 
   for (let i = 0; i < gen4Links.length; i++) {
     gen4Links[i].onclick = display;
+  }
+
+  for (let i = 0; i < gen4Links.length; i++) {
+    gen5Links[i].onclick = display;
   }
 
   // Get top position of side_panel. Set event listener for scroll on window.

@@ -1,2 +1,7 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<h3><%= @category.name %> wikis</h3>
+<hr>
+<ul>
+  <% @pages.each do |p| %>
+    <li><%= p.title %></li>
+  <% end %>
+</ul>
