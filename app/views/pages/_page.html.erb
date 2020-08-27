@@ -1,20 +1,10 @@
-
-<%= link_to page_path(page) do %>
-  <div class="card_exterior">
-    <div class="card">
-      <div class="cardview_container">
-				<box-icon class='box_cardview' size='84px' style='float:left;' name='file'></box-icon>
-        <h4><%= page.title %></h4>
-        <small class="float-right"><%= page.category.name %></small>
-        <% if page.description.present? %>
-          <p><%= page.description %></p>
-        <% else %>
-          <p>No description provided.</p>
-        <%#= sanitize preview(p) %>
-        <% end %>
-        <div class="cardview_author"><p>by <%= page.user.username %></p><p> | last edit: <%= page.last_user_edit %></p></div>
-      
-      </div>
-    </div>
-  <% end %>
+<div class="card my-3">
+  <div class="card-header">
+    <h5 class="my-1"><%= page.title %></h5>
   </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= page.sanitized_content %></h5>
+    <p class="card-text"><%= page.description if page.description.present? %></p>
+    <%= link_to 'View', page_path(page), class: 'btn btn-primary' %>
+  </div>
+</div>
