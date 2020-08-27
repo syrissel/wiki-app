@@ -4,7 +4,8 @@
     <div class="card">
       <div class="cardview_container">
 				<box-icon class='box_cardview' size='84px' style='float:left;' name='file'></box-icon>
-        <h3><%= page.title %></h3>
+        <h4><%= page.title %></h4>
+        <small class="float-right"><%= page.category.name %></small>
         <% if page.description.present? %>
           <p><%= page.description %></p>
         <% else %>

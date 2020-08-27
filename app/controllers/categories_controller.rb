@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_supervisor
+  before_action :authenticate_supervisor, except: [ :show ]
   before_action :authenticate_user
   before_action :set_category, only: [:edit, :show, :update, :destroy]
 
