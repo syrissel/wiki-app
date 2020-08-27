@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_163052) do
+ActiveRecord::Schema.define(version: 2020_08_27_170238) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_163052) do
     t.bigint "category_id"
     t.integer "position"
     t.string "is_leaf_node"
+    t.integer "page_limit"
     t.index ["category_id"], name: "index_categories_on_category_id"
   end
 

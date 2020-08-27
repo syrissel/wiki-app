@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-3"></div>
   <div class="col-6">
-    <%= form_for @category do |f| %>
+    <%= form_for @category, validate: true do |f| %>
       <%= hidden_field(:category, :sort_number, value: sort_number_increment) %>
       <% if params[:action] == 'new' %>
         <%= hidden_field(:category, :category_id, value: @parent.present? ? @parent.id : '') %>
@@ -18,6 +18,11 @@
           <%= f.select :category_id, Category.no_leaf_categories.where.not(id: @category.id).map { |c| [ c.name, c.id ] }, { selected: @category.category_id, include_blank: true }, { class: 'form-control' } %>
         </div>
       <% end %>
+      <div class="form-group">
+        <%= f.label :page_limit %>
+        <%= f.number_field :page_limit, class: 'form-control' %>
+        <small class="form-text text-muted">Determines the number of wikis that will show in the side menu. Leaving this blank will allow an unlimited amount.</small>
+      </div>
       <div class="form-group">
         <%= f.submit 'Save', class: 'btn btn-primary' %>
         <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
