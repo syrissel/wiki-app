@@ -82,7 +82,7 @@ function load() {
     gen4Links[i].onclick = display;
   }
 
-  for (let i = 0; i < gen4Links.length; i++) {
+  for (let i = 0; i < gen5Links.length; i++) {
     gen5Links[i].onclick = display;
   }
 

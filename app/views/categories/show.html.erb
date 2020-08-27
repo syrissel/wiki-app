@@ -1,7 +1,13 @@
 <h3><%= @category.name %> wikis</h3>
 <hr>
-<ul>
-  <% @pages.each do |p| %>
-    <li><%= p.title %></li>
-  <% end %>
-</ul>
+<div id="pages_container">
+  <div id="pages">
+      <% @pages.each do |p| %>
+        <%= render partial: 'pages/page', locals: { page: p } %>
+      <% end %>
+  </div>
+</div>
+
+<div id="paginator">
+  <%= paginate @pages %>
+</div>
