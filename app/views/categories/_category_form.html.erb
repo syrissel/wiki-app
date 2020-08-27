@@ -15,7 +15,7 @@
       <% if params[:action] == 'edit' %>
         <div class="form-group">
           <%= f.label 'Parent Category' %>
-          <%= f.select :category_id, Category.where.not(id: @category.category_id).where.not(id: @category.id).map { |c| [ c.name, c.id ] }, {}, { class: 'form-control' } %>
+          <%= f.select :category_id, Category.no_leaf_categories.where.not(id: @category.id).map { |c| [ c.name, c.id ] }, { selected: @category.category_id, include_blank: true }, { class: 'form-control' } %>
         </div>
       <% end %>
       <div class="form-group">

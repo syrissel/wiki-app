@@ -9,3 +9,5 @@
     <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: "Delete #{@category.name}? All child categories and pages will be deleted as well."}, class: 'dropdown-item' %>
   </div>
 </div>
+
+<%= @category.is_last_category %>
