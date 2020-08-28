@@ -27,7 +27,7 @@
 	<div class="form-group d-flex flex-column">
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
 		<%= f.label :category %>
-	<button type="button" class="btn btn-light btn-sm show-category-options">Select Category</button>
+	<button type="button" class="btn btn-light show-category-options">Select Category</button>
 	<div class="category_select hidden">
 		<div class="image_options_header">
 			<h4>Choose Category</h4>
