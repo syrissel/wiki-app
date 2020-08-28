@@ -1,15 +1,15 @@
 <h1 class="edit_title edit_font">Edit Video</h1>
 <%= image_tag(@video.image.video_path.url) %>
 <%= form_for @video do |f| %>
-  <div class='form_group'>
-    <%= f.label :name, class: 'form_label' %>
-    <%= f.text_field :name, class: 'text_field' %>
+  <div class='form-group'>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-	<div class='form_group'>
+	<div class='form-group'>
 		<%= f.label 'Description (optional)' %>
-		<%= f.text_area :description, style: "width: 959px; height: 166px;"%>
+		<%= f.text_area :description, class: 'form-control'%>
 	</div>
-	<div class="form_group">
-		<%= f.submit 'Update' %>
+	<div class="form-group">
+		<%= f.submit 'Update', class: 'btn btn-primary' %>
 	</div>
 <% end %>
