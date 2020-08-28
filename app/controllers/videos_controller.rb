@@ -30,7 +30,12 @@ class VideosController < ApplicationController
 			@path = @video.image.path.url
 		end
 
-		# @video.description = @base64
+		@images = image_search
+
+		respond_to do |format|
+			format.html
+			format.js
+		end
 		
 	end
 	

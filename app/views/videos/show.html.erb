@@ -1,41 +1,85 @@
-
-<%= render plain: params[:video].inspect %>
-<h2 class='show_title'><%= @video.name %></h2>
+<h3 class='show_title'><%= @video.name %></h3>
+<hr>
 <%= video_tag @video.path, size: "854x480", controls: true, poster: @path, id: 'video', class: 'video-player' %>
 <div id="show_video_description"><%= @video.description %></div>
 
 <%# Only supervisors and the executive can add custom thumbnails %>
 <% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
-<h2>Pick an existing image for thumbnail</h2>
+<button type="button" id="video_options_button" class="btn btn-dark my-2">Options</button>
+<div class="hidden" id="video_options">
 <%= form_for @video do |f| %>
   <div class="form_group">
-    <%= collection_select :video, :image_id, Image.order(:id), :id, :name, prompt: true %>
+    <%#= collection_select :video, :image_id, Image.where('video_path IS NOT NULL').order(:id), :id, :name, html: { class: 'form-control' } %>
+    <%= f.label 'Pick a thumbnail' %>
+    <%= f.select :image_id, Image.where('video_path IS NOT NULL').order(:id).map { |i| [i.name, i.id] }, { selected: @video.image_id, include_blank: true }, { class: 'form-control' } %>
   </div>
   <div class="form_group">
-    <%= f.submit 'Update thumbnail' %>
+    <%= f.submit 'Update', class: 'btn btn-primary float-left' %>
+    <button type="button" id="capture_options_button" class="btn btn-secondary float-right">Create new thumbnail</button>
   </div>
 <% end %>
-<h2>OR</h2>
-<h2>Create custom thumbnail</h2>
 
-<button id="capture">Capture</button>
+<div id="capture_container" class="hidden">
+<div class="alert alert-primary" role="alert">
+  Adding a custom thumbnail:
+  <ol>
+    <li>Scroll through video and find a desired thumbnail.</li>
+    <li>Click "Capture".</li>
+    <li>Enter a name for the photo.</li>
+    <li>Click "Create thumbnail".</li>
+  </ol>
+</div>
+<div class="row">
+<div class="col-6 d-flex">
 
 <canvas id="canvas" class='hidden'></canvas>
-<img id='video_image' style="width:426px; height:240px; border:2px solid black;" src="" />
-<% end %>
-<%= form_for Image.new, html: {class: '', id: 'upload_form'} do |f| %>
-  <%#= hidden_field(:image, :video_path, value: @video.base64) %>
-  <div class="form_group">
+<img id='video_image' style="width:284px; height:160px; border:2px solid black;" src="" />
+<button id="capture" class="btn btn-secondary align-self-end mx-3">Capture</button>
+</div><!--col-6-->
+<div class="col-6">
+<%= form_for Image.new, html: {class: '', id: 'upload_form'}, validates: true do |f| %>
+  <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
     <%= f.text_field :video_path, id: 'video_path_field', class: 'hidden' %>
   </div>
-  <div class='form_group'>
-    <%= f.submit 'Create thumbnail' %>
+  <div class='form-group'>
+    <%= f.submit 'Create thumbnail', class: 'btn btn-primary' %>
+    <button type="button" id="capture_back_button" class="btn btn-secondary float-right">Back</button>
   </div>
 <% end %>
+
+</div>
+</div><!--col-6-->
+</div><!--row-->
+</div><!--capture-container-->
+<% end %>
+
 <script>
-  
+  $('#video_options_button').click(function() {
+    let options = $('#video_options')
+    if (options.css('display') == 'none') {
+      options.show()
+    } else {
+      options.hide()
+    }
+  })
+
+  $('#capture_back_button').click(function() {
+    $('#capture_container').hide()
+    $('.edit_video').show()
+  })
+
+  $('#capture_options_button').click(function() {
+    let options = $('#capture_container')
+    if (options.css('display') == 'none') {
+      options.show()
+      $('.edit_video').hide()
+    } else {
+      options.hide()
+      $('.edit_video').show()
+    }
+  })
 
 
 
@@ -79,7 +123,6 @@
 				newImg.src = "data:image/jpeg;base64," + base64;
 				newImg.id = "base64_image";
 				document.body.appendChild(newImg);
-				console.log(base64);
 
 				var full_base64 =  "data:image/jpeg;base64," + base64;
         document.querySelector('#video_path_field').value = full_base64;
