@@ -17,8 +17,8 @@ class Page < ApplicationRecord
 
 
   def get_preview
-    if content.index('<p>')
-      preview_start = content.index('<p>')
+    if content.index('<p')
+      preview_start = content.index('<p')
       preview_end = content.index('</p>')
       preview = content[preview_start, preview_end]
       preview.length > 300 ? "#{ Page.strip_tags(preview[0..300]) }..." : "#{ Page.strip_tags(preview) }..."
