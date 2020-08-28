@@ -23,9 +23,9 @@ class Page < ApplicationRecord
       preview = content[preview_start, preview_end]
 
       if preview.length <= 300
-        Page.strip_tags(preview) != '' ? "#{ Page.strip_tags(preview) }..." : 'No preview available.'
+        Page.strip_tags(preview).length != 0 ? "#{ Page.strip_tags(preview) }..." : 'No preview available.'
       else
-        "#{ Page.strip_tags(preview[0..300]) }..."
+        Page.strip_tags(preview).length != 0 ? "#{ Page.strip_tags(preview[0..300]) }..." : "No preview available."
       end
     else
       'No preview available.'
