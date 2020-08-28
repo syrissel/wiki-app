@@ -16,15 +16,15 @@
 
   <%= form_for @user, url: { action: :admin_update }, validate: true do |f| %>
     <div class="form-group">
-      <%= f.label "Username (required)", params[:username] %>
+      <%= f.label :username, params[:username] %>
       <%= f.text_field :username, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label "First name (optional)", params[:first_name] %>
+      <%= f.label :first_name, params[:first_name] %>
       <%= f.text_field :first_name, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label "Last name (optional)", params[:last_name] %>
+      <%= f.label :last_name, params[:last_name] %>
       <%= f.text_field :last_name, class: 'form-control' %>
     </div>
     <div class="form-group">

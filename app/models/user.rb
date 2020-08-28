@@ -19,6 +19,8 @@ class User < ApplicationRecord
 	validates_uniqueness_of :username
 	validates :username, presence: true, length: { minimum: 2 }, format: { with: /\A[a-z]+\z/ }
 	validates :password, presence: true, length: { minimum: 5 }, on: :create
+	validates :first_name, presence: true
+	validates :last_name, presence: true
 
 	scope :supervisors, -> {where('user_level_id > ?', INTERN_VALUE)}
 end
