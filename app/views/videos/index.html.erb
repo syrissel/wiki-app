@@ -1,11 +1,12 @@
 <% if @videos.present? %>
-<h2>Current Videos:</h2>
+<h3>Current Videos:</h3>
+<hr>
 <% else %>
 <h2>There are no videos here... <%= link_to 'Upload one!', new_video_path %></h2>
 <% end %>
 <ul>
 <% @videos.each do |v| %>
-  <li style="list-style:none;">
+  <li style="list-style:none;" class="my-2">
     <%= link_to video_path(v) do %> 
       <% if v.image.present? && v.image.video_path.present? %>
         <%= image_tag(v.image.video_path.url) %>
