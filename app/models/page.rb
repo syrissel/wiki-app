@@ -21,14 +21,14 @@ class Page < ApplicationRecord
       preview_start = content.index('<p')
       preview_end = content.index('</p>')
       preview = content[preview_start, preview_end]
-      preview.length > 300 ? "#{ Page.strip_tags(preview[0..300]) }..." : "#{ Page.strip_tags(preview) }..."
-      
-    elsif content.index('<ul>')
-      'ul'
-    elsif content.index('<ol>')
-      'ol'
+
+      if preview.length <= 300
+        Page.strip_tags(preview) != '' ? "#{ Page.strip_tags(preview) }..." : 'No preview available.'
+      else
+        "#{ Page.strip_tags(preview[0..300]) }..."
+      end
     else
-      'nil'
+      'No preview available.'
     end
   end
 end

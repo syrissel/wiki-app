@@ -8,6 +8,6 @@
     <%= link_to 'Read', page_path(page), class: 'btn btn-primary' %>
   </div>
   <div class="card-footer">
-    <small class="float-right text-muted"><%= User.find_by_username(page.last_user_edit).fullname %></small>
+    <small class="float-right text-muted"><%= page.user.fullname %></small>
   </div>
 </div>
