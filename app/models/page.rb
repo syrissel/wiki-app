@@ -17,18 +17,25 @@ class Page < ApplicationRecord
 
 
   def get_preview
-    if content.index('<p')
-      preview_start = content.index('<p')
-      preview_end = content.index('</p>')
-      preview = content[preview_start, preview_end]
+    result = ''
+    doc = Nokogiri::HTML(content)
 
-      if preview.length <= 300
-        Page.strip_tags(preview).length != 0 ? "#{ Page.strip_tags(preview) }..." : 'No preview available.'
-      else
-        Page.strip_tags(preview).length != 0 ? "#{ Page.strip_tags(preview[0..300]) }..." : "No preview available."
-      end
-    else
-      'No preview available.'
+    # Remove nodes not needed for preview.
+    doc.search("//div").remove
+    doc.search("//h1").remove
+    doc.search("//h2").remove
+    doc.search("//h3").remove
+    doc.search("//h4").remove
+    doc.search("//h5").remove
+    doc.search("//h6").remove
+    doc.search("//img").remove
+    doc.search("//ul").remove
+    doc.search("//ol").remove
+
+    # Loop through text of remaining nodes.
+    doc.xpath("//text()").each do |node|
+      result += "#{node.to_s} "
     end
+    result[0..300] + '...'
   end
 end
