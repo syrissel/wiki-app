@@ -24,13 +24,10 @@
 	<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
 		
   </div>
-	<div class="form-group">
-		<%= f.label 'Give a quick summary of what this wiki is about (optional)' %>
-		<%= f.text_field :description, class: "form-control"%>
-		</div>
-	<div class="form-group d-flex">
+	<div class="form-group d-flex flex-column">
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
-	<button type="button" class="btn btn-secondary show-category-options">Select Category</button>
+		<%= f.label :category %>
+	<button type="button" class="btn btn-light btn-sm show-category-options">Select Category</button>
 	<div class="category_select hidden">
 		<div class="image_options_header">
 			<h4>Choose Category</h4>
@@ -40,7 +37,7 @@
 		<button type='button' class="show-category-options btn btn-primary">OK</button>
 	</div>
 	<div class="errors m-2" id="category_error"></div>
-	<div id="selected_category" class="m-2 font-weight-bold">Please select a category.</div>
+	<div id="selected_category" class="m-2 font-weight-bold"></div>
 	</div>
 
 	<div class="form-group">
