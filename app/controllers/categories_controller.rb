@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @pages = @category.pages.where(page_publish_status_id: PUBLISHED).page params[:page]
+    @pages = @category.pages.where(page_publish_status_id: PUBLISHED).order(updated_at: :desc).page params[:page]
   end
 
   def edit
