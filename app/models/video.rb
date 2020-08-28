@@ -4,7 +4,10 @@ class Video < ApplicationRecord
 
 	mount_uploader :path, VideoUploader
 	
-	paginates_per 8
+  paginates_per 8
+  
+  validates :name, presence: true
+  validates :path, presence: true
 
 
   # def set_success(format, opts)

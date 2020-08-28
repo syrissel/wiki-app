@@ -1,4 +1,8 @@
-<h1 class="edit_title edit_font">Edit Video</h1>
+<h3>Edit Video</h3>
+<hr>
+<div class="row">
+<div class="col-3"></div>
+<div class="col-6">
 <%= image_tag(@video.image.video_path.url) %>
 <%= form_for @video do |f| %>
   <div class='form-group'>
@@ -13,3 +17,6 @@
 		<%= f.submit 'Update', class: 'btn btn-primary' %>
 	</div>
 <% end %>
+</div><!--col-6-->
+<div class="col-3"></div>
+</div>
