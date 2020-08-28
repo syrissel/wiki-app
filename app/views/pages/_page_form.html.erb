@@ -28,7 +28,7 @@
 		<%= f.label 'Give a quick summary of what this wiki is about (optional)' %>
 		<%= f.text_field :description, class: "form-control"%>
 		</div>
-	<div class="form-group">
+	<div class="form-group d-flex">
 		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
 	<button type="button" class="btn btn-secondary show-category-options">Select Category</button>
 	<div class="category_select hidden">
@@ -39,8 +39,10 @@
 		<%= render partial: 'category_select', locals: { is_form: true } %>
 		<button type='button' class="show-category-options btn btn-primary">OK</button>
 	</div>
+	<div class="errors m-2" id="category_error"></div>
+	<div id="selected_category" class="m-2 font-weight-bold">Please select a category.</div>
 	</div>
-	<div class="errors" id="category_error"></div>
+
 	<div class="form-group">
 		<% if current_page?(action: 'new') %>
 			<%= f.text_area :content, id: :summernote %>

@@ -38,5 +38,16 @@ document.addEventListener('turbolinks:load', function() {
 			options.classList.add("hidden");
 		}
     });
+    $('input[name="page[category_id]"]').change(function() {
+        $('#selected_category').html('Selected: ' + $('input[name="page[category_id]"]:checked').data('name'))
+    })
+
+    $('#new_page').submit(function(event) {
+
+        if ($('input[name="page[category_id]"]:checked').val() == null) {
+            $('#category_error').html('Please select a category.')
+            event.preventDefault();
+        }
+    })
 
 }, false);
