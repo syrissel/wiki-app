@@ -80,6 +80,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.fetch(:image, {}).permit(:path, :video_path, :name)
+      params.fetch(:image, {}).permit(:path, :video_path, :name, :video_id)
     end
 end

@@ -11,7 +11,7 @@
   <div class="form_group">
     <%#= collection_select :video, :image_id, Image.where('video_path IS NOT NULL').order(:id), :id, :name, html: { class: 'form-control' } %>
     <%= f.label 'Pick a thumbnail' %>
-    <%= f.select :image_id, Image.where('video_path IS NOT NULL').order(:id).map { |i| [i.name, i.id] }, { selected: @video.image_id, include_blank: true }, { class: 'form-control' } %>
+    <%= f.select :image_id, Image.where(video_id: @video.id).order(:id).map { |i| [i.name, i.id] }, { selected: @video.image_id, include_blank: true }, { class: 'form-control' } %>
   </div>
   <div class="form_group">
     <%= f.submit 'Update', class: 'btn btn-primary float-left' %>
@@ -37,11 +37,12 @@
 <button id="capture" class="btn btn-secondary align-self-end mx-3">Capture</button>
 </div><!--col-6-->
 <div class="col-6">
-<%= form_for Image.new, html: {class: '', id: 'upload_form'}, validates: true do |f| %>
+<%= form_for Image.new, html: {class: '', id: 'upload_form'}, validate: true do |f| %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
     <%= f.text_field :video_path, id: 'video_path_field', class: 'hidden' %>
+    <%= hidden_field(:image, :video_id, value: @video.id) %>
   </div>
   <div class='form-group'>
     <%= f.submit 'Create thumbnail', class: 'btn btn-primary' %>
@@ -56,6 +57,14 @@
 <% end %>
 
 <script>
+  $('#upload_form').submit(function(event) {
+    if ($.trim($('#image_name').val()).length < 1) {
+      $('#image_name').addClass('is-invalid')
+      event.preventDefault()
+    }
+  })
+
+
   $('#video_options_button').click(function() {
     let options = $('#video_options')
     if (options.css('display') == 'none') {
