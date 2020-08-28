@@ -1,10 +1,13 @@
 <div class="card my-3">
-  <div class="card-header">
+  <div class="card-header d-flex">
     <h5 class="my-1"><%= page.title %></h5>
+    <small class="float-right text-muted ml-auto my-1"><%= page.updated_at.strftime("%b %-d, %Y at %l:%M %p") %></small>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%= page.sanitized_content %></h5>
-    <p class="card-text"><%= page.description if page.description.present? %></p>
-    <%= link_to 'View', page_path(page), class: 'btn btn-primary' %>
+    <p><%= page.get_preview %></p>
+    <%= link_to 'Read', page_path(page), class: 'btn btn-primary' %>
+  </div>
+  <div class="card-footer">
+    <small class="float-right text-muted"><%= User.find_by_username(page.last_user_edit).fullname %></small>
   </div>
 </div>

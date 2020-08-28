@@ -13,4 +13,22 @@ class Page < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: { maximum: 40 }
   validates :content, presence: true, length: { minimum: 3 }
   validates :category_id, presence: true
+
+
+
+  def get_preview
+    if content.index('<p>')
+      preview_start = content.index('<p>')
+      preview_end = content.index('</p>')
+      preview = content[preview_start, preview_end]
+      preview.length > 300 ? "#{ Page.strip_tags(preview[0..300]) }..." : "#{ Page.strip_tags(preview) }..."
+      
+    elsif content.index('<ul>')
+      'ul'
+    elsif content.index('<ol>')
+      'ol'
+    else
+      'nil'
+    end
+  end
 end
