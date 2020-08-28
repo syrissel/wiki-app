@@ -1,8 +1,8 @@
-<h2>Welcome to the Computers for Schools Wiki Site!</h2>
 <% if @query %>
   <h3>Search results for "<%= @query %>"</h3>
 <% elsif @pages.present? %>
-  <h3>Latest updates:</h3>
+  <h3>Latest updates</h3>
+  <hr>
 <% else %>
   <h3>There are currently no wikis published... <%= link_to 'Create one!', new_page_path %></h3>
 <% end %>

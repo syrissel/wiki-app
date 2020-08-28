@@ -5,7 +5,7 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = image_search(params['/images'])
+    @images = image_search
 
 
   end

@@ -31,14 +31,16 @@ hr {
 }
 
  .logo {
-  display: block;
-  width: 249px;
-  height: 100px;
-  padding: 0px;
-  margin: 22px;
-  border: 0;
-  text-decoration: none;
-  background: url(c4smb_logo.png) no-repeat top left;
+  // display: block;
+  // width: 249px;
+  // height: 100px;
+  // padding: 0px;
+  // margin: 22px;
+  // border: 0;
+  // text-decoration: none;
+  // background: url(c4smb_logo.png) no-repeat top left;
+  // float: left;
+  margin: 0.5rem 0;
   float: left;
 }
 
@@ -48,7 +50,7 @@ hr {
   top: 0px;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 110px;
   padding: 0px 0px 0px 0px;
   margin: 0px auto;
   overflow: hidden;
@@ -60,8 +62,8 @@ hr {
   font-style: italic;
   color: #d4af37;
   float: left;
-  padding-top: 45px;
-  margin-left: -12px;
+  padding-top: 58px;
+  margin-left: 13px;
   margin-right: 40px;
 }
 
@@ -166,7 +168,7 @@ hr {
 
 .user_login {
   float: right;
-  margin: 3em;
+  // margin: 3em;
 }
 
 #search {

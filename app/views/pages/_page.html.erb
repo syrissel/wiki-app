@@ -8,6 +8,7 @@
     <%= link_to 'Read', page_path(page), class: 'btn btn-primary' %>
   </div>
   <div class="card-footer">
+    <small class="float-left text-muted"><%= link_to page.category.name, category_path(page.category), class: 'text-decoration-none text-muted' %></small>
     <small class="float-right text-muted"><%= page.user.fullname %></small>
   </div>
 </div>
