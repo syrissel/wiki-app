@@ -36,6 +36,6 @@ class Page < ApplicationRecord
     doc.xpath("//text()").each do |node|
       result += "#{node.to_s} "
     end
-    result[0..300] + '...'
+    result[0..300].strip + '...'
   end
 end
