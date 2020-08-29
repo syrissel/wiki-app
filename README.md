@@ -1,5 +1,9 @@
 # README
 
+* Read config/application.yml.example to setup environment variables.
+* Upload image named 'default_video' before trying to upload first video.
+* Ruby version 2.6.5
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
