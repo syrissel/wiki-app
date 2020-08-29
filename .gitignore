@@ -36,3 +36,6 @@ yarn-debug.log*
 /public/videos/*
 /public/uploads/image/*
 /public/uploads/
+
+# Ignore application configuration
+/config/application.yml

@@ -1,0 +1,5 @@
+smtp_username: 'example@domain.com'
+smtp_password: 'your_pass'
+
+// Who will be receiving emails.
+admin_email:   'admin@domain.com'

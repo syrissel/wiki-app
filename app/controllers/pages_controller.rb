@@ -103,6 +103,7 @@ class PagesController < ApplicationController
 		@page = Page.new(page_params)
     
     if (@page.save)
+      PageMailer.with(page: @page).new_page_email.deliver_later
 
       @page.title_review = @page.title
       @page.content_review = @page.content

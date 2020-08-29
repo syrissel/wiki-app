@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>A new wiki has been submitted by <%= @page.user.fullname %> in <%= @page.category.name %>. <a href="http://localhost:3000/review">Click here</a> to review it.</p>
+    <h3><%= @page.title %></h3>
+    <p><%= @page.get_preview %></p>
+  </body>
+  </html>
