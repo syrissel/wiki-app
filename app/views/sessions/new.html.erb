@@ -3,7 +3,7 @@
 <div class="col-6">
   <h5>Login</h5>
   <hr>
-  <p class="alert margin_fix"><%= alert %></p>
+  <p class="text-danger"><%= alert %></p>
   <%= form_for sessions_path, :url => { :action => "create" } do |f| %>
     <div class="form-group">
       <%= f.label :username %>
