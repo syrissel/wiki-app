@@ -11,7 +11,6 @@ class Page < ApplicationRecord
 
 	#validates :image, file_size: { less_than: 5.megabytes }
   validates :title, presence: true, length: { maximum: 40 }
-  validates :content, presence: true, length: { minimum: 3 }
   validates :category_id, presence: true
 
 
