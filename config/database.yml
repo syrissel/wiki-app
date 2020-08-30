@@ -13,8 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: wiki_app
-  password: comps4skools2
+  username: <%= ENV["db_username"] %>
+  password: <%= ENV["db_password"] %>
   host: localhost
   socket: /var/run/mysqld/mysqld.sock 
 
@@ -51,5 +51,3 @@ test:
 production:
   <<: *default
   database: DocsApp_production
-  username: DocsApp
-  password: <%= ENV['DOCSAPP_DATABASE_PASSWORD'] %>

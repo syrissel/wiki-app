@@ -3,3 +3,6 @@ smtp_password: 'your_pass'
 
 // Who will be receiving emails.
 admin_email:   'admin@domain.com'
+
+db_username:   'username'
+db_password:   'your_pass'
