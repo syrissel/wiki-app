@@ -86,12 +86,40 @@ function load() {
     gen5Links[i].onclick = display;
   }
 
+  // $('#side_panel').height($(window).height() - $('.header_container').height() - $('#side_background').height())
+  $('#side_background').scrollLock();
+  $('#side_menu_nav').scrollLock();
+  $('.side_panel_container').scrollLock();
+
+  $('#side_panel').hover(function() {
+    $(this).height($(window).height() - $('.header_container').height() - $('#side_background').height())
+  }, function() {
+    $(this).height(0)
+  })
+
+
   // Get top position of side_panel. Set event listener for scroll on window.
   // If value of the scroll of the top of the page is greater than the top of the side panel,
   // set it to position fixed so that it stays on the screen.
   var sidePanelTop = $('#side_panel').offset().top;
   $(window).scroll(function() {
     var currentScroll = $(window).scrollTop();
+    let headerHeight = $('.header_container').height()
+    let currentClientHeight = $(window).height()
+    let sideBackground = $('#side_background').height()
+    let height = 0
+    if (currentScroll >= sidePanelTop) {
+      height = currentClientHeight - sideBackground
+    } else {
+      height = currentClientHeight - headerHeight - sideBackground
+    }
+  
+    $('#side_panel').hover(function() {
+      $(this).height(height)
+    }, function() {
+      $(this).height(0)
+    })
+    
     if (currentScroll >= sidePanelTop) {
         $('#side_panel').css({
             position: 'fixed',

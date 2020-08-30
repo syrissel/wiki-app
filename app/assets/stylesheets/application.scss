@@ -104,12 +104,12 @@ hr {
   transition: opacity 0.5s, width 0.1s;
   border-top: 2px solid #FFF;
   padding-top: 10px;
-  overflow: scroll;
+  overflow-y: scroll;
   background: #353535;
 }
 
 #side_panel:hover {
-  height: 75%;
+  height: 100%;
   width: 30%;
 }
 
