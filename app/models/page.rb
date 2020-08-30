@@ -10,7 +10,7 @@ class Page < ApplicationRecord
   paginates_per 5
 
 	#validates :image, file_size: { less_than: 5.megabytes }
-  validates :title, presence: true, uniqueness: true, length: { maximum: 40 }
+  validates :title, presence: true, length: { maximum: 40 }
   validates :content, presence: true, length: { minimum: 3 }
   validates :category_id, presence: true
 
