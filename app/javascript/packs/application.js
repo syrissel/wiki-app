@@ -15,7 +15,7 @@ require("@rails/activestorage").start()
 require('@client-side-validations/client-side-validations')
 require('custom/image-form-validations')
 require('custom/notifications')
-require('jquery-scroll-lock')
+require('jquery-scroll-lock/jquery-scrollLock')
 import "channels";
 import "jquery";
 import "boxicons";
