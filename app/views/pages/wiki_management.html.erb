@@ -1,1 +1,11 @@
-<h5></h5>
+<%= javascript_pack_tag 'admin.js' %>
+<h5>Wiki Management</h5>
+<hr>
+<table class="table mx-auto mt-4" style="width:0 !important;">
+  <tbody>
+    <tr class="row">
+      <td class="admin-td"><%= link_to drafts_path do %><div class="admin-item-wrapper"><h4>Drafts</h4><box-icon class='icon' size='108px' name='edit'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>New Wikis</h4><box-icon class="icon" size="108px" type='solid' name='file' ></box-icon></div><% end %></td>
+    </tr>
+  </tbody>
+</table>

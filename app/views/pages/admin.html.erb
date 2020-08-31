@@ -10,20 +10,10 @@
       <td class="admin-td"><%= link_to videos_path do %><div class="admin-item-wrapper"><h4>Videos</h4><box-icon class="icon" size="108px" type='solid' name='videos'></box-icon></div><% end %></td>
     <tr class="row">
       <td class="admin-td"><%= link_to users_path do %><div class="admin-item-wrapper"><h4>Users</h4><box-icon class="icon" size="108px" type='solid' name='group'></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>Wiki Review</h4><box-icon class="icon" size="108px" name='select-multiple'></box-icon></div><% end %></td>
+      <td class="admin-td"><%= link_to wiki_management_path do %><div class="admin-item-wrapper"><h4>Wiki Review</h4><box-icon class="icon" size="108px" name='select-multiple'></box-icon></div><% end %></td>
       <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>Settings</h4><box-icon class="icon" size="108px" type='solid' name='cog'></box-icon></div><% end %></td>
     </tr>
   </tbody>
 </table>
-
-
-<div id="admin_menu">
-  <div class="row">
-  </div>
-  <div class="row">
-  </div>
-	<div class="row">
-	</div>
-</div>
 
 <%= render 'snackbar' %>
