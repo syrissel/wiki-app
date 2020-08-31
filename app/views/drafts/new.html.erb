@@ -1,0 +1,13 @@
+<h5>New Draft for <i><%= @page.title %></i></h5>
+<hr>
+
+<%= render 'form', draft: @draft %>
+
+<%= console %>
+
+<script>
+$(document).on('turbolinks:load', function() {
+	$('.note-placeholder').hide()  
+  $('#draft_title').val($('#draft_title').data('title'))
+})
+</script>

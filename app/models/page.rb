@@ -4,7 +4,8 @@ class Page < ApplicationRecord
   belongs_to :user, optional: true
 	belongs_to :category
 	belongs_to :page_publish_status
-	has_one :page_forum, dependent: :destroy
+  has_one :page_forum, dependent: :destroy
+  has_many :drafts
 
   # Temp. Should change this later.
   paginates_per 5

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Drafts</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">Title</th>
+      <th colspan="2">Category</th>
+      <th></th>
+      <th>Approval status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drafts.each do |draft| %>
+      <tr>
+        <td class="table-danger"><%= draft.page.title  %></td>
+        <td class="table-success"><%= draft.title %></td>
+        <td class="table-danger"><%= draft.page.category.name %></td>
+        <td class="table-success"><%= draft.category.name %></td>
+        <td><%= link_to 'Show', draft_path(draft) %></td>
+        <td>
+          <%= form_for draft, html: { class: 'd-flex' } do |f| %>
+            <%= f.select :approval_status_id, ApprovalStatus.all.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-50' } %>
+            <%= f.submit 'Go', class: 'btn btn-primary btn-sm ml-1' %>
+            <%= hidden_field(:draft, :page_id, value: draft.page.id) %>
+            <% if draft.approval_status_id == REJECTED %>
+            <%= link_to draft, method: :delete, data: { confirm: 'Are you sure?' } do %><box-icon name='trash' type='solid' color='#f80000' ></box-icon><% end %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

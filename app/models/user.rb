@@ -4,6 +4,7 @@ class User < ApplicationRecord
 		self.first_name + ' ' + self.last_name
 	end
 
+	has_many :drafts
   belongs_to :user_level
   has_many :pages, dependent: :nullify
   has_many :notifications

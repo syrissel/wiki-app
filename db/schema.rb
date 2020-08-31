@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_184636) do
+ActiveRecord::Schema.define(version: 2020_08_31_182826) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status"
@@ -38,6 +38,21 @@ ActiveRecord::Schema.define(version: 2020_08_28_184636) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["page_forum_id"], name: "index_comments_on_page_forum_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "drafts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "category_id", null: false
+    t.bigint "approval_status_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "page_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["approval_status_id"], name: "index_drafts_on_approval_status_id"
+    t.index ["category_id"], name: "index_drafts_on_category_id"
+    t.index ["page_id"], name: "index_drafts_on_page_id"
+    t.index ["user_id"], name: "index_drafts_on_user_id"
   end
 
   create_table "forum_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -153,6 +168,10 @@ ActiveRecord::Schema.define(version: 2020_08_28_184636) do
   add_foreign_key "categories", "categories"
   add_foreign_key "comments", "page_forums"
   add_foreign_key "comments", "users"
+  add_foreign_key "drafts", "approval_statuses"
+  add_foreign_key "drafts", "categories"
+  add_foreign_key "drafts", "pages"
+  add_foreign_key "drafts", "users"
   add_foreign_key "forum_users", "page_forums"
   add_foreign_key "forum_users", "users"
   add_foreign_key "notifications", "comments", on_delete: :cascade

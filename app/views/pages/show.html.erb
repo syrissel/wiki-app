@@ -5,7 +5,7 @@
 			<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
 			<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
 			<% if @page.approval_status_id == EXECUTIVE_VALUE %>
-				<%= link_to "Edit", edit_page_path %>
+				<%= link_to "Edit", new_draft_path %>
 			<% else %>
 				<p id="review_message">This wiki is currently under review.</p>
 			<% end %>
