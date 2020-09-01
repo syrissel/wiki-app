@@ -1,6 +1,6 @@
 class DraftsController < ApplicationController
   before_action :set_draft, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_supervisor, only: [:index]
+  before_action :authenticate_supervisor, only: [:index, :show]
   before_action :can_edit, only: [:edit]
 
   # GET /drafts
@@ -136,6 +136,6 @@ class DraftsController < ApplicationController
     end
 
     def can_edit
-      current_user == @draft.user && current_user.user_level_id < SUPERVISOR_VALUE
+      redirect_to root_path, notice: 'Unauthorized' unless current_user == @draft.user || current_user.user_level_id > INTERN_VALUE
     end
 end
