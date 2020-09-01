@@ -6,6 +6,16 @@ class DraftsController < ApplicationController
   # GET /drafts.json
   def index
     @drafts = Draft.order(approval_status_id: :asc).order(updated_at: :desc).page params[:page]
+
+    if params["/drafts"].present? && params["/drafts"][:q].present?
+      @search = params["/drafts"][:q].strip
+      @drafts = @drafts.joins(:user).joins(:category).where("title LIKE :search 
+                                                             OR username LIKE :search 
+                                                             OR name LIKE :search
+                                                             OR first_name LIKE :search
+                                                             OR last_name LIKE :search", search: "%#{@search}%")
+    end
+    byebug
   end
 
   # GET /drafts/1
@@ -39,6 +49,10 @@ class DraftsController < ApplicationController
 
     respond_to do |format|
       if @draft.save
+        (User.supervisors.uniq - [current_user]).each do |s|
+          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} created a draft for \"#{@page.title}\"", page_id: @draft.id)
+        end
+
         format.html { redirect_to root_path, notice: 'Draft was successfully created.' }
         format.json { render :show, status: :created, location: @draft }
       else

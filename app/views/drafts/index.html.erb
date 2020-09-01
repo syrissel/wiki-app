@@ -2,7 +2,20 @@
 
 <h3>Drafts</h3>
 <hr>
-
+<div class="row">
+<div class="col-4">
+  <%= form_for drafts_path, method: :get, remote: true do |f| %>
+    <div class="form-group">
+      <%= f.text_field :q, class: 'form-control w-75' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Search', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div><!--col-4-->
+<div class="col-4"></div>
+<div class="col-4"></div>
+</div><!--row-->
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,20 +28,7 @@
   </thead>
 
   <tbody>
-    <% @drafts.each do |draft| %>
-      <tr>
-        <td><%= link_to draft.title, draft_path(draft) %></td>
-        <td><%= draft.category.name %></td>
-        <td><%= draft.user.fullname %></td>
-        <td><%= draft.updated_at.strftime("%b %e, %Y %H:%M:%S") %></td>
-        <td>
-          <%= draft.approval_status.status %>
-          <% if draft.approval_status_id == REJECTED %>
-            <%= link_to draft, method: :delete, data: { confirm: 'Are you sure?' } do %><box-icon name='trash' type='solid' color='#f80000' ></box-icon><% end %>
-          <% end %>  
-        </td>
-      </tr>
-    <% end %>
+    <%= render @drafts %>
   </tbody>
 </table>
 

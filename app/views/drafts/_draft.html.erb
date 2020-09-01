@@ -1,0 +1,12 @@
+<tr>
+  <td><%= link_to draft.title, draft_path(draft) %></td>
+  <td><%= draft.category.name %></td>
+  <td><%= draft.user.fullname %></td>
+  <td><%= draft.updated_at.strftime("%b %e, %Y %H:%M:%S") %></td>
+  <td>
+    <%= draft.approval_status.status %>
+    <% if draft.approval_status_id == REJECTED %>
+      <%= link_to draft, method: :delete, data: { confirm: 'Are you sure?' } do %><box-icon name='trash' type='solid' color='#f80000' ></box-icon><% end %>
+    <% end %>  
+  </td>
+</tr>
