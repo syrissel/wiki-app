@@ -1,31 +1,21 @@
-<div id="page_header" style='overflow:auto;'>
-	<div class="show_row_top">
-		<div class="show_img"><%= image_tag('c4smb_logo_2.jpg') %></div>
-		<div class="show_info">
-			<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-			<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-			<% if @page.approval_status_id == EXECUTIVE_VALUE %>
-				<%= link_to "Edit", new_draft_path %>
-			<% else %>
-				<p id="review_message">This wiki is currently under review.</p>
-			<% end %>
-		</div>
-	</div>
-	<div class="show_row_bottom"><h1><%= sanitize @page.title %></h1></div>
-	
-</div>
-<hr class="show_hr" />
-<div id="show_container">
-<div class="">
-<div class="form_group note-editor"><%= raw @page.content %></div>
-</div>
-</div>
-<div id="divider_container">
-	<hr id="cfs_divider">
-</div>
-<hr class="show_hr" />
 
-<button type='button' onclick="window.print();return false;">Print</button>
+<div class="d-flex">
+	<h3 class="align-self-end"><%= @page.title %></h3>
+	<div class="d-flex flex-column ml-auto">
+		<small class="text-muted ml-auto">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
+		<small class="text-muted ml-auto">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
+		<small class="ml-auto"><%= link_to "Edit", new_draft_path %> | <a href="#" onclick="window.print();return false;">Print</a></small>
+	</div>
+</div>
+<hr>
+
+
+<div id="show_container">
+	<div class="">
+		<div class="form_group note-editor"><%= raw @page.content %></div>
+	</div>
+</div>
+<hr>
 
 <style type="text/css">
 	@media print{
@@ -70,16 +60,9 @@
 			display: none;
 		}
 
-		.show_hr {
-			margin-top: 10px;
-		}
-
 		#show_container {
 			margin: 0px;
-		}
-
-		#show_container p {
-			font-size: 14px;
+			padding: 0 5rem;
 		}
 
 		title {
@@ -87,9 +70,7 @@
 		}
 }
 
-.image_resize_slider {
-	display: none;
-}
+
 </style>
 
 

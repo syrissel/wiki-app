@@ -5,7 +5,7 @@ class DraftsController < ApplicationController
   # GET /drafts
   # GET /drafts.json
   def index
-    @drafts = Draft.order(approval_status_id: :asc).order(updated_at: :desc)
+    @drafts = Draft.order(approval_status_id: :asc).order(updated_at: :desc).page params[:page]
   end
 
   # GET /drafts/1
@@ -39,7 +39,7 @@ class DraftsController < ApplicationController
 
     respond_to do |format|
       if @draft.save
-        format.html { redirect_to @draft, notice: 'Draft was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Draft was successfully created.' }
         format.json { render :show, status: :created, location: @draft }
       else
         format.html { render :new }
@@ -63,7 +63,7 @@ class DraftsController < ApplicationController
         @page.sanitized_content = ActionController::Base.helpers.strip_tags(@draft.content)
         @page.title = @draft.title
         @page.category_id = @draft.category_id
-        @page.last_user_edit = User.find_by_username(@draft.user_id)
+        @page.last_user_edit = User.find(@draft.user_id).username
         @page.update(title: @page.title, content: @page.content, category_id: @page.category_id)
         @draft.destroy
         redirect_to @page, notice: "#{@page.title} has been saved!"

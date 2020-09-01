@@ -8,7 +8,8 @@
     <tr>
       <th>Title</th>
       <th>Category</th>
-      <th>Action</th>
+      <th>Author</th>
+      <th>Last Updated</th>
       <th>Approval status</th>
     </tr>
   </thead>
@@ -16,9 +17,10 @@
   <tbody>
     <% @drafts.each do |draft| %>
       <tr>
-        <td><%= draft.title %></td>
+        <td><%= link_to draft.title, draft_path(draft) %></td>
         <td><%= draft.category.name %></td>
-        <td><%= link_to 'View', draft_path(draft), class: 'btn btn-secondary btn-sm' %></td>
+        <td><%= draft.user.fullname %></td>
+        <td><%= draft.updated_at.strftime("%b %e, %Y %H:%M:%S") %></td>
         <td>
           <%= draft.approval_status.status %>
           <% if draft.approval_status_id == REJECTED %>

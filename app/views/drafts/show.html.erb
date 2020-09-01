@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
+<div id="wiki_header" class="d-flex">
+  <h3 class="align-self-end"><%= @draft.title %></h3>
+  <div class="d-flex flex-column ml-auto">
+    <small class="text-muted align-self-end ml-auto">Created by: <%= @draft.user.fullname %> on <%= @draft.created_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
+    <small class="ml-auto"><%= link_to 'Edit', edit_draft_path(@draft) %></small>
+  </div>
+</div>
+<hr>
 
-<p>
-  <strong>Title:</strong>
-  <%= @draft.title %>
-</p>
 <div id="show_container">
   <div class="note-editor"><%= raw @draft.content %></div>
 </div>
