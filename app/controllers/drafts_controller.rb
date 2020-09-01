@@ -1,6 +1,7 @@
 class DraftsController < ApplicationController
   before_action :set_draft, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_supervisor, only: [:show, :index, :edit]
+  before_action :authenticate_supervisor, only: [:index]
+  before_action :can_edit, only: [:edit]
 
   # GET /drafts
   # GET /drafts.json
@@ -20,7 +21,7 @@ class DraftsController < ApplicationController
   # GET /drafts/1
   # GET /drafts/1.json
   def show
-    @statuses = ApprovalStatus.where.not(id: [ current_user.user_level_id == EXECUTIVE_VALUE ? SUPERVISOR_VALUE : EXECUTIVE_VALUE ])
+    @statuses = (current_user.user_level_id == SUPERVISOR_VALUE) ? ApprovalStatus.where.not(id: [ EXECUTIVE_VALUE ]) : ApprovalStatus.all
   end
 
   # GET /drafts/new
@@ -83,8 +84,21 @@ class DraftsController < ApplicationController
 
       # Any other update to the draft.
       else
-        (User.supervisors.uniq - [current_user]).each do |s|
-          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} updated a draft, \"#{@draft.title}\"", page_id: @draft.id)
+        action = 'updated'
+
+        case @draft.approval_status_id
+        when SUPERVISOR_VALUE
+          action = 'approved'
+        when REJECTED
+          action = 'rejected'
+        end
+
+        if @draft.approval_status_id == REJECTED
+          Notification.create(recipient_id: @draft.user_id, actor_id: current_user.id, message: "#{current_user.fullname} rejected your draft \"#{@draft.title}\"", page_id: @draft.id)
+        else
+          (User.supervisors.uniq - [ current_user ]).each do |s|
+            Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} #{action} a draft \"#{@draft.title}\"", page_id: @draft.id)
+          end
         end
 
         respond_to do |format|
@@ -119,5 +133,9 @@ class DraftsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def draft_params
       params.require(:draft).permit(:title, :content, :category_id, :approval_status_id, :page_id, :user_id)
+    end
+
+    def can_edit
+      current_user == @draft.user && current_user.user_level_id < SUPERVISOR_VALUE
     end
 end

@@ -19,7 +19,7 @@
 
 <%= form_for @draft, html: { class: 'ml-5' } do |f| %>
   <div class="form-group">
-    <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-50' } %>
+    <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, { }, { class: 'form-control w-50' } %>
   </div>
   <div class="form-group">
     <%= f.submit 'Update', class: 'btn btn-primary' %>
