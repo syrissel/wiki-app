@@ -48,6 +48,9 @@ class DraftsController < ApplicationController
     if @draft.update(draft_params)
       if params[:draft][:approval_status_id].to_i == EXECUTIVE_VALUE
         @page.content = @draft.content
+
+        # For search functionality.
+        @page.sanitized_content = ActionController::Base.helpers.strip_tags(@draft.content)
         @page.title = @draft.title
         @page.category_id = @draft.category_id
         @page.last_user_edit = User.find_by_username(@draft.user_id)
