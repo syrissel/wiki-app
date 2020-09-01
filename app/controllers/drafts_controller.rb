@@ -16,6 +16,12 @@ class DraftsController < ApplicationController
   def new
     @draft = Draft.new
     @page = Page.find(params[:id])
+    @images = image_search
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /drafts/1/edit

@@ -1,6 +1,5 @@
 
 <%= form_for @draft, validate: true do |f| %>
-
   <div class="errors">
   <% if @draft.present? && @draft.errors.any? %>
     <p><%= pluralize(@draft.errors.count, "error") %> prevented this wiki from being saved:</p>
@@ -32,3 +31,5 @@
     <%= f.submit 'Submit', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+  <%= render 'images/image_select' %>
