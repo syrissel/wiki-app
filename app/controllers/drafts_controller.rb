@@ -5,7 +5,7 @@ class DraftsController < ApplicationController
   # GET /drafts
   # GET /drafts.json
   def index
-    @drafts = Draft.order(approval_status_id: :asc).order(updated_at: :desc).page params[:page]
+    @drafts = Draft.supervisor_approved_first().order(approval_status_id: :asc).order(updated_at: :desc).page params[:page]
 
     if params["/drafts"].present? && params["/drafts"][:q].present?
       @search = params["/drafts"][:q].strip
@@ -15,7 +15,6 @@ class DraftsController < ApplicationController
                                                              OR first_name LIKE :search
                                                              OR last_name LIKE :search", search: "%#{@search}%")
     end
-    byebug
   end
 
   # GET /drafts/1
