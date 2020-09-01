@@ -30,7 +30,7 @@
     <%= f.select :category_id, Category.all.map { |c| [ c.name, c.id ] }, { selected: @page.category_id }, { class: 'form-control' } %>
   </div>
   <div class="form-group">
-    <%= f.text_area :content, id: :summernote, data: { content: params[:action]['new'] ? @page.content : '' } %>
+    <%= f.text_area :content, id: :summernote, data: { content: params[:action]['new'] ? @page.content : @draft.content } %>
   </div>
   <div class="form-group">
     <%= f.submit 'Submit', class: 'btn btn-primary' %>
@@ -38,3 +38,9 @@
 <% end %>
 
   <%= render 'images/image_select' %>
+
+<script>
+$(document).on('turbolinks:load', function() {
+  $('.note-editable').html($('#summernote').data('content'))
+})
+</script>

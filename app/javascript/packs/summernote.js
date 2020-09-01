@@ -63,12 +63,7 @@ $(document).on('turbolinks:load', function() {
             btnVideo: VideoButton
         },
         tabDisable: true,
-        disableDragAndDrop: true,
-        callbacks: {
-            onInit: function(e) {
-                $('#summernote').summernote('pasteHTML', $('#summernote').data('content'))
-            }
-        }
+        disableDragAndDrop: true
     });
 
     var helloButton = function (context) {
