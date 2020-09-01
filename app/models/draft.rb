@@ -5,7 +5,7 @@ class Draft < ApplicationRecord
   belongs_to :user
   has_many :notifications, dependent: :destroy
 
-  paginates_per 20
+  paginates_per 15
 
   validates :title, presence: true, length: { maximum: 40 }
   validates :category_id, presence: true
