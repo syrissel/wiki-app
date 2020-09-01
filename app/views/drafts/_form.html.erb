@@ -42,5 +42,9 @@
 <script>
 $(document).on('turbolinks:load', function() {
   $('.note-editable').html($('#summernote').data('content'))
+
+  $('form').submit(function(event) {
+    $('#summernote').val($('.note-editable').html())
+  })
 })
 </script>
