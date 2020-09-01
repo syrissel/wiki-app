@@ -2,5 +2,5 @@
 <% if current_user.user_level_id < SUPERVISOR_VALUE %>
 	<%= link_to notification.message, page_forum_path(notification.comment.page_forum), class: 'dropdown-item' %>
 <% else %>
-	<%= link_to notification.message, review_wiki_path(notification.page), class: 'dropdown-item' %>
+	<%= link_to notification.message, draft_path(notification.page), class: 'dropdown-item' %>
 <% end %>

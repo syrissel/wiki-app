@@ -6,12 +6,12 @@ class DraftsController < ApplicationController
   # GET /drafts.json
   def index
     @drafts = Draft.order(approval_status_id: :asc).order(updated_at: :desc)
-    @statuses = ApprovalStatus.where.not(id: [ current_user.user_level_id == EXECUTIVE_VALUE ? SUPERVISOR_VALUE : EXECUTIVE_VALUE ])
   end
 
   # GET /drafts/1
   # GET /drafts/1.json
   def show
+    @statuses = ApprovalStatus.where.not(id: [ current_user.user_level_id == EXECUTIVE_VALUE ? SUPERVISOR_VALUE : EXECUTIVE_VALUE ])
   end
 
   # GET /drafts/new
@@ -54,6 +54,8 @@ class DraftsController < ApplicationController
     @page = Page.find(params[:draft][:page_id])
     
     if @draft.update(draft_params)
+
+      # Draft is approved by CEO. Draft is merged with wiki then deleted.
       if params[:draft][:approval_status_id].to_i == EXECUTIVE_VALUE
         @page.content = @draft.content
 
@@ -65,9 +67,15 @@ class DraftsController < ApplicationController
         @page.update(title: @page.title, content: @page.content, category_id: @page.category_id)
         @draft.destroy
         redirect_to @page, notice: "#{@page.title} has been saved!"
+
+      # Any other update to the draft.
       else
-          respond_to do |format|
-          format.html { redirect_to @draft, notice: 'Draft was successfully updated.' }
+        (User.supervisors.uniq - [current_user]).each do |s|
+          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} updated a draft, \"#{@draft.title}\"", page_id: @draft.id)
+        end
+
+        respond_to do |format|
+          format.html { redirect_to drafts_path, notice: 'Draft was successfully updated.' }
           format.json { render :show, status: :ok, location: @draft }
         end
       end

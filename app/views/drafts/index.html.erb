@@ -20,14 +20,10 @@
         <td><%= draft.category.name %></td>
         <td><%= link_to 'View', draft_path(draft), class: 'btn btn-secondary btn-sm' %></td>
         <td>
-          <%= form_for draft, html: { class: 'd-flex' } do |f| %>
-            <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-75' } %>
-            <%= f.submit 'Go', class: 'btn btn-primary btn-sm ml-1' %>
-            <%= hidden_field(:draft, :page_id, value: draft.page.id) %>
-            <% if draft.approval_status_id == REJECTED %>
+          <%= draft.approval_status.status %>
+          <% if draft.approval_status_id == REJECTED %>
             <%= link_to draft, method: :delete, data: { confirm: 'Are you sure?' } do %><box-icon name='trash' type='solid' color='#f80000' ></box-icon><% end %>
-            <% end %>
-          <% end %>
+          <% end %>  
         </td>
       </tr>
     <% end %>
