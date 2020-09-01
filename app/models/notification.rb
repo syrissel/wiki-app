@@ -3,5 +3,6 @@ class Notification < ApplicationRecord
 	belongs_to :actor, class_name: 'User', foreign_key: :actor_id
 	belongs_to :comment, optional: true
 	belongs_to :page, optional: true
+	belongs_to :draft, optional: true
   # belongs_to :user
 end

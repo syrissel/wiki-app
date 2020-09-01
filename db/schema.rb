@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_182826) do
+ActiveRecord::Schema.define(version: 2020_09_01_183336) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status"
@@ -82,8 +82,10 @@ ActiveRecord::Schema.define(version: 2020_08_31_182826) do
     t.datetime "read_at"
     t.bigint "page_id"
     t.bigint "comment_id"
+    t.bigint "draft_id"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["draft_id"], name: "index_notifications_on_draft_id"
     t.index ["page_id"], name: "index_notifications_on_page_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
@@ -175,6 +177,7 @@ ActiveRecord::Schema.define(version: 2020_08_31_182826) do
   add_foreign_key "forum_users", "page_forums"
   add_foreign_key "forum_users", "users"
   add_foreign_key "notifications", "comments", on_delete: :cascade
+  add_foreign_key "notifications", "drafts"
   add_foreign_key "notifications", "pages", on_delete: :cascade
   add_foreign_key "page_forums", "pages", on_delete: :cascade
   add_foreign_key "page_forums", "users"

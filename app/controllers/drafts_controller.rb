@@ -50,7 +50,7 @@ class DraftsController < ApplicationController
     respond_to do |format|
       if @draft.save
         (User.supervisors.uniq - [current_user]).each do |s|
-          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} created a draft for \"#{@page.title}\"", page_id: @draft.id)
+          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} created a draft for \"#{@page.title}\"", draft_id: @draft.id)
         end
 
         format.html { redirect_to root_path, notice: 'Draft was successfully created.' }
