@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Drafts</h1>
+<h3>Drafts</h3>
+<hr>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="2">Title</th>
-      <th colspan="2">Category</th>
-
+      <th>Title</th>
+      <th>Category</th>
+      <th>Action</th>
       <th>Approval status</th>
     </tr>
   </thead>
@@ -15,14 +16,12 @@
   <tbody>
     <% @drafts.each do |draft| %>
       <tr>
-        <td class="table-danger"><%= draft.page.title  %></td>
-        <td class="table-success"><%= draft.title %></td>
-        <td class="table-danger"><%= draft.page.category.name %></td>
-        <td class="table-success"><%= draft.category.name %></td>
-
+        <td><%= draft.title %></td>
+        <td><%= draft.category.name %></td>
+        <td><%= link_to 'View', draft_path(draft), class: 'btn btn-secondary btn-sm' %></td>
         <td>
           <%= form_for draft, html: { class: 'd-flex' } do |f| %>
-            <%= f.select :approval_status_id, ApprovalStatus.all.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-75' } %>
+            <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-75' } %>
             <%= f.submit 'Go', class: 'btn btn-primary btn-sm ml-1' %>
             <%= hidden_field(:draft, :page_id, value: draft.page.id) %>
             <% if draft.approval_status_id == REJECTED %>

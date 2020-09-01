@@ -1,10 +1,12 @@
 class DraftsController < ApplicationController
   before_action :set_draft, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_supervisor, only: [:show, :index, :edit]
 
   # GET /drafts
   # GET /drafts.json
   def index
-    @drafts = Draft.all
+    @drafts = Draft.order(approval_status_id: :asc).order(updated_at: :desc)
+    @statuses = ApprovalStatus.where.not(id: [ current_user.user_level_id == EXECUTIVE_VALUE ? SUPERVISOR_VALUE : EXECUTIVE_VALUE ])
   end
 
   # GET /drafts/1
