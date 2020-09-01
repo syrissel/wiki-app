@@ -1,13 +1,6 @@
 <h5>New Draft for <i><%= @page.title %></i></h5>
 <hr>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Notice:</strong> There is currently a 🐛 bug where a space is added to the beginning
-                           of the draft. The workaround for now is to delete the space before submitting
-                           the document. A fix for this issue is currently being worked on. Thank you.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+
 <%= render 'form', draft: @draft %>
 
 
