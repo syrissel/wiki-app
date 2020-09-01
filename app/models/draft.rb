@@ -3,7 +3,7 @@ class Draft < ApplicationRecord
   belongs_to :approval_status
   belongs_to :page
   belongs_to :user
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
   paginates_per 20
 
