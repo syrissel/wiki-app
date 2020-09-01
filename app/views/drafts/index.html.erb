@@ -7,7 +7,7 @@
     <tr>
       <th colspan="2">Title</th>
       <th colspan="2">Category</th>
-      <th></th>
+
       <th>Approval status</th>
     </tr>
   </thead>
@@ -19,10 +19,10 @@
         <td class="table-success"><%= draft.title %></td>
         <td class="table-danger"><%= draft.page.category.name %></td>
         <td class="table-success"><%= draft.category.name %></td>
-        <td><%= link_to 'Show', draft_path(draft) %></td>
+
         <td>
           <%= form_for draft, html: { class: 'd-flex' } do |f| %>
-            <%= f.select :approval_status_id, ApprovalStatus.all.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-50' } %>
+            <%= f.select :approval_status_id, ApprovalStatus.all.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-75' } %>
             <%= f.submit 'Go', class: 'btn btn-primary btn-sm ml-1' %>
             <%= hidden_field(:draft, :page_id, value: draft.page.id) %>
             <% if draft.approval_status_id == REJECTED %>

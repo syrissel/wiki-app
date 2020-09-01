@@ -120,7 +120,6 @@ class PagesController < ApplicationController
 			(User.supervisors.uniq - [current_user]).each do |s|
 				Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "New wiki submitted by #{current_user.username}", page_id: @page.id)
 			end
-			Notification.create(recipient_id: EXECUTIVE_VALUE, actor_id: current_user.id, message: "")
       flash[:notice] = 'Wiki has been submitted for review!'
       redirect_to pages_path
     else
