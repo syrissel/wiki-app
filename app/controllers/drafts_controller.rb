@@ -132,7 +132,7 @@ class DraftsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def draft_params
-      params.require(:draft).permit(:title, :content, :category_id, :approval_status_id, :page_id, :user_id)
+      params.require(:draft).permit(:title, :content, :category_id, :approval_status_id, :page_id, :user_id, :description)
     end
 
     def can_edit

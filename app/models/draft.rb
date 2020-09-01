@@ -9,6 +9,7 @@ class Draft < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 40 }
   validates :category_id, presence: true
+  validates :description, presence: true
 
   scope :supervisor_approved_first, -> { order("FIELD(approval_status_id, #{SUPERVISOR_VALUE}) DESC") }
 end
