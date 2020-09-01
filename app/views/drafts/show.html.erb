@@ -11,21 +11,19 @@
 <div id="show_container">
   <div class="note-editor"><%= raw @draft.content %></div>
 </div>
-<p>
+<hr>
+<p class="ml-5">
   <strong>Category:</strong>
-  <%= @draft.category_id %>
+  <%= @draft.category.name %>
 </p>
 
-<p>
-  <strong>Approval status:</strong>
-  <%= @draft.approval_status_id %>
-</p>
-
-<%= link_to 'Edit', edit_draft_path(@draft) %> |
-<%= link_to 'Back', drafts_path %>
-
-<%= form_for @draft, html: { class: 'd-flex' } do |f| %>
-  <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-75' } %>
-  <%= f.submit 'Go', class: 'btn btn-primary btn-sm ml-1' %>
+<%= form_for @draft, html: { class: 'ml-5' } do |f| %>
+  <div class="form-group">
+    <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, {}, { class: 'form-control w-50' } %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Update', class: 'btn btn-primary' %>
+    <%= link_to 'Back', drafts_path, class: 'btn btn-secondary' %>
+  </div>
   <%= hidden_field(:draft, :page_id, value: @draft.page.id) %>
 <% end %>
