@@ -1,6 +1,7 @@
 
 <% if current_user.user_level_id < SUPERVISOR_VALUE %>
-	<%= link_to notification.message, edit_draft_path(notification.draft), class: 'dropdown-item' %>
+	<% link = notification.page_id.present? ? edit_page_path(notification.page) : edit_draft_path(notification.draft) %>
+	<%= link_to notification.message, link, class: 'dropdown-item' %>
 <% else %>
 	<% link = notification.page_id.present? ? review_wiki_path(notification.page) : draft_path(notification.draft) %>
 	<%= link_to notification.message, link, class: 'dropdown-item' %>

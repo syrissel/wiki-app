@@ -33,7 +33,7 @@
     <%= f.text_area :content, id: :summernote, data: { content: params[:action]['new'] ? @page.content : @draft.content } %>
   </div>
   <div class="form-group">
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <%= f.submit 'Submit', class: 'btn btn-primary float-right' %>
   </div>
 <% end %>
 

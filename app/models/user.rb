@@ -24,4 +24,5 @@ class User < ApplicationRecord
 	validates :last_name, presence: true
 
 	scope :supervisors, -> {where('user_level_id > ?', INTERN_VALUE)}
+	scope :executives, -> { where(user_level_id: EXECUTIVE_VALUE) }
 end

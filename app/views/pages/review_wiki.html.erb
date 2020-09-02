@@ -1,79 +1,48 @@
-<div id="page_header" style='overflow:auto;'>
-	<div class="show_row_top">
-		<div class="show_img"><%= image_tag('c4smb_logo_2.jpg') %></div>
-		<div class="show_info">
-			<p class="page_header_font">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-			<p class="page_header_font">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></p>
-			<%= link_to "Edit", edit_page_path %>
-		</div>
-	</div>
-	<div class="show_row_bottom"><h1><%= sanitize @page.title_review %></h1></div>
-	
+<p id="notice"><%= notice %></p>
+<div id="wiki_header" class="d-flex">
+  <h3 class="align-self-end"><%= @page.title %></h3>
+  <div class="d-flex flex-column ml-auto">
+    <small class="text-muted align-self-end ml-auto">Created by: <%= @page.user.fullname %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
+    <small class="ml-auto"><%= link_to 'Edit', edit_page_path(@page) %></small>
+  </div>
 </div>
-<hr class="show_hr" />
+<hr>
+
 <div id="show_container">
-<div class="">
-<div class="form_group note-editor"><%= raw @page.content_review %></div>
+  <div class="note-editor"><%= raw @page.content %></div>
 </div>
+<hr>
+<p class="ml-5">
+  <strong>Category:</strong>
+  <%= @page.category.name %>
+</p>
+
+<div class="row">
+<div class="col-2"></div>
+<div class="col-8">
+<%= form_for @page, html: { class: 'ml-5' } do |f| %>
+  <div class="form-group">
+    <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, { }, { class: 'form-control' } %>
+  </div>
+  <div id="page_comments" class="form-group hidden">
+    <%= f.label :comments %>
+    <%= f.text_area :comments, class: 'form-control' %>
+    <small class="text-muted">Enter a reason for the rejection. ie 'Duplicate wiki', 'Be more descriptive when describing cataloguing workflows'</small>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Update', class: 'btn btn-primary' %>
+    <%= link_to 'Back', review_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>
 </div>
-<div id="divider_container">
-	<hr id="cfs_divider">
-</div>
-<hr class="show_hr" />
+<div class="col-2"></div>
+</div><!--row-->
 
-
-<!-- A supervisor cannot review a page they recently edited. The executive can push a wiki live right away. -->
-<% if (current_user.user_level_id == EXECUTIVE_VALUE) || ((current_user.username != "#{@page.last_user_edit}") && (current_user.user_level_id == SUPERVISOR_VALUE)) %>
-	<h2>Supervisor Options:</h2>
-	<%= form_for @page, :url => { :action => "supervisor_update" } do |f| %>
-		<div>
-				<%= hidden_field(:page, :title_review, value: @page.title_review) %>
-				<%= hidden_field(:page, :content_review, value: @page.content_review) %>
-				<%= hidden_field(:page, :category_review, value: @page.category_review) %>
-		</div>
-		<%= f.label :approval_status_id %>
-		<%= collection_select :page, :approval_status_id, ApprovalStatus.order(:status).where.not(id: [EXECUTIVE_VALUE, PENDING]), :id, :status, prompt: true %>
-		<div>
-		<%= f.submit "Submit Status", class: "link_button review_button_fix" %>
-		</div>
-	<% end %>
-	<%= form_for @page, :url => { :action => "supervisor_update" } do |f| %>
-		<div class="form_group">
-			<%= hidden_field(:page, :page_publish_status_id, value: UNPUBLISHED) %>
-			<%= f.submit 'Unpublish', class: 'link_button', data: { confirm: "Unpublish wiki?"} %>
-		</div>
-	<% end %>
-<% else %>
-	<h2>You cannot review a wiki you recently edited.</h2>
-<% end %>
-
-<% if current_user.user_level_id == EXECUTIVE_VALUE && @page.approval_status_id == SUPERVISOR_VALUE %>
-	<%= form_for @page, :url => { :action => "executive_update" } do |f| %>
-		<div>
-			<%= hidden_field(:page, :title, value: @page.title_review) %>
-			<%= hidden_field(:page, :content, value: @page.content_review) %>
-			<%= hidden_field(:page, :approval_status_id, value: EXECUTIVE_VALUE) %>
-			<%= hidden_field(:page, :category_id, value: @page.category_review) %>
-			<%= hidden_field(:page, :page_publish_status_id, value: PUBLISHED) %>
-		</div>
-		<%= f.submit "Executive Approve", data: { confirm: "Publish wiki?"} %>
-	<% end %>
-<% end %>
-
-<% unless @page_forum.present? %>
-	<%= render 'page_forums/form' %>
-<% end %>
-
-<div id="page_forum">
-	<% if @page.page_forum_id.present? %>
-		<%= render partial: 'page_forums/page_forum', locals: { page_forum: @page_forum } %>
-	<% end %>
-</div>
-
-<% if @page.page_forum_id.present? %>
-	<%= render partial: 'comments/form', locals: { page_forum: @page_forum } %>
-<% end %>
-
-
-
-
+<script>
+$('#page_approval_status_id').change(function() {
+  $('#page_comments').hide()
+  if ($(this).val() == 4) {
+    $('#page_comments').show()
+  }
+})
+</script>

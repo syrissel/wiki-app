@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   post 'create-forum', to: 'pages#create_page_forum', as: 'create_forum'
   patch 'change_password/:id', to: 'users#change_password'
   get 'wiki_management', to: 'pages#wiki_management'
+  get 'unpublished', to: 'pages#unpublished', as: 'unpublished'
 
 
   resources :categories

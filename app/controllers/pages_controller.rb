@@ -55,6 +55,7 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
+    @publish_statuses = PagePublishStatus.all
   end
 
   def edit
@@ -69,31 +70,41 @@ class PagesController < ApplicationController
     end
   end
 
-  # If the database fails at updating, render edit page. Otherwise commit changes.
-  def base_update
-    @page = Page.find(params[:id])
-    @page.update(page_params)
-  end
 
   # For user edits.
   def update
-    if base_update
-      redirect_to root_path, notice: 'Edit successful. Submitted for review!'
-    else
-      render 'edit'
-    end
-  end
-  
-  # These methods may be able to be refactored into one. See approval statuses with switch statement.
-  def supervisor_update
-    base_update
-    redirect_to review_path, notice: 'Status updated!'
-  end
+    @page = Page.find(params[:id])
+    @page.page_publish_status_id = PUBLISHED if params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
 
-	# For Executive Approval, or when the wiki is published live.
-	def executive_update
-    base_update
-    redirect_to root_path, notice: "#{@page.title} is now live!"
+    if @page.update(page_params)
+      # If supervisor approved, send executives a notification.
+      if params[:page][:approval_status_id].to_i == SUPERVISOR_VALUE
+        (User.executives.uniq - [current_user]).each do |s|
+          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "A wiki has been approved by #{current_user.fullname}", page_id: @page.id)
+        end
+      # If an executive rejects a wiki, notify supervisors
+      elsif params[:page][:approval_status_id].to_i == REJECTED && current_user.user_level_id == EXECUTIVE_VALUE
+        (User.supervisors.uniq - [current_user]).each do |s|
+          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "A wiki has been rejected by #{current_user.fullname}", page_id: @page.id)
+        end
+        # Send author notification.
+        Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki has been rejected by #{current_user.fullname}", page_id: @page.id)
+      elsif params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
+        Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki, \"#{@page.title}\" has been published.", page_id: @page.id)
+      elsif params[:page][:approval_status_id].to_i == REJECTED
+        Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki has been rejected by #{current_user.fullname}", page_id: @page.id)
+      else
+        (User.supervisors.uniq - [current_user]).each do |s|
+          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{@page.title} has a new edit by #{current_user.fullname}", page_id: @page.id)
+        end
+      end
+
+      respond_to do |format|
+        format.html { redirect_to wiki_management_path, notice: "#{@page.title} has been updated." }
+        format.js
+      end
+
+    end
   end
 
   # Instantiates new Page object with permitted values. Duplicate content is stored
@@ -135,6 +146,18 @@ class PagesController < ApplicationController
 		puts "errors that prevented destruction: #{error.record.errors}"
   end
 
+  def unpublished
+    @pages = Page.where(page_publish_status_id: UNPUBLISHED).where(approval_status_id: EXECUTIVE_VALUE).page params[:page]
+    if params["/unpublished"].present? && params["/unpublished"][:q].present?
+      @search = params["/unpublished"][:q].strip
+      @pages = @pages.joins(:user).joins(:category).where("title LIKE :search 
+                                                             OR username LIKE :search 
+                                                             OR name LIKE :search
+                                                             OR first_name LIKE :search
+                                                             OR last_name LIKE :search", search: "%#{@search}%")
+    end
+  end
+
   # Review this
 	def review
 		@order_by = 'updated_at desc'
@@ -165,8 +188,7 @@ class PagesController < ApplicationController
 	
 	def review_wiki
 		@page = Page.find(params[:id])
-		@page_forum = PageForum.find_by_page_id(@page.id)
-		#@comments = Comment.where(page_forum_id: @page_forum.id)
+    @statuses = (current_user.user_level_id == SUPERVISOR_VALUE) ? ApprovalStatus.where.not(id: [ EXECUTIVE_VALUE ]) : ApprovalStatus.all
 	end
 
   def admin
@@ -208,7 +230,7 @@ class PagesController < ApplicationController
   def page_params
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
-																 :pinned, :search, :image, :description, :sanitized_content, :page, :page_publish_status_id)
+																 :pinned, :search, :image, :description, :sanitized_content, :page, :page_publish_status_id, :comments)
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
@@ -237,7 +259,7 @@ class PagesController < ApplicationController
 	def check_published
 		@page = Page.find(params[:id])
 
-		if @page.page_publish_status_id == UNPUBLISHED
+		if @page.page_publish_status_id == UNPUBLISHED && current_user.user_level_id < SUPERVISOR_VALUE
 			redirect_to root_path, notice: 'Page has not been published yet.'
 		end
 	end
