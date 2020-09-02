@@ -110,14 +110,11 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
 
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.elasticemail.com",
-    :port                 => 2525,
-    :user_name            => ENV["smtp_username"],
-    :password             => ENV["smtp_password"],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
+    :address              => "localhost",
+    :port                 => 25,
+    :domain               => "cfs-poweredge-r310"
   }
 end

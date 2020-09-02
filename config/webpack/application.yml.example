@@ -3,6 +3,8 @@ smtp_password: 'your_pass'
 
 // Who will be receiving emails.
 admin_email:   'admin@domain.com'
+from_email:    'mailserverhost'
+default_url_host: 'server_domain'
 
 db_username:   'username'
 db_password:   'your_pass'

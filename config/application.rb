@@ -14,6 +14,7 @@ module DocsApp
     config.load_defaults 6.0
     config.time_zone = 'Central Time (US & Canada)'
     config.action_view.automatically_disable_submit_tag = false
+    config.action_mailer.default_url_options = { host: ENV['default_url_host'] }
 
 
     # Settings in config/environments/* take precedence over those specified here.
