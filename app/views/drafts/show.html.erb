@@ -21,9 +21,17 @@
   <%= @draft.category.name %>
 </p>
 
+<div class="row">
+<div class="col-2"></div>
+<div class="col-8">
 <%= form_for @draft, html: { class: 'ml-5' } do |f| %>
   <div class="form-group">
-    <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, { }, { class: 'form-control w-50' } %>
+    <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, { }, { class: 'form-control' } %>
+  </div>
+  <div id="draft_comments" class="form-group hidden">
+    <%= f.label :comments %>
+    <%= f.text_area :comments, class: 'form-control' %>
+    <small class="text-muted">Enter a reason for the rejection. ie 'Duplicate wiki', 'Be more descriptive when describing cataloguing workflows'</small>
   </div>
   <div class="form-group">
     <%= f.submit 'Update', class: 'btn btn-primary' %>
@@ -31,3 +39,15 @@
   </div>
   <%= hidden_field(:draft, :page_id, value: @draft.page.id) %>
 <% end %>
+</div>
+<div class="col-2"></div>
+</div><!--row-->
+
+<script>
+$('#draft_approval_status_id').change(function() {
+  $('#draft_comments').hide()
+  if ($(this).val() == 4) {
+    $('#draft_comments').show()
+  }
+})
+</script>

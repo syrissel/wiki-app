@@ -94,10 +94,10 @@ class DraftsController < ApplicationController
         end
 
         if @draft.approval_status_id == REJECTED
-          Notification.create(recipient_id: @draft.user_id, actor_id: current_user.id, message: "#{current_user.fullname} rejected your draft \"#{@draft.title}\"", page_id: @draft.id)
+          Notification.create(recipient_id: @draft.user_id, actor_id: current_user.id, message: "#{current_user.fullname} rejected your draft \"#{@draft.title}\"", draft_id: @draft.id)
         else
           (User.supervisors.uniq - [ current_user ]).each do |s|
-            Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} #{action} a draft \"#{@draft.title}\"", page_id: @draft.id)
+            Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{current_user.fullname} #{action} a draft \"#{@draft.title}\"", draft_id: @draft.id)
           end
         end
 
@@ -132,7 +132,7 @@ class DraftsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def draft_params
-      params.require(:draft).permit(:title, :content, :category_id, :approval_status_id, :page_id, :user_id, :description)
+      params.require(:draft).permit(:title, :content, :category_id, :approval_status_id, :page_id, :user_id, :description, :comments)
     end
 
     def can_edit
