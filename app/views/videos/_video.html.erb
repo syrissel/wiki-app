@@ -1,0 +1,14 @@
+<li class="image-container">
+  <div class='radio_bottom'>
+    <label>
+      <%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(video.id).path, thumbnail: Video.find(video.id).image.video_path.url} do %>
+        <% if video.path.present? %>
+          <%= image_tag(video.image.video_path.url(:video)) %> <%# Video is a good preview size. %>
+        <% end %>
+      <% end %>
+    </label>
+  </div>
+    <div class='radio_top'>
+    <span><%= video.name %></span>
+  </div>
+</li>

@@ -78,4 +78,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :image_search
 
+  def video_search
+    if params["/videos"].present? && params["/videos"][:videoq].present?
+      @query = params["/videos"][:videoq]
+      @videos = Video.where("name LIKE :query", query: "%#{@query}%").order(created_at: :desc).page params[:page]
+    else
+      @videos = Video.all.order(created_at: :desc).page params[:page]
+    end
+  end
+  helper_method :video_search
+
 end

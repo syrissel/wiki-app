@@ -1,0 +1,36 @@
+<div class="video_options hidden">
+<div class="image_options_header">
+  <h4>Insert Video</h4>
+  <button type='button' class="show-video-options">x</button>
+</div>
+
+<ul>
+<div class='radio_wrapper'>
+<% if @videos.present? %>
+<%= render 'videos/video_search' %>
+      <div id="videos">
+      <%= render @videos %>
+      </div>
+<% end %>
+</div>
+</ul>
+
+<div class="media_options_wrapper">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <div id="paginator">
+        <% if @videos.present? %>
+        <%= paginate @videos, remote: true %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-4">
+      <button type='button' id="video_button" class="btn btn-primary float-right my-2 mx-1">Insert</button>
+      <button type='button' class="show-video-options btn btn-secondary float-right my-2">Close</button>
+    </div><!--col-4-->
+  </div><!--row-->
+</div>
+</div>
+
+

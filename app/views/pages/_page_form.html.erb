@@ -48,45 +48,4 @@
   </div>
 <% end %>
 	<%= render 'images/image_select' %>
-
-	<div class="video_options hidden clearfix">
-	<h2>Insert Video</h2>
-	<ul>
-	<div class='radio_wrapper'>
-	<% if @videos.present? %>
-	<% @videos.each do |v| %>
-	<li>
-	
-	<div class='radio_top'>
-	<strong><%= v.name %></strong>
-	</div>
-	<%# Store video path in data for retrieval by jquery %>
-	<div class='radio_bottom'>
-	
-	<label>
-	
-	<%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(v.id).path, thumbnail: Video.find(v.id).image.video_path.url} do %>
-	<% if v.image.video_path.present? %>
-		<%# <div class="video_image_wrapper"> %>
-		<%= image_tag(v.image.video_path.url, size: '196x111') %>
-		<%# <box-icon class="video_preview_icon" size="96px" color="#656565" name='play'></box-icon>
-		</div> %>
-	<% elsif v.image.path.present? %>
-		<%= image_tag(v.image.path.url, size: '196x111') %>
-	<% end %>
-	<%# '295.783x166.367' %>
-	</label>
-	<% end %>
-	</div>
-	</li>
-	<% end %>
-	<%= paginate @videos, params: { video: true } %>
-		<div class="media_options_wrapper">
-		<button type='button' id="video_button">Insert</button>
-		<button type='button' class="show-video-options">Cancel</button>
-		<%= link_to 'Upload', new_video_path %>
-	</div>
-	<% end %>
-	</div>
-	</ul>
-</div>
+	<%= render 'videos/video_select' %>

@@ -1,0 +1,6 @@
+<div id="image_search">
+  <%= simple_form_for videos_path, method: :get, remote: true do |f| %>
+		<%= f.text_field :videoq, class: 'form-control w-50' %>
+		<%= f.submit 'Search', class: 'btn btn-primary btn-sm mx-1'  %>
+	<% end %>
+</div>

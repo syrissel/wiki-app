@@ -29,6 +29,7 @@ class DraftsController < ApplicationController
     @draft = Draft.new
     @page = Page.find(params[:id])
     @images = image_search
+    @videos = video_search
 
     respond_to do |format|
       format.html
@@ -39,6 +40,8 @@ class DraftsController < ApplicationController
   # GET /drafts/1/edit
   def edit
     @page = Page.find(@draft.page_id)
+    @images = image_search
+    @videos = video_search
   end
 
   # POST /drafts

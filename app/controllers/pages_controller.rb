@@ -41,7 +41,7 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
 		@confirm = ['Submitting for supervisor approval. Continue?', 'Publishing page. Continue?']
-    @videos = Video.order(created_at: :desc).page params[:page]
+    @videos = video_search
     @images = image_search
 
     @categories = Category.order(:id).where('category_id IS NULL')
