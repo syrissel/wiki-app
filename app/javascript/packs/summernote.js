@@ -26,10 +26,30 @@ let VideoButton = function (context) {
     let ui = $.summernote.ui;
 
     let button = ui.button({
-        contents: '<i class="fa fa-play" aria-hidden="true"></i>',
+        contents: '<i class="fa fa-video-camera" aria-hidden="true"></i>',
         tooltip: 'Video',
         click: function () {
             let options = document.getElementsByClassName('video_options')[0];
+        
+            if (options.classList.contains('hidden')) {
+                options.className = options.className.replace("hidden", "");
+            } else {
+                options.classList.add("hidden");
+            }
+        }
+    })
+
+    return button.render()
+}
+
+let PdfButton = function (context) {
+    let ui = $.summernote.ui;
+
+    let button = ui.button({
+        contents: '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>',
+        tooltip: 'PDF',
+        click: function () {
+            let options = document.getElementsByClassName('pdf_options')[0];
         
             if (options.classList.contains('hidden')) {
                 options.className = options.className.replace("hidden", "");
@@ -53,34 +73,19 @@ $(document).on('turbolinks:load', function() {
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph', 'height']],
             ['table', ['table']],
-            ['insert', ['link', 'btnImage', 'btnVideo']],
+            ['insert', ['link', 'btnImage', 'btnVideo', 'btnPdf']],
             ['tableOfContents'],
             ['view', ['fullscreen', 'help']]
         ],
         placeholder: 'Compose a wiki',
         buttons: {
             btnImage: ImageButton,
-            btnVideo: VideoButton
+            btnVideo: VideoButton,
+            btnPdf:   PdfButton
         },
         tabDisable: true,
         disableDragAndDrop: true
     });
-
-    var helloButton = function (context) {
-        var ui = $('#summernote').ui;
-      
-        // create button
-        var button = ui.button({
-          contents: '<i class="fa fa-child"></i>',
-          tooltip: 'hello',
-          click: function () {
-            // invoke insertText method with 'hello' on editor module.
-            context.invoke('editor.insertText', 'hello');
-          }
-        });
-      
-        return button.render();   // return button as jquery object
-      }
 
     $('#image_button').click(function() {
         let url = $("input[name='image']:checked").data('image').url;
@@ -112,7 +117,7 @@ $(document).on('turbolinks:load', function() {
     })
 
     $('#pdf_button').click(function() {
-        let url = $('#pdf_button').data('url')
+        let url = $("input[name='pdf']:checked").data('pdf').url
         let iframe = document.createElement('iframe')
         iframe.setAttribute('src', url)
         iframe.setAttribute('width', '100%')

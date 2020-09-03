@@ -111,6 +111,8 @@ GEM
     file_validators (2.3.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
+    font-awesome-rails (4.7.0.5)
+      railties (>= 3.2, < 6.1)
     font-awesome-sass (5.13.0)
       sassc (>= 1.11)
     globalid (0.4.2)
@@ -303,6 +305,7 @@ DEPENDENCIES
   client_side_validations
   figaro
   file_validators
+  font-awesome-rails
   font-awesome-sass
   hirb (~> 0.7.3)
   jbuilder (~> 2.7)

@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <label>
+      <%= content_tag :input, type: 'radio', name: 'pdf', data: {pdf: Pdf.find(pdf.id).path} do %>
+        <% if pdf.path.present? %>
+          <%= pdf.name %>.pdf
+        <% end %>
+      <% end %>
+  </label>
+  </td>
+  <td><%= pdf.created_at.strftime("%b %e, %Y %H:%M:%S") %></td>
+</tr>

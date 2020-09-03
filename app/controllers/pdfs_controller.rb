@@ -4,7 +4,7 @@ class PdfsController < ApplicationController
   # GET /pdfs
   # GET /pdfs.json
   def index
-    @pdfs = Pdf.all.page params[:page]
+    @pdfs = pdf_search
   end
 
   # GET /pdfs/1
@@ -15,6 +15,7 @@ class PdfsController < ApplicationController
   # GET /pdfs/new
   def new
     @pdf = Pdf.new
+
   end
 
   # GET /pdfs/1/edit
@@ -25,14 +26,17 @@ class PdfsController < ApplicationController
   # POST /pdfs.json
   def create
     @pdf = Pdf.new(pdf_params)
+    @pdfs = pdf_search
 
     respond_to do |format|
       if @pdf.save
         format.html { redirect_to @pdf, notice: 'Pdf was successfully created.' }
         format.json { render :show, status: :created, location: @pdf }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @pdf.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

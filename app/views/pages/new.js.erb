@@ -1,3 +1,4 @@
 $('#images').html('<%= escape_javascript render(@images) %>');
 $('#videos').html('<%= escape_javascript render(@videos) %>');
+$('#pdfs').html('<%= escape_javascript render 'pdfs/pdf_table' %>');
 $('#paginator').html('<%= escape_javascript(paginate(@images, remote: true).to_s) %>');

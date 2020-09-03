@@ -1,0 +1,32 @@
+<div class="pdf_options hidden">
+	<div class="image_options_header">
+		<h4>Insert PDF</h4>
+		<button type='button' class="show-pdf-options">x</button>
+	</div>
+
+	<div class='radio_wrapper'>
+	<% if @pdfs.present? %>
+		<%= render 'pdfs/pdf_search' %>
+        <div id="pdfs">
+          <%= render 'pdfs/pdf_table' %>
+        </div>
+	<% end %>
+	</div>
+
+	<div class="media_options_wrapper">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+				<div id="paginator">
+					<% if @pdfs.present? %>
+					<%= paginate @pdfs, remote: true %>
+					<% end %>
+				</div>
+			</div>
+			<div class="col-4">
+				<button type='button' id="pdf_button" class="btn btn-primary float-right my-2 mx-1">Insert</button>
+				<button type='button' class="show-pdf-options btn btn-secondary float-right my-2">Close</button>
+			</div><!--col-4-->
+		</div><!--row-->
+	</div>
+</div>

@@ -45,6 +45,7 @@ gem 'acts_as_list'
 gem 'bootstrap'
 gem 'summernote-rails'
 gem 'font-awesome-sass'
+gem 'font-awesome-rails'
 
 gem 'mime-types'
 gem 'carrierwave-base64'

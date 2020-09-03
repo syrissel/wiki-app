@@ -46,6 +46,7 @@ class PagesController < ApplicationController
 		@confirm = ['Submitting for supervisor approval. Continue?', 'Publishing page. Continue?']
     @videos = video_search
     @images = image_search
+    @pdfs = pdf_search
 
     @categories = Category.order(:id).where('category_id IS NULL')
     # @users = User.order(:name).page params[:page]

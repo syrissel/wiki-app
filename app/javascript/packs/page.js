@@ -38,6 +38,17 @@ document.addEventListener('turbolinks:load', function() {
 			options.classList.add("hidden");
 		}
     });
+
+    $('.show-pdf-options').click(function() {
+        let options = document.getElementsByClassName('pdf_options')[0];
+
+		if (options.classList.contains('hidden')) {
+			options.className = options.className.replace("hidden", "");
+		} else {
+			options.classList.add("hidden");
+		}
+    });
+
     $('input[name="page[category_id]"]').change(function() {
         $('#selected_category').html('Selected: ' + $('input[name="page[category_id]"]:checked').data('name'))
     })

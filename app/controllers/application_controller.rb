@@ -88,4 +88,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :video_search
 
+  def pdf_search
+    if params["/pdfs"].present? && params["/pdfs"][:pdfq].present?
+      @query = params["/pdfs"][:pdfq]
+      @pdfs = Pdf.where("name LIKE :query", query: "%#{@query}%").order(created_at: :desc).page params[:page]
+    else
+      @pdfs = Pdf.all.order(created_at: :desc).page params[:page]
+    end
+  end
+  helper_method :pdf_search
+
 end

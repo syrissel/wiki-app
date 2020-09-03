@@ -4,5 +4,5 @@ class Pdf < ApplicationRecord
   validates :name, presence: true
   validates :path, presence: true
 
-  paginates_per 20
+  paginates_per 7
 end
