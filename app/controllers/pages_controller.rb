@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
-  before_action :authenticate_supervisor, only: [:review, :admin, :review_wiki]
+  before_action :authenticate_supervisor, only: [:review, :admin, :review_wiki, :wiki_management]
 	before_action :authenticate_user, except: [:index]
 	
 	# This will prevent people from viewing the page when it's published but also being reviewed.
-	before_action :check_pending, only: [:edit]
-	before_action :check_published, only: [:show]
+  before_action :check_published, only: [:show]
+  before_action :can_edit, only: [:edit]
   
   
 
@@ -63,10 +63,10 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @images = image_search(params['/pages/4/edit'])
-    byebug
+    @images = image_search
 		@page = Page.find(params[:id])
-    @videos = Video.order(:created_at).limit(36).page params[:page]
+    @videos = video_search
+    @pdfs = pdf_search
 
     respond_to do |format|
       format.html { render :edit }
@@ -238,27 +238,10 @@ class PagesController < ApplicationController
 		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
   end
 
-  def check_pending
-		@page = Page.find(params[:id])
-    @user = User.find_by_username(@page.last_user_edit)
-    @videos = Video.order(created_at: :desc).page params[:page]
-    @images = image_search
-    @categories = Category.order(:id).where('category_id IS NULL')
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-
-		# If the current user is either the Executive Director or a Supervisor, render the edit page.
-		# If the current user is not in that category, if the page's approval status is not 'pending', render the edit page.
-		# Finally, if the page is pending and the current user is not the user who last edited the wiki, they will be redirected the home page.
-		if (current_user.user_level_id == EXECUTIVE_VALUE || current_user.user_level_id == SUPERVISOR_VALUE) || (@page.approval_status_id != PENDING) || (current_user == @user)
-			render :edit
-		else
-			redirect_to root_path, notice: "Cannot edit #{@page.title}. It is currently being reviewed."
-    end
-	end
+  def can_edit
+    @page = Page.find(params[:id])
+    redirect_to root_path, notice: 'Unauthorized' unless current_user == @page.user || current_user.user_level_id > INTERN_VALUE
+  end
 	
 	def check_published
 		@page = Page.find(params[:id])
