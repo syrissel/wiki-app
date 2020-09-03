@@ -1,5 +1,6 @@
 class PdfsController < ApplicationController
   before_action :set_pdf, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_supervisor, only: [ :index, :edit ]
 
   # GET /pdfs
   # GET /pdfs.json
