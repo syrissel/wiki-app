@@ -1,0 +1,50 @@
+<%# First time registration form %>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h5>Register First User</h5>
+    <hr>
+
+    <%= form_for @user, validate: true do |f| %>
+    <div class="errors">
+    <% if @user.present? && @user.errors.any? %>
+      <p><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</p>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </div>
+
+      <div class="form-group">
+        <%= f.label :username, params[:username] %>
+        <%= f.text_field :username, class: 'form-control' %>
+        <%= hidden_field(:user, :user_status_id, value: UserStatus.find_by_status('Active').id) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :first_name, params[:first_name] %>
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, params[:last_name] %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= hidden_field(:user, :user_level_id, value: EXECUTIVE_VALUE) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, params[:password] %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, params[:password_confirmation] %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Register", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <div class="col-3"></div>
+  </div><!--col-6-->
+</div><!--row-->

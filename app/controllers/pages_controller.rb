@@ -9,6 +9,9 @@ class PagesController < ApplicationController
   
 
   def index
+    # Check if there are any users in database for first time registration.
+    @users = User.all
+    @user = User.new if User.all.count == 0
     if params[:query].present?
       @query = params[:query]
       @pages = Page.joins(:user).where("page_publish_status_id = :publish AND sanitized_content LIKE :query
