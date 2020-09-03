@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :pdfs
   resources :drafts, except: [:new]
   get 'draft/:id/new', to: 'drafts#new', as: 'new_draft'
   # get 'comments/create'

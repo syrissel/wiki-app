@@ -111,6 +111,15 @@ $(document).on('turbolinks:load', function() {
         console.log($('#summernote').summernote('editor.getLastRange'))
     })
 
+    $('#pdf_button').click(function() {
+        let url = $('#pdf_button').data('url')
+        let iframe = document.createElement('iframe')
+        iframe.setAttribute('src', url)
+        iframe.setAttribute('width', '100%')
+        iframe.setAttribute('height', '750px')
+        $('#summernote').summernote('insertNode', iframe)
+    })
+
     $('#range_test_button').click(function () {
         let range = new Range();
         const summernote = $('.note-editable')[0]

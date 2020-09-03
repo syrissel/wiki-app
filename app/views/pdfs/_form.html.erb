@@ -1,0 +1,25 @@
+
+<%= form_for @pdf, validate: true do |f| %>
+<div class="errors">
+<% if @pdf.present? && @pdf.errors.any? %>
+	<p><%= pluralize(@pdf.errors.count, "error") %> prevented this wiki from being saved:</p>
+	<ul>
+	<% @pdf.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+</div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+		<%= f.label :path %>
+    <%= f.file_field :path, class: 'form-control-file' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Upload', class: 'btn btn-primary' %>
+  </div>
+<% end %>

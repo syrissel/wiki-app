@@ -9,6 +9,8 @@
 <% end %>
 </div>
 
+<button id="pdf_button" type="button" data-url="<%= Pdf.find(1).path.url %>">Clicky</button>
+
 <%= form_for @page, validate: true do |f| %>
   <div class="form-group">
     <%= f.label :title %>
