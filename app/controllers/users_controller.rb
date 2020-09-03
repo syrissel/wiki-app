@@ -77,6 +77,10 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def register_intern
+		@user = User.new
+	end
+
 	def change_password
 		@user = User.find(params[:id])
 		if !@user.authenticate(params[:user][:current_password])

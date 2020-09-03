@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   patch 'change_password/:id', to: 'users#change_password'
   get 'wiki_management', to: 'pages#wiki_management'
   get 'unpublished', to: 'pages#unpublished', as: 'unpublished'
+  get 'intern-registration', to: 'users#register_intern', as: 'register_intern'
 
 
   resources :categories
