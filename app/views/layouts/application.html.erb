@@ -108,11 +108,15 @@
       <%= yield %>
     </div>
   </div>
-      <footer>
-     <ul class="footer_info">
-      <li class="footer_info_lastmod">Random wiki: <%= link_to @random_page.title, @random_page if @random_page.present? %></li>
-      <li class="footer_info_copyright">Computers for Schools Manitoba <%= Time.now.year %></li>
+    <footer>
+    <div class="d-flex justify-content-center h-100">
+    <div class="d-flex flex-column justify-content-center text-center">
+     <ul class="p-0 list-unstyled">
+      <li>Random wiki: <%= link_to @random_page.title, @random_page if @random_page.present? %></li>
+      <li>Computers for Schools Manitoba <%= Time.now.year %></li>
      </ul>
+     </div>
+    </div>
     </footer>
 
   
