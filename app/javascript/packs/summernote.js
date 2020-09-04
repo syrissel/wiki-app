@@ -84,7 +84,8 @@ $(document).on('turbolinks:load', function() {
             btnPdf:   PdfButton
         },
         tabDisable: true,
-        disableDragAndDrop: true
+        disableDragAndDrop: true,
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '24', '36', '48']
     });
 
     $('#image_button').click(function() {
