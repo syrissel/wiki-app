@@ -3,4 +3,5 @@
 <iframe src="<%= @pdf.path.url %>" width="100%" height="750px"></iframe>
 
 <%= link_to 'Edit', edit_pdf_path(@pdf) %> |
-<%= link_to 'Back', pdfs_path %>
+<%= link_to 'Back', pdfs_path %> |
+<%= link_to 'Show in serparate window', @pdf.path.url, target: '_blank' %>

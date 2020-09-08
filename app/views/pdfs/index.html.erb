@@ -13,7 +13,7 @@
   <tbody>
     <% @pdfs.each do |pdf| %>
     <tr>
-      <td><%= link_to pdf.name, pdf_path(pdf) %></td>
+      <td><%= link_to pdf.name, pdf.path.url, target: '_blank' %></td>
       <td><%= pdf.created_at.strftime("%b %e, %Y %H:%M:%S") %></td>
       <td>
         <div class="dropdown">
