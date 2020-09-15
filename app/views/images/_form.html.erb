@@ -1,4 +1,3 @@
-
 <%= form_for @image, validate: true, remote: true do |f| %>
 
 <div class="errors">
@@ -23,7 +22,6 @@
   </div>
   <div class="form-group">
     <%= f.submit 'Submit', class: 'btn btn-primary' %>
-    <%= link_to 'Back', images_path, class: 'btn btn-secondary' %>
   </div>
   <% else %>
   <div class="form-group">
