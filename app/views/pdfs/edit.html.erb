@@ -1,7 +1,9 @@
 <h5>Editing <i><%= @pdf.name %></i></h5>
 <hr>
-
-<%= render 'form', pdf: @pdf %>
-
-<%= link_to 'Show', @pdf %> |
-<%= link_to 'Back', pdfs_path %>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <%= render 'form', pdf: @pdf %>
+    </div>
+    <div class="col-3"></div>
+</div>

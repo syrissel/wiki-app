@@ -47,7 +47,7 @@ class PdfsController < ApplicationController
   def update
     respond_to do |format|
       if @pdf.update(pdf_params)
-        format.html { redirect_to @pdf, notice: 'Pdf was successfully updated.' }
+        format.html { redirect_to pdfs_path, notice: 'Pdf was successfully updated.' }
         format.json { render :show, status: :ok, location: @pdf }
       else
         format.html { render :edit }
