@@ -7,6 +7,7 @@
 <% if current_user.user_level_id == SUPERVISOR_VALUE || current_user.user_level_id == EXECUTIVE_VALUE %>
 <div class="d-flex justify-content-end">
 <button type="button" id="video_options_button" class="btn btn-warning mx-1">Options</button>
+<%= link_to 'Edit', edit_video_path(@video), class: 'btn btn-secondary mr-1' %>
 <%= link_to 'Back', videos_path, class: 'float-right btn btn-secondary' %>
 </div>
 <div class="hidden" id="video_options">
@@ -134,7 +135,8 @@
 				var newImg = document.createElement('img');
 				newImg.src = "data:image/jpeg;base64," + base64;
 				newImg.id = "base64_image";
-				document.body.appendChild(newImg);
+        document.body.appendChild(newImg);
+        $('#base64_image').hide()
 
 				var full_base64 =  "data:image/jpeg;base64," + base64;
         document.querySelector('#video_path_field').value = full_base64;

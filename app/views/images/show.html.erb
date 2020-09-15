@@ -11,7 +11,7 @@
 
 <%= link_to 'Full resolution', @image.path.url, target: '_blank', class: 'btn btn-warning' %>
 <%= link_to 'Edit', edit_image_path(@image), class: 'btn btn-secondary' %>
-<%= link_to 'Back', images_path, class: 'btn btn-secondary' %>
+<button type="button" onclick="window.history.back();" class="btn btn-secondary">Back</button>
 <div class="dropdown show float-right">
   <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Delete
