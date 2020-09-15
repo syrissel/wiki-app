@@ -10,6 +10,7 @@
 <div class="mt-2">
 
 <%= link_to 'Full resolution', @image.path.url, target: '_blank', class: 'btn btn-warning' %>
+<%= link_to 'Edit', edit_image_path(@image), class: 'btn btn-secondary' %>
 <%= link_to 'Back', images_path, class: 'btn btn-secondary' %>
 <div class="dropdown show float-right">
   <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
