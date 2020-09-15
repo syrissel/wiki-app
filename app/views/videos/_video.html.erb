@@ -2,8 +2,10 @@
   <div class='radio_bottom'>
     <label>
       <%= content_tag :input, type: 'radio', name: 'video', data: {video: Video.find(video.id).path, thumbnail: Video.find(video.id).image.video_path.url} do %>
-        <% if video.path.present? %>
+        <% if video.image.video_path.present? %>
           <%= image_tag(video.image.video_path.url(:video)) %> <%# Video is a good preview size. %>
+        <% else %>
+          <%= image_tag(video.image.path.url(:video)) %> <%# If there is no custom thumbnail %>
         <% end %>
       <% end %>
     </label>
