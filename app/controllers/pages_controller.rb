@@ -14,10 +14,12 @@ class PagesController < ApplicationController
     @user = User.new if User.all.count == 0
     if params[:query].present?
       @query = params[:query]
-      @pages = Page.joins(:user).where("page_publish_status_id = :publish AND sanitized_content LIKE :query
+      @pages = Page.joins(:user).joins(:category).where("page_publish_status_id = :publish AND sanitized_content LIKE :query
                                         OR page_publish_status_id = :publish AND title LIKE :query
                                         OR page_publish_status_id = :publish AND username LIKE :query
-																				OR page_publish_status_id = :publish AND description LIKE :query", 
+                                        OR page_publish_status_id = :publish AND description LIKE :query
+                                        OR page_publish_status_id = :publish AND categories.name LIKE :query
+                                        OR page_publish_status_id = :publish AND users.first_name LIKE :query", 
                                         publish: PUBLISHED, query: "%#{@query}%" ).order("updated_at desc").limit(10).page params[:page]
 
       @videos = Video.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36)
