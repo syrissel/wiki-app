@@ -42,7 +42,7 @@
     </div>
     <div class="form-group">
       <%= f.submit "Save", class: 'btn btn-primary' %>
-      <button class="btn btn-secondary" type="button" onclick="history.back()">Back</button>
+      <%= link_to 'Back', users_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
   </div><!--col-6-->
