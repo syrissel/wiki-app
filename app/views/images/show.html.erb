@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% if @image.name.present? %>
   <h2><%= @image.name %></h2>
 <% end %>
@@ -9,10 +7,17 @@
 <% else %>
   <%= image_tag(@image.video_path.url) %>
 <% end %>
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+<div class="mt-2">
 
-<%= link_to 'Full resolution', @image.path.url, target: '_blank' %>
+<%= link_to 'Full resolution', @image.path.url, target: '_blank', class: 'btn btn-warning' %>
+<%= link_to 'Back', images_path, class: 'btn btn-secondary' %>
+<div class="dropdown show float-right">
+  <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Delete
+  </a>
 
-<%= link_to 'New Image', new_image_path, class: 'link_button' %>
-<button type="button" class="btn btn-secondary float-right mx-1" onclick="history.back()">Back</button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <%= link_to 'Delete', image_path(@image), method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
+  </div>
+</div>
+</div>
