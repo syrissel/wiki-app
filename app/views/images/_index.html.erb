@@ -1,7 +1,15 @@
 <% if @images.present? %>
-<div class="images-top">
+<div class="d-flex flex-column">
     <h3>Images</h3>
-    <%= link_to 'New', new_image_path, class: 'btn btn-success my-2' %>
+    <div class="mb-2" style="width:25rem;">
+      <%= simple_form_for images_path, method: :get do |f| %>
+      <%= f.text_field :imageq, class: 'form-control float-left w-50' %>
+      <div class="float-left">
+        <%= f.submit 'Search', class: 'btn btn-primary ml-2'  %>
+        <%= link_to 'New', new_image_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+	<% end %>
 </div>
 <hr>
 <% else %>
