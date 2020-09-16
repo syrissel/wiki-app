@@ -111,8 +111,20 @@ class PagesController < ApplicationController
     @page.page_publish_status_id = PUBLISHED if params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
 
     # If checkbox is unchecked, set value to nil for sorting reasons.
-    params[:page][:global_pinned] = (params[:page][:global_pinned] == "0") ? nil : params[:page][:global_pinned]
-    params[:page][:category_pinned] = (params[:page][:category_pinned] == "0") ? nil : params[:page][:category_pinned]
+    if params[:page][:global_pinned].present? && params[:page][:global_pinned] == "1"
+      params[:page][:pinned_by_id] = current_user.id
+    else
+      params[:page][:global_pinned] = nil
+    end
+
+    if params[:page][:category_pinned].present? && params[:page][:category_pinned] == "1"
+      params[:page][:category_pinned_by_id] = current_user.id
+    else
+      params[:page][:category_pinned] = nil
+    end
+
+    #params[:page][:global_pinned] = (params[:page][:global_pinned] == "0") ? nil : params[:page][:global_pinned]
+    # params[:page][:category_pinned] = (params[:page][:category_pinned] == "0") ? nil : params[:page][:category_pinned]
 
     if @page.update(page_params)
 
@@ -251,7 +263,7 @@ class PagesController < ApplicationController
 																 :title_review, :content_review, :category_review, :last_user_edit, 
                                  :pinned, :search, :image, :description, :sanitized_content, :page,
                                  :page_publish_status_id, :comments, :category_pinned, :global_pinned,
-                                 :last_edited_at)
+                                 :last_edited_at, :pinned_by_id, :category_pinned_by_id)
   end
 
   def can_edit

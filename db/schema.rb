@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_160102) do
+ActiveRecord::Schema.define(version: 2020_09_16_205510) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status"
@@ -130,10 +130,14 @@ ActiveRecord::Schema.define(version: 2020_09_16_160102) do
     t.string "category_pinned"
     t.string "global_pinned"
     t.datetime "last_edited_at"
+    t.bigint "pinned_by_id"
+    t.bigint "category_pinned_by_id"
     t.index ["approval_status_id"], name: "index_pages_on_approval_status_id"
     t.index ["category_id"], name: "index_pages_on_category_id"
+    t.index ["category_pinned_by_id"], name: "index_pages_on_category_pinned_by_id"
     t.index ["page_forum_id"], name: "index_pages_on_page_forum_id"
     t.index ["page_publish_status_id"], name: "index_pages_on_page_publish_status_id"
+    t.index ["pinned_by_id"], name: "index_pages_on_pinned_by_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
@@ -199,6 +203,8 @@ ActiveRecord::Schema.define(version: 2020_09_16_160102) do
   add_foreign_key "pages", "page_forums", on_delete: :cascade
   add_foreign_key "pages", "page_publish_statuses"
   add_foreign_key "pages", "users"
+  add_foreign_key "pages", "users", column: "category_pinned_by_id"
+  add_foreign_key "pages", "users", column: "pinned_by_id"
   add_foreign_key "users", "user_levels"
   add_foreign_key "users", "user_statuses"
   add_foreign_key "videos", "images"

@@ -5,7 +5,7 @@ class User < ApplicationRecord
 	end
 
 	has_many :drafts
-  belongs_to :user_level
+	belongs_to :user_level
   has_many :pages, dependent: :nullify
   has_many :notifications
 	belongs_to :user_status

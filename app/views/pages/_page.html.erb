@@ -3,8 +3,10 @@
     <h5 class="my-1"><%= page.title %></h5>
     <small class="float-right text-muted ml-auto my-1">
       <%= page.last_edited_at.present? ? page.last_edited_at.strftime("%b %-d, %Y at %l:%M %p") : page.updated_at.strftime("%b %-d, %Y at %l:%M %p") %>
-      <% if page.global_pinned.present? && params['controller']['pages'].present? || page.category_pinned.present? && params['controller']['categories'].present? %>
-        <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned"></i>
+      <% if page.global_pinned.present? && params['controller']['pages'].present? %>
+        <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned by <%= page.pinned_by.fullname %>"></i>
+      <% else %>
+        <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned by <%=  %>"></i>
       <% end %>
     </small>
   </div>
