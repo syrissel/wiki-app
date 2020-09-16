@@ -2,7 +2,7 @@
   <div class="card-header d-flex" <% if page.global_pinned.present? && params['controller']['pages'].present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
     <h5 class="my-1"><%= page.title %></h5>
     <small class="float-right text-muted ml-auto my-1">
-      <%= page.updated_at.strftime("%b %-d, %Y at %l:%M %p") %>
+      <%= page.last_edited_at.present? ? page.last_edited_at.strftime("%b %-d, %Y at %l:%M %p") : page.updated_at.strftime("%b %-d, %Y at %l:%M %p") %>
       <% if page.global_pinned.present? && params['controller']['pages'].present? %>
         <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned"></i>
       <% end %>
