@@ -80,10 +80,12 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.page_publish_status_id = PUBLISHED if params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
 
+    # If checkbox is unchecked, set value to nil for sorting reasons.
     params[:page][:global_pinned] = (params[:page][:global_pinned] == "0") ? nil : params[:page][:global_pinned]
     params[:page][:category_pinned] = (params[:page][:category_pinned] == "0") ? nil : params[:page][:category_pinned]
 
     if @page.update(page_params)
+
       # If supervisor approved, send executives a notification.
       if params[:page][:approval_status_id].to_i == SUPERVISOR_VALUE
         (User.executives.uniq - [current_user]).each do |s|
@@ -118,15 +120,13 @@ class PagesController < ApplicationController
   # in the table until it is approved. When it is approved, the update will be called
   # and the review columns will be set to nil perserving space in the DB.
   def create
+    params[:page][:last_edited_at] = Time.now
 		@page = Page.new(page_params)
     
     if (@page.save)
       PageMailer.with(page: @page).new_page_email.deliver_later
 
-      @page.title_review = @page.title
-      @page.content_review = @page.content
       @page.sanitized_content = ActionController::Base.helpers.strip_tags(@page.content)
-      @page.category_review = @page.category_id
 			
 			if @page.user.user_level_id == EXECUTIVE_VALUE
 				@page.approval_status_id = EXECUTIVE_VALUE
@@ -220,7 +220,8 @@ class PagesController < ApplicationController
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
                                  :pinned, :search, :image, :description, :sanitized_content, :page,
-                                 :page_publish_status_id, :comments, :category_pinned, :global_pinned)
+                                 :page_publish_status_id, :comments, :category_pinned, :global_pinned,
+                                 :last_edited_at)
   end
 
   def can_edit

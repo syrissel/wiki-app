@@ -81,6 +81,7 @@ class DraftsController < ApplicationController
         @page.title = @draft.title
         @page.category_id = @draft.category_id
         @page.last_user_edit = User.find(@draft.user_id).username
+        @page.last_edited_at = Time.now
         @page.update(title: @page.title, content: @page.content, category_id: @page.category_id)
         @draft.destroy
         redirect_to @page, notice: "#{@page.title} has been saved!"

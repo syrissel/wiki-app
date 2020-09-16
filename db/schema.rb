@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_142907) do
+ActiveRecord::Schema.define(version: 2020_09_16_160102) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_142907) do
     t.text "comments"
     t.string "category_pinned"
     t.string "global_pinned"
+    t.datetime "last_edited_at"
     t.index ["approval_status_id"], name: "index_pages_on_approval_status_id"
     t.index ["category_id"], name: "index_pages_on_category_id"
     t.index ["page_forum_id"], name: "index_pages_on_page_forum_id"
