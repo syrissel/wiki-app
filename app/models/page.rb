@@ -40,4 +40,5 @@ class Page < ApplicationRecord
   end
 
   scope :global, -> { order(global_pinned: :desc).order(last_edited_at: :desc).order(updated_at: :desc) }
+  scope :pinned_categories, -> { order(category_pinned: :desc).order(last_edited_at: :desc).order(updated_at: :desc) }
 end

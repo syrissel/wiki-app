@@ -18,7 +18,7 @@
 									<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(s.id) %>
 									</ul>
 										<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
-																													category: s.id, publish: PUBLISHED).limit(Category.find(s.id).page_limit) %>
+																													category: s.id, publish: PUBLISHED).pinned_categories.limit(Category.find(s.id).page_limit) %>
                   <ul>
                   <% pages_of_type.each do |pot| %>
                     <li>
@@ -38,7 +38,7 @@
 													</ul>
 
                       		<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
-																																category: t.id, publish: PUBLISHED).limit(Category.find(t.id).page_limit) %>
+																																category: t.id, publish: PUBLISHED).pinned_categories.limit(Category.find(t.id).page_limit) %>
                         	<ul>
                         	<% pages_of_type.each do |pot| %>
                           	<li>
@@ -58,7 +58,7 @@
 																	</ul>
 																	
                             			<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
-																																				category: u.id, publish: PUBLISHED).limit(Category.find(u.id).page_limit)  %>
+																																				category: u.id, publish: PUBLISHED).pinned_categories.limit(Category.find(u.id).page_limit)  %>
                               		<ul>
 																	<% pages_of_type.each do |pot| %>
 																		<li>
@@ -77,7 +77,7 @@
 																					<ul>
 																					<box-icon name='home' class='mr-1' size='20px'></box-icon><%= link_to 'Home', category_path(v.id) %>
 																					</ul>
-																					<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", category: v.id, publish: PUBLISHED).limit(Category.find(v.id).page_limit) %>
+																					<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", category: v.id, publish: PUBLISHED).pinned_categories.limit(Category.find(v.id).page_limit) %>
 																					<ul>
 																						<% pages_of_type.each do |pot| %>
 																							<%= link_to pot.title, pot %><box-icon class='mr-1 float-left' size='20px' name='file'>
@@ -103,7 +103,7 @@
 						<% end %>
 						<% if !is_form %>
             <% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
-																									category: r.id, publish: PUBLISHED).limit(Category.find(r.id).page_limit) %>
+																									category: r.id, publish: PUBLISHED).pinned_categories.limit(Category.find(r.id).page_limit) %>
             <ul class="root_pages">
             <% pages_of_type.each do |pot| %>
               <li>
