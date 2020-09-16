@@ -1,5 +1,11 @@
 <% if @query %>
-  <h3>Search results for "<%= @query %>"</h3>
+<div class="d-flex justify-content-left">
+  <h3>
+    Search results for <i>"<%= @query %>"</i>
+  </h3>
+  <span class="align-self-end ml-auto"><%= @filters %></span>
+</div>
+  <hr>
 <% elsif @pages.present? %>
   <h3>Latest updates</h3>
   <hr>

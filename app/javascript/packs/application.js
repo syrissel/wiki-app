@@ -16,12 +16,15 @@ require('@client-side-validations/client-side-validations')
 require('custom/image-form-validations')
 require('custom/notifications')
 require('jquery-scroll-lock/jquery-scrollLock')
+require('custom/search')
 import "channels";
 import "jquery";
 import "boxicons";
 import "custom/side_menu";
 import "custom/header";
 import 'custom/wiki-validate';
+
+
 
 //import '@client-side-validations/client-side-validations'
 //import "custom/image_show";

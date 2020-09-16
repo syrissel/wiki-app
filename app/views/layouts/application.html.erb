@@ -30,9 +30,30 @@
       </div>
       <div class="col-4 d-flex flex-column justify-content-end" style="height:inherit;">
         <div id="" class="my-2">
-            <%= form_tag pages_path, method: :get do %>
-              <%= text_field_tag :query, nil, :placeholder => 'Search', class: 'form-control w-75 float-left mr-2' %>
+            <%= form_for pages_path, method: :get do |f| %>
+              <%= f.text_field :query, :placeholder => 'Search', class: 'form-control float-left mr-2', style: 'width: 70%' %>
               <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+              <button id="btn_filter_options" type="button" class="btn btn-link btn-sm" style="color:#d4af37;">Filter options...</button>
+              <div id="filter_options" class="d-none" style="color:#FFF;">
+                <span class="mr-2">Search for wikis by...</span>
+                <div class="form-check form-check-inline mt-2">
+                  <%= f.check_box :title, class: 'form-check-input' %>
+                  <%= f.label :title, "Title", class: 'form-check-label' %>
+                </div>
+                <div class="form-check form-check-inline">
+                  <%= f.check_box :content, class: 'form-check-input' %>
+                  <%= f.label :content, "Content", class: 'form-check-label' %>
+                </div>
+                <div class="form-check form-check-inline">
+                  <%= f.check_box :category, class: 'form-check-input' %>
+                  <%= f.label :category, "Category", class: 'form-check-label' %>
+                </div>
+                <div class="form-check form-check-inline">
+                  <%= f.check_box :user, class: 'form-check-input' %>
+                  <%= f.label :user, "Author", class: 'form-check-label' %>
+                </div>
+                <input type="reset" class="btn btn-secondary btn-sm">
+              </div>
             <% end %>
         </div>
       </div>

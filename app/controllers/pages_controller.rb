@@ -12,17 +12,46 @@ class PagesController < ApplicationController
     # Check if there are any users in database for first time registration.
     @users = User.all
     @user = User.new if User.all.count == 0
-    if params[:query].present?
-      @query = params[:query]
-      @pages = Page.joins(:user).joins(:category).where("page_publish_status_id = :publish AND sanitized_content LIKE :query
-                                        OR page_publish_status_id = :publish AND title LIKE :query
-                                        OR page_publish_status_id = :publish AND username LIKE :query
-                                        OR page_publish_status_id = :publish AND description LIKE :query
-                                        OR page_publish_status_id = :publish AND categories.name LIKE :query
-                                        OR page_publish_status_id = :publish AND users.first_name LIKE :query", 
-                                        publish: PUBLISHED, query: "%#{@query}%" ).global.limit(10).page params[:page]
+    if params["/pages"].present? && params["/pages"][:query].present?
+      @query = params["/pages"][:query]
+      @filters = 'Applied filters: none'
+      full_sql = "page_publish_status_id = :publish AND sanitized_content LIKE :query
+                OR page_publish_status_id = :publish AND title LIKE :query
+                OR page_publish_status_id = :publish AND username LIKE :query
+                OR page_publish_status_id = :publish AND categories.name LIKE :query
+                OR page_publish_status_id = :publish AND users.first_name LIKE :query
+                OR page_publish_status_id = :publish AND users.last_name LIKE :query"
+      sql = ''
 
-      @videos = Video.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36)
+      # If filter is checked on the search form.
+      if params["/pages"][:title].present? && params["/pages"][:title] == "1"
+        sql += "page_publish_status_id = :publish AND title LIKE :query OR "
+        @filters.slice! 'none'
+        @filters += 'title '
+      end
+
+      if params["/pages"][:content].present? && params["/pages"][:content] == "1"
+        sql += "page_publish_status_id = :publish AND sanitized_content LIKE :query OR "
+        @filters.slice! 'none'
+        @filters += 'content '
+      end
+
+      if params["/pages"][:category].present? && params["/pages"][:category] == "1"
+        sql += "page_publish_status_id = :publish AND categories.name LIKE :query OR "
+        @filters.slice! 'none'
+        @filters += 'category '
+      end
+
+      if params["/pages"][:user].present? && params["/pages"][:user] == "1"
+        sql += "page_publish_status_id = :publish AND username LIKE :query OR page_publish_status_id = :publish AND users.first_name LIKE :query OR page_publish_status_id = :publish AND users.last_name LIKE :query OR "
+        @filters.slice! 'none'
+        @filters += 'author '
+      end
+
+      # Remove last 'OR' at the end of the sql string. If no filters applied, search all filters.
+      sql = sql.length != 0 ? sql.sub(/(.*)\bor\b/i, '\1') : full_sql
+
+      @pages = Page.joins(:user).joins(:category).where(sql, publish: PUBLISHED, query: "%#{@query}%" ).global.page params[:page]
     else
       @pages = Page.where(page_publish_status_id: PUBLISHED).global.page params[:page]
     end
@@ -39,6 +68,11 @@ class PagesController < ApplicationController
 			@notifications.each do |n|
 				n.update(read_at: Time.now)
 			end
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
 
   end
