@@ -1,9 +1,9 @@
 <div class="card my-3">
-  <div class="card-header d-flex" <% if page.global_pinned.present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
+  <div class="card-header d-flex" <% if page.global_pinned.present? && params['controller']['pages'].present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
     <h5 class="my-1"><%= page.title %></h5>
     <small class="float-right text-muted ml-auto my-1">
       <%= page.updated_at.strftime("%b %-d, %Y at %l:%M %p") %>
-      <% if page.global_pinned.present? %>
+      <% if page.global_pinned.present? && params['controller']['pages'].present? %>
         <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned"></i>
       <% end %>
     </small>
@@ -12,7 +12,7 @@
     <p><%= page.get_preview %></p>
     <%= link_to 'Read', page_path(page), class: 'btn btn-primary' %>
   </div>
-  <div class="card-footer" <% if page.global_pinned.present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
+  <div class="card-footer" <% if page.global_pinned.present? && params['controller']['pages'].present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
     <small class="float-left text-muted"><%= link_to page.category.name, category_path(page.category), class: 'text-decoration-none text-muted' %></small>
     <small class="float-right text-muted"><%= page.user.fullname %></small>
   </div>
