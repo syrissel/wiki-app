@@ -20,11 +20,11 @@ class PagesController < ApplicationController
                                         OR page_publish_status_id = :publish AND description LIKE :query
                                         OR page_publish_status_id = :publish AND categories.name LIKE :query
                                         OR page_publish_status_id = :publish AND users.first_name LIKE :query", 
-                                        publish: PUBLISHED, query: "%#{@query}%" ).order("updated_at desc").limit(10).page params[:page]
+                                        publish: PUBLISHED, query: "%#{@query}%" ).global.limit(10).page params[:page]
 
       @videos = Video.where("name LIKE :query", query: "%#{@query}%").order(:created_at).limit(36)
     else
-      @pages = Page.where(page_publish_status_id: PUBLISHED).order("updated_at desc").page params[:page]
+      @pages = Page.where(page_publish_status_id: PUBLISHED).global.page params[:page]
     end
 		
 		if params[:clear].present?
@@ -76,11 +76,12 @@ class PagesController < ApplicationController
     end
   end
 
-
-  # For user edits.
   def update
     @page = Page.find(params[:id])
     @page.page_publish_status_id = PUBLISHED if params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
+
+    params[:page][:global_pinned] = (params[:page][:global_pinned] == "0") ? nil : params[:page][:global_pinned]
+    params[:page][:category_pinned] = (params[:page][:category_pinned] == "0") ? nil : params[:page][:category_pinned]
 
     if @page.update(page_params)
       # If supervisor approved, send executives a notification.
@@ -208,24 +209,6 @@ class PagesController < ApplicationController
   def wiki_management
     @pages = Page.all
   end
-  
-  
-  # Displays preview card of wiki on homepage. Finds first occurence of <p> tag
-  # then substrings it upto 400 characters. Appends three dots to the end of the
-  # paragraph.
-  def preview(page)
-    text = page.content
-
-    if text.index("p>").nil?
-      result = "No preview available"
-    else
-      content = text.index("p>") + 2
-      result = text[content...400]
-    end
-    
-    result += "..."
-  end
-  helper_method :preview
 
   private 
 
@@ -236,8 +219,8 @@ class PagesController < ApplicationController
   def page_params
 		params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id,
 																 :title_review, :content_review, :category_review, :last_user_edit, 
-																 :pinned, :search, :image, :description, :sanitized_content, :page, :page_publish_status_id, :comments)
-		#params.require(:page).permit(:title, :content, :approval_status_id, :user_id, :category_id)
+                                 :pinned, :search, :image, :description, :sanitized_content, :page,
+                                 :page_publish_status_id, :comments, :category_pinned, :global_pinned)
   end
 
   def can_edit

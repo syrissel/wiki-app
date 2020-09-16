@@ -38,7 +38,7 @@
 			<%= f.label :global_pinned, 'Pin globally', class: 'form-check-label' %>
 		</div>
 	</div>
-	<div class="form-group">
+	<div class="form-group mt-2">
 		<%= f.submit 'Update', class: 'btn btn-primary' %>
 		<% if @page.page_publish_status_id == UNPUBLISHED %>
 			<%= link_to 'Back', wiki_management_path, class: 'btn btn-secondary' %>

@@ -38,4 +38,6 @@ class Page < ApplicationRecord
     end
     result[0..300].strip + '...'
   end
+
+  scope :global, -> { order(global_pinned: :desc).order(updated_at: :desc) }
 end
