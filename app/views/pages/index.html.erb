@@ -1,10 +1,12 @@
 <% if @query %>
-<div class="d-flex justify-content-left">
-  <h3>
+
+  <h5>
     Search results for <i>"<%= @query %>"</i>
-  </h3>
-  <span class="align-self-end ml-auto"><%= @filters %></span>
-</div>
+  </h5>
+  <%= @filters.present? ? 'Filters:' : '' %>
+  <% @filters.each do |filter| %>
+    <span class="badge badge-info"><%= filter %></span>
+  <% end %>
   <hr>
 <% elsif @pages.present? %>
   <h3>Latest updates</h3>

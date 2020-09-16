@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     @user = User.new if User.all.count == 0
     if params["/pages"].present? && params["/pages"][:query].present?
       @query = params["/pages"][:query]
-      @filters = 'Applied filters: none'
+      @filters = []
       full_sql = "page_publish_status_id = :publish AND sanitized_content LIKE :query
                 OR page_publish_status_id = :publish AND title LIKE :query
                 OR page_publish_status_id = :publish AND username LIKE :query
@@ -26,26 +26,22 @@ class PagesController < ApplicationController
       # If filter is checked on the search form.
       if params["/pages"][:title].present? && params["/pages"][:title] == "1"
         sql += "page_publish_status_id = :publish AND title LIKE :query OR "
-        @filters.slice! 'none'
-        @filters += 'title '
+        @filters.push 'title'
       end
 
       if params["/pages"][:content].present? && params["/pages"][:content] == "1"
         sql += "page_publish_status_id = :publish AND sanitized_content LIKE :query OR "
-        @filters.slice! 'none'
-        @filters += 'content '
+        @filters.push 'content'
       end
 
       if params["/pages"][:category].present? && params["/pages"][:category] == "1"
         sql += "page_publish_status_id = :publish AND categories.name LIKE :query OR "
-        @filters.slice! 'none'
-        @filters += 'category '
+        @filters.push 'category'
       end
 
       if params["/pages"][:user].present? && params["/pages"][:user] == "1"
         sql += "page_publish_status_id = :publish AND username LIKE :query OR page_publish_status_id = :publish AND users.first_name LIKE :query OR page_publish_status_id = :publish AND users.last_name LIKE :query OR "
-        @filters.slice! 'none'
-        @filters += 'author '
+        @filters.push 'author'
       end
 
       # Remove last 'OR' at the end of the sql string. If no filters applied, search all filters.
