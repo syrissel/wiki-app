@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     # Check if there are any users in database for first time registration.
     @users = User.all
     @user = User.new if User.all.count == 0
-    if params["/pages"].present? && params["/pages"][:query].present? || params["/pages"][:category_search].present?
+    if params["/pages"].present? && params["/pages"][:query].present? || params["/pages"].present? && params["/pages"][:category_search].present?
       @query = params["/pages"][:query]
       @filters = []
 
