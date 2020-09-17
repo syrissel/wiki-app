@@ -35,7 +35,6 @@
               <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
               <button id="btn_filter_options" type="button" class="btn btn-link btn-sm" style="color:#d4af37;">Filter options...</button>
               <div id="filter_options" class="d-none" style="color:#FFF;">
-                <span class="mr-2">Search for wikis by...</span>
                 <div class="form-check form-check-inline mt-2">
                   <%= f.check_box :title, class: 'form-check-input' %>
                   <%= f.label :title, "Title", class: 'form-check-label' %>
@@ -46,12 +45,14 @@
                 </div>
                 <div class="form-check form-check-inline">
                   <%= f.check_box :category, class: 'form-check-input' %>
-                  <%= f.label :category, "Category", class: 'form-check-label' %>
+                  <%= f.label :category, "Category name", class: 'form-check-label' %>
                 </div>
                 <div class="form-check form-check-inline">
                   <%= f.check_box :user, class: 'form-check-input' %>
                   <%= f.label :user, "Author", class: 'form-check-label' %>
                 </div>
+                <button type="button" id="btn_other_search_options" class="btn btn-secondary btn-sm">...</button>
+                <%= render 'category_modal' %>
               </div>
             <% end %>
         </div>
