@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>A wiki has been approved. <%= link_to 'Click here', review_url %> to review it.</p>
+    <h3><%= @page.title %></h3>
+    <p>Category: <%= @page.category.name %></p>
+    <p><%= @page.get_preview %></p>
+  </body>
+  </html>
