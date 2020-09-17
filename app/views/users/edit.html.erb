@@ -29,9 +29,12 @@
     </div>
     <div class="form-group">
       <%= f.label :user_level %>
-      <% if @user.username == 'edirector' %>
-        <input class="form-control" value="EXECUTIVE" disabled>
-        <%= hidden_field(:user, :user_level_id, { value: EXECUTIVE_VALUE }) %>
+      <%# Show all options if logged in user is executive %>
+      <% if current_user.user_level_id == EXECUTIVE_VALUE %>
+        
+        <%= f.select :user_level_id, UserLevel.order(:level).map { |u| [ u.level, u.id ] }, { }, { class: 'form-control' } %>
+      <% elsif @user.user_level_id == EXECUTIVE_VALUE %>
+        <input class="form-control" type="text" value="Executive" disabled>
       <% else %>
         <%= f.select :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME).map { |u| [ u.level, u.id ] }, { }, { class: 'form-control' } %>
       <% end %>

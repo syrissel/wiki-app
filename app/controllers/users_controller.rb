@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   wrap_parameters :user, include: [:username, :password, :password_confirmation, :new_password, :current_password]
 
 	def index
-		@order_by = 'created_at'
+		@order_by = 'user_status_id'
 
 		if params[:s].present?
 			filter_params = params[:s]
