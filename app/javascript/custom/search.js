@@ -3,11 +3,12 @@ require('bootstrap')
 $(document).on('turbolinks:load', function() {
     $('#btn_filter_options').click(function() {
 
-        if ($('#filter_options').hasClass('d-none')) {
-            $('#filter_options').removeClass('d-none')
-        } else {
-            $('#filter_options').addClass('d-none')
-        }
+        // if ($('#filter_options').hasClass('d-none')) {
+        //     $('#filter_options').removeClass('d-none')
+        // } else {
+        //     $('#filter_options').addClass('d-none')
+        // }
+        $(this).dropdown('toggle')
     })
 
     $('#btn_other_search_options').click(function() {
@@ -26,6 +27,14 @@ $(document).on('turbolinks:load', function() {
 
     $('.user-menu').click(function() {
         $(this).dropdown('toggle')
+    })
+
+    $('.dropdown-menu').click(function(event) {
+        event.stopPropagation()
+    })
+
+    $('#modal_category_select').click(function(event) {
+        event.stopPropagation()
     })
 })
 
