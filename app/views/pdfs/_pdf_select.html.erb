@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="col-4">
-				<% if @pdfs.count == 0 %>
+				<% if @pdfs.present? && @pdfs.count == 0 %>
 					<%= link_to 'Upload new PDF', new_pdf_path, class: 'btn btn-primary my-2 mx-1 float-right', data: { confirm: 'Warning: any unsaved work will be lost. Continue?' } %>
 				<% else %>
 					<button type='button' id="pdf_button" class="btn btn-primary float-right my-2 mx-1">Insert</button>

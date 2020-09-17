@@ -111,15 +111,15 @@ class PagesController < ApplicationController
     @page.page_publish_status_id = PUBLISHED if params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
 
     # If checkbox is unchecked, set value to nil for sorting reasons.
-    if params[:page][:global_pinned].present? && params[:page][:global_pinned] == "1"
+    if params[:page][:global_pinned].present? && params[:page][:global_pinned] == "1" && @page.global_pinned.nil?
       params[:page][:pinned_by_id] = current_user.id
-    else
+    elsif params[:page][:global_pinned].present? && params[:page][:global_pinned] == "0"
       params[:page][:global_pinned] = nil
     end
 
-    if params[:page][:category_pinned].present? && params[:page][:category_pinned] == "1"
+    if params[:page][:category_pinned].present? && params[:page][:category_pinned] == "1" && @page.category_pinned.nil?
       params[:page][:category_pinned_by_id] = current_user.id
-    else
+    elsif params[:page][:category_pinned].present? && params[:page][:category_pinned] == "0"
       params[:page][:category_pinned] = nil
     end
 

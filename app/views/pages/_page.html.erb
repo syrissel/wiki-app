@@ -5,8 +5,8 @@
       <%= page.last_edited_at.present? ? page.last_edited_at.strftime("%b %-d, %Y at %l:%M %p") : page.updated_at.strftime("%b %-d, %Y at %l:%M %p") %>
       <% if page.global_pinned.present? && params['controller']['pages'].present? %>
         <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned by <%= page.pinned_by.fullname %>"></i>
-      <% else %>
-        <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned by <%=  %>"></i>
+      <% elsif page.category_pinned.present? && params['controller']['categories'].present? %>
+        <i class="fa fa-thumb-tack fa-lg ml-1" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Pinned by <%= page.category_pinned_by.fullname  %>"></i>
       <% end %>
     </small>
   </div>

@@ -2,8 +2,8 @@ class Page < ApplicationRecord
 	mount_uploader :image, ImageUploader
   belongs_to :approval_status
   belongs_to :user, optional: true
-  belongs_to :pinned_by, class_name: 'User', foreign_key: :pinned_by_id
-  belongs_to :category_pinned_by, class_name: 'User', foreign_key: :category_pinned_by_id
+  belongs_to :pinned_by, class_name: 'User', foreign_key: :pinned_by_id, optional: true
+  belongs_to :category_pinned_by, class_name: 'User', foreign_key: :category_pinned_by_id, optional: true
 	belongs_to :category
 	belongs_to :page_publish_status
   has_one :page_forum, dependent: :destroy
