@@ -39,6 +39,12 @@
         <%= f.select :user_level_id, UserLevel.order(:level).where.not(level: EXECUTIVE_NAME).map { |u| [ u.level, u.id ] }, { }, { class: 'form-control' } %>
       <% end %>
     </div>
+    <% if @user.user_level_id > INTERN_VALUE %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: 'form-control' %>
+      </div>
+    <% end %>
     <div class="form-group">
       <%= f.label :user_status %>
       <%= f.select :user_status_id, UserStatus.all.map { |s| [ s.status, s.id ] }, { }, { class: 'form-control' } %>
