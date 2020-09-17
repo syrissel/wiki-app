@@ -23,5 +23,9 @@ $(document).on('turbolinks:load', function() {
         //     $('.form-check-input').prop('checked', false)
         $('#btn_other_search_options').html($('input[name="/pages[category_search]"]:checked').data('name'))
     })
+
+    $('.user-menu').click(function() {
+        $(this).dropdown('toggle')
+    })
 })
 

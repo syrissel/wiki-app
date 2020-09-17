@@ -38,7 +38,7 @@ class PagesController < ApplicationController
 
       if params["/pages"][:category].present? && params["/pages"][:category] == "1"
         sql += "page_publish_status_id = :publish AND categories.name LIKE :query OR "
-        @filters.push 'Category'
+        @filters.push 'Category name'
       end
 
       if params["/pages"][:user].present? && params["/pages"][:user] == "1"
