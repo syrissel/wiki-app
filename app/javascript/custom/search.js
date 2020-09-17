@@ -13,12 +13,15 @@ $(document).on('turbolinks:load', function() {
     $('#btn_other_search_options').click(function() {
 
         // $('.form-check-input').prop('checked', false)
-        // $('input[name="/pages[category]"]').change(function() {
-        //     if ($(this).is(':checked'))
-        //         $('.form-check-input').prop('checked', false)
-        // })
+
         // $('.form-check-input').attr('disabled', 'disabled')
         $('#modal_category_select').modal('show')
+    })
+
+    $('input[name="/pages[category_search]"]').change(function() {
+        // if ($(this).is(':checked'))
+        //     $('.form-check-input').prop('checked', false)
+        $('#btn_other_search_options').html($('input[name="/pages[category_search]"]:checked').data('name'))
     })
 })
 

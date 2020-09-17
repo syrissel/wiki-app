@@ -33,7 +33,7 @@
             <%= form_for pages_path, url: { controller: 'pages', action: 'index' }, method: :get do |f| %>
               <%= f.text_field :query, :placeholder => 'Search', class: 'form-control float-left mr-2', style: 'width: 70%' %>
               <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-              <button id="btn_filter_options" type="button" class="btn btn-link btn-sm" style="color:#d4af37;">Filter options...</button>
+              <button id="btn_filter_options" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-filter" aria-hidden="true"></i></button>
               <div id="filter_options" class="d-none" style="color:#FFF;">
                 <div class="form-check form-check-inline mt-2">
                   <%= f.check_box :title, class: 'form-check-input' %>
@@ -51,8 +51,9 @@
                   <%= f.check_box :user, class: 'form-check-input' %>
                   <%= f.label :user, "Author", class: 'form-check-label' %>
                 </div>
-                <button type="button" id="btn_other_search_options" class="btn btn-secondary btn-sm">...</button>
-                <%= render 'category_modal' %>
+                <span>Category:</span>
+                <button type="button" id="btn_other_search_options" class="btn btn-secondary btn-sm">none</button>
+                <%= render 'category_search_modal' %>
               </div>
             <% end %>
         </div>
