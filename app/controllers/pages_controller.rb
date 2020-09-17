@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     # Check if there are any users in database for first time registration.
     @users = User.all
     @user = User.new if User.all.count == 0
-    if params["/pages"].present? && params["/pages"][:query].present?
+    if params["/pages"].present? && params["/pages"][:query].present? || params["/pages"][:category_search].present?
       @query = params["/pages"][:query]
       @filters = []
 
@@ -52,11 +52,17 @@ class PagesController < ApplicationController
       if params["/pages"][:category_search].present?
         @category = Category.find(params["/pages"][:category_search])
         @filters.push @category.name
-        @pages = @category.pages.joins(:user).joins(:category).where(sql, publish: PUBLISHED, query: "%#{@query}%").pinned_categories.page params[:page]
+
+        if params["/pages"][:query] == ''
+          redirect_to category_path(@category)
+        else
+          @pages = @category.pages.joins(:user).joins(:category).where(sql, publish: PUBLISHED, query: "%#{@query}%").pinned_categories.page params[:page]
+        end
       else
         @pages = Page.joins(:user).joins(:category).where(sql, publish: PUBLISHED, query: "%#{@query}%" ).global.page params[:page]
       end
     else
+
       @pages = Page.where(page_publish_status_id: PUBLISHED).global.page params[:page]
     end
 		
