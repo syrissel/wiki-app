@@ -144,10 +144,10 @@ class PagesController < ApplicationController
         Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki, \"#{@page.title}\" has been published.", page_id: @page.id)
       elsif params[:page][:approval_status_id].to_i == REJECTED
         Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki has been rejected by #{current_user.fullname}", page_id: @page.id)
-      else
-        (User.supervisors.uniq - [current_user]).each do |s|
-          Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{@page.title} has a new edit by #{current_user.fullname}", page_id: @page.id)
-        end
+      # else
+      #   (User.supervisors.uniq - [current_user]).each do |s|
+      #     Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "#{@page.title} has a new edit by #{current_user.fullname}", page_id: @page.id)
+      #   end
       end
 
       respond_to do |format|
