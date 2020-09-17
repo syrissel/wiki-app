@@ -1,0 +1,38 @@
+<div class="modal fade" id="search_help_modal" tabindex="-1" role="dialog" aria-labelledby="search_help_modal_title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="search_help_modal_title">Search Help</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5><u>What can I search for?</u></h5>
+        <p class="mx-2">
+            <ul>
+                <li>Wiki title</li>
+                <li>Wiki contents</li>
+                <li>Wiki category's name</li>
+                <li>Wiki author's first name, last name, and username</li>
+            </ul>
+        </p>
+        <h5><u>Search for everything</u></h5>
+        <p class="mx-2" style="text-indent:1rem;">Leave all filters blank. The search text will be matched with all the above parameters.</p>
+        <h5><u>Checkbox filters</u></h5>
+        <p class="mx-2" style="text-indent:1rem;">Depending on which checkboxes are selected, the search text will be matched with those filters only. Example: if title 
+           is selected, it will only search for a wiki's title.
+        </p>
+        <h5><u>Search within a category</u></h5>
+        <p class="mx-2" style="text-indent:1rem;">Note that this is different from searching via the "Category name" filter. When a category is selected, the search text
+           will only match wikis within that category. Other filters can be applied in tandem with this option. Example: if the 
+           category "Production" is selected and the filter "Title" is selected, only wikis that belong to the Production category
+           will be matched.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
