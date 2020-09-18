@@ -29,11 +29,16 @@ $(document).on('turbolinks:load', function() {
         $('#btn_other_search_options').html($('input[name="/pages[category_search]"]:checked').data('name'))
         $('#link_remove_category_filter').removeClass('d-none')
         $('#_pages_category').attr('disabled', 'disabled');
+        $('#_pages_category').prop('checked', false)
+        $('#btn_other_search_options').addClass('btn-info')
+        $('#btn_other_search_options').removeClass('btn-link')
     })
 
     $('#link_remove_category_filter').click(function() {
         $('input[name="/pages[category_search]"]:checked').prop('checked', false)
-        $('#btn_other_search_options').html('none')
+        $('#btn_other_search_options').html('none selected')
+        $('#btn_other_search_options').removeClass('btn-info')
+        $('#btn_other_search_options').addClass('btn-link')
         $('#_pages_category').removeAttr('disabled')
         $(this).addClass('d-none')
     })
