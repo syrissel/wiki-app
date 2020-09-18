@@ -43,15 +43,12 @@ $(document).on('turbolinks:load', function() {
         $(this).addClass('d-none')
     })
 
-    $('.user-menu').click(function() {
+    // Fix button dropdowns since Bootstrap is wacky.
+    $('.dropdown-toggle').click(function() {
         $(this).dropdown('toggle')
     })
 
-    $('#notification_bell').click(function() {
-        $(this).dropdown('toggle')
-    })
-
-    $('.dropdown-menu').click(function(event) {
+    $('#filter_dropdown .dropdown-menu').click(function(event) {
         event.stopPropagation()
     })
 

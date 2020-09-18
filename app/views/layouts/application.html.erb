@@ -33,7 +33,7 @@
             <%= form_for pages_path, url: { controller: 'pages', action: 'index' }, method: :get do |f| %>
               <%= f.text_field :query, placeholder: 'Search', class: 'form-control float-left mr-2', style: 'width: 70%' %>
               <button type="submit" class="btn btn-primary float-left mr-2"><i class="fa fa-search" aria-hidden="true"></i></button>
-              <div class="dropdown">
+              <div class="dropdown" id="filter_dropdown">
                 <button id="btn_filter_options" type="button" class="btn btn-secondary float-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i></button>
                 <div class="dropdown-menu dropdown-menu-right">
                   <div class="px-2 py-1">
