@@ -29,7 +29,7 @@
 		</td>
     <td>
       <div class="status-text">
-      <%= p.approval_status.status %>
+      <%= p.approval_status.id == SUPERVISOR_VALUE ? ' Approved by ' + p.approved_by.fullname : p.approval_status.status %>
       </div>
     </td>
     <td>

@@ -278,7 +278,7 @@ class PagesController < ApplicationController
 																 :title_review, :content_review, :category_review, :last_user_edit, 
                                  :pinned, :search, :image, :description, :sanitized_content, :page,
                                  :page_publish_status_id, :comments, :category_pinned, :global_pinned,
-                                 :last_edited_at, :pinned_by_id, :category_pinned_by_id)
+                                 :last_edited_at, :pinned_by_id, :category_pinned_by_id, :approved_by_id)
   end
 
   def can_edit

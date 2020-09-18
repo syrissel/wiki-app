@@ -23,6 +23,7 @@
 <%= form_for @page, html: { class: 'ml-5' } do |f| %>
   <div class="form-group">
     <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, { }, { class: 'form-control' } %>
+    <%= hidden_field(:page, :approved_by_id, value: current_user.id) %>
   </div>
   <div id="page_comments" class="form-group hidden">
     <%= f.label :comments %>
