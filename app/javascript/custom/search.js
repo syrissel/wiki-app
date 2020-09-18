@@ -47,6 +47,10 @@ $(document).on('turbolinks:load', function() {
         $(this).dropdown('toggle')
     })
 
+    $('#notification_bell').click(function() {
+        $(this).dropdown('toggle')
+    })
+
     $('.dropdown-menu').click(function(event) {
         event.stopPropagation()
     })
