@@ -110,11 +110,16 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    :address              => "localhost",
-    :port                 => 25,
-    :domain               => "cfs-poweredge-r310"
+    address:              "mail.shawhosting.ca",
+    port:                 1025,
+    domain:               "c4smb.ca",
+    user_name:            ENV["smtp_username"],
+    password:             ENV["smtp_password"],
+    authentication:       :login,
+    enable_starttls_auto: true,
+    openssl_verify_mode:  'none'
   }
 end
