@@ -23,6 +23,7 @@
     <div class="">
     <div class="header_container row">
       <div class="col-4">
+          <box-icon name='menu'></box-icon>
 
           <div class="logo"><%= link_to root_path do %><img src="<%= asset_path('c4smb_logo.png') %>" style="width:210px;" /><% end %></div>
           <div class="wiki_logo"><span>wiki</span> <small style="">(Beta)</small></div>
@@ -115,27 +116,9 @@
       </div>
     </div><!--row-->
   </div><!--header_container-->
-
-    <div id="side_panel">
-    <div id='side_menu_nav'>
-        <ul>
-          <% unless current_user %>
-            <li><%= link_to 'Login', login_path %></li>
-          <% else %>
-						<li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'New Wiki', new_page_path %></li>
-          <% end %>
-          <% if authorize_access && current_user %>
-          <li><%= link_to 'Admin', admin_path %></li>
-          <% end %>
-        </ul>
-      </div>
-    <div id='side_background'><box-icon id='menu_icon' name='menu' size='72px' color='#d4af37'></box-icon></div>
-    <div class="side_panel_container">
-        <%= render partial: 'application/category_select', locals: { is_form: false } %>
-      </div>
-    </div>
+    <%= render 'side_menu' %>
     <div id="middle_content">
+      <button type="button" id="sidebarCollapse">button</button>
       <%= yield %>
     </div>
   </div>
