@@ -19,17 +19,17 @@
 
   <body>
 
-  <div class="container-fluid p-0">
+  <div class="container-fluid p-0 site-wrapper">
     <div class="">
-    <div class="header_container row">
+    <div class="header_container row bg-dark">
       <div class="col-4">
-          <box-icon name='menu'></box-icon>
-
-          <div class="logo"><%= link_to root_path do %><img src="<%= asset_path('c4smb_logo.png') %>" style="width:210px;" /><% end %></div>
-          <div class="wiki_logo"><span>wiki</span> <small style="">(Beta)</small></div>
-        
+        <div class="d-flex flex-column justify-content-center h-100">
+          <div id="btn_show_sidebar" style="cursor:pointer;width:60px;">
+            <box-icon name='menu' size='60px' color='#d4af37'></box-icon>
+          </div>
+        </div>
       </div>
-      <div class="col-4 d-flex flex-column justify-content-end" style="height:inherit;">
+      <div class="col-4 d-flex flex-column justify-content-center h-100" style="height:inherit;">
         <div id="" class="my-2">
             <%= form_for pages_path, url: { controller: 'pages', action: 'index' }, method: :get do |f| %>
               <%= f.text_field :query, placeholder: 'Search', class: 'form-control float-left mr-2', style: 'width: 70%' %>
@@ -63,8 +63,6 @@
                   </div>
                 </div>
               </div>
-              <%= render 'category_search_modal' %>
-              <%= render 'search_help_modal' %>
             <% end %>
         </div>
       </div>
@@ -118,7 +116,6 @@
   </div><!--header_container-->
     <%= render 'side_menu' %>
     <div id="middle_content">
-      <button type="button" id="sidebarCollapse">button</button>
       <%= yield %>
     </div>
   </div>
@@ -133,8 +130,9 @@
     </div>
     </footer>
 
-  
-    
+    <!---Render search bar modals-->
+    <%= render 'category_search_modal' %>
+    <%= render 'search_help_modal' %>
   </body>
 </html>
 

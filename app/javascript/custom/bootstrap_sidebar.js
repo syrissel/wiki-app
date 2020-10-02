@@ -1,10 +1,11 @@
 require('malihu-custom-scrollbar-plugin')
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
 
     $("#sidebar").mCustomScrollbar({
          theme: "light-thin"
     });
+
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');

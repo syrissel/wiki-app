@@ -17,7 +17,8 @@ require('custom/image-form-validations')
 require('custom/notifications')
 require('jquery-scroll-lock/jquery-scrollLock')
 require('custom/search')
-require('custom/bootstrap_sidebar')
+// require('custom/bootstrap_sidebar')
+require('custom/custom_sidebar')
 import "channels";
 import "jquery";
 import "boxicons";

@@ -31,28 +31,21 @@ hr {
 }
 
  .logo {
-  // display: block;
-  // width: 249px;
-  // height: 100px;
-  // padding: 0px;
-  // margin: 22px;
-  // border: 0;
-  // text-decoration: none;
-  // background: url(c4smb_logo.png) no-repeat top left;
-  // float: left;
   margin: 0.5rem 0;
   float: left;
 }
 
 .header_container {
-  //background: url(header_container_external_bg.png) repeat-x top center;
-  background-color: #016383;
+  // background-color: #016383;
   top: 0px;
   left: 0;
   width: 100%;
-  height: 110px;
+  height: 80px;
   padding: 0px 0px 0px 0px;
   margin: 0px auto;
+  position: fixed;
+  z-index: 1;
+  transition: margin-left 0.3s !important;
 }
 
 .wiki_logo {
@@ -200,7 +193,7 @@ hr {
   border: 3px solid rgb(80, 80, 80);
   padding: 10px 25px;
   margin: 0px auto;
-  margin-top: 2rem;
+  margin-top: 7.5rem;
   margin-bottom: 2rem;
 	width: 60em;
 	overflow: auto;
@@ -241,6 +234,7 @@ footer ul {
   // height: 100%;
   // padding-bottom: 10px;
   min-height: calc(100vh - 120px) !important;
+  transition: margin-left .3s;
   //overflow: auto;
 }
 
@@ -1155,4 +1149,8 @@ html, body {
 
 #comment-editor {
 	height: 8em;
+}
+
+#category_menu {
+  font-size: 1.2rem;
 }

@@ -49,7 +49,7 @@ function load() {
 
       let rootChildrenCount = rootPages.childElementCount;
       if ((childrenCount > 1 || rootChildrenCount > 0) && !arrowPresent) {
-        item.innerHTML += "<box-icon class='chevron' size='16px' name='chevron-down'></box-icon>"
+        item.innerHTML += "<box-icon class='chevron' size='16px' color='#E8E8E8' name='caret-down'></box-icon>"
       }
     }
   }
@@ -59,8 +59,10 @@ function load() {
     let siblingElement = this.nextElementSibling;
   
     if (siblingElement.style.display === 'none') {
-      siblingElement.style.display = 'block';
+      $(this).next.animate({display: 'block'})
+      // siblingElement.style.display = 'block';
     } else {
+      $(this).animate({})
       siblingElement.style.display = 'none';
     }
   
@@ -90,6 +92,7 @@ function load() {
   $('#side_background').scrollLock();
   $('#side_menu_nav').scrollLock();
   $('.side_panel_container').scrollLock();
+  $('.sidebar').scrollLock();
 
   $('#side_panel').hover(function() {
     $(this).height($(window).height() - $('.header_container').height() - $('#side_background').height())
