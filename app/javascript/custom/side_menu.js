@@ -55,17 +55,8 @@ function load() {
   }
   
   function display() {
-  
-    let siblingElement = this.nextElementSibling;
-  
-    if (siblingElement.style.display === 'none') {
-      $(this).next.animate({display: 'block'})
-      // siblingElement.style.display = 'block';
-    } else {
-      $(this).animate({})
-      siblingElement.style.display = 'none';
-    }
-  
+    let siblingElement = $(this).next();
+    siblingElement.slideToggle(300);
   }
 
   for (let i = 0; i < gen1Links.length; i++) {

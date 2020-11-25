@@ -1154,3 +1154,34 @@ html, body {
 #category_menu {
   font-size: 1.2rem;
 }
+
+.side-menu-link {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.side-menu-link:hover {
+  color: #83b0e1 !important;
+  text-decoration: none;
+}
+
+.side-menu-home {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.side-menu-home:hover {
+  text-decoration: none;
+}
+
+.side-menu-folder:hover {
+  color: #f0b57e;
+}
+
+.side-menu-icon {
+  margin-top: 0.1rem;
+}
+
+// .side-menu-folder {
+//   color: #f0b57e;
+// }
