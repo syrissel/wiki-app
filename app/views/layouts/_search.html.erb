@@ -1,0 +1,36 @@
+<%= form_for pages_path, url: { controller: 'pages', action: 'index' }, method: :get do |f| %>
+    <div class="input-group">
+        <%= f.text_field :query, placeholder: 'Search', class: 'form-control'%>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button id="btn_filter_options" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i></button>
+            <div class="dropdown-menu dropdown-menu-right" id="filter_dropdown">
+                <div class="px-2 py-1">
+                    <h6>Filter options</h6>
+                    <div class="dropdown-divider"></div>
+                    <div class="form-check form-check-inline mt-2">
+                    <%= f.check_box :title, class: 'form-check-input' %>
+                    <%= f.label :title, "Title", class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check form-check-inline">
+                    <%= f.check_box :content, class: 'form-check-input' %>
+                    <%= f.label :content, "Content", class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check form-check-inline">
+                    <%= f.check_box :category, class: 'form-check-input' %>
+                    <%= f.label :category, "Category name", class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check form-check-inline">
+                    <%= f.check_box :user, class: 'form-check-input' %>
+                    <%= f.label :user, "Author", class: 'form-check-label' %>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <span>Category:</span>
+                    <button type="button" id="btn_other_search_options" class="btn btn-link btn-sm">none selected</button><a href="#" id="link_remove_category_filter" class="d-none text-secondary ml-1"data-toggle="tooltip" data-placement="right" title="Remove category filter"><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></a>
+                    <button type="button" id="btn_search_help" class="btn btn-link float-right">Help</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
