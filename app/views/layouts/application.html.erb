@@ -22,75 +22,19 @@
   <div class="container-fluid p-0 site-wrapper">
     <div class="">
     <div class="header_container row bg-dark">
-      <div class="col-4">
+      <div class="col-md-2 col-lg-3">
         <div class="d-flex flex-column justify-content-center h-100">
           <div id="btn_show_sidebar" style="cursor:pointer;width:60px;">
             <box-icon name='menu' size='60px' color='#d4af37'></box-icon>
           </div>
         </div>
       </div>
-      <div class="col-4 d-flex flex-column justify-content-center h-100" style="height:inherit;">
-        <div id="" class="my-2">
-            <%= form_for pages_path, url: { controller: 'pages', action: 'index' }, method: :get do |f| %>
-              <%= f.text_field :query, placeholder: 'Search', class: 'form-control float-left mr-2', style: 'width: 70%' %>
-              <button type="submit" class="btn btn-primary float-left mr-2"><i class="fa fa-search" aria-hidden="true"></i></button>
-              <div class="dropdown" id="filter_dropdown">
-                <button id="btn_filter_options" type="button" class="btn btn-secondary float-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-filter" aria-hidden="true"></i></button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="px-2 py-1">
-                  <h6>Filter options</h6>
-                  <div class="dropdown-divider"></div>
-                  <div class="form-check form-check-inline mt-2">
-                    <%= f.check_box :title, class: 'form-check-input' %>
-                    <%= f.label :title, "Title", class: 'form-check-label' %>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <%= f.check_box :content, class: 'form-check-input' %>
-                    <%= f.label :content, "Content", class: 'form-check-label' %>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <%= f.check_box :category, class: 'form-check-input' %>
-                    <%= f.label :category, "Category name", class: 'form-check-label' %>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <%= f.check_box :user, class: 'form-check-input' %>
-                    <%= f.label :user, "Author", class: 'form-check-label' %>
-                  </div>
-                  <div class="dropdown-divider"></div>
-                  <span>Category:</span>
-                    <button type="button" id="btn_other_search_options" class="btn btn-link btn-sm">none selected</button><a href="#" id="link_remove_category_filter" class="d-none text-secondary ml-1"data-toggle="tooltip" data-placement="right" title="Remove category filter"><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></a>
-                    <button type="button" id="btn_search_help" class="btn btn-link float-right">Help</button>
-                  </div>
-                </div>
-              </div>
-            <% end %>
+      <div class="col-md-8 col-lg-6 d-flex flex-column justify-content-center h-100" style="height:inherit;">
+        <div id="" class="my-2 d-none d-md-block">
+          <%= render 'layouts/search' %>
         </div>
       </div>
-      <div class="col-4 d-flex justify-content-end text-right user_login">
-        <div class="d-flex flex-column justify-content-end">
-          <% if current_user %>
-            <div class="dropdown">
-              <button class="btn btn-link dropdown-toggle user-menu" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= current_user.username %>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <%= link_to 'Change Password', new_password_path, class: 'dropdown-item' %>
-                <div class="dropdown-divider"></div>
-                <%= link_to 'Logout', logout_path, class: ' dropdown-item text-danger' %>
-              </div>
-            </div>
-
-          <% else %>
-            <div class="dropdown">
-            <button class="btn btn-link dropdown-toggle user-menu" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Menu
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-              <%= link_to 'Login', new_session_path, class: ' dropdown-item' %>
-            </div>
-          </div>
-          <% end %>
-          </div>
+      <div class="col-md-2 col-lg-3 d-flex justify-content-end text-right user_login">
           <% if current_user %>
           <div class="d-flex flex-column justify-content-end">
             <div class="btn-group">
