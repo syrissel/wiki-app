@@ -48,7 +48,7 @@ $(document).on('turbolinks:load', function() {
         $(this).dropdown('toggle')
     })
 
-    $('#filter_dropdown .dropdown-menu').click(function(event) {
+    $('#filter_dropdown').click(function(event) {
         event.stopPropagation()
     })
 
