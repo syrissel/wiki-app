@@ -196,7 +196,7 @@ hr {
   margin: 0px auto;
   margin-top: 6.5rem;
   margin-bottom: 2rem;
-	width: 60em;
+	width: 55em;
 	overflow: auto;
 }
 
@@ -860,9 +860,13 @@ html, body {
   font-size: 16px !important;
 }
 
+.gen1:hover, .gen2:hover, .gen3:hover, .gen4:hover, .gen5:hover {
+  background-color: #333;
+}
+
 .root_categories {
   padding-left: 10px;
-  padding-top: 10px;
+  // padding-top: 10px;
 }
 
 .root_categories li {
