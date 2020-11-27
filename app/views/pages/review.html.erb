@@ -9,7 +9,7 @@
 	<% end %>
 </div>
 </div>
-<table class="mt-2 table table-striped">
+<table class="mt-2 table table-striped table-sm">
 <thead>
   <tr>
     <th>Title<div class="arrow_container"><%= link_to review_path(s: 'title_asc') do %><box-icon size="14px" type='solid' name='up-arrow'></box-icon><% end %><%= link_to review_path(s: 'title_desc') do %><box-icon size="14px" name='down-arrow' type='solid' ></box-icon><% end %></div></th>
@@ -22,7 +22,7 @@
 <tbody>
 <% @pending_pages.each do |p| %>
   <tr>
-    <td><%= link_to p.title, review_wiki_path(p) %></td>
+    <td><%= link_to p.title, review_wiki_path(p), class: 'font-weight-bold text-body text-decoration-none' %></td>
     <td><%= p.last_user_edit %></td>
 		<td>
 			<%= p.page_publish_status.status %>
@@ -34,9 +34,9 @@
     </td>
     <td>
       <% if p.approval_status.id == REJECTED %>
-        <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"}, class: "delete-button"%>
+        <%= link_to 'Delete', destroy_page_path(p), method: :delete, data: { confirm: "Delete page #{p.title}?"}, class: "btn btn-danger btn-sm"%>
       <% end %>
-      <%= link_to 'Review', review_wiki_path(p), class: 'review-button' %>
+      <%= link_to 'Review', review_wiki_path(p), class: 'btn btn-secondary btn-sm' %>
     </td>
   </tr>
 <% end %>

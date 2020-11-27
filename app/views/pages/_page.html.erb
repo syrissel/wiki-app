@@ -1,3 +1,4 @@
+<%= link_to page_path(page), class: 'text-body text-decoration-none' do %>
 <div class="card my-3">
   <div class="card-header d-flex" <% if page.global_pinned.present? && params['controller']['pages'].present? || page.category_pinned.present? && params['controller']['categories'].present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
     <h5 class="my-1"><%= page.title %></h5>
@@ -12,10 +13,10 @@
   </div>
   <div class="card-body">
     <p><%= page.get_preview %></p>
-    <%= link_to 'Read', page_path(page), class: 'btn btn-primary' %>
   </div>
   <div class="card-footer" <% if page.global_pinned.present? && params['controller']['pages'].present? || page.category_pinned.present? && params['controller']['categories'].present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
     <small class="float-left text-muted"><%= link_to page.category.name, category_path(page.category), class: 'text-decoration-none text-muted' %></small>
     <small class="float-right text-muted"><%= page.user.fullname %></small>
   </div>
 </div>
+<% end %>
