@@ -19,7 +19,7 @@
 <% if current_user.user_level_id < SUPERVISOR_VALUE %>
 	<div class="row">
 		<div class="col-12">
-			<a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-secondary">Back</a>
+			<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
 		</div>
 	</div><!--row-->
 <% end %>
@@ -50,7 +50,7 @@
 			<%= link_to 'Back', wiki_management_path, class: 'btn btn-secondary' %>
 			<%= link_to 'Delete Wiki', page_path(@page), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger float-right' %>
 		<% else %>
-			<a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-secondary">Back</a>
+			<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
 		<% end %>
 	</div>
 	<% end %>
