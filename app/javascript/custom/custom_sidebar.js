@@ -7,9 +7,11 @@ $(document).on('turbolinks:load', function(){
 
             if ($(window).width() < 1700) {
                 $('#middle_content').animate({'margin-left': '400px'}, 50);
+            } else {
+                $('#middle_content').animate({'margin-left': '450px'}, 300);
             }
 
-            if ($(window).width() < 1260) {
+            if ($(window).width() < 1460) {
                 $('#middle_content').animate({'width': $(window).width() - 400}, 300)
             }
 
