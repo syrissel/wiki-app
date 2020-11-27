@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>A new wiki has been submitted by <%= @page.user.fullname %> in <%= @page.category.name %>. <%= link_to 'Click here', review_url %> to review it.</p>
+    <p>A new wiki has been submitted by <%= @page.user.fullname %> in <%= @page.category.name %>. <a href="<%= url_for(host: 'http://192.168.100.25', controller: 'pages', action: 'review_wiki', id: @page.id)  %>">Click here to review it</a></p>
     <h3><%= @page.title %></h3>
     <p><%= @page.get_preview %></p>
   </body>
