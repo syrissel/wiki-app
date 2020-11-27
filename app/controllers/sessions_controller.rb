@@ -16,7 +16,23 @@ class SessionsController < ApplicationController
 		elsif user.present? && user.authenticate(params["/sessions"][:password])
       session[:user_id] = user.id
       user.update_attribute(:last_login, Time.now)
-      redirect_to root_path, notice: "Logged in successfully."
+      flash['notice'] = 'Logged in successfully'
+      if session[:page].present?
+        page = Page.find(session[:page])
+        session[:page] = nil
+        redirect_to page_path(page)
+      elsif session[:review_wiki].present?
+        page = Page.find(session[:review_wiki])
+        session[:review_wiki] = nil
+        if user.user_level_id > INTERN_VALUE
+          redirect_to review_wiki_path(page)
+        else
+          flash['alert'] = 'Unauthorized'
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path
+      end
     else
       flash.now.alert = "Username/password combination is invalid."
       render 'new'
@@ -25,6 +41,8 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:page] = nil
+    session[:review_wiki] = nil
     redirect_to root_path, notice: "Logged out!"
   end
 end

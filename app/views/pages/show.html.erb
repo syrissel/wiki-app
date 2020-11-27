@@ -16,7 +16,13 @@
 	</div>
 </div>
 <hr>
-
+<% if current_user.user_level_id < SUPERVISOR_VALUE %>
+	<div class="row">
+		<div class="col-12">
+			<a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-secondary">Back</a>
+		</div>
+	</div><!--row-->
+<% end %>
 <% if current_user.user_level_id > INTERN_VALUE %>
 <div class="row">
 
@@ -43,6 +49,8 @@
 		<% if @page.page_publish_status_id == UNPUBLISHED %>
 			<%= link_to 'Back', wiki_management_path, class: 'btn btn-secondary' %>
 			<%= link_to 'Delete Wiki', page_path(@page), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger float-right' %>
+		<% else %>
+			<a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-secondary">Back</a>
 		<% end %>
 	</div>
 	<% end %>

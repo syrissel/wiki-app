@@ -53,9 +53,9 @@ class ApplicationController < ActionController::Base
   # Need to revise these two methods
   def authenticate_supervisor
     if current_user.nil?
-      redirect_to login_path, notice: "Not authorized. Please login."
+      redirect_to login_path, alert: "Not authorized. Please login."
     elsif current_user.user_level_id == INTERN_VALUE
-      redirect_to root_path, notice: "Not authorized. Please find a supervisor to perform this action."
+      redirect_to root_path, alert: "Not authorized. Please find a supervisor to perform this action."
     end
 	end
 

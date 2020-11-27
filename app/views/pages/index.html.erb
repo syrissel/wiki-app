@@ -24,10 +24,15 @@
   </div>
 </div>
 
+<% if current_user.present? %>
 <div id="paginator">
   <%= paginate @pages, remote: true %>
-</div>  
-
+</div> 
+<% else %>
+  <div class="d-flex justify-content-center">
+    <p>To view more pages, <%= link_to 'log in', login_path %></p>
+  </div>
+<% end %>
 
 <% if params[:query].present? && @videos.present? %>
 <h3>Video results:</h3>

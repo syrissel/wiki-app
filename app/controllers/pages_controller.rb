@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  before_action :authenticate_supervisor, only: [:review, :admin, :review_wiki, :wiki_management]
-	before_action :authenticate_user, except: [:index]
+  before_action :authenticate_supervisor, only: [:review, :admin, :wiki_management] # review_wiki
+	before_action :authenticate_user, except: [:index, :show, :review_wiki] # show
 	
 	# This will prevent people from viewing the page when it's published but also being reviewed.
   before_action :check_published, only: [:show]
@@ -106,6 +106,10 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
     @publish_statuses = PagePublishStatus.all
+    if current_user.nil?
+      session[:page] = @page.id
+      authenticate_user
+    end
   end
 
   def edit
@@ -251,8 +255,15 @@ class PagesController < ApplicationController
 	end
 	
 	def review_wiki
-		@page = Page.find(params[:id])
-    @statuses = (current_user.user_level_id == SUPERVISOR_VALUE) ? ApprovalStatus.where.not(id: [ EXECUTIVE_VALUE ]) : ApprovalStatus.all
+    @page = Page.find(params[:id])
+
+    if current_user.nil?
+      session[:review_wiki] = @page.id
+      authenticate_supervisor
+    else
+      authenticate_supervisor
+      @statuses = (current_user.user_level_id == SUPERVISOR_VALUE) ? ApprovalStatus.where.not(id: [ EXECUTIVE_VALUE ]) : ApprovalStatus.all
+    end
 	end
 
   def admin
