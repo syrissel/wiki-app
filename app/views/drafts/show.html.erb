@@ -1,3 +1,9 @@
+<%= javascript_pack_tag 'draft-show', 'data-turbolinks-track': 'reload' %>
+<head>
+  <style>
+    <%= Diffy::CSS %>
+  </style>
+</head>
 <p id="notice"><%= notice %></p>
 <div id="wiki_header" class="d-flex">
   <h3 class="align-self-end"><%= @draft.title %></h3>
@@ -9,7 +15,13 @@
 <hr>
 
 <div id="show_container">
+  <h3>Original</h3>
+  <div class="note-editor"><%= raw @page.content %></div>
+  <h3>New Draft</h3>
   <div class="note-editor"><%= raw @draft.content %></div>
+  <h3>Text Difference</h3>
+  <%= raw Diffy::Diff.new(@page_string, @draft_string, :include_plus_and_minus_in_html => true, :context => 0).to_s(:html_simple) %>
+  <div id="diff_report"></div>
 </div>
 <hr>
 <p class="ml-5">

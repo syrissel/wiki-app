@@ -51,7 +51,7 @@ gem 'mime-types'
 gem 'carrierwave-base64'
 gem 'client_side_validations'
 
-gem 'nokogiri-diff', '~> 0.2.0'
+gem 'diffy', '~> 3.4'
 
 
 # Reduces boot times through caching; required in config/boot.rb

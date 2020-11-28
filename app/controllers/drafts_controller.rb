@@ -21,7 +21,49 @@ class DraftsController < ApplicationController
   # GET /drafts/1
   # GET /drafts/1.json
   def show
+    @page = Page.find(@draft.page_id)
     @statuses = (current_user.user_level_id == SUPERVISOR_VALUE) ? ApprovalStatus.where.not(id: [ EXECUTIVE_VALUE ]) : ApprovalStatus.all
+
+    # All of this code below is to basically add new lines after each element to account for the Diffy Gem functionality
+    delimiters = ['</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</p>',  '</li>']
+    @page_text = @page.content.split(Regexp.union(delimiters))
+    @draft_text = @draft.content.split(Regexp.union(delimiters))
+    @page_string = ""
+    @draft_string = ""
+
+    @page_text.each do |text|
+      if text.include? '<p'
+        text += "\n</p>"
+      elsif text.include? '<h1'
+        text += "\n</h1>"
+      elsif text.include? '<h2'
+        text+= "\n</h2>"
+      elsif text.include? '<h3'
+        text += "\n</h3>"
+      elsif text.include? '<h4'
+        text += "\n</h4>"
+      elsif text.include? '<li'
+        text += "\n</li>"
+      end
+      @page_string += ActionController::Base.helpers.strip_tags(text.strip)
+    end
+
+    @draft_text.each do |text|
+      if text.include? '<p'
+        text += "\n</p>"
+      elsif text.include? '<h1'
+        text += "\n</h1>"
+      elsif text.include? '<h2'
+        text+= "\n</h2>"
+      elsif text.include? '<h3'
+        text += "\n</h3>"
+      elsif text.include? '<h4'
+        text += "\n</h4>"
+      elsif text.include? '<li'
+        text += "\n</li>"
+      end
+      @draft_string += ActionController::Base.helpers.strip_tags(text.strip)
+    end
   end
 
   # GET /drafts/new

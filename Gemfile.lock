@@ -103,6 +103,7 @@ GEM
       rails (>= 5.0.0.1, < 6.1)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    diffy (3.4.0)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.13.1)
@@ -171,9 +172,6 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    nokogiri-diff (0.2.0)
-      nokogiri (~> 1.5)
-      tdiff (~> 0.3, >= 0.3.2)
     popper_js (1.16.0)
     public_suffix (4.0.5)
     puma (3.12.6)
@@ -259,7 +257,6 @@ GEM
       multi_json (~> 1.8)
     summernote-rails (0.8.12.0)
       railties (>= 3.1)
-    tdiff (0.3.4)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -303,6 +300,7 @@ DEPENDENCIES
   carrierwave-base64
   carrierwave-video
   client_side_validations
+  diffy (~> 3.4)
   figaro
   file_validators
   font-awesome-rails
@@ -315,7 +313,6 @@ DEPENDENCIES
   mime-types
   mini_magick
   mysql2 (>= 0.4.4)
-  nokogiri-diff (~> 0.2.0)
   puma (~> 3.11)
   rails (~> 6.0.0)
   sass-rails (~> 5)
