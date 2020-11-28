@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # Redirect if username/pw combination is wrong & user refreshes page.
@@ -35,7 +39,9 @@ class SessionsController < ApplicationController
       end
     else
       flash.now.alert = "Username/password combination is invalid."
-      render 'new'
+      respond_to do |format|
+        format.js { render :new }
+      end
     end
   end
 

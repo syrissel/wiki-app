@@ -1,22 +1,24 @@
+<%= javascript_pack_tag 'validate-login', 'data-turbolinks-track': 'reload' %>
+<div id="response"></div>
 <div class="row">
-<div class="col-3"></div>
-<div class="col-6">
-  <h5>Login</h5>
-  <hr>
-  <%= form_for sessions_path, :url => { :action => "create" } do |f| %>
-    <div class="form-group">
-      <%= f.label :username %>
-      <%= f.text_field :username, class: 'form-control' %>
+  <div class="col-3"></div>
+    <div class="col-6">
+      <h5>Login</h5>
+      <hr>
+      <%= form_for sessions_path, :url => { :action => "create" }, remote: true do |f| %>
+        <div class="form-group">
+          <%= f.label :username %>
+          <%= f.text_field :username, class: 'form-control', value: params[:username] %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Login", class: 'btn btn-primary' %>
+          <%= link_to 'Back', root_path, class: 'btn btn-secondary btn-sm' %>
+        </div>
+      <% end %>
     </div>
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.submit "Login", class: 'btn btn-primary' %>
-      <%= link_to 'Back', root_path, class: 'btn btn-secondary btn-sm' %>
-    </div>
-  <% end %>
-</div>
-<div class="col-3"></div>
+  <div class="col-3"></div>
 </div>
