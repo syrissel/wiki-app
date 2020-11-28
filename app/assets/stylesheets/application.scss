@@ -666,8 +666,50 @@ html, body {
 .admin-td {
   margin: 0.25rem !important;
   // background-color: #53708e;
-  background-color: #343a40;
+  // background-color: #343a40;
+  background-color: #58738e;
+  border-radius: 5px;
   // cursor: pointer;
+}
+
+.admin-pdf {
+  background-color: #bb4b4b;
+}
+
+.admin-video {
+  background-color: #58738e;
+}
+
+.admin-image {
+  background-color: #588e85;
+}
+
+.admin-category {
+  background-color: #8e588d;
+}
+
+.admin-review {
+  background-color: #adb15d;
+}
+
+.admin-users {
+  background-color: #8e5858;
+}
+
+.admin-settings {
+  background-color: #404040;
+}
+
+.admin-license {
+  background-color: #5989b9;
+}
+
+.admin-back {
+  background-color: #7d6373;
+}
+
+.text-tertiary {
+  color: #016383 !important;
 }
 
 .admin-item-wrapper {
@@ -860,9 +902,13 @@ html, body {
   font-size: 16px !important;
 }
 
-.gen1:hover, .gen2:hover, .gen3:hover, .gen4:hover, .gen5:hover {
-  background-color: #333;
+.side-menu-item-hover:hover {
+  background-color: #3a3a3a;;
 }
+
+// .gen1:hover, .gen2:hover, .gen3:hover, .gen4:hover, .gen5:hover {
+//   background-color: #333;
+// }
 
 .root_categories {
   padding-left: 10px;

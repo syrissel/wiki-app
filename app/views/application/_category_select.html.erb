@@ -1,16 +1,16 @@
 <ul class='root_categories'>
 	<% @root_categories.each do |r| %>
-        <p class='gen1'><span class="side-menu-folder"><%= r.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft , :category_id, r.id, class: 'ml-1', 'data-name': r.name) : '' %></p>
+        <p class="gen1 <%= !is_form ? 'side-menu-item-hover' : '' %>"><span class="side-menu-folder"><%= r.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft , :category_id, r.id, class: 'ml-1', 'data-name': r.name) : '' %></p>
 
 				<li class='gen1_list'>
 						<% if !is_form %>
-						<ul>
+						<ul class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 						<box-icon color='#FFF' name='home' class='mr-2 side-menu-icon' size='20px'></box-icon><%= link_to 'Home', category_path(r.id), class: 'side-menu-home' %>
 						</ul>
 							<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", category: r.id, publish: PUBLISHED).pinned_categories.limit(Category.find(r.id).page_limit) %>
 							<ul class="root_pages">
 								<% pages_of_type.each do |pot| %>
-								<li>
+								<li class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 									<box-icon color='#f0b57e' class='mr-2 side-menu-icon float-left' size='20px' name='file'></box-icon><%= link_to pot.title, pot, class: 'side-menu-link' %>
 								</li>
 								<% end %>
@@ -19,17 +19,17 @@
 						<% @sub_categories.each do |s| %>
 							<% if r.id == s.category_id %>
 								<ul>
-                  <p class='gen2'><span class="side-menu-folder"><%= s.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, s.id, class: 'ml-1', 'data-name': s.name) : '' %></p>
+                  <p class="gen2 <%= !is_form ? 'side-menu-item-hover' : '' %>"><span class="side-menu-folder"><%= s.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, s.id, class: 'ml-1', 'data-name': s.name) : '' %></p>
 									<li class='gen2_list'>
 									<% if !is_form %>
-									<ul>
+									<ul class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 									<box-icon color='#FFF' name='home' class='mr-2 side-menu-icon' size='20px'></box-icon><%= link_to 'Home', category_path(s.id), class: 'side-menu-home' %>
 									</ul>
 										<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", 
 																													category: s.id, publish: PUBLISHED).pinned_categories.limit(Category.find(s.id).page_limit) %>
                   <ul>
                   <% pages_of_type.each do |pot| %>
-                    <li>
+                    <li class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
                       <box-icon color='#f0b57e' class='mr-2  side-menu-icon float-left' size='20px' name='file'></box-icon><%= link_to pot.title, pot, class: 'side-menu-link' %>
                     </li>
                   <% end %>
@@ -38,10 +38,10 @@
 									<% @sub_categories.each do |t| %>
 										<% if s.id == t.category_id %>
 											<ul>
-                        <p class='gen3'><span class="side-menu-folder"><%= t.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, t.id, class: 'ml-1', 'data-name': t.name) : '' %></p>
+                        <p class="gen3 <%= !is_form ? 'side-menu-item-hover' : '' %>"><span class="side-menu-folder"><%= t.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, t.id, class: 'ml-1', 'data-name': t.name) : '' %></p>
 												<li class='gen3_list'>
 													<% if !is_form %>
-													<ul>
+													<ul class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 													<box-icon color='#FFF' name='home' class='mr-2 side-menu-icon' size='20px'></box-icon><%= link_to 'Home', category_path(t.id), class: 'side-menu-home' %>
 													</ul>
 
@@ -49,7 +49,7 @@
 																																category: t.id, publish: PUBLISHED).pinned_categories.limit(Category.find(t.id).page_limit) %>
                         	<ul>
                         	<% pages_of_type.each do |pot| %>
-                          	<li>
+                          	<li class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
                             	<box-icon color='#f0b57e' class='mr-2 side-menu-icon float-left' size='20px' name='file'></box-icon><%= link_to pot.title, pot, class: 'side-menu-link' %>
                           	</li>
                         	<% end %>
@@ -58,10 +58,10 @@
 													<% @sub_categories.each do |u| %>
 														<% if t.id == u.category_id %>
 															<ul>
-                                <p class='gen4'><span class="side-menu-folder"><%= u.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, u.id, class: 'ml-1', 'data-name': u.name) : '' %></p>
+                                <p class="gen4 <%= !is_form ? 'side-menu-item-hover' : '' %>"><span class="side-menu-folder"><%= u.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, u.id, class: 'ml-1', 'data-name': u.name) : '' %></p>
 																<li class='gen4_list'>
 																	<% if !is_form %>
-																	<ul>
+																	<ul class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 																	<box-icon color='#FFF' name='home' class='mr-2 side-menu-icon' size='20px'></box-icon><%= link_to 'Home', category_path(u.id), class: 'side-menu-home' %>
 																	</ul>
 																	
@@ -69,7 +69,7 @@
 																																				category: u.id, publish: PUBLISHED).pinned_categories.limit(Category.find(u.id).page_limit)  %>
                               		<ul>
 																	<% pages_of_type.each do |pot| %>
-																		<li>
+																		<li class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 																			<box-icon color='#f0b57e' class='mr-2 side-menu-icon float-left' size='20px' name='file'></box-icon><%= link_to pot.title, pot, class: 'side-menu-link' %>
 																		</li>
 																	<% end %>
@@ -78,17 +78,17 @@
 																	<% @sub_categories.each do |v| %>
 																		<% if u.id == v.category_id %>
 																			<ul>
-																				<p class='gen5'><span class="side-menu-folder"><%= v.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, v.id, class: 'ml-1', 'data-name': v.name) : '' %></p>
+																				<p class="gen5 <%= !is_form ? 'side-menu-item-hover' : '' %>"><span class="side-menu-folder"><%= v.name %></span><box-icon color='#83b0e1' class='mr-2 float-left side-menu-icon' size='20px' name='folder'></box-icon><%= is_form ? (radio_button params[:controller]['pages'] ? :page : :draft, :category_id, v.id, class: 'ml-1', 'data-name': v.name) : '' %></p>
 																				
 																				<li class="gen5_list">
 																				<% if !is_form %>
-																					<ul>
+																					<ul class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 																					<box-icon color='#FFF' name='home' class='mr-2 side-menu-icon' size='20px'></box-icon><%= link_to 'Home', category_path(v.id), class: 'side-menu-home' %>
 																					</ul>
 																					<% pages_of_type = @menu_pages.where("pages.category_id = :category AND page_publish_status_id = :publish", category: v.id, publish: PUBLISHED).pinned_categories.limit(Category.find(v.id).page_limit) %>
 																					<ul>
 																						<% pages_of_type.each do |pot| %>
-																							<li>
+																							<li class="<%= !is_form ? 'side-menu-item-hover' : '' %>">
 																								<box-icon color='#f0b57e' class='mr-2 side-menu-icon float-left' size='20px' name='file'></box-icon><%= link_to pot.title, pot, class: 'side-menu-link' %>
 																							</li>
 																						<% end %>

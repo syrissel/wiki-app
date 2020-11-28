@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to draft.title, draft_path(draft) %></td>
+  <td><%= link_to draft.title, draft_path(draft), class: 'font-weight-bold text-tertiary' %></td>
   <td><%= draft.category.name %></td>
   <td><%= draft.user.fullname %></td>
   <td><%= draft.updated_at.strftime("%b %e, %Y %H:%M:%S") %></td>

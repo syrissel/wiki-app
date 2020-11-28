@@ -22,7 +22,7 @@
 <tbody>
 <% @pending_pages.each do |p| %>
   <tr>
-    <td><%= link_to p.title, review_wiki_path(p), class: 'font-weight-bold text-body text-decoration-none' %></td>
+    <td><%= link_to p.title, review_wiki_path(p), class: 'font-weight-bold text-tertiary' %></td>
     <td><%= p.last_user_edit %></td>
 		<td>
 			<%= p.page_publish_status.status %>
