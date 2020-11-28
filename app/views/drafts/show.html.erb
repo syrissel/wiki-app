@@ -1,27 +1,50 @@
-<%= javascript_pack_tag 'draft-show', 'data-turbolinks-track': 'reload' %>
 <head>
   <style>
     <%= Diffy::CSS %>
+
+    /* #middle_content {
+      width: 100%;
+    } */
   </style>
 </head>
 <p id="notice"><%= notice %></p>
 <div id="wiki_header" class="d-flex">
-  <h3 class="align-self-end"><%= @draft.title %></h3>
+  <div class="align-self-end">
+    <% if @draft.title != @page.title %>
+      <div class="alert alert-warning"><box-icon name='error' ></box-icon> <span class="font-weight-bold p-2">Title has changed!</span></div>
+      <div class="diff font-weight-bold">
+        <ul>
+            <li class="del" style="font-size:22px;"><del><span class="symbol">-</span><%= @page.title %></del></li>
+            <li class="ins" style="font-size:22px;"><del><span class="symbol">+</span><%= @draft.title %></del></li>
+        </ul>
+      </div>
+    <% else %>
+      <h3><%= @draft.title %></h3>
+    <% end %>
+  </div>
   <div class="d-flex flex-column ml-auto">
     <small class="text-muted align-self-end ml-auto">Created by: <%= @draft.user.fullname %> on <%= @draft.created_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
-    <small class="ml-auto"><%= link_to 'Edit', edit_draft_path(@draft) %></small>
+    <small class="ml-auto"><%= link_to 'Edit', edit_draft_path(@draft) %> | <a href="javascript:void(0)" id="btn_expand" class="ml-auto">Expand</a></small>
   </div>
 </div>
 <hr>
 
-<div id="show_container">
-  <h3>Original</h3>
-  <div class="note-editor"><%= raw @page.content %></div>
-  <h3>New Draft</h3>
-  <div class="note-editor"><%= raw @draft.content %></div>
-  <h3>Text Difference</h3>
-  <%= raw Diffy::Diff.new(@page_string, @draft_string, :include_plus_and_minus_in_html => true, :context => 0).to_s(:html_simple) %>
-  <div id="diff_report"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <h3>Original</h3>
+      <div class="note-editor"><%= raw @page.content %></div>
+    </div><!--col-6-->
+    <div class="col-6">
+      <h3>New Draft</h3>
+      <div class="note-editor"><%= raw @draft.content %></div>
+    </div><!--col-6-->
+  </div><!--row-->
+  <div class="row">
+    <h3>Text Difference</h3>
+    <%= raw Diffy::Diff.new(@page_string, @draft_string, :include_plus_and_minus_in_html => true, :context => 0).to_s(:html_simple) %>
+    <div id="diff_report"></div>
+  </div>
 </div>
 <hr>
 <p class="ml-5">

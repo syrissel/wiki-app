@@ -225,19 +225,19 @@ footer ul {
   color: #d4af37;
 }
 
-.container {
-  // min-height: 100vh; /* will cover the 100% of viewport */
-  // display: block;
-  // position: relative;
-  /* padding-bottom: 100px; */ /* height of your footer */
-  // font-family: roboto_cond_regular_ycdt, Arial;
-  background: #E6EFF4;
-  // height: 100%;
-  // padding-bottom: 10px;
-  min-height: calc(100vh - 120px) !important;
-  transition: margin-left .3s;
-  //overflow: auto;
-}
+// .container {
+//   // min-height: 100vh; /* will cover the 100% of viewport */
+//   // display: block;
+//   // position: relative;
+//   /* padding-bottom: 100px; */ /* height of your footer */
+//   // font-family: roboto_cond_regular_ycdt, Arial;
+//   background: #E6EFF4;
+//   // height: 100%;
+//   // padding-bottom: 10px;
+//   min-height: calc(100vh - 120px) !important;
+//   transition: margin-left .3s;
+//   //overflow: auto;
+// }
 
 footer {
   height: 100px !important;

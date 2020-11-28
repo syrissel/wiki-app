@@ -1,10 +1,9 @@
-
 <div class="d-flex">
 	<h3 class="align-self-end"><%= @page.title %></h3>
 	<div class="d-flex flex-column ml-auto">
 		<small class="text-muted ml-auto">Created by: <%= @page.user.username %> on <%= @page.created_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
 		<small class="text-muted ml-auto">Last edited by: <%= @page.last_user_edit %> on <%= @page.updated_at.strftime("%B %-d, %Y at %l:%M %p") %></small>
-		<small id="wiki_options" class="ml-auto"><%= link_to "Edit", new_draft_path %> | <a href="#" onclick="window.print();return false;">Print</a></small>
+		<small id="wiki_options" class="ml-auto"><%= link_to "Edit", new_draft_path %> | <a href="#" onclick="window.print();return false;">Print</a> | <a href="javascript:void(0)" id="btn_expand" class="ml-auto">Expand</a></small>
 	</div>
 </div>
 <hr>

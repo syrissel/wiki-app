@@ -5,6 +5,7 @@ Description: Various event listeners for functionality on the page show and edit
 */
 
 document.addEventListener('turbolinks:load', function() {
+    const contentWidth = $('#middle_content').css('width')
 
     // Show or hide the video select window.
     $('.show-video-options').click(function() {
@@ -58,6 +59,23 @@ document.addEventListener('turbolinks:load', function() {
         if ($('input[name="page[category_id]"]:checked').val() == null) {
             $('#category_error').html('Please select a category.')
             event.preventDefault();
+        }
+    })
+
+    $('#btn_expand').on('click', function () {
+        
+        if ($(this).html() === 'Shrink') {
+            $(this).html('Expand')
+            $('#middle_content').animate({
+                width: contentWidth
+            }, 500, function () {
+                $(this).removeAttr('style')
+            })
+        } else {
+            $(this).html('Shrink')
+            $('#middle_content').animate({
+                width: '100%'
+            }, 500)
         }
     })
 
