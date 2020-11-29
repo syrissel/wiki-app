@@ -25,6 +25,7 @@ import "boxicons";
 import "custom/side_menu";
 import "custom/header";
 import 'custom/wiki-validate';
+import 'boxicons/css/boxicons.min.css'
 
 
 
