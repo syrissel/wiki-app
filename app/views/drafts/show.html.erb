@@ -11,11 +11,10 @@
 <div id="wiki_header" class="d-flex">
   <div class="align-self-end">
     <% if @draft.title != @page.title %>
-      <div class="alert alert-warning"><box-icon name='error' ></box-icon> <span class="font-weight-bold p-2">Title has changed!</span></div>
       <div class="diff font-weight-bold">
         <ul>
-            <li class="del" style="font-size:22px;"><del><span class="symbol">-</span><%= @page.title %></del></li>
-            <li class="ins" style="font-size:22px;"><del><span class="symbol">+</span><%= @draft.title %></del></li>
+            <li class="del"><del><span class="symbol">-</span><%= @page.title %></del></li>
+            <li class="ins"><del><span class="symbol">+</span><%= @draft.title %></del></li>
         </ul>
       </div>
     <% else %>
@@ -32,34 +31,80 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-6">
-      <h3>Original</h3>
-      <div class="note-editor"><%= raw @page.content %></div>
-    </div><!--col-6-->
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Category</th>
+          </th>
+        </thead>
+        <tbody>
+          <% if @draft.category.name != @page.category.name %>
+            <tr>
+              <td>
+                <div class="diff">
+                  <ul>
+                    <li class="del"><del><span class="symbol">-</span><%= @page.category.name %></del></li>
+                    <li class="ins"><ins><span class="symbol">+</span><%= @draft.category.name %></ins></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          <% else %>
+          <tr>
+            <td><%= @draft.category.name %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <div class="col-6">
-      <h3>New Draft</h3>
-      <div class="note-editor"><%= raw @draft.content %></div>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Editor Note</th>
+          </th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @draft.description %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 border-right border-top">
+      <h3>Original</h3>
+      <div class="note-editor" id="page"><%= raw @page.content %></div>
+    </div><!--col-6-->
+    <div class="col-6 border-left border-top">
+      <h3>Draft</h3>
+      <div class="note-editor" id="draft"><%= raw @draft.content %></div>
     </div><!--col-6-->
   </div><!--row-->
+  <hr>
   <div class="row">
-    <h3>Text Difference</h3>
-    <%= raw Diffy::Diff.new(@page_string, @draft_string, :include_plus_and_minus_in_html => true, :context => 0).to_s(:html_simple) %>
-    <div id="diff_report"></div>
+      <div class="col-12">
+        <div class="d-flex">
+          <h3>Changes Summary</h3>
+          <a href="javascript:void(0)" id="show_context" class="btn-link btn-sm ml-auto">Show Context</a>
+        </div>
+        <div id="diff_report"></div>
+        <div id="diff_summary">
+          <%= raw Diffy::Diff.new(@page_string, @draft_string, :include_plus_and_minus_in_html => true, :context => 0).to_s(:html_simple) %>
+        </div>
+        <div id="diff_full" class="hidden">
+          <%= raw Diffy::Diff.new(@page_string, @draft_string, :include_plus_and_minus_in_html => true).to_s(:html_simple) %>
+        </div>
+      </div>
   </div>
 </div>
 <hr>
-<p class="ml-5">
-  <strong>Description:</strong>
-  <%= @draft.description %>
-</p>
-<p class="ml-5">
-  <strong>Category:</strong>
-  <%= @draft.category.name %>
-</p>
-
 <div class="row">
 <div class="col-2"></div>
 <div class="col-8">
-<%= form_for @draft, html: { class: 'ml-5' } do |f| %>
+<h5>Supervisor Options</h5>
+<%= form_for @draft do |f| %>
   <div class="form-group">
     <%= f.select :approval_status_id, @statuses.map { |a| [ a.status, a.id ] }, { }, { class: 'form-control' } %>
   </div>
@@ -70,13 +115,17 @@
   </div>
   <div class="form-group">
     <%= f.submit 'Update', class: 'btn btn-primary' %>
-    <%= link_to 'Back', drafts_path, class: 'btn btn-secondary' %>
   </div>
   <%= hidden_field(:draft, :page_id, value: @draft.page.id) %>
 <% end %>
 </div>
 <div class="col-2"></div>
 </div><!--row-->
+<div class="row">
+  <div class="col-12">
+    <%= link_to drafts_path, class: 'btn btn-secondary back-button' do %><box-icon name='arrow-back' class='back-button-icon'></box-icon><% end %>
+  </div>
+</div>
 
 <script>
 $('#draft_approval_status_id').change(function() {
