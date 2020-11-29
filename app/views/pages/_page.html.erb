@@ -1,5 +1,5 @@
 <%= link_to page_path(page), class: 'text-body text-decoration-none' do %>
-<div class="card my-3">
+<div class="card my-3 wiki-card">
   <div class="card-header d-flex" <% if page.global_pinned.present? && params['controller']['pages'].present? || page.category_pinned.present? && params['controller']['categories'].present? %>style="background-color:rgb(254 223 0 / 12%) !important;"<%end%>>
     <h5 class="my-1"><%= page.title %></h5>
     <small class="float-right text-muted ml-auto my-1">
