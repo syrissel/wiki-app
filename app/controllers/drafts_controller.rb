@@ -126,7 +126,7 @@ class DraftsController < ApplicationController
         @page.last_edited_at = Time.now
         @page.update(title: @page.title, content: @page.content, category_id: @page.category_id)
         @draft.destroy
-        redirect_to @page, notice: "#{@page.title} has been saved!"
+        redirect_to @page, notice: "Draft has been merged with #{@page.title}!"
 
       # Any other update to the draft.
       else
@@ -148,7 +148,7 @@ class DraftsController < ApplicationController
         end
 
         respond_to do |format|
-          format.html { redirect_to drafts_path, notice: 'Draft was successfully updated.' }
+          format.html { redirect_to @draft, notice: 'Draft was successfully updated.' }
           format.json { render :show, status: :ok, location: @draft }
         end
       end
