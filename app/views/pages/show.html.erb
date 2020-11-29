@@ -15,44 +15,47 @@
 	</div>
 </div>
 <hr>
-<% if current_user.user_level_id < SUPERVISOR_VALUE %>
-	<div class="row">
-		<div class="col-12">
-			<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
-		</div>
-	</div><!--row-->
-<% end %>
+
+<div class="row">
+	<div class="col-12">
+		<%= link_to root_path, class: 'btn btn-secondary back-button' do %><box-icon name='arrow-back' class='back-button-icon'></box-icon><% end %>
+		<% if current_user.user_level_id > INTERN_VALUE %>
+			<a href="javascript:void(0)" id="link_supervisor_options" style='padding-bottom:2px;' class="font-weight-bold text-body btn"><box-icon name='cog' color='#FFF' type='solid'></box-icon></a>
+		<% end %>
+	</div>
+</div><!--row-->
+
 <% if current_user.user_level_id > INTERN_VALUE %>
 <div class="row">
 
 <div class="col-2"></div>
 <div class="col-8">
-<strong>Supervisor Options</strong>
-<hr>
-	<%= form_for @page do |f| %>
-	<div class="form-group">
-		<%= f.select :page_publish_status_id, @publish_statuses.map { |p| [ p.status, p.id ] }, { selected: @page.page_publish_status_id }, { class: 'form-control' } %>
-	</div>
-	<div class="d-flex justify-content-center">
-		<div class="form-check form-check-inline">
-			<%= f.check_box :category_pinned, class: 'form-check-input' %>
-			<%= f.label :category_pinned, 'Pin to category', class: 'form-check-label' %>
+	<div id="supervisor_options" class="hidden">
+		<h5>Supervisor Options</h5>
+		<hr>
+		<%= form_for @page do |f| %>
+		<div class="form-group">
+			<%= f.select :page_publish_status_id, @publish_statuses.map { |p| [ p.status, p.id ] }, { selected: @page.page_publish_status_id }, { class: 'form-control' } %>
 		</div>
-		<div class="form-check form-check-inline">
-			<%= f.check_box :global_pinned, class: 'form-check-input' %>
-			<%= f.label :global_pinned, 'Pin to front page', class: 'form-check-label' %>
+		<div class="d-flex justify-content-center">
+			<div class="form-check form-check-inline">
+				<%= f.check_box :category_pinned, class: 'form-check-input' %>
+				<%= f.label :category_pinned, 'Pin to category', class: 'form-check-label' %>
+			</div>
+			<div class="form-check form-check-inline">
+				<%= f.check_box :global_pinned, class: 'form-check-input' %>
+				<%= f.label :global_pinned, 'Pin to front page', class: 'form-check-label' %>
+			</div>
 		</div>
-	</div>
-	<div class="form-group mt-2">
-		<%= f.submit 'Update', class: 'btn btn-primary' %>
-		<% if @page.page_publish_status_id == UNPUBLISHED %>
-			<%= link_to 'Back', wiki_management_path, class: 'btn btn-secondary' %>
-			<%= link_to 'Delete Wiki', page_path(@page), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger float-right' %>
-		<% else %>
-			<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+		<div class="form-group mt-2">
+			<%= f.submit 'Update', class: 'btn btn-primary' %>
+			<% if @page.page_publish_status_id == UNPUBLISHED %>
+				<%= link_to root_path, class: 'btn btn-secondary back-button' do %><box-icon name='arrow-back' class='back-button-icon'></box-icon><% end %>
+				<%= link_to 'Delete Wiki', page_path(@page), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger float-right' %>
+			<% end %>
+		</div>
 		<% end %>
 	</div>
-	<% end %>
 </div>
 <div class="col-2"></div>
 </div>
