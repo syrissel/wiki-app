@@ -62,6 +62,10 @@ document.addEventListener('turbolinks:load', function() {
         }
     })
 
+    $('#link_supervisor_options').on('click', function () {
+        $('#supervisor_options').slideToggle()
+    })
+
     $('#btn_expand').on('click', function () {
         
         if ($(this).html() === 'Shrink') {
@@ -78,5 +82,7 @@ document.addEventListener('turbolinks:load', function() {
             }, 500)
         }
     })
+
+    $('.back-button-icon').attr('color', '#FFF')
 
 }, false);
