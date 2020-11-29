@@ -7,6 +7,4 @@
 </div>
 <% end %>
 <%= render 'form', draft: @draft %>
-
-<%= link_to 'Show', @draft %> |
-<%= link_to 'Back', drafts_path %>
+<%= link_to @draft, class: 'btn btn-secondary back-button' do %><box-icon name='arrow-back' class='back-button-icon'></box-icon><% end %>
