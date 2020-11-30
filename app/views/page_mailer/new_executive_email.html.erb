@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>A wiki has been approved by <%= @page.approved_by.fullname %>. <%= link_to 'Click here', review_url %> to review it.</p>
+    <p>A wiki has been approved by <%= @page.approved_by.fullname %>. <a href="<%= url_for(host: 'http://192.168.100.25', controller: 'pages', action: 'review_wiki', id: @page.id)  %>">Click here to review it</a></p>
     <h3><%= @page.title %></h3>
     <p>Category: <%= @page.category.name %></p>
     <p><%= @page.get_preview %></p>
