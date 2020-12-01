@@ -160,7 +160,7 @@ class PagesController < ApplicationController
         # Send author notification.
         Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki has been rejected by #{current_user.fullname}", page_id: @page.id)
       elsif params[:page][:approval_status_id].to_i == EXECUTIVE_VALUE
-        Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki, \"#{@page.title}\" has been published.", page_id: @page.id)
+        Notification.create(is_published: 'Y', recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki, \"#{@page.title}\" has been published.", page_id: @page.id)
       elsif params[:page][:approval_status_id].to_i == REJECTED
         Notification.create(recipient_id: @page.user_id, actor_id: current_user.id, message: "Your wiki has been rejected by #{current_user.fullname}", page_id: @page.id)
       # else
@@ -250,6 +250,7 @@ class PagesController < ApplicationController
                             .page(params[:page])
                             .per(20)
     else
+      byebug
       @pending_pages = Page.where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page(params[:page]).per(20)
     end
 	end

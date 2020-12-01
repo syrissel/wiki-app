@@ -4,9 +4,9 @@
 <table class="table mx-auto mt-4" style="width:0 !important;">
   <tbody>
     <tr class="row">
-      <td class="admin-td"><%= link_to drafts_path do %><div class="admin-item-wrapper"><h4>Drafts</h4><box-icon class="icon" color="#FFF" size='108px' name='edit'></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>New Wikis</h4><box-icon class="icon" color="#FFF" size="108px" type='solid' name='file' ></box-icon></div><% end %></td>
-      <td class="admin-td"><%= link_to unpublished_path do %><div class="admin-item-wrapper"><h4>Unpublished Wikis</h4><box-icon class="icon" color="#FFF" size="108px" name='file-blank' ></box-icon></div><% end %></td>
+      <td class="admin-td admin-drafts"><%= link_to drafts_path do %><div class="admin-item-wrapper"><h4>Drafts</h4><box-icon class="icon" color="#FFF" size='108px' name='edit'></box-icon></div><% end %></td>
+      <td class="admin-td admin-new-wiki"><%= link_to review_path do %><div class="admin-item-wrapper"><h4>New Wikis</h4><box-icon class="icon" color="#FFF" size="108px" type='solid' name='file' ></box-icon></div><% end %></td>
+      <td class="admin-td admin-archive"><%= link_to unpublished_path do %><div class="admin-item-wrapper"><h4>Archive</h4><box-icon class="icon" color="#FFF" size="108px" type='solid' name='archive' ></box-icon></div><% end %></td>
     </tr>
   </tbody>
 </table>

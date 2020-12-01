@@ -1,8 +1,16 @@
 
 <% if current_user.user_level_id < SUPERVISOR_VALUE %>
-	<% link = notification.page_id.present? ? edit_page_path(notification.page) : edit_draft_path(notification.draft) %>
-	<%= link_to notification.message, link, class: 'dropdown-item' %>
+	<% if notification.is_published.nil? %>
+		<% link = notification.page_id.present? ? edit_page_path(notification.page) : edit_draft_path(notification.draft) %>
+		<%= link_to notification.message, link, class: 'dropdown-item' %>
+	<% else %>
+		<%= link_to notification.message, page_path(notification.page), class: 'dropdown-item' %>
+	<% end %>
 <% else %>
-	<% link = notification.page_id.present? ? review_wiki_path(notification.page) : draft_path(notification.draft) %>
-	<%= link_to notification.message, link, class: 'dropdown-item' %>
+	<% if notification.is_published.nil? %>
+		<% link = notification.page_id.present? ? review_wiki_path(notification.page) : draft_path(notification.draft) %>
+		<%= link_to notification.message, link, class: 'dropdown-item' %>
+	<% else %>
+		<%= link_to notification.message, page_path(notification.page), class: 'dropdown-item' %>
+	<% end %>
 <% end %>
