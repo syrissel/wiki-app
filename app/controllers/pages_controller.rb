@@ -250,7 +250,6 @@ class PagesController < ApplicationController
                             .page(params[:page])
                             .per(20)
     else
-      byebug
       @pending_pages = Page.where.not(approval_status_id: EXECUTIVE_VALUE).order(@order_by).page(params[:page]).per(20)
     end
 	end
@@ -295,7 +294,7 @@ class PagesController < ApplicationController
 
   def can_edit
     @page = Page.find(params[:id])
-    redirect_to root_path, notice: 'Unauthorized' unless current_user == @page.user || current_user.user_level_id > INTERN_VALUE
+    redirect_to root_path, alert: 'Unauthorized' unless (current_user == @page.user && @page.approval_status_id == REJECTED && @page.page_publish_status_id == UNPUBLISHED) || current_user.user_level_id > INTERN_VALUE
   end
 	
 	def check_published
