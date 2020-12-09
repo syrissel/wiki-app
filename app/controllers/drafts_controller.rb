@@ -182,6 +182,6 @@ class DraftsController < ApplicationController
     end
 
     def can_edit
-      redirect_to root_path, notice: 'Unauthorized' unless current_user == @draft.user || current_user.user_level_id > INTERN_VALUE
+      redirect_to root_path, alert: 'Unauthorized' unless current_user == @draft.user || current_user.user_level_id > INTERN_VALUE
     end
 end
