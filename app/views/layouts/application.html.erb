@@ -97,24 +97,23 @@
     </footer>
 
     <!---Render search bar modals-->
-    <%= render 'category_search_modal' %>
     <%= render 'search_help_modal' %>
   </body>
 </html>
 
 <script>
-  // const checkNotifications = () => {
-  //   fetch("<%= bell_toggle_path %>")
-  //     .then(response => response.text())
-  //     .then(response => {
-  //       document.getElementById("notification_bell").innerHTML = response;
-  //     });
-  // };
+  const checkNotifications = () => {
+    fetch("<%= bell_toggle_path %>")
+      .then(response => response.text())
+      .then(response => {
+        document.getElementById("notification_bell").innerHTML = response;
+      });
+  };
 
-	// setInterval(checkNotifications, 10000);
+	setInterval(checkNotifications, 60000);
 	
-	// document.body.addEventListener('click', function() {
-	// 	let menu = document.getElementById("notifications");''
-	// 	menu.style.display = 'none';
-	// });
+	document.body.addEventListener('click', function() {
+		let menu = document.getElementById("notifications");''
+		menu.style.display = 'none';
+	});
 </script>
