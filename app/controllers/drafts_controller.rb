@@ -1,5 +1,6 @@
 class DraftsController < ApplicationController
   before_action :set_draft, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
   before_action :authenticate_supervisor, only: [:index, :show]
   before_action :can_edit, only: [:edit]
 
@@ -147,9 +148,13 @@ class DraftsController < ApplicationController
           end
         end
 
-        respond_to do |format|
-          format.html { redirect_to @draft, notice: 'Draft was successfully updated.' }
-          format.json { render :show, status: :ok, location: @draft }
+        if current_user.user_level_id > INTERN_VALUE
+          respond_to do |format|
+            format.html { redirect_to @draft, notice: 'Draft was successfully updated.' }
+            format.json { render :show, status: :ok, location: @draft }
+          end
+        else
+          redirect_to root_path, notice: 'Draft was successfully updated.'
         end
       end
     else
