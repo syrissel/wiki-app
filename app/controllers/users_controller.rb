@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 		@active = UserStatus.first.id
 
     if @user.save
-      redirect_to admin_path, notice: "#{@user.username} has been created."
+      redirect_to admin_path, notice: "#{@user.fullname} has been created."
     else
       render 'new'
     end
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
 	def admin_update
 		if update
-			redirect_to users_path, notice: "#{@user.username} has been updated."
+			redirect_to users_path, notice: "#{@user.fullname} has been updated."
 		else
 			render :edit
 		end
