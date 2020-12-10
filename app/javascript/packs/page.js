@@ -30,15 +30,15 @@ document.addEventListener('turbolinks:load', function() {
     });
 
     // Show or hide the category select window.
-    $('.show-category-options').click(function() {
-        let options = document.getElementsByClassName('category_select')[0];
+    // $('.show-category-options').click(function() {
+    //     let options = document.getElementsByClassName('category_select')[0];
 
-		if (options.classList.contains('hidden')) {
-			options.className = options.className.replace("hidden", "");
-		} else {
-			options.classList.add("hidden");
-		}
-    });
+	// 	if (options.classList.contains('hidden')) {
+	// 		options.className = options.className.replace("hidden", "");
+	// 	} else {
+	// 		options.classList.add("hidden");
+	// 	}
+    // });
 
     $('.show-pdf-options').click(function() {
         let options = document.getElementsByClassName('pdf_options')[0];
