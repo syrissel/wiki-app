@@ -17,6 +17,7 @@ $(document).on('turbolinks:load', function() {
 
         // $('.form-check-input').attr('disabled', 'disabled')
         $('#modal_category_select').modal('show')
+        $('.modal-backdrop').css('z-index', 0)
     })
 
     $('#btn_search_help').click(function() {
@@ -58,6 +59,11 @@ $(document).on('turbolinks:load', function() {
 
     $('#search_help_modal').click(function(event) {
         event.stopPropagation()
+    })
+
+    $('#btn_select_category').click(function() {
+
+        $('#page_category_select').modal('show')
     })
 })
 
