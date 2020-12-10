@@ -52,6 +52,7 @@
     <div class="form-group">
       <%= f.submit "Save", class: 'btn btn-primary' %>
       <%= link_to 'Back', users_path, class: 'btn btn-secondary' %>
+      <%= link_to 'Change Password', new_update_passwords_path(@user.id), class: 'btn btn-link float-right' %>
     </div>
   <% end %>
   </div><!--col-6-->
