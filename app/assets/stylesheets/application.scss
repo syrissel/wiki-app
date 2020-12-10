@@ -1174,6 +1174,12 @@ html, body {
 	}
 }
 
+@media (max-width: 1050px) {
+  .video_options, .pdf_options, .image_options {
+    width: 50em;
+  }
+}
+
 @media (max-width: 1024px) {
 	#side_panel:hover {
 		height: 100%;
@@ -1304,4 +1310,12 @@ ins, del, .unchanged span {
 
 .admin-drafts {
   background-color: #bb5d5d;
+}
+
+.btn-gray {
+  background-color: #e6e6e6 !important;
+}
+
+.btn-gray:hover {
+  background-color: #ececec !important;
 }
