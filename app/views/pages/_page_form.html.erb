@@ -23,22 +23,12 @@
     <%= hidden_field(:page, :approval_status_id, value: PENDING) %>
 	<%= hidden_field(:page, :last_user_edit, value: current_user.username) %>
   </div>
-	<div class="form-group d-flex flex-column">
-		<%#= collection_select :page, :category_id, Category.order(:id).where('category_id IS NULL'), :id, :name, {prompt: true}, {id: 'root'} %>
-		<%= f.label :category %>
-	<button type="button" class="btn btn-light show-category-options">Select Category</button>
-	<div class="category_select hidden">
-		<div class="image_options_header">
-			<h4>Choose Category</h4>
-			<button type='button' class="show-category-options">x</button>
-		</div>
-		<%= render partial: 'category_select', locals: { is_form: true } %>
-		<button type='button' class="show-category-options btn btn-primary">OK</button>
-	</div>
+	
+	<button type="button" id="btn_select_category" class="btn btn-gray w-100 my-2">Select Category</button>
+	<%= render 'pages/page_category_select'%> <!--Render partial within form-->
+
 	<div class="errors m-2" id="category_error"></div>
 	<div id="selected_category" class="m-2 font-weight-bold"></div>
-	</div>
-
 	<div class="form-group">
 			<%= f.text_area :content, id: :summernote %>
 	</div>
