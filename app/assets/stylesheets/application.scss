@@ -1343,3 +1343,8 @@ ins, del, .unchanged span {
 .btn-gray:hover {
   background-color: #ececec !important;
 }
+
+.dropdown-wrapper {
+  overflow-y: scroll !important;
+  max-height: 20rem;
+}

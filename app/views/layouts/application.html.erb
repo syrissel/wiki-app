@@ -48,9 +48,11 @@
               </div>
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <% if @notifications.present? %>
-                  <%= render @notifications %>
-                <% end %>
+                <div class="dropdown-wrapper">
+                  <% if @notifications.present? %>
+                    <%= render @notifications %>
+                  <% end %>
+                </div>
                 <div class="dropdown-divider"></div>
                 <span class="text-center"><%= link_to 'Clear Notifications', pages_path(clear: 'true'), remote: true, class: 'dropdown-item text-danger' %></span>
               </div>
