@@ -123,13 +123,11 @@ Rails.application.configure do
   #   openssl_verify_mode:  'none'
   # }
 
-  @settings = Setting.first
-
   config.action_mailer.smtp_settings = {
-    address:              @settings.smtp_address,
-    port:                 @settings.smtp_port,
-    user_name:            @settings.smtp_username,
-    password:             @settings.smtp_password,
+    address:              ENV['smtp_address'],
+    port:                 ENV['smtp_port'],
+    user_name:            ENV['smtp_username'],
+    password:             ENV['smtp_password'],
     authentication:       :login,
     enable_starttls_auto: true,
     openssl_verify_mode:  'none'
