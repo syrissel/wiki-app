@@ -71,6 +71,6 @@ class SettingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def setting_params
-      params.require(:setting).permit(:logo, :smtp_address, :smtp_port, :smtp_domain, :smtp_username, :smtp_password)
+      params.require(:setting).permit(:logo, :smtp_address, :smtp_port, :smtp_domain, :smtp_username, :smtp_password, :server_ip)
     end
 end
