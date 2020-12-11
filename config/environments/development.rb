@@ -60,17 +60,31 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  # @settings = Setting.first
 
   # config.action_mailer.smtp_settings = {
-  #   address:              "mail.shawhosting.ca",
-  #   port:                 1025,
-  #   domain:               "c4smb.ca",
-  #   user_name:            ENV["smtp_username"],
-  #   password:             ENV["smtp_password"],
+  #   address:              @settings.smtp_address,
+  #   port:                 @settings.smtp_port,
+  #   domain:               @settings.smtp_domain,
+  #   user_name:            @settings.smtp_username,
+  #   password:             @settings.smtp_password,
   #   authentication:       :login,
   #   enable_starttls_auto: true,
   #   openssl_verify_mode:  'none'
   # }
+
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.smtp_settings = {
+    address:              "mail.shawhosting.ca",
+    port:                 1025,
+    domain:               "c4smb.ca",
+    user_name:            "WikiMailer@c4smb.ca",
+    authentication:       :login,
+    enable_starttls_auto: true,
+    openssl_verify_mode:  'none'
+  }
 end
