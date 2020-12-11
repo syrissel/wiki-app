@@ -1,0 +1,39 @@
+<%= form_for @setting, validate: true do |f| %>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div class="form-inputs">
+        <div class="form-group">
+          <%= f.label :logo %>
+          <%= f.text_field :logo, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :smtp_address %>
+          <%= f.text_field :smtp_address, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :smtp_port %>
+          <%= f.text_field :smtp_port, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :smtp_domain %>
+          <%= f.text_field :smtp_domain, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :smtp_username %>
+          <%= f.text_field :smtp_username, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :smtp_password %>
+          <%= f.password_field :smtp_password, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit 'Update', class: 'btn btn-primary float-left mr-1' %>
+        <%= link_to 'Back', admin_path, class: 'btn btn-secondary' %>
+      </div>
+    </div><!--col-6-->
+    <div class="col-3"></div>
+  </div><!--row-->
+<% end %>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Logo:</strong>
+  <%= @setting.logo %>
+</p>
+
+<p>
+  <strong>Smtp address:</strong>
+  <%= @setting.smtp_address %>
+</p>
+
+<p>
+  <strong>Smtp port:</strong>
+  <%= @setting.smtp_port %>
+</p>
+
+<p>
+  <strong>Smtp domain:</strong>
+  <%= @setting.smtp_domain %>
+</p>
+
+<p>
+  <strong>Smtp username:</strong>
+  <%= @setting.smtp_username %>
+</p>
+
+<p>
+  <strong>Smtp password:</strong>
+  <%= @setting.smtp_password %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
