@@ -18,7 +18,7 @@ class User < ApplicationRecord
 	paginates_per 20
 
 	validates_uniqueness_of :username
-	validates :username, presence: true, length: { minimum: 2 }, format: { with: /\A[a-z]+\z/ }
+	validates :username, presence: true, length: { minimum: 5 }, format: { without: /\s/, message: "must not contain spaces" }
 	validates :password, presence: true, length: { minimum: 5 }, on: :create
 	validates :first_name, presence: true
 	validates :last_name, presence: true
