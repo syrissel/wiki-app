@@ -33,8 +33,6 @@ ApprovalStatus.create(status: 'Rejected')
 PagePublishStatus.create(status: 'Published')
 PagePublishStatus.create(status: 'Unpublished')
 
-Setting.create(logo: 'Computers for Schools')
-
 User.create(username: 'edirector', password: 'password', password_confirmation: 'password', user_level_id: EXECUTIVE_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
 User.create(username: 'hpotter', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
 User.create(username: 'jlennon', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
