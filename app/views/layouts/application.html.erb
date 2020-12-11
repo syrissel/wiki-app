@@ -90,7 +90,7 @@
     <div class="d-flex flex-column justify-content-center text-center">
      <ul class="p-0 list-unstyled">
       <li>Random wiki: <%= link_to @random_page.title, @random_page if @random_page.present? %></li>
-      <li>Computers for Schools Manitoba <%= Time.now.year %></li>
+      <li><%= "#{Setting.first.logo} #{Time.now.year}" %></li>
      </ul>
      </div>
     </div>
