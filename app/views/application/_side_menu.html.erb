@@ -52,12 +52,13 @@
                   <li class="gen1_list">
                     <ul>
                     <box-icon color='#f0b57e' name='home' class='mr-2 side-menu-icon' size='20px'></box-icon><%= link_to 'Home', admin_path, class: 'side-menu-link' %>
-                    <li class='side-menu-item-hover'><%= link_to 'Wiki Review', wiki_management_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='select-multiple'></box-icon></li>
-                    <li class='side-menu-item-hover'><%= link_to 'Category Settings', categories_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='customize'></box-icon></li>
-                    <li class='side-menu-item-hover'><%= link_to 'User Management', users_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='group'></box-icon></li>
-                    <li class='side-menu-item-hover'><%= link_to 'PDFs', pdfs_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" type='solid' name='file-pdf'></box-icon></li>
-                    <li class='side-menu-item-hover'><%= link_to 'Images', images_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='images'></box-icon></li>
-                    <li class='side-menu-item-hover'><%= link_to 'Videos', videos_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" type='solid' name='videos'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'Wiki Review', wiki_management_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='select-multiple'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'Category Settings', categories_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='customize'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'User Management', users_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='group'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'PDFs', pdfs_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" type='solid' name='file-pdf'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'Images', images_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" name='images'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'Videos', videos_path, class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" type='solid' name='videos'></box-icon></li>
+                      <li class='side-menu-item-hover'><%= link_to 'Settings', edit_setting_path(Setting.first), class: 'side-menu-link' %><box-icon color='#f0b57e' class="mr-2 float-left side-menu-icon" size="20px" type='solid' name='cog'></box-icon></li>
                     </ul>
                   </li>
                 <% end %>
