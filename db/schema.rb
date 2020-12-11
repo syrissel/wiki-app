@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_152408) do
+ActiveRecord::Schema.define(version: 2020_12_11_185219) do
 
   create_table "approval_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status"
@@ -155,7 +155,6 @@ ActiveRecord::Schema.define(version: 2020_12_11_152408) do
     t.string "logo"
     t.string "smtp_address"
     t.string "smtp_port"
-    t.string "smtp_domain"
     t.string "smtp_username"
     t.string "smtp_password"
     t.datetime "created_at", precision: 6, null: false
