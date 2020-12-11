@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :settings
   resources :pdfs
   resources :drafts, except: [:new]
   get 'draft/:id/new', to: 'drafts#new', as: 'new_draft'
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
 	resources :page_forums
   resources :comments
   resources :passwords
+  resources :settings
   # resources :update_passwords
   get 'update-passwords/new/:id', to: 'update_passwords#new', as: 'new_update_passwords'
   post 'update-passwords/create/:id', to: 'update_passwords#create', as: 'create_update_passwords'
