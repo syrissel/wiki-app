@@ -148,7 +148,7 @@ class PagesController < ApplicationController
 
       # If supervisor approved, send executives a notification.
       if params[:page][:approval_status_id].to_i == SUPERVISOR_VALUE
-        PageMailer.with(page: @page).new_executive_email.deliver_later
+        PageMailer.with(page: @page, settings: Setting.first).new_executive_email.deliver_later
         (User.executives.uniq - [current_user]).each do |s|
           Notification.create(recipient_id: s.id, actor_id: current_user.id, message: "A wiki has been approved by #{current_user.fullname}", page_id: @page.id)
         end
@@ -185,7 +185,7 @@ class PagesController < ApplicationController
 		@page = Page.new(page_params)
     
     if (@page.save)
-      PageMailer.with(page: @page).new_page_email.deliver_later
+      PageMailer.with(page: @page, settings: Setting.first).new_page_email.deliver_later
 
       @page.sanitized_content = ActionController::Base.helpers.strip_tags(@page.content)
 			
