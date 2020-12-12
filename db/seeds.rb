@@ -15,8 +15,8 @@ UserStatus.create(status: 'Active')
 UserStatus.create(status: 'Inactive')
 
 Category.create(name: 'Production')
-Category.create(name: 'Cataloguing')
-Category.create(name: 'Backdoor')
+Category.create(name: 'Inventory')
+Category.create(name: 'Policy')
 Category.create(name: 'Computer Guides')
 
 # a = Category.create(:name => "a")
@@ -33,10 +33,6 @@ ApprovalStatus.create(status: 'Rejected')
 PagePublishStatus.create(status: 'Published')
 PagePublishStatus.create(status: 'Unpublished')
 
-User.create(username: 'edirector', password: 'password', password_confirmation: 'password', user_level_id: EXECUTIVE_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
-User.create(username: 'hpotter', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
-User.create(username: 'jlennon', password: 'password', password_confirmation: 'password', user_level_id: SUPERVISOR_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
-User.create(username: 'smireault', password: 'password', password_confirmation: 'password', user_level_id: INTERN_VALUE, user_status_id: UserStatus.find_by_status('Active').id)
 
 # Page.create(title: 'test1', content: 'test1', user_id: 3, approval_status_id: PENDING, category_id: 1)
 # Page.create(title: 'test2', content: 'test2', user_id: 3, approval_status_id: PENDING, category_id: 1)

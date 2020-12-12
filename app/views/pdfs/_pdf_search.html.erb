@@ -2,6 +2,5 @@
   <%= simple_form_for pdfs_path, method: :get, remote: true do |f| %>
 		<%= f.text_field :pdfq, class: 'form-control w-50' %>
 		<%= f.submit 'Search', class: 'btn btn-primary btn-sm mx-1'  %>
-        <%= link_to 'Upload', new_pdf_path, remote: true, class: 'btn btn-info btn-sm', style: 'padding: 0.375rem 0.75rem !important;' %>
 	<% end %>
 </div>

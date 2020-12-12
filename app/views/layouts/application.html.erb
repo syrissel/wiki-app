@@ -69,6 +69,11 @@
   </div><!--header_container-->
     <%= render 'side_menu' %>
     <div id="middle_content">
+      <% if current_user.nil? %>
+        <div class="alert alert-primary">
+          Welcome to the demo of my wiki app. You can login as a guest user with the username 'guest' and password 'password2020'. All the best!
+        </div>
+      <% end %>
       <% if alert.present? %>
         <div class="alert alert-danger alert-dismissible fade show">
           <%= alert %>
